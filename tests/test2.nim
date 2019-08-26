@@ -42,11 +42,11 @@ suite "Library":
   test "Uninterpreted Functions":
     z3:
       let
-        f = declFunc("f", singleton(RealSort), RealSort)
+        f = declFunc("f", params(RealSort), RealSort)
         x = declRealConst("x")
 
       assert distinc(x, 0.0, 1.0)
-      assert f.apply(singleton(x)) == x + f.apply(singleton(0.0.toAst()))
+      assert f.apply(params(x)) == x + f.apply(params(0.0.toAst()))
 
       assert check() == sat
       echo getModel()

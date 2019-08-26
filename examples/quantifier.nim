@@ -6,7 +6,7 @@ z3:
     y = declIntConst("y")
     z = declIntConst("z")
 
-    f = declFunc("f", pair(IntSort, singleton(IntSort)), IntSort)
+    f = declFunc("f", params(IntSort, IntSort), IntSort)
 
-  echo forall(pair(x, pair(y, singleton(z))), (f.apply(pair(x, singleton(y))) == z) ==> distinc(x, z) and distinc(y, z))
-  echo exists(pair(x, pair(y, singleton(z))), (f.apply(pair(x, singleton(y))) == z) ==> distinc(x, z) and distinc(y, z))
+  echo forall(params(x, y, z), (f.apply(params(x, y)) == z) ==> distinc(x, z) and distinc(y, z))
+  echo exists(params(x, y, z), (f.apply(params(x, y)) == z) ==> distinc(x, z) and distinc(y, z))

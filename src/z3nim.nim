@@ -3,7 +3,8 @@
 ## Z3 binding for Nim language.
 
 import z3nim/z3api
-import hashes
+import hashes, ropes
+import macros except params
 
 type
   Version* = object
@@ -18,7 +19,7 @@ type
 
   NumericSort* = IntSort | RealSort
 
-  Pair*[T1, T2] = object
+  Pair[T1, T2] = object
 
   Sort*[T] = distinct Z3Sort
   Ast*[T] = distinct Z3Ast
@@ -60,7 +61,7 @@ template z3*(body: untyped): untyped =
         y = declBoolConst("y")
 
       assert not ((not (x and y)) == (not x or not y))
-      echo check ## => unsat
+      assert check() == unsat
 
   block:
     let cfg = Z3MkConfig()
@@ -94,7 +95,7 @@ template z3block*(body: untyped): untyped =
   block:
     body
 
-  Z3_sovler_pop(ctx, solver, 1'u.cuint)
+  Z3_solver_pop(ctx, solver, 1'u.cuint)
 
 proc mkSort(ctx: Z3Context; s: typedesc[BoolSort]): Z3Sort = ctx.Z3MkBoolSort()
 proc mkSort(ctx: Z3Context; s: typedesc[IntSort]): Z3Sort = ctx.Z3MkIntSort()
@@ -107,27 +108,55 @@ template makeSort*(S: typedesc): Sort[S] =
   Sort[S](mkSort(ctx, S))
 
 
-template singleton*[S](s: Sort[S]): Sorts[S] =
+template singleton[S](s: Sort[S]): Sorts[S] =
   Sorts[S](@[Z3Sort(s)])
 
-template pair*[S1, S2](s1: Sort[S1]; s2: Sorts[S2]): Sorts[Pair[S1, S2]] =
+template pair[S1, S2](s1: Sort[S1]; s2: Sorts[S2]): Sorts[Pair[S1, S2]] =
   Sorts[Pair[S1, S2]](Z3Sort(s1) & seq[Z3Sort](s2))
 
 
-template singleton*(S: typedesc): Sorts[S] =
+template singleton(S: typedesc): Sorts[S] =
   mixin mkSort
   Sorts[S](@[mkSort(ctx, S)])
 
-template pair*[S2](S1: typedesc; s2: Sorts[S2]): Sorts[Pair[S1, S2]] =
+template pair[S2](S1: typedesc; s2: Sorts[S2]): Sorts[Pair[S1, S2]] =
   mixin mkSort
   Sorts[Pair[S1, S2]](mkSort(ctx, S1) & seq[Z3Sort](s2))
 
 
-template singleton*[S](a: Ast[S]): Asts[S] =
+template singleton[S](a: Ast[S]): Asts[S] =
   Asts[S](@[Z3Ast(a)])
 
-template pair*[S1, S2](a1: Ast[S1]; a2: Asts[S2]): Asts[Pair[S1, S2]] =
+template pair[S1, S2](a1: Ast[S1]; a2: Asts[S2]): Asts[Pair[S1, S2]] =
   Asts[Pair[S1, S2]](Z3Ast(a1) & seq[Z3Ast](a2))
+
+
+macro params*(args: varargs[untyped]): untyped =
+  ## Construct parameters.
+  ##
+  ## If each argument is either a type descriptor or a sort, then it becomes ``Sorts``.
+  ## If each argument is an AST, then it becomes ``Asts``.
+  runnableExamples:
+    z3:
+      let
+        f1 = declFunc(1, params(IntSort), IntSort)
+        f2 = declFunc(2, params(BoolSort, IntSort), BoolSort)
+
+        x = declConst("x", IntSort)
+
+      assert forall(params(x), f1.apply(params(x)) > toAst(0))
+      assert exists(params(x), f2.apply(params(toAst(true), x)))
+
+      assert check() == sat
+
+  let lastArg = args[^1]
+  result = quote do:
+    singleton(`lastArg`)
+
+  for i in 2..args.len:
+    let arg = args[^i]
+    result = quote do:
+      pair(`arg`, `result`)
 
 
 template declConst[S](sym: Z3Symbol; s: Sort[S]): Ast[S] =
@@ -178,11 +207,11 @@ template declFunc*[D](id: string; domains: Sorts[D]; R: typedesc): FuncDecl[D, R
   runnableExamples:
     z3:
       let
-        f = declFunc("f", pair(RealSort, singleton(RealSort)), RealSort)
+        f = declFunc("f", params(RealSort, RealSort), RealSort)
         x = declRealConst("x")
 
-      assert f.apply(pair(x, singleton(x))) == x
-      echo check() ## => sat
+      assert f.apply(params(x, x)) == x
+      assert check() == sat
 
   let sym = Z3MkStringSymbol(ctx, id)
   declFunc(sym, domains, R)
@@ -192,11 +221,11 @@ template declFunc*[D](id: int; domains: Sorts[D]; R: typedesc): FuncDecl[D, R] =
   runnableExamples:
     z3:
       let
-        f = declFunc(0, pair(RealSort, singleton(RealSort)), RealSort)
+        f = declFunc(0, params(RealSort, RealSort), RealSort)
         x = declRealConst(1)
 
-      assert f.apply(pair(x, singleton(x))) == x
-      echo check() ## => sat
+      assert f.apply(params(x, x)) == x
+      assert check() == sat
 
   let sym = Z3MkIntSymbol(ctx, id.cint)
   declFunc(sym, domains, R)
@@ -285,9 +314,6 @@ template distinc*[S](args: varargs[Ast[S], toAst]): Ast[BoolSort] =
 
   Ast[BoolSort](Z3MkDistinct(ctx, cuint(len(args)), cast[carray[Z3Ast]](addr args0[0])))
 
-template `!=`*(arg1, arg2: untyped): untyped =
-  distinc(arg1, arg2)
-
 template `==>`*(arg1, arg2: Ast[BoolSort]): Ast[BoolSort] =
   Ast[BoolSort](Z3MkImplies(ctx, Z3Ast(arg1), Z3Ast(arg2)))
 
@@ -297,7 +323,7 @@ template `==>`*(arg1: bool; arg2: Ast[BoolSort]): Ast[BoolSort] =
 template `==>`*(arg1: Ast[BoolSort]; arg2: bool): Ast[BoolSort] =
   if arg2: Ast[BoolSort](Z3MkTrue(ctx)) else: Ast[BoolSort](Z3MkNot(ctx, Z3Ast(arg1)))
 
-template add*[S: NumericSort](args: varargs[Ast[S], toAst]): Ast[S] =
+template astAdd*[S: NumericSort](args: varargs[Ast[S], toAst]): Ast[S] =
   var args0: array[len(args), Z3Ast]
 
   for idx, arg in args:
@@ -306,9 +332,9 @@ template add*[S: NumericSort](args: varargs[Ast[S], toAst]): Ast[S] =
   Ast[S](Z3MkAdd(ctx, cuint(len(args)), cast[carray[Z3Ast]](addr args0[0])))
 
 template `+`*(arg1, arg2: untyped): untyped =
-  add(arg1, arg2)
+  astAdd(arg1, arg2)
 
-template mul*[S: NumericSort](args: varargs[Ast[S], toAst]): Ast[S] =
+template astMul*[S: NumericSort](args: varargs[Ast[S], toAst]): Ast[S] =
   var args0: array[len(args), Z3Ast]
 
   for idx, arg in args:
@@ -317,12 +343,12 @@ template mul*[S: NumericSort](args: varargs[Ast[S], toAst]): Ast[S] =
   Ast[S](Z3MkMul(ctx, cuint(len(args)), cast[carray[Z3Ast]](addr args0[0])))
 
 template `*`*(arg1, arg2: untyped): untyped =
-  mul(arg1, arg2)
+  astMul(arg1, arg2)
 
 template `-`*[S: NumericSort](arg: Ast[S]): Ast[S] =
   Ast[S](Z3MkUnaryMinus(ctx, Z3Ast(arg)))
 
-template sub*[S: NumericSort](args: varargs[Ast[S], toAst]): Ast[S] =
+template astSub*[S: NumericSort](args: varargs[Ast[S], toAst]): Ast[S] =
   var args0: array[len(args), Z3Ast]
 
   for idx, arg in args:
@@ -331,7 +357,7 @@ template sub*[S: NumericSort](args: varargs[Ast[S], toAst]): Ast[S] =
   Ast[S](Z3MkSub(ctx, cuint(len(args)), cast[carray[Z3Ast]](addr args0[0])))
 
 template `-`*(arg1, arg2: untyped): untyped =
-  sub(arg1, arg2)
+  astSub(arg1, arg2)
 
 template `div`*(arg1, arg2: Ast[IntSort]): Ast[IntSort] =
   Ast[IntSort](Z3MkDiv(ctx, Z3Ast(arg1), Z3Ast(arg2)))
@@ -497,8 +523,36 @@ template getModel*: Model =
 template `$`*[S](sort: Sort[S]): string =
   $Z3SortToString(ctx, Z3Sort(sort))
 
+template `$`*[S](sorts: Sorts[S]): string =
+  var r = rope("(")
+  let sortsSeq = seq[Z3Sort](sorts)
+
+  r.add($Z3SortToString(ctx, sortsSeq[0]))
+
+  if len(sortsSeq) > 1:
+    for sort in sortsSeq[1..^1]:
+      r.add(", ")
+      r.add($Z3SortToString(ctx, sort))
+
+  r.add(")")
+  $r
+
 template `$`*[S](ast: Ast[S]): string =
   $Z3AstToString(ctx, Z3Ast(ast))
+
+template `$`*[S](asts: Asts[S]): string =
+  var r = rope("(")
+  let astsSeq = seq[Z3Ast](asts)
+
+  add(r, $Z3AstToString(ctx, astsSeq[0]))
+
+  if len(astsSeq) > 1:
+    for ast in astsSeq[1..^1]:
+      add(r, ", ")
+      add(r, $Z3AstToString(ctx, ast))
+
+  add(r, ")")
+  $r
 
 template `$`*(model: Model): string =
   $Z3ModelToString(ctx, Z3Model(model))

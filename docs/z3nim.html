@@ -846,10 +846,14 @@ function main() {
     title="IntSort = object"><wbr />Int<wbr />Sort<span class="attachedType"></span></a></li>
   <li><a class="reference" href="#RealSort"
     title="RealSort = object"><wbr />Real<wbr />Sort<span class="attachedType"></span></a></li>
+  <li><a class="reference" href="#BitVecSort"
+    title="BitVecSort[N] = object"><wbr />Bit<wbr />Vec<wbr />Sort<span class="attachedType"></span></a></li>
+  <li><a class="reference" href="#ArraySort"
+    title="ArraySort[D; R] = object"><wbr />Array<wbr />Sort<span class="attachedType"></span></a></li>
+  <li><a class="reference" href="#SetSort"
+    title="SetSort[T] = object"><wbr />Set<wbr />Sort<span class="attachedType"></span></a></li>
   <li><a class="reference" href="#NumericSort"
     title="NumericSort = IntSort | RealSort"><wbr />Numeric<wbr />Sort<span class="attachedType"></span></a></li>
-  <li><a class="reference" href="#Pair"
-    title="Pair[T1; T2] = object"><wbr />Pair<span class="attachedType"></span></a></li>
   <li><a class="reference" href="#Sort"
     title="Sort[T] = distinct Z3_sort"><wbr />Sort<span class="attachedType"></span></a></li>
   <li><a class="reference" href="#Ast"
@@ -890,6 +894,14 @@ function main() {
   </ul>
 </li>
 <li>
+  <a class="reference reference-toplevel" href="#17" id="67">Macros</a>
+  <ul class="simple simple-toc-section">
+      <li><a class="reference" href="#params.m%2Cvarargs%5Buntyped%5D"
+    title="params(args: varargs[untyped]): untyped"><wbr />params<span class="attachedType"></span></a></li>
+
+  </ul>
+</li>
+<li>
   <a class="reference reference-toplevel" href="#18" id="68">Templates</a>
   <ul class="simple simple-toc-section">
       <li><a class="reference" href="#z3.t%2Cuntyped"
@@ -898,18 +910,6 @@ function main() {
     title="z3block(body: untyped): untyped"><wbr />z3block<span class="attachedType"></span></a></li>
   <li><a class="reference" href="#makeSort.t%2Ctypedesc"
     title="makeSort(S: typedesc): Sort[S]"><wbr />make<wbr />Sort<span class="attachedType">Sort</span></a></li>
-  <li><a class="reference" href="#singleton.t%2CSort%5BS%5D"
-    title="singleton[S](s: Sort[S]): Sorts[S]"><wbr />singleton<span class="attachedType">Sort</span></a></li>
-  <li><a class="reference" href="#pair.t%2CSort%5BS1%5D%2CSorts%5BS2%5D"
-    title="pair[S1; S2](s1: Sort[S1]; s2: Sorts[S2]): Sorts[Pair[S1, S2]]"><wbr />pair<span class="attachedType">Sort</span></a></li>
-  <li><a class="reference" href="#singleton.t%2Ctypedesc"
-    title="singleton(S: typedesc): Sorts[S]"><wbr />singleton<span class="attachedType">Sorts</span></a></li>
-  <li><a class="reference" href="#pair.t%2Ctypedesc%2CSorts%5BS2%5D"
-    title="pair[S2; ](S1: typedesc; s2: Sorts[S2]): Sorts[Pair[S1, S2]]"><wbr />pair<span class="attachedType">Sorts</span></a></li>
-  <li><a class="reference" href="#singleton.t%2CAst%5BS%5D"
-    title="singleton[S](a: Ast[S]): Asts[S]"><wbr />singleton<span class="attachedType">Ast</span></a></li>
-  <li><a class="reference" href="#pair.t%2CAst%5BS1%5D%2CAsts%5BS2%5D"
-    title="pair[S1; S2](a1: Ast[S1]; a2: Asts[S2]): Asts[Pair[S1, S2]]"><wbr />pair<span class="attachedType">Ast</span></a></li>
   <li><a class="reference" href="#declConst.t%2Cstring%2Ctypedesc"
     title="declConst(id: string; S: typedesc): Ast[S]"><wbr />decl<wbr />Const<span class="attachedType">Ast</span></a></li>
   <li><a class="reference" href="#declConst.t%2Cint%2Ctypedesc"
@@ -920,6 +920,8 @@ function main() {
     title="declIntConst(id: string | int): Ast[IntSort]"><wbr />decl<wbr />Int<wbr />Const<span class="attachedType">Ast</span></a></li>
   <li><a class="reference" href="#declRealConst.t"
     title="declRealConst(id: string | int): Ast[RealSort]"><wbr />decl<wbr />Real<wbr />Const<span class="attachedType">Ast</span></a></li>
+  <li><a class="reference" href="#declBitVecConst.t%2C%2C"
+    title="declBitVecConst(id: string | int; size: static uint): Ast[BitVecSort[size]]"><wbr />decl<wbr />Bit<wbr />Vec<wbr />Const<span class="attachedType">Ast</span></a></li>
   <li><a class="reference" href="#declFunc.t%2Cstring%2CSorts%5BD%5D%2Ctypedesc"
     title="declFunc[D; ](id: string; domains: Sorts[D]; R: typedesc): FuncDecl[D, R]"><wbr />decl<wbr />Func<span class="attachedType">FuncDecl</span></a></li>
   <li><a class="reference" href="#declFunc.t%2Cint%2CSorts%5BD%5D%2Ctypedesc"
@@ -964,26 +966,24 @@ function main() {
     title="`==`(arg1: Ast[RealSort]; arg2: float): Ast[BoolSort]"><wbr />`==`<span class="attachedType">Ast</span></a></li>
   <li><a class="reference" href="#distinc.t%2Cvarargs%5BAst%5BS%5D%2CtoAst%5D"
     title="distinc[S](args: varargs[Ast[S], toAst]): Ast[BoolSort]"><wbr />distinc<span class="attachedType">Ast</span></a></li>
-  <li><a class="reference" href="#%21%3D.t%2Cuntyped%2Cuntyped"
-    title="`!=`(arg1, arg2: untyped): untyped"><wbr />`!=`<span class="attachedType"></span></a></li>
   <li><a class="reference" href="#%3D%3D%3E.t%2CAst%5BBoolSort%5D%2CAst%5BBoolSort%5D"
     title="`==&gt;`(arg1, arg2: Ast[BoolSort]): Ast[BoolSort]"><wbr />`==&gt;`<span class="attachedType">Ast</span></a></li>
   <li><a class="reference" href="#%3D%3D%3E.t%2Cbool%2CAst%5BBoolSort%5D"
     title="`==&gt;`(arg1: bool; arg2: Ast[BoolSort]): Ast[BoolSort]"><wbr />`==&gt;`<span class="attachedType">Ast</span></a></li>
   <li><a class="reference" href="#%3D%3D%3E.t%2CAst%5BBoolSort%5D%2Cbool"
     title="`==&gt;`(arg1: Ast[BoolSort]; arg2: bool): Ast[BoolSort]"><wbr />`==&gt;`<span class="attachedType">Ast</span></a></li>
-  <li><a class="reference" href="#add.t%2Cvarargs%5BAst%5BS%3A+NumericSort%5D%2CtoAst%5D"
-    title="add[S](args: varargs[Ast[S], toAst]): Ast[S]"><wbr />add<span class="attachedType">Ast</span></a></li>
+  <li><a class="reference" href="#astAdd.t%2Cvarargs%5BAst%5BS%3A+NumericSort%5D%2CtoAst%5D"
+    title="astAdd[S](args: varargs[Ast[S], toAst]): Ast[S]"><wbr />ast<wbr />Add<span class="attachedType">Ast</span></a></li>
   <li><a class="reference" href="#%2B.t%2Cuntyped%2Cuntyped"
     title="`+`(arg1, arg2: untyped): untyped"><wbr />`+`<span class="attachedType"></span></a></li>
-  <li><a class="reference" href="#mul.t%2Cvarargs%5BAst%5BS%3A+NumericSort%5D%2CtoAst%5D"
-    title="mul[S](args: varargs[Ast[S], toAst]): Ast[S]"><wbr />mul<span class="attachedType">Ast</span></a></li>
+  <li><a class="reference" href="#astMul.t%2Cvarargs%5BAst%5BS%3A+NumericSort%5D%2CtoAst%5D"
+    title="astMul[S](args: varargs[Ast[S], toAst]): Ast[S]"><wbr />ast<wbr />Mul<span class="attachedType">Ast</span></a></li>
   <li><a class="reference" href="#%2A.t%2Cuntyped%2Cuntyped"
     title="`*`(arg1, arg2: untyped): untyped"><wbr />`*`<span class="attachedType"></span></a></li>
   <li><a class="reference" href="#-.t%2CAst%5BS%3A+NumericSort%5D"
     title="`-`[S](arg: Ast[S]): Ast[S]"><wbr />`-`<span class="attachedType">Ast</span></a></li>
-  <li><a class="reference" href="#sub.t%2Cvarargs%5BAst%5BS%3A+NumericSort%5D%2CtoAst%5D"
-    title="sub[S](args: varargs[Ast[S], toAst]): Ast[S]"><wbr />sub<span class="attachedType">Ast</span></a></li>
+  <li><a class="reference" href="#astSub.t%2Cvarargs%5BAst%5BS%3A+NumericSort%5D%2CtoAst%5D"
+    title="astSub[S](args: varargs[Ast[S], toAst]): Ast[S]"><wbr />ast<wbr />Sub<span class="attachedType">Ast</span></a></li>
   <li><a class="reference" href="#-.t%2Cuntyped%2Cuntyped"
     title="`-`(arg1, arg2: untyped): untyped"><wbr />`-`<span class="attachedType"></span></a></li>
   <li><a class="reference" href="#div.t%2CAst%5BIntSort%5D%2CAst%5BIntSort%5D"
@@ -1074,8 +1074,12 @@ function main() {
     title="getModel(): Model"><wbr />get<wbr />Model<span class="attachedType">Model</span></a></li>
   <li><a class="reference" href="#%24.t%2CSort%5BS%5D"
     title="`$`[S](sort: Sort[S]): string"><wbr />`$`<span class="attachedType">Sort</span></a></li>
+  <li><a class="reference" href="#%24.t%2CSorts%5BS%5D"
+    title="`$`[S](sorts: Sorts[S]): string"><wbr />`$`<span class="attachedType">Sorts</span></a></li>
   <li><a class="reference" href="#%24.t%2CAst%5BS%5D"
     title="`$`[S](ast: Ast[S]): string"><wbr />`$`<span class="attachedType">Ast</span></a></li>
+  <li><a class="reference" href="#%24.t%2CAsts%5BS%5D"
+    title="`$`[S](asts: Asts[S]): string"><wbr />`$`<span class="attachedType">Asts</span></a></li>
   <li><a class="reference" href="#%24.t%2CModel"
     title="`$`(model: Model): string"><wbr />`$`<span class="attachedType">Model</span></a></li>
   <li><a class="reference" href="#%24.t%2CFuncDecl%5BD%2CR%5D"
@@ -1147,15 +1151,29 @@ function main() {
 
 
 </dd>
-<a id="NumericSort"></a>
-<dt><pre><a href="z3nim.html#NumericSort"><span class="Identifier">NumericSort</span></a> <span class="Other">=</span> <a href="z3nim.html#IntSort"><span class="Identifier">IntSort</span></a> <span class="Operator">|</span> <a href="z3nim.html#RealSort"><span class="Identifier">RealSort</span></a></pre></dt>
+<a id="BitVecSort"></a>
+<dt><pre><a href="z3nim.html#BitVecSort"><span class="Identifier">BitVecSort</span></a><span class="Other">[</span><span class="Identifier">N</span><span class="Other">]</span> <span class="Other">=</span> <span class="Keyword">object</span></pre></dt>
 <dd>
 
 
 
 </dd>
-<a id="Pair"></a>
-<dt><pre><a href="z3nim.html#Pair"><span class="Identifier">Pair</span></a><span class="Other">[</span><span class="Identifier">T1</span><span class="Other">;</span> <span class="Identifier">T2</span><span class="Other">]</span> <span class="Other">=</span> <span class="Keyword">object</span></pre></dt>
+<a id="ArraySort"></a>
+<dt><pre><a href="z3nim.html#ArraySort"><span class="Identifier">ArraySort</span></a><span class="Other">[</span><span class="Identifier">D</span><span class="Other">;</span> <span class="Identifier">R</span><span class="Other">]</span> <span class="Other">=</span> <span class="Keyword">object</span></pre></dt>
+<dd>
+
+
+
+</dd>
+<a id="SetSort"></a>
+<dt><pre><a href="z3nim.html#SetSort"><span class="Identifier">SetSort</span></a><span class="Other">[</span><span class="Identifier">T</span><span class="Other">]</span> <span class="Other">=</span> <span class="Keyword">object</span></pre></dt>
+<dd>
+
+
+
+</dd>
+<a id="NumericSort"></a>
+<dt><pre><a href="z3nim.html#NumericSort"><span class="Identifier">NumericSort</span></a> <span class="Other">=</span> <a href="z3nim.html#IntSort"><span class="Identifier">IntSort</span></a> <span class="Operator">|</span> <a href="z3nim.html#RealSort"><span class="Identifier">RealSort</span></a></pre></dt>
 <dd>
 
 
@@ -1259,6 +1277,29 @@ Get current Z3 version.
 </dd>
 
 </dl></div>
+<div class="section" id="17">
+<h1><a class="toc-backref" href="#17">Macros</a></h1>
+<dl class="item">
+<a id="params.m,varargs[untyped]"></a>
+<dt><pre><span class="Keyword">macro</span> <a href="#params.m%2Cvarargs%5Buntyped%5D"><span class="Identifier">params</span></a><span class="Other">(</span><span class="Identifier">args</span><span class="Other">:</span> <span class="Identifier">varargs</span><span class="Other">[</span><span class="Identifier">untyped</span><span class="Other">]</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">untyped</span></pre></dt>
+<dd>
+
+<p>Construct parameters.</p>
+<p>If each argument is either a type descriptor or a sort, then it becomes <tt class="docutils literal"><span class="pre">Sorts</span></tt>. If each argument is an AST, then it becomes <tt class="docutils literal"><span class="pre">Asts</span></tt>.</p>
+
+<p><strong class="examples_text">Examples:</strong></p>
+<pre class="listing"><span class="Identifier">z3</span><span class="Other">:</span>
+  <span class="Keyword">let</span>
+    <span class="Identifier">f1</span> <span class="Other">=</span> <span class="Identifier">declFunc</span><span class="Other">(</span><span class="DecNumber">1</span><span class="Other">,</span> <span class="Identifier">params</span><span class="Other">(</span><span class="Identifier">IntSort</span><span class="Other">)</span><span class="Other">,</span> <span class="Identifier">IntSort</span><span class="Other">)</span>
+    <span class="Identifier">f2</span> <span class="Other">=</span> <span class="Identifier">declFunc</span><span class="Other">(</span><span class="DecNumber">2</span><span class="Other">,</span> <span class="Identifier">params</span><span class="Other">(</span><span class="Identifier">BoolSort</span><span class="Other">,</span> <span class="Identifier">IntSort</span><span class="Other">)</span><span class="Other">,</span> <span class="Identifier">BoolSort</span><span class="Other">)</span>
+    <span class="Identifier">x</span> <span class="Other">=</span> <span class="Identifier">declConst</span><span class="Other">(</span><span class="StringLit">&quot;x&quot;</span><span class="Other">,</span> <span class="Identifier">IntSort</span><span class="Other">)</span>
+  <span class="Identifier">assert</span> <span class="Identifier">forall</span><span class="Other">(</span><span class="Identifier">params</span><span class="Other">(</span><span class="Identifier">x</span><span class="Other">)</span><span class="Other">,</span> <span class="Identifier">f1</span><span class="Other">.</span><span class="Identifier">apply</span><span class="Other">(</span><span class="Identifier">params</span><span class="Other">(</span><span class="Identifier">x</span><span class="Other">)</span><span class="Other">)</span> <span class="Operator">&gt;</span> <span class="Identifier">toAst</span><span class="Other">(</span><span class="DecNumber">0</span><span class="Other">)</span><span class="Other">)</span>
+  <span class="Identifier">assert</span> <span class="Identifier">exists</span><span class="Other">(</span><span class="Identifier">params</span><span class="Other">(</span><span class="Identifier">x</span><span class="Other">)</span><span class="Other">,</span> <span class="Identifier">f2</span><span class="Other">.</span><span class="Identifier">apply</span><span class="Other">(</span><span class="Identifier">params</span><span class="Other">(</span><span class="Identifier">toAst</span><span class="Other">(</span><span class="Identifier">true</span><span class="Other">)</span><span class="Other">,</span> <span class="Identifier">x</span><span class="Other">)</span><span class="Other">)</span><span class="Other">)</span>
+  <span class="Identifier">assert</span> <span class="Identifier">check</span><span class="Other">(</span><span class="Other">)</span> <span class="Operator">==</span> <span class="Identifier">sat</span></pre>
+
+</dd>
+
+</dl></div>
 <div class="section" id="18">
 <h1><a class="toc-backref" href="#18">Templates</a></h1>
 <dl class="item">
@@ -1273,7 +1314,7 @@ Z3 environment block.
     <span class="Identifier">x</span> <span class="Other">=</span> <span class="Identifier">declBoolConst</span><span class="Other">(</span><span class="StringLit">&quot;x&quot;</span><span class="Other">)</span>
     <span class="Identifier">y</span> <span class="Other">=</span> <span class="Identifier">declBoolConst</span><span class="Other">(</span><span class="StringLit">&quot;y&quot;</span><span class="Other">)</span>
   <span class="Identifier">assert</span> <span class="Keyword">not</span> <span class="Other">(</span><span class="Other">(</span><span class="Keyword">not</span> <span class="Other">(</span><span class="Identifier">x</span> <span class="Keyword">and</span> <span class="Identifier">y</span><span class="Other">)</span><span class="Other">)</span> <span class="Operator">==</span> <span class="Other">(</span><span class="Keyword">not</span> <span class="Identifier">x</span> <span class="Keyword">or</span> <span class="Keyword">not</span> <span class="Identifier">y</span><span class="Other">)</span><span class="Other">)</span>
-  <span class="Identifier">echo</span> <span class="Identifier">check</span>                   <span class="Comment">## =&gt; unsat</span></pre>
+  <span class="Identifier">assert</span> <span class="Identifier">check</span><span class="Other">(</span><span class="Other">)</span> <span class="Operator">==</span> <span class="Identifier">unsat</span></pre>
 
 </dd>
 <a id="z3block.t,untyped"></a>
@@ -1292,48 +1333,6 @@ Z3 environment block.
 <dd>
 
 Make a sort.
-
-</dd>
-<a id="singleton.t,Sort[S]"></a>
-<dt><pre><span class="Keyword">template</span> <a href="#singleton.t%2CSort%5BS%5D"><span class="Identifier">singleton</span></a><span class="Other">[</span><span class="Identifier">S</span><span class="Other">]</span><span class="Other">(</span><span class="Identifier">s</span><span class="Other">:</span> <a href="z3nim.html#Sort"><span class="Identifier">Sort</span></a><span class="Other">[</span><span class="Identifier">S</span><span class="Other">]</span><span class="Other">)</span><span class="Other">:</span> <a href="z3nim.html#Sorts"><span class="Identifier">Sorts</span></a><span class="Other">[</span><span class="Identifier">S</span><span class="Other">]</span></pre></dt>
-<dd>
-
-
-
-</dd>
-<a id="pair.t,Sort[S1],Sorts[S2]"></a>
-<dt><pre><span class="Keyword">template</span> <a href="#pair.t%2CSort%5BS1%5D%2CSorts%5BS2%5D"><span class="Identifier">pair</span></a><span class="Other">[</span><span class="Identifier">S1</span><span class="Other">;</span> <span class="Identifier">S2</span><span class="Other">]</span><span class="Other">(</span><span class="Identifier">s1</span><span class="Other">:</span> <a href="z3nim.html#Sort"><span class="Identifier">Sort</span></a><span class="Other">[</span><span class="Identifier">S1</span><span class="Other">]</span><span class="Other">;</span> <span class="Identifier">s2</span><span class="Other">:</span> <a href="z3nim.html#Sorts"><span class="Identifier">Sorts</span></a><span class="Other">[</span><span class="Identifier">S2</span><span class="Other">]</span><span class="Other">)</span><span class="Other">:</span> <a href="z3nim.html#Sorts"><span class="Identifier">Sorts</span></a><span class="Other">[</span><a href="z3nim.html#Pair"><span class="Identifier">Pair</span></a><span class="Other">[</span><span class="Identifier">S1</span><span class="Other">,</span> <span class="Identifier">S2</span><span class="Other">]</span><span class="Other">]</span></pre></dt>
-<dd>
-
-
-
-</dd>
-<a id="singleton.t,typedesc"></a>
-<dt><pre><span class="Keyword">template</span> <a href="#singleton.t%2Ctypedesc"><span class="Identifier">singleton</span></a><span class="Other">(</span><span class="Identifier">S</span><span class="Other">:</span> <span class="Identifier">typedesc</span><span class="Other">)</span><span class="Other">:</span> <a href="z3nim.html#Sorts"><span class="Identifier">Sorts</span></a><span class="Other">[</span><span class="Identifier">S</span><span class="Other">]</span></pre></dt>
-<dd>
-
-
-
-</dd>
-<a id="pair.t,typedesc,Sorts[S2]"></a>
-<dt><pre><span class="Keyword">template</span> <a href="#pair.t%2Ctypedesc%2CSorts%5BS2%5D"><span class="Identifier">pair</span></a><span class="Other">[</span><span class="Identifier">S2</span><span class="Other">;</span> <span class="Other">]</span><span class="Other">(</span><span class="Identifier">S1</span><span class="Other">:</span> <span class="Identifier">typedesc</span><span class="Other">;</span> <span class="Identifier">s2</span><span class="Other">:</span> <a href="z3nim.html#Sorts"><span class="Identifier">Sorts</span></a><span class="Other">[</span><span class="Identifier">S2</span><span class="Other">]</span><span class="Other">)</span><span class="Other">:</span> <a href="z3nim.html#Sorts"><span class="Identifier">Sorts</span></a><span class="Other">[</span><a href="z3nim.html#Pair"><span class="Identifier">Pair</span></a><span class="Other">[</span><span class="Identifier">S1</span><span class="Other">,</span> <span class="Identifier">S2</span><span class="Other">]</span><span class="Other">]</span></pre></dt>
-<dd>
-
-
-
-</dd>
-<a id="singleton.t,Ast[S]"></a>
-<dt><pre><span class="Keyword">template</span> <a href="#singleton.t%2CAst%5BS%5D"><span class="Identifier">singleton</span></a><span class="Other">[</span><span class="Identifier">S</span><span class="Other">]</span><span class="Other">(</span><span class="Identifier">a</span><span class="Other">:</span> <a href="z3nim.html#Ast"><span class="Identifier">Ast</span></a><span class="Other">[</span><span class="Identifier">S</span><span class="Other">]</span><span class="Other">)</span><span class="Other">:</span> <a href="z3nim.html#Asts"><span class="Identifier">Asts</span></a><span class="Other">[</span><span class="Identifier">S</span><span class="Other">]</span></pre></dt>
-<dd>
-
-
-
-</dd>
-<a id="pair.t,Ast[S1],Asts[S2]"></a>
-<dt><pre><span class="Keyword">template</span> <a href="#pair.t%2CAst%5BS1%5D%2CAsts%5BS2%5D"><span class="Identifier">pair</span></a><span class="Other">[</span><span class="Identifier">S1</span><span class="Other">;</span> <span class="Identifier">S2</span><span class="Other">]</span><span class="Other">(</span><span class="Identifier">a1</span><span class="Other">:</span> <a href="z3nim.html#Ast"><span class="Identifier">Ast</span></a><span class="Other">[</span><span class="Identifier">S1</span><span class="Other">]</span><span class="Other">;</span> <span class="Identifier">a2</span><span class="Other">:</span> <a href="z3nim.html#Asts"><span class="Identifier">Asts</span></a><span class="Other">[</span><span class="Identifier">S2</span><span class="Other">]</span><span class="Other">)</span><span class="Other">:</span> <a href="z3nim.html#Asts"><span class="Identifier">Asts</span></a><span class="Other">[</span><a href="z3nim.html#Pair"><span class="Identifier">Pair</span></a><span class="Other">[</span><span class="Identifier">S1</span><span class="Other">,</span> <span class="Identifier">S2</span><span class="Other">]</span><span class="Other">]</span></pre></dt>
-<dd>
-
-
 
 </dd>
 <a id="declConst.t,string,typedesc"></a>
@@ -1371,6 +1370,13 @@ Shorthand for <tt class="docutils literal"><span class="pre">declConst(id, IntSo
 Shorthand for <tt class="docutils literal"><span class="pre">declConst(id, RealSort)</span></tt>.
 
 </dd>
+<a id="declBitVecConst.t,,"></a>
+<dt><pre><span class="Keyword">template</span> <a href="#declBitVecConst.t%2C%2C"><span class="Identifier">declBitVecConst</span></a><span class="Other">(</span><span class="Identifier">id</span><span class="Other">:</span> <span class="Identifier">string</span> <span class="Operator">|</span> <span class="Identifier">int</span><span class="Other">;</span> <span class="Identifier">size</span><span class="Other">:</span> <span class="Identifier">static</span> <span class="Identifier">uint</span><span class="Other">)</span><span class="Other">:</span> <a href="z3nim.html#Ast"><span class="Identifier">Ast</span></a><span class="Other">[</span><a href="z3nim.html#BitVecSort"><span class="Identifier">BitVecSort</span></a><span class="Other">[</span><span class="Identifier">size</span><span class="Other">]</span><span class="Other">]</span></pre></dt>
+<dd>
+
+Shorthand for <tt class="docutils literal"><span class="pre">declConst(id, BitVecSort[size])</span></tt>.
+
+</dd>
 <a id="declFunc.t,string,Sorts[D],typedesc"></a>
 <dt><pre><span class="Keyword">template</span> <a href="#declFunc.t%2Cstring%2CSorts%5BD%5D%2Ctypedesc"><span class="Identifier">declFunc</span></a><span class="Other">[</span><span class="Identifier">D</span><span class="Other">;</span> <span class="Other">]</span><span class="Other">(</span><span class="Identifier">id</span><span class="Other">:</span> <span class="Identifier">string</span><span class="Other">;</span> <span class="Identifier">domains</span><span class="Other">:</span> <a href="z3nim.html#Sorts"><span class="Identifier">Sorts</span></a><span class="Other">[</span><span class="Identifier">D</span><span class="Other">]</span><span class="Other">;</span> <span class="Identifier">R</span><span class="Other">:</span> <span class="Identifier">typedesc</span><span class="Other">)</span><span class="Other">:</span> <a href="z3nim.html#FuncDecl"><span class="Identifier">FuncDecl</span></a><span class="Other">[</span><span class="Identifier">D</span><span class="Other">,</span> <span class="Identifier">R</span><span class="Other">]</span></pre></dt>
 <dd>
@@ -1379,10 +1385,10 @@ Declare a function.
 <p><strong class="examples_text">Examples:</strong></p>
 <pre class="listing"><span class="Identifier">z3</span><span class="Other">:</span>
   <span class="Keyword">let</span>
-    <span class="Identifier">f</span> <span class="Other">=</span> <span class="Identifier">declFunc</span><span class="Other">(</span><span class="StringLit">&quot;f&quot;</span><span class="Other">,</span> <span class="Identifier">pair</span><span class="Other">(</span><span class="Identifier">RealSort</span><span class="Other">,</span> <span class="Identifier">singleton</span><span class="Other">(</span><span class="Identifier">RealSort</span><span class="Other">)</span><span class="Other">)</span><span class="Other">,</span> <span class="Identifier">RealSort</span><span class="Other">)</span>
+    <span class="Identifier">f</span> <span class="Other">=</span> <span class="Identifier">declFunc</span><span class="Other">(</span><span class="StringLit">&quot;f&quot;</span><span class="Other">,</span> <span class="Identifier">params</span><span class="Other">(</span><span class="Identifier">RealSort</span><span class="Other">,</span> <span class="Identifier">RealSort</span><span class="Other">)</span><span class="Other">,</span> <span class="Identifier">RealSort</span><span class="Other">)</span>
     <span class="Identifier">x</span> <span class="Other">=</span> <span class="Identifier">declRealConst</span><span class="Other">(</span><span class="StringLit">&quot;x&quot;</span><span class="Other">)</span>
-  <span class="Identifier">assert</span> <span class="Identifier">f</span><span class="Other">.</span><span class="Identifier">apply</span><span class="Other">(</span><span class="Identifier">pair</span><span class="Other">(</span><span class="Identifier">x</span><span class="Other">,</span> <span class="Identifier">singleton</span><span class="Other">(</span><span class="Identifier">x</span><span class="Other">)</span><span class="Other">)</span><span class="Other">)</span> <span class="Operator">==</span> <span class="Identifier">x</span>
-  <span class="Identifier">echo</span> <span class="Identifier">check</span><span class="Other">(</span><span class="Other">)</span>                 <span class="Comment">## =&gt; sat</span></pre>
+  <span class="Identifier">assert</span> <span class="Identifier">f</span><span class="Other">.</span><span class="Identifier">apply</span><span class="Other">(</span><span class="Identifier">params</span><span class="Other">(</span><span class="Identifier">x</span><span class="Other">,</span> <span class="Identifier">x</span><span class="Other">)</span><span class="Other">)</span> <span class="Operator">==</span> <span class="Identifier">x</span>
+  <span class="Identifier">assert</span> <span class="Identifier">check</span><span class="Other">(</span><span class="Other">)</span> <span class="Operator">==</span> <span class="Identifier">sat</span></pre>
 
 </dd>
 <a id="declFunc.t,int,Sorts[D],typedesc"></a>
@@ -1393,10 +1399,10 @@ Declare a function.
 <p><strong class="examples_text">Examples:</strong></p>
 <pre class="listing"><span class="Identifier">z3</span><span class="Other">:</span>
   <span class="Keyword">let</span>
-    <span class="Identifier">f</span> <span class="Other">=</span> <span class="Identifier">declFunc</span><span class="Other">(</span><span class="DecNumber">0</span><span class="Other">,</span> <span class="Identifier">pair</span><span class="Other">(</span><span class="Identifier">RealSort</span><span class="Other">,</span> <span class="Identifier">singleton</span><span class="Other">(</span><span class="Identifier">RealSort</span><span class="Other">)</span><span class="Other">)</span><span class="Other">,</span> <span class="Identifier">RealSort</span><span class="Other">)</span>
+    <span class="Identifier">f</span> <span class="Other">=</span> <span class="Identifier">declFunc</span><span class="Other">(</span><span class="DecNumber">0</span><span class="Other">,</span> <span class="Identifier">params</span><span class="Other">(</span><span class="Identifier">RealSort</span><span class="Other">,</span> <span class="Identifier">RealSort</span><span class="Other">)</span><span class="Other">,</span> <span class="Identifier">RealSort</span><span class="Other">)</span>
     <span class="Identifier">x</span> <span class="Other">=</span> <span class="Identifier">declRealConst</span><span class="Other">(</span><span class="DecNumber">1</span><span class="Other">)</span>
-  <span class="Identifier">assert</span> <span class="Identifier">f</span><span class="Other">.</span><span class="Identifier">apply</span><span class="Other">(</span><span class="Identifier">pair</span><span class="Other">(</span><span class="Identifier">x</span><span class="Other">,</span> <span class="Identifier">singleton</span><span class="Other">(</span><span class="Identifier">x</span><span class="Other">)</span><span class="Other">)</span><span class="Other">)</span> <span class="Operator">==</span> <span class="Identifier">x</span>
-  <span class="Identifier">echo</span> <span class="Identifier">check</span><span class="Other">(</span><span class="Other">)</span>                 <span class="Comment">## =&gt; sat</span></pre>
+  <span class="Identifier">assert</span> <span class="Identifier">f</span><span class="Other">.</span><span class="Identifier">apply</span><span class="Other">(</span><span class="Identifier">params</span><span class="Other">(</span><span class="Identifier">x</span><span class="Other">,</span> <span class="Identifier">x</span><span class="Other">)</span><span class="Other">)</span> <span class="Operator">==</span> <span class="Identifier">x</span>
+  <span class="Identifier">assert</span> <span class="Identifier">check</span><span class="Other">(</span><span class="Other">)</span> <span class="Operator">==</span> <span class="Identifier">sat</span></pre>
 
 </dd>
 <a id="toAst.t,Ast[S]"></a>
@@ -1539,13 +1545,6 @@ Convert from a float value to Z3 AST.
 
 
 </dd>
-<a id="!=.t,untyped,untyped"></a>
-<dt><pre><span class="Keyword">template</span> <a href="#%21%3D.t%2Cuntyped%2Cuntyped"><span class="Identifier">`!=`</span></a><span class="Other">(</span><span class="Identifier">arg1</span><span class="Other">,</span> <span class="Identifier">arg2</span><span class="Other">:</span> <span class="Identifier">untyped</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">untyped</span></pre></dt>
-<dd>
-
-
-
-</dd>
 <a id="==>.t,Ast[BoolSort],Ast[BoolSort]"></a>
 <dt><pre><span class="Keyword">template</span> <a href="#%3D%3D%3E.t%2CAst%5BBoolSort%5D%2CAst%5BBoolSort%5D"><span class="Identifier">`==&gt;`</span></a><span class="Other">(</span><span class="Identifier">arg1</span><span class="Other">,</span> <span class="Identifier">arg2</span><span class="Other">:</span> <a href="z3nim.html#Ast"><span class="Identifier">Ast</span></a><span class="Other">[</span><a href="z3nim.html#BoolSort"><span class="Identifier">BoolSort</span></a><span class="Other">]</span><span class="Other">)</span><span class="Other">:</span> <a href="z3nim.html#Ast"><span class="Identifier">Ast</span></a><span class="Other">[</span><a href="z3nim.html#BoolSort"><span class="Identifier">BoolSort</span></a><span class="Other">]</span></pre></dt>
 <dd>
@@ -1567,8 +1566,8 @@ Convert from a float value to Z3 AST.
 
 
 </dd>
-<a id="add.t,varargs[Ast[S: NumericSort],toAst]"></a>
-<dt><pre><span class="Keyword">template</span> <a href="#add.t%2Cvarargs%5BAst%5BS%3A+NumericSort%5D%2CtoAst%5D"><span class="Identifier">add</span></a><span class="Other">[</span><span class="Identifier">S</span><span class="Other">]</span><span class="Other">(</span><span class="Identifier">args</span><span class="Other">:</span> <span class="Identifier">varargs</span><span class="Other">[</span><a href="z3nim.html#Ast"><span class="Identifier">Ast</span></a><span class="Other">[</span><span class="Identifier">S</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">toAst</span><span class="Other">]</span><span class="Other">)</span><span class="Other">:</span> <a href="z3nim.html#Ast"><span class="Identifier">Ast</span></a><span class="Other">[</span><span class="Identifier">S</span><span class="Other">]</span></pre></dt>
+<a id="astAdd.t,varargs[Ast[S: NumericSort],toAst]"></a>
+<dt><pre><span class="Keyword">template</span> <a href="#astAdd.t%2Cvarargs%5BAst%5BS%3A+NumericSort%5D%2CtoAst%5D"><span class="Identifier">astAdd</span></a><span class="Other">[</span><span class="Identifier">S</span><span class="Other">]</span><span class="Other">(</span><span class="Identifier">args</span><span class="Other">:</span> <span class="Identifier">varargs</span><span class="Other">[</span><a href="z3nim.html#Ast"><span class="Identifier">Ast</span></a><span class="Other">[</span><span class="Identifier">S</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">toAst</span><span class="Other">]</span><span class="Other">)</span><span class="Other">:</span> <a href="z3nim.html#Ast"><span class="Identifier">Ast</span></a><span class="Other">[</span><span class="Identifier">S</span><span class="Other">]</span></pre></dt>
 <dd>
 
 
@@ -1581,8 +1580,8 @@ Convert from a float value to Z3 AST.
 
 
 </dd>
-<a id="mul.t,varargs[Ast[S: NumericSort],toAst]"></a>
-<dt><pre><span class="Keyword">template</span> <a href="#mul.t%2Cvarargs%5BAst%5BS%3A+NumericSort%5D%2CtoAst%5D"><span class="Identifier">mul</span></a><span class="Other">[</span><span class="Identifier">S</span><span class="Other">]</span><span class="Other">(</span><span class="Identifier">args</span><span class="Other">:</span> <span class="Identifier">varargs</span><span class="Other">[</span><a href="z3nim.html#Ast"><span class="Identifier">Ast</span></a><span class="Other">[</span><span class="Identifier">S</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">toAst</span><span class="Other">]</span><span class="Other">)</span><span class="Other">:</span> <a href="z3nim.html#Ast"><span class="Identifier">Ast</span></a><span class="Other">[</span><span class="Identifier">S</span><span class="Other">]</span></pre></dt>
+<a id="astMul.t,varargs[Ast[S: NumericSort],toAst]"></a>
+<dt><pre><span class="Keyword">template</span> <a href="#astMul.t%2Cvarargs%5BAst%5BS%3A+NumericSort%5D%2CtoAst%5D"><span class="Identifier">astMul</span></a><span class="Other">[</span><span class="Identifier">S</span><span class="Other">]</span><span class="Other">(</span><span class="Identifier">args</span><span class="Other">:</span> <span class="Identifier">varargs</span><span class="Other">[</span><a href="z3nim.html#Ast"><span class="Identifier">Ast</span></a><span class="Other">[</span><span class="Identifier">S</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">toAst</span><span class="Other">]</span><span class="Other">)</span><span class="Other">:</span> <a href="z3nim.html#Ast"><span class="Identifier">Ast</span></a><span class="Other">[</span><span class="Identifier">S</span><span class="Other">]</span></pre></dt>
 <dd>
 
 
@@ -1602,8 +1601,8 @@ Convert from a float value to Z3 AST.
 
 
 </dd>
-<a id="sub.t,varargs[Ast[S: NumericSort],toAst]"></a>
-<dt><pre><span class="Keyword">template</span> <a href="#sub.t%2Cvarargs%5BAst%5BS%3A+NumericSort%5D%2CtoAst%5D"><span class="Identifier">sub</span></a><span class="Other">[</span><span class="Identifier">S</span><span class="Other">]</span><span class="Other">(</span><span class="Identifier">args</span><span class="Other">:</span> <span class="Identifier">varargs</span><span class="Other">[</span><a href="z3nim.html#Ast"><span class="Identifier">Ast</span></a><span class="Other">[</span><span class="Identifier">S</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">toAst</span><span class="Other">]</span><span class="Other">)</span><span class="Other">:</span> <a href="z3nim.html#Ast"><span class="Identifier">Ast</span></a><span class="Other">[</span><span class="Identifier">S</span><span class="Other">]</span></pre></dt>
+<a id="astSub.t,varargs[Ast[S: NumericSort],toAst]"></a>
+<dt><pre><span class="Keyword">template</span> <a href="#astSub.t%2Cvarargs%5BAst%5BS%3A+NumericSort%5D%2CtoAst%5D"><span class="Identifier">astSub</span></a><span class="Other">[</span><span class="Identifier">S</span><span class="Other">]</span><span class="Other">(</span><span class="Identifier">args</span><span class="Other">:</span> <span class="Identifier">varargs</span><span class="Other">[</span><a href="z3nim.html#Ast"><span class="Identifier">Ast</span></a><span class="Other">[</span><span class="Identifier">S</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">toAst</span><span class="Other">]</span><span class="Other">)</span><span class="Other">:</span> <a href="z3nim.html#Ast"><span class="Identifier">Ast</span></a><span class="Other">[</span><span class="Identifier">S</span><span class="Other">]</span></pre></dt>
 <dd>
 
 
@@ -1924,8 +1923,22 @@ Convert from a float value to Z3 AST.
 
 
 </dd>
+<a id="$.t,Sorts[S]"></a>
+<dt><pre><span class="Keyword">template</span> <a href="#%24.t%2CSorts%5BS%5D"><span class="Identifier">`$`</span></a><span class="Other">[</span><span class="Identifier">S</span><span class="Other">]</span><span class="Other">(</span><span class="Identifier">sorts</span><span class="Other">:</span> <a href="z3nim.html#Sorts"><span class="Identifier">Sorts</span></a><span class="Other">[</span><span class="Identifier">S</span><span class="Other">]</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">string</span></pre></dt>
+<dd>
+
+
+
+</dd>
 <a id="$.t,Ast[S]"></a>
 <dt><pre><span class="Keyword">template</span> <a href="#%24.t%2CAst%5BS%5D"><span class="Identifier">`$`</span></a><span class="Other">[</span><span class="Identifier">S</span><span class="Other">]</span><span class="Other">(</span><span class="Identifier">ast</span><span class="Other">:</span> <a href="z3nim.html#Ast"><span class="Identifier">Ast</span></a><span class="Other">[</span><span class="Identifier">S</span><span class="Other">]</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">string</span></pre></dt>
+<dd>
+
+
+
+</dd>
+<a id="$.t,Asts[S]"></a>
+<dt><pre><span class="Keyword">template</span> <a href="#%24.t%2CAsts%5BS%5D"><span class="Identifier">`$`</span></a><span class="Other">[</span><span class="Identifier">S</span><span class="Other">]</span><span class="Other">(</span><span class="Identifier">asts</span><span class="Other">:</span> <a href="z3nim.html#Asts"><span class="Identifier">Asts</span></a><span class="Other">[</span><span class="Identifier">S</span><span class="Other">]</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">string</span></pre></dt>
 <dd>
 
 
@@ -1983,7 +1996,7 @@ Convert from a float value to Z3 AST.
       <div class="twelve-columns footer">
         <span class="nim-sprite"></span>
         <br/>
-        <small>Made with Nim. Generated: 2019-08-24 05:04:24 UTC</small>
+        <small>Made with Nim. Generated: 2019-08-26 01:05:49 UTC</small>
       </div>
     </div>
   </div>
