@@ -497,6 +497,16 @@ proc Z3_get_estimated_alloc_size*: uint64 {.libz3.}
 # AST vectors
 # ===========
 
+proc Z3_mk_ast_vector*(c: Z3_context): Z3_ast_vector {.libz3.}
+proc Z3_ast_vector_inc_ref*(c: Z3_context; v: Z3_ast_vector) {.libz3.}
+proc Z3_ast_vector_dec_ref*(c: Z3_context; v: Z3_ast_vector) {.libz3.}
+proc Z3_ast_vector_size*(c: Z3_context; v: Z3_ast_vector): cuint {.libz3.}
+proc Z3_ast_vector_get*(c: Z3_context; v: Z3_ast_vector; i: cuint): Z3_ast {.libz3.}
+proc Z3_ast_vector_set*(c: Z3_context; v: Z3_ast_vector; i: cuint; a: Z3_ast) {.libz3.}
+proc Z3_ast_vector_resize*(c: Z3_context; v: Z3_ast_vector; n: cuint) {.libz3.}
+proc Z3_ast_vector_push*(c: Z3_context; v: Z3_ast_vector; a: Z3_ast) {.libz3.}
+proc Z3_ast_vector_translate*(s: Z3_context; v: Z3_ast_vector; t: Z3_context): Z3_ast_vector {.libz3.}
+proc Z3_ast_vector_to_string*(c: Z3_context; v: Z3_ast_vector): Z3_string {.libz3.}
 
 # AST maps
 # ========

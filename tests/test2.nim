@@ -34,9 +34,11 @@ suite "Library":
 
       echo getModel()
 
+      echo getAssertions()
+
   test "Contamination-free":
     z3:
-      assert 5 == 2 + 3
+      check 5 == 2 + 3
 
 
   test "Uninterpreted Functions":
@@ -48,5 +50,25 @@ suite "Library":
       assert distinc(x, 0.0, 1.0)
       assert f.apply(params(x)) == x + f.apply(params(0.0.toAst()))
 
-      assert check() == sat
+      check check() == sat
       echo getModel()
+
+  test "AST vector":
+    z3:
+      let
+        x = declIntConst(1)
+        y = declIntConst(2)
+        z = declIntConst(3)
+
+      assert x + y > z
+
+      z3block:
+        assert 3 * x + y < 2 * z
+
+        check getAssertions().len == 2
+
+        assert x > 0
+
+        check getAssertions().len == 3
+
+      check getAssertions().len == 1

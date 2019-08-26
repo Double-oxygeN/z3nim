@@ -30,6 +30,8 @@ type
 
   FuncDecl*[D, R] = distinct Z3FuncDecl
 
+  AstVector* = distinct Z3AstVector
+
 
 func major*(self: Version): uint = self.major
 func minor*(self: Version): uint = self.minor
@@ -520,6 +522,10 @@ template check*: CheckResult =
 template getModel*: Model =
   Model(Z3SolverGetModel(ctx, solver))
 
+template getAssertions*: AstVector =
+  AstVector(Z3SolverGetAssertions(ctx, solver))
+
+
 template `$`*[S](sort: Sort[S]): string =
   $Z3SortToString(ctx, Z3Sort(sort))
 
@@ -559,6 +565,12 @@ template `$`*(model: Model): string =
 
 template `$`*[D, R](fn: FuncDecl[D, R]): string =
   $Z3FuncDeclToString(ctx, Z3FuncDecl(fn))
+
+template `$`*(astvec: AstVector): string =
+  $Z3AstVectorToString(ctx, Z3AstVector(astvec))
+
+template len*(astvec: AstVector): int =
+  int(Z3AstVectorSize(ctx, Z3AstVector(astvec)))
 
 template `===`*[S](t1, t2: Ast[S]): bool =
   Z3IsEqAst(ctx, Z3Ast(t1), Z3Ast(t2))
