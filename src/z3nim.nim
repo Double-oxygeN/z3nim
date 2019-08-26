@@ -1,6 +1,6 @@
 ## :Author: `Double-oxygeN <https://github.com/Double-oxygeN>`_
 ##
-## Z3 binding for Nim language.
+## Z3 Nim binding.
 
 import z3nim/z3api
 import hashes, ropes
