@@ -101,3 +101,18 @@ suite "API":
 
     ctx.Z3SolverDecRef(solver)
     Z3DelContext ctx
+
+  test "Bit-vector":
+    let
+      cfg = Z3MkConfig()
+      ctx = Z3MkContext(cfg)
+
+    Z3DelConfig cfg
+
+    var bits0 = [true, false, false]
+
+    let bv0 = ctx.Z3MkBVNumeral(3'u.cuint, addr bits0[0])
+
+    check $ctx.Z3AstToString(bv0) == "#b001"
+
+    Z3DelContext ctx

@@ -21,6 +21,9 @@ type
   BoolSort* = object
   IntSort* = object
   RealSort* = object
+  BitVecSort*[N: static uint] = object
+  ArraySort*[D, R] = object
+  SetSort*[T] = object
 
   NumericSort* = IntSort | RealSort
 
@@ -72,6 +75,9 @@ template z3*(body: untyped): untyped =
 
   block:
     let cfg = Z3MkConfig()
+
+    Z3SetParamValue(cfg, "timeout", $60_000)
+
     let ctx {.inject, used.} = Z3MkContext(cfg)
 
     Z3DelConfig(cfg)
@@ -107,6 +113,9 @@ template z3block*(body: untyped): untyped =
 proc mkSort(ctx: Z3Context; s: typedesc[BoolSort]): Z3Sort = ctx.Z3MkBoolSort()
 proc mkSort(ctx: Z3Context; s: typedesc[IntSort]): Z3Sort = ctx.Z3MkIntSort()
 proc mkSort(ctx: Z3Context; s: typedesc[RealSort]): Z3Sort = ctx.Z3MkRealSort()
+proc mkSort[N: static uint](ctx: Z3Context; s: typedesc[BitVecSort[N]]): Z3Sort = ctx.Z3MkBvSort(N.cuint)
+proc mkSort[D, R](ctx: Z3Context; s: typedesc[ArraySort[D, R]]): Z3Sort = ctx.Z3MkArraySort(mkSort(ctx, D), mkSort(ctx, R))
+proc mkSort[T](ctx: Z3Context; s: typedesc[SetSort[T]]): Z3Sort = ctx.Z3MkSetSort(mkSort(ctx, T))
 
 
 template makeSort*(S: typedesc): Sort[S] =
@@ -191,6 +200,10 @@ template declIntConst*(id: string | int): Ast[IntSort] =
 template declRealConst*(id: string | int): Ast[RealSort] =
   ## Shorthand for ``declConst(id, RealSort)``.
   declConst(id, RealSort)
+
+template declBitVecConst*(id: string | int; size: static uint): Ast[BitVecSort[size]] =
+  ## Shorthand for ``declConst(id, BitVecSort[size])``.
+  declConst(id, BitVecSort[size])
 
 
 template declFunc[D](sym: Z3Symbol; domains: Sorts[D]; R: typedesc): FuncDecl[D, R] =
