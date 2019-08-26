@@ -4,6 +4,7 @@
 # https://opensource.org/licenses/MIT
 
 ## :Author: `Double-oxygeN <https://github.com/Double-oxygeN>`_
+## :License: MIT
 ##
 ## Z3 Nim binding.
 
