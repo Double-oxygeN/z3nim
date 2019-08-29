@@ -274,23 +274,35 @@ template `not`*(arg: Ast[BoolSort]): Ast[BoolSort] =
   Ast[BoolSort](Z3MkNot(ctx, Z3Ast(arg)))
 
 template boolAnd*(args: varargs[Ast[BoolSort], toAst]): Ast[BoolSort] =
-  var args0: array[len(args), Z3Ast]
+  var
+    argsPtr = alloc(len(args) * sizeof(Z3Ast))
+    argsArr = cast[carray[Z3Ast]](argsPtr)
 
   for idx, arg in args:
-    args0[idx] = Z3Ast(arg)
+    argsArr[idx] = Z3Ast(arg)
 
-  Ast[BoolSort](Z3MkAnd(ctx, cuint(len(args)), cast[carray[Z3Ast]](addr args0[0])))
+  let a = Ast[BoolSort](Z3MkAnd(ctx, cuint(len(args)), argsArr))
+
+  dealloc argsPtr
+
+  a
 
 template `and`*(arg1, arg2: untyped): untyped =
   boolAnd(arg1, arg2)
 
 template boolOr*(args: varargs[Ast[BoolSort], toAst]): Ast[BoolSort] =
-  var args0: array[len(args), Z3Ast]
+  var
+    argsPtr = alloc(len(args) * sizeof(Z3Ast))
+    argsArr = cast[carray[Z3Ast]](argsPtr)
 
   for idx, arg in args:
-    args0[idx] = Z3Ast(arg)
+    argsArr[idx] = Z3Ast(arg)
 
-  Ast[BoolSort](Z3MkOr(ctx, cuint(len(args)), cast[carray[Z3Ast]](addr args0[0])))
+  let a = Ast[BoolSort](Z3MkOr(ctx, cuint(len(args)), argsArr))
+
+  dealloc argsPtr
+
+  a
 
 template `or`*(arg1, arg2: untyped): untyped =
   boolOr(arg1, arg2)
@@ -328,12 +340,18 @@ template `==`*(arg1: Ast[RealSort]; arg2: float): Ast[BoolSort] =
   arg1 == toAst(arg2)
 
 template distinc*[S](args: varargs[Ast[S], toAst]): Ast[BoolSort] =
-  var args0: array[len(args), Z3Ast]
+  var
+    argsPtr = alloc(len(args) * sizeof(Z3Ast))
+    argsArr = cast[carray[Z3Ast]](argsPtr)
 
   for idx, arg in args:
-    args0[idx] = Z3Ast(arg)
+    argsArr[idx] = Z3Ast(arg)
 
-  Ast[BoolSort](Z3MkDistinct(ctx, cuint(len(args)), cast[carray[Z3Ast]](addr args0[0])))
+  let a = Ast[BoolSort](Z3MkDistinct(ctx, cuint(len(args)), argsArr))
+
+  dealloc argsPtr
+
+  a
 
 template `==>`*(arg1, arg2: Ast[BoolSort]): Ast[BoolSort] =
   Ast[BoolSort](Z3MkImplies(ctx, Z3Ast(arg1), Z3Ast(arg2)))
@@ -345,23 +363,35 @@ template `==>`*(arg1: Ast[BoolSort]; arg2: bool): Ast[BoolSort] =
   if arg2: Ast[BoolSort](Z3MkTrue(ctx)) else: Ast[BoolSort](Z3MkNot(ctx, Z3Ast(arg1)))
 
 template astAdd*[S: NumericSort](args: varargs[Ast[S], toAst]): Ast[S] =
-  var args0: array[len(args), Z3Ast]
+  var
+    argsPtr = alloc(len(args) * sizeof(Z3Ast))
+    argsArr = cast[carray[Z3Ast]](argsPtr)
 
   for idx, arg in args:
-    args0[idx] = Z3Ast(args[idx])
+    argsArr[idx] = Z3Ast(arg)
 
-  Ast[S](Z3MkAdd(ctx, cuint(len(args)), cast[carray[Z3Ast]](addr args0[0])))
+  let a = Ast[S](Z3MkAdd(ctx, cuint(len(args)), argsArr))
+
+  dealloc argsPtr
+
+  a
 
 template `+`*(arg1, arg2: untyped): untyped =
   astAdd(arg1, arg2)
 
 template astMul*[S: NumericSort](args: varargs[Ast[S], toAst]): Ast[S] =
-  var args0: array[len(args), Z3Ast]
+  var
+    argsPtr = alloc(len(args) * sizeof(Z3Ast))
+    argsArr = cast[carray[Z3Ast]](argsPtr)
 
   for idx, arg in args:
-    args0[idx] = Z3Ast(args[idx])
+    argsArr[idx] = Z3Ast(arg)
 
-  Ast[S](Z3MkMul(ctx, cuint(len(args)), cast[carray[Z3Ast]](addr args0[0])))
+  let a = Ast[S](Z3MkMul(ctx, cuint(len(args)), argsArr))
+
+  dealloc argsPtr
+
+  a
 
 template `*`*(arg1, arg2: untyped): untyped =
   astMul(arg1, arg2)
@@ -370,12 +400,18 @@ template `-`*[S: NumericSort](arg: Ast[S]): Ast[S] =
   Ast[S](Z3MkUnaryMinus(ctx, Z3Ast(arg)))
 
 template astSub*[S: NumericSort](args: varargs[Ast[S], toAst]): Ast[S] =
-  var args0: array[len(args), Z3Ast]
+  var
+    argsPtr = alloc(len(args) * sizeof(Z3Ast))
+    argsArr = cast[carray[Z3Ast]](argsPtr)
 
   for idx, arg in args:
-    args0[idx] = Z3Ast(arg)
+    argsArr[idx] = Z3Ast(arg)
 
-  Ast[S](Z3MkSub(ctx, cuint(len(args)), cast[carray[Z3Ast]](addr args0[0])))
+  let a = Ast[S](Z3MkSub(ctx, cuint(len(args)), argsArr))
+
+  dealloc argsPtr
+
+  a
 
 template `-`*(arg1, arg2: untyped): untyped =
   astSub(arg1, arg2)
@@ -520,7 +556,7 @@ template quantifier[V, S](isForall: bool; apps: Asts[V]; body: Ast[S]): Ast[S] =
     assert(Z3IsApp(ctx, app), "Unsupported `apps` is given. It only supports either constants or applications (Z3_APP_AST).")
     boundArr[idx] = Z3ToApp(ctx, app)
 
-  let a = Ast[S](Z3MkQuantifierConst(ctx, isForall, 0'u.cuint, appsSeq.len.cuint, boundArr, 0'u.cuint, nil, Z3_ast(body)))
+  let a = Ast[S](Z3MkQuantifierConst(ctx, isForall, 0'u.cuint, appsSeq.len.cuint, boundArr, 0'u.cuint, nil, Z3Ast(body)))
 
   dealloc boundPtr
 
