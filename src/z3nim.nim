@@ -367,6 +367,12 @@ template `==>`*(arg1: bool; arg2: Ast[BoolSort]): Ast[BoolSort] =
 template `==>`*(arg1: Ast[BoolSort]; arg2: bool): Ast[BoolSort] =
   if arg2: Ast[BoolSort](Z3MkTrue(ctx)) else: Ast[BoolSort](Z3MkNot(ctx, Z3Ast(arg1)))
 
+template ite*[S](arg1: Ast[BoolSort]; arg2, arg3: Ast[S]): Ast[S] =
+  Ast[S](Z3MkIte(ctx, Z3Ast(arg1), Z3Ast(arg2), Z3Ast(arg3)))
+
+template ite*[S](arg1: bool; arg2, arg3: Ast[S]): Ast[S] =
+  if arg1: arg2 else: arg3
+
 template astAdd*[S: NumericSort](args: varargs[Ast[S], toAst]): Ast[S] =
   var
     argsPtr = alloc(len(args) * sizeof(Z3Ast))
