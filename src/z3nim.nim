@@ -25,6 +25,7 @@ type
   BitVecSort*[N: static uint] = object
   ArraySort*[D, R] = object
   SetSort*[T] = object
+  UnknownSort* = object
 
   NumericSort* = IntSort | RealSort
 
@@ -77,7 +78,11 @@ template z3*(body: untyped): untyped =
   block:
     let cfg = Z3MkConfig()
 
+    Z3SetParamValue(cfg, "proof", "true")
     Z3SetParamValue(cfg, "timeout", $60_000)
+    Z3SetParamValue(cfg, "well_sorted_check", "true")
+    Z3SetParamValue(cfg, "model", "true")
+    Z3SetParamValue(cfg, "unsat_core", "true")
 
     let ctx {.inject, used.} = Z3MkContext(cfg)
 
@@ -579,6 +584,9 @@ template getModel*: Model =
 
 template getAssertions*: AstVector =
   AstVector(Z3SolverGetAssertions(ctx, solver))
+
+template getProof*: Ast[UnknownSort] =
+  Ast[UnknownSort](Z3SolverGetProof(ctx, solver))
 
 
 template `$`*[S](sort: Sort[S]): string =
