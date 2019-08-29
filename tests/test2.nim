@@ -72,3 +72,22 @@ suite "Library":
         check getAssertions().len == 3
 
       check getAssertions().len == 1
+
+  test "timeout":
+    z3:
+      # negation of Goldbach's conjecture (one of unsolved problems)
+      let
+        x = declConst(1, IntSort)
+        y = declConst(2, IntSort)
+        z = declConst(3, IntSort)
+        wy = declConst(4, IntSort)
+        wz = declConst(5, IntSort)
+
+      assert x > 3
+      assert x mod 2 == 0
+
+      assert forall(params(y, z, wy, wz), (((1 < wy and wy < y) ==> (y mod wy != 0)) and ((1 < wz and wz < z) ==> (z mod wz != 0))) ==> (x != y + z))
+
+      z3block:
+        setTimeout(3_000'u)
+        check check() == undefined

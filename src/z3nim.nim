@@ -79,7 +79,6 @@ template z3*(body: untyped): untyped =
     let cfg = Z3MkConfig()
 
     Z3SetParamValue(cfg, "proof", "true")
-    Z3SetParamValue(cfg, "timeout", $60_000)
     Z3SetParamValue(cfg, "well_sorted_check", "true")
     Z3SetParamValue(cfg, "model", "true")
     Z3SetParamValue(cfg, "unsat_core", "true")
@@ -89,12 +88,15 @@ template z3*(body: untyped): untyped =
     Z3DelConfig(cfg)
 
     let solver {.inject, used.} = Z3MkSolver(ctx)
-
     Z3SolverIncRef(ctx, solver)
+
+    let solverParams {.inject, used.} = Z3MkParams(ctx)
+    Z3ParamsIncRef(ctx, solverParams)
 
     block:
       body
 
+    Z3ParamsDecRef(ctx, solverParams)
     Z3SolverDecRef(ctx, solver)
     Z3DelContext(ctx)
 
@@ -115,6 +117,12 @@ template z3block*(body: untyped): untyped =
     body
 
   Z3_solver_pop(ctx, solver, 1'u.cuint)
+
+
+template setTimeout*(ms: uint) =
+  let sym = Z3MkStringSymbol(ctx, "timeout")
+  Z3ParamsSetUint(ctx, solverParams, sym, cuint(ms))
+
 
 proc mkSort(ctx: Z3Context; s: typedesc[BoolSort]): Z3Sort = ctx.Z3MkBoolSort()
 proc mkSort(ctx: Z3Context; s: typedesc[IntSort]): Z3Sort = ctx.Z3MkIntSort()
@@ -583,6 +591,7 @@ template assert*(t: Ast[BoolSort]) =
   Z3SolverAssert(ctx, solver, Z3Ast(t))
 
 template check*: CheckResult =
+  Z3SolverSetParams(ctx, solver, solverParams)
   Z3SolverCheck(ctx, solver).ord.CheckResult
 
 template getModel*: Model =
