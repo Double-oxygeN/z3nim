@@ -1,4 +1,4 @@
-import ../src/z3nim
+import z3nim
 
 z3:
   let
