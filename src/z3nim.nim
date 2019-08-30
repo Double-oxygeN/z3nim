@@ -123,6 +123,13 @@ template setTimeout*(ms: uint) =
   let sym = Z3MkStringSymbol(ctx, "timeout")
   Z3ParamsSetUint(ctx, solverParams, sym, cuint(ms))
 
+template setParallelThreads*(count: uint) =
+  let sym = Z3MkStringSymbol(ctx, "threads")
+  Z3ParamsSetUint(ctx, solverParams, sym, cuint(count))
+
+template setZeroAccuracy*(k: uint) =
+  let sym = Z3MkStringSymbol(ctx, "zero_accuracy")
+  Z3ParamsSetUint(ctx, solverParams, sym, cuint(k))
 
 proc mkSort(ctx: Z3Context; s: typedesc[BoolSort]): Z3Sort = ctx.Z3MkBoolSort()
 proc mkSort(ctx: Z3Context; s: typedesc[IntSort]): Z3Sort = ctx.Z3MkIntSort()
@@ -263,6 +270,61 @@ template declFunc*[D](id: int; domains: Sorts[D]; R: typedesc): FuncDecl[D, R] =
 
   let sym = Z3MkIntSymbol(ctx, id.cint)
   declFunc(sym, domains, R)
+
+
+template defRecursiveFunc[D](sym: Z3Symbol; domains: Sorts[D]; R: typedesc; args: Asts[D]; body: untyped): FuncDecl[D, R] =
+  let
+    domainsSeq = seq[Z3Sort](domains)
+    argsSeq = seq[Z3Ast](args)
+  var
+    domainsPtr = alloc(len(domainsSeq) * sizeof(Z3Sort))
+    domainsArr = cast[carray[Z3Sort]](domainsPtr)
+    argsPtr = alloc(len(argsSeq) * sizeof(Z3Ast))
+    argsArr = cast[carray[Z3Ast]](argsPtr)
+
+  for idx, domain in domainsSeq:
+    domainsArr[idx] = domain
+
+  for idx, arg in argsSeq:
+    argsArr[idx] = arg
+
+  let recfunc = Z3MKRecFuncDecl(ctx, sym, cuint(len(domainsSeq)), domainsArr, mkSort(ctx, R))
+
+  block:
+    let
+      recur {.inject.} = FuncDecl[D, R](recfunc)
+      bodyAst = body
+
+    Z3AddRecDef(ctx, recfunc, cuint(len(argsSeq)), argsArr, Z3Ast(bodyAst))
+
+  dealloc domainsPtr
+  dealloc argsPtr
+
+  FuncDecl[D, R](recfunc)
+
+template defRecursiveFunc*[D](id: string; domains: Sorts[D]; R: typedesc; args: Asts[D]; body: untyped): FuncDecl[D, R] =
+  ## Define a recursive function.
+  ##
+  ## In ``body``, you can use ``recur`` as the function itself.
+  runnableExamples:
+    z3:
+      let
+        x = declConst("x", IntSort)
+        a = declConst("a", IntSort)
+
+        f = defRecursiveFunc("f", params(IntSort, IntSort), IntSort, params(x, a)):
+          ite(x <= 0, a, recur.apply(params(x - 1, a * x)))
+
+      proc factorial(x: Ast[IntSort]): Ast[IntSort] =
+        f.apply(params(x, toAst(1)))
+
+      let n = declConst("n", IntSort)
+      assert factorial(n) > 1_000
+      assert check() == sat
+  
+  let sym = Z3MkStringSymbol(ctx, id)
+  defRecursiveFunc(sym, domains, R, args):
+    body
 
 
 template toAst*[S](a: Ast[S]): Ast[S] =

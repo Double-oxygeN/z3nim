@@ -91,3 +91,20 @@ suite "Library":
       z3block:
         setTimeout(3_000'u)
         check check() == undefined
+
+  test "recursive function":
+    z3:
+      let
+        x = declConst("x", IntSort)
+        a = declConst("a", IntSort)
+
+        f = defRecursiveFunc("f", params(IntSort, IntSort), IntSort, params(x, a)):
+          ite(x <= 0, a, recur.apply(params(x - 1, a * x)))
+
+        n = declConst("n", IntSort)
+
+      proc factorial(x: Ast[IntSort]): Ast[IntSort] =
+        f.apply(params(x, toAst(1)))
+
+      assert factorial(n) > 1000
+      check check() == sat

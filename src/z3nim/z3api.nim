@@ -228,7 +228,7 @@ proc Z3_mk_const*(c: Z3_context; s: Z3_symbol; ty: Z3_sort): Z3_ast {.libz3.}
 proc Z3_mk_fresh_decl*(c: Z3_context; prefix: Z3_string; domain_size: cuint; domain: carray[Z3_sort]; range: Z3_sort): Z3_func_decl {.libz3.}
 proc Z3_mk_fresh_const*(c: Z3_context; prefix: Z3_string; ty: Z3_sort): Z3_ast {.libz3.}
 proc Z3_mk_rec_func_decl*(c: Z3_context; s: Z3_symbol; domain_size: cuint; domain: carray[Z3_sort]; range: Z3_sort): Z3_func_decl {.libz3.}
-proc Z3_add_rec_def*(c: Z3_context; f: Z3_func_decl; args: carray[Z3_ast]; body: Z3_ast) {.libz3.}
+proc Z3_add_rec_def*(c: Z3_context; f: Z3_func_decl; n: cuint; args: carray[Z3_ast]; body: Z3_ast) {.libz3.}
 
 # Propositional Logic and Equality
 # ================================
