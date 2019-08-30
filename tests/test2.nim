@@ -91,6 +91,7 @@ suite "Library":
       z3block:
         setTimeout(3_000'u)
         check check() == undefined
+        check getReason() == "canceled"
 
   test "recursive function":
     z3:

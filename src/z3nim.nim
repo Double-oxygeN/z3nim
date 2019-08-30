@@ -672,6 +672,10 @@ template getProof*: Ast[UnknownSort] =
   ## Do not call this procedure before calling ``check``.
   Ast[UnknownSort](Z3SolverGetProof(ctx, solver))
 
+template getReason*: string =
+  ## Get reason for ``undefined``.
+  ## Do not call this procedure before calling ``check``.
+  $Z3SolverGetReasonUnknown(ctx, solver)
 
 template `$`*[S](sort: Sort[S]): string =
   $Z3SortToString(ctx, Z3Sort(sort))
