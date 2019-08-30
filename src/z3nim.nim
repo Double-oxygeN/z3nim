@@ -650,19 +650,26 @@ template exists*[V, S](apps: Asts[V]; body: Ast[S]): Ast[S] =
   quantifier(false, apps, body)
 
 template assert*(t: Ast[BoolSort]) =
+  ## Add an assertion.
   Z3SolverAssert(ctx, solver, Z3Ast(t))
 
 template check*: CheckResult =
+  ## Check if all assertions satisfy or not.
   Z3SolverSetParams(ctx, solver, solverParams)
   Z3SolverCheck(ctx, solver).ord.CheckResult
 
 template getModel*: Model =
+  ## Get model.
+  ## Do not call this procedure before calling ``check``.
   Model(Z3SolverGetModel(ctx, solver))
 
 template getAssertions*: AstVector =
+  ## Get assertions.
   AstVector(Z3SolverGetAssertions(ctx, solver))
 
 template getProof*: Ast[UnknownSort] =
+  ## Get proof for unsat.
+  ## Do not call this procedure before calling ``check``.
   Ast[UnknownSort](Z3SolverGetProof(ctx, solver))
 
 
