@@ -42,6 +42,8 @@ type
 
   AstVector* = distinct Z3AstVector
 
+  Z3Exception* = object of Exception
+
 
 func major*(self: Version): uint = self.major
 func minor*(self: Version): uint = self.minor
@@ -92,6 +94,10 @@ template z3*(body: untyped): untyped =
 
     let solverParams {.inject, used.} = Z3MkParams(ctx)
     Z3ParamsIncRef(ctx, solverParams)
+
+    Z3SetErrorHandler(ctx) do (c: Z3Context; e: Z3ErrorCode):
+      let errorMessage = $Z3GetErrorMsg(c, e)
+      raise newException(Z3Exception, errorMessage)
 
     block:
       body
@@ -691,7 +697,9 @@ template eval*[S](model: Model; ast: Ast[S]): Ast[S] =
       assert $model.eval(x mod 33) == "19"
 
   var val: Z3Ast
-  assert Z3_model_eval(ctx, Z3_model(model), Z3Ast(ast), true, addr val)
+  if not Z3_model_eval(ctx, Z3_model(model), Z3Ast(ast), true, addr val):
+    raise newException(Z3Exception, "Evaluation failed.")
+
   Ast[S](val)
 
 template `$`*[S](sort: Sort[S]): string =
