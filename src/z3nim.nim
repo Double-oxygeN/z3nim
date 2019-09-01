@@ -317,6 +317,7 @@ template defRecursiveFunc*[D](id: string; args: Asts[D]; R: typedesc; body: unty
 
       let n = declConst("n", IntSort)
       assert factorial(n) > 1_000
+      assert factorial(n) < 10_000
       assert check() == sat
   
   let sym = Z3MkStringSymbol(ctx, id)

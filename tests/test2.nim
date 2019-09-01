@@ -108,4 +108,5 @@ suite "Library":
         f.apply(params(x, toAst(1)))
 
       assert factorial(n) > 1000
+      assert factorial(n) < 10000
       check check() == sat

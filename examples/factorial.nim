@@ -13,7 +13,8 @@ z3:
   proc factorial(x: Ast[IntSort]): Ast[IntSort] =
     f.apply(params(x, toAst(1)))
 
-  assert factorial(n) > 1000
+  assert factorial(n) > 1_000
+  assert factorial(n) < 10_000
 
   echo check()
   echo getModel()
