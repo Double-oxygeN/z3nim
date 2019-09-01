@@ -386,6 +386,10 @@ proc Z3_simplify_ex*(c: Z3_context; a: Z3_ast; p: Z3_params): Z3_ast {.libz3.}
 # Modifiers
 # =========
 
+proc Z3_update_term*(c: Z3_context; a: Z3_ast; num_args: cuint; args: carray[Z3_ast]): Z3_ast {.libz3.}
+proc Z3_substitute*(c: Z3_context; a: Z3_ast; num_exprs: cuint; `from`, to: carray[Z3_ast]): Z3_ast {.libz3.}
+proc Z3_substitute_vars*(c: Z3_context; a: Z3_ast; num_exprs: cuint; to: carray[Z3_ast]): Z3_ast {.libz3.}
+proc Z3_translate*(source: Z3_context; a: Z3_ast; target: Z3_context): Z3_ast {.libz3.}
 
 # Models
 # ======
