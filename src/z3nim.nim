@@ -694,13 +694,64 @@ template eval*[S](model: Model; ast: Ast[S]): Ast[S] =
 
       let model = getModel()
 
-      assert $model.eval(x mod 33) == "19"
+      assert model.eval(x mod 33).toInt() == 19
 
   var val: Z3Ast
-  if not Z3_model_eval(ctx, Z3_model(model), Z3Ast(ast), true, addr val):
+  if not Z3ModelEval(ctx, Z3_model(model), Z3Ast(ast), true, addr val):
     raise newException(Z3Exception, "Evaluation failed.")
 
   Ast[S](val)
+
+template toInt*(ast: Ast[IntSort]): int =
+  ## Convert AST to an integer value.
+  if not Z3IsNumeralAst(ctx, Z3Ast(ast)):
+    raise newException(Z3Exception, "AST is not numeral.")
+
+  var val: cint
+  if not Z3GetNumeralInt(ctx, Z3Ast(ast), addr val):
+    raise newException(Z3Exception, "Numeral value does not fit in a machine int.")
+
+  int(val)
+
+template toInt64*(ast: Ast[IntSort]): int64 =
+  ## Convert AST to a 64-bit integer value.
+  if not Z3IsNumeralAst(ctx, Z3Ast(ast)):
+    raise newException(Z3Exception, "AST is not numeral.")
+
+  var val: int64
+  if not Z3GetNumeralInt64(ctx, Z3Ast(ast), addr val):
+    raise newException(Z3Exception, "Numeral value does not fit in machine int64.")
+
+  val
+
+template toUint*(ast: Ast[IntSort]): uint =
+  ## Convert AST to an unsigned integer value.
+  if not Z3IsNumeralAst(ctx, Z3Ast(ast)):
+    raise newException(Z3Exception, "AST is not numeral.")
+
+  var val: cuint
+  if not Z3GetNumeralUint(ctx, Z3Ast(ast), addr val):
+    raise newException(Z3Exception, "Numeral value does not fit in a machine uint.")
+
+  uint(val)
+
+template toUint64*(ast: Ast[IntSort]): uint64 =
+  ## Convert AST to a 64-bit unsigned integer value.
+  if not Z3IsNumeralAst(ctx, Z3Ast(ast)):
+    raise newException(Z3Exception, "AST is not numeral.")
+
+  var val: uint64
+  if not Z3GetNumeralUint64(ctx, Z3Ast(ast), addr val):
+    raise newException(Z3Exception, "Numeral value does not fit in machine uint64.")
+
+  val
+
+template toFloat*(ast: Ast[RealSort]): float =
+  ## Convert AST to a floating-point value.
+  if not Z3IsNumeralAst(ctx, Z3Ast(ast)):
+    raise newException(Z3Exception, "AST is not numeral.")
+
+  float(Z3GetNumeralDouble(ctx, Z3Ast(ast)))
 
 template `$`*[S](sort: Sort[S]): string =
   $Z3SortToString(ctx, Z3Sort(sort))

@@ -125,8 +125,14 @@ suite "Library":
 
       check check() == sat
 
-      let model = getModel()
+      let
+        model = getModel()
 
-      echo model.eval(x)
-      echo model.eval(y)
-      echo model.eval(z)
+        xVal = model.eval(x).toFloat()
+        yVal = model.eval(y).toFloat()
+        zVal = model.eval(z).toFloat()
+
+      assert xVal + yVal + zVal == 6.0
+      assert xVal + yVal < 4.5
+      assert xVal + zVal > 2.5
+      assert yVal > zVal + 0.8

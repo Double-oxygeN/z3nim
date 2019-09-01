@@ -379,7 +379,13 @@ proc Z3_is_eq_ast*(c: Z3_context; t1, t2: Z3_ast): bool {.libz3.}
 proc Z3_get_ast_hash*(c: Z3_context; a: Z3_ast): cuint {.libz3.}
 proc Z3_get_sort*(c: Z3_context; a: Z3_ast): Z3_sort {.libz3.}
 proc Z3_is_app*(c: Z3_context; a: Z3_ast): bool {.libz3.}
+proc Z3_is_numeral_ast*(c: Z3_context; a: Z3_ast): bool {.libz3.}
 proc Z3_to_app*(c: Z3_context; a: Z3_ast): Z3_app {.libz3.}
+proc Z3_get_numeral_double*(c: Z3_context; a: Z3_ast): cdouble {.libz3.}
+proc Z3_get_numeral_int*(c: Z3_context; v: Z3_ast; i: ptr cint): bool {.libz3.}
+proc Z3_get_numeral_uint*(c: Z3_context; v: Z3_ast; u: ptr cuint): bool {.libz3.}
+proc Z3_get_numeral_uint64*(c: Z3_context; v: Z3_ast; i: ptr uint64): bool {.libz3.}
+proc Z3_get_numeral_int64*(c: Z3_context; v: Z3_ast; i: ptr int64): bool {.libz3.}
 proc Z3_simplify*(c: Z3_context; a: Z3_ast): Z3_ast {.libz3.}
 proc Z3_simplify_ex*(c: Z3_context; a: Z3_ast; p: Z3_params): Z3_ast {.libz3.}
 
