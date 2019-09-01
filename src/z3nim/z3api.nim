@@ -394,6 +394,21 @@ proc Z3_translate*(source: Z3_context; a: Z3_ast; target: Z3_context): Z3_ast {.
 # Models
 # ======
 
+proc Z3_mk_model*(c: Z3_context): Z3_model {.libz3.}
+proc Z3_model_inc_ref*(c: Z3_context; m: Z3_model) {.libz3.}
+proc Z3_model_dec_ref*(c: Z3_context; m: Z3_model) {.libz3.}
+proc Z3_model_eval*(c: Z3_context; m: Z3_model; t: Z3_ast; model_completion: bool; v: ptr Z3_ast): bool {.libz3.}
+proc Z3_model_get_const_interp*(c: Z3_context; m: Z3_model; a: Z3_func_decl): Z3_ast {.libz3.}
+proc Z3_model_has_interp*(c: Z3_context; m: Z3_model; a: Z3_func_decl): bool {.libz3.}
+proc Z3_model_get_func_interp*(c: Z3_context; m: Z3_model; f: Z3_func_decl): Z3_func_interp {.libz3.}
+proc Z3_model_get_num_consts*(c: Z3_context; m: Z3_model): cuint {.libz3.}
+proc Z3_model_get_const_decl*(c: Z3_context; m: Z3_model; i: cuint): Z3_func_decl {.libz3.}
+proc Z3_model_get_num_funcs*(c: Z3_context; m: Z3_model): cuint {.libz3.}
+proc Z3_model_get_func_decl*(c: Z3_context; m: Z3_model; i: cuint): Z3_func_decl {.libz3.}
+proc Z3_model_get_num_sorts*(c: Z3_context; m: Z3_model): cuint {.libz3.}
+proc Z3_model_get_sort*(c: Z3_context; m: Z3_model; i: cuint): Z3_sort {.libz3.}
+proc Z3_model_get_sort_universe*(c: Z3_context; m: Z3_model; s: Z3_sort): Z3_ast_vector {.libz3.}
+proc Z3_model_translate*(c: Z3_context; m: Z3_model; dst: Z3_context): Z3_model {.libz3.}
 
 # Interaction logging
 # ===================

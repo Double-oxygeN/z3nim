@@ -675,6 +675,25 @@ template getReason*: string =
   ## Do not call this procedure before calling ``check``.
   $Z3SolverGetReasonUnknown(ctx, solver)
 
+template eval*[S](model: Model; ast: Ast[S]): Ast[S] =
+  ## Evaluate AST under the model.
+  runnableExamples:
+    z3:
+      let x = declIntConst("x")
+
+      assert x mod 3 == 1
+      assert x mod 11 == 8
+
+      assert check() == sat
+
+      let model = getModel()
+
+      assert $model.eval(x mod 33) == "19"
+
+  var val: Z3Ast
+  assert Z3_model_eval(ctx, Z3_model(model), Z3Ast(ast), true, addr val)
+  Ast[S](val)
+
 template `$`*[S](sort: Sort[S]): string =
   $Z3SortToString(ctx, Z3Sort(sort))
 

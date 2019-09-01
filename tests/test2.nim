@@ -110,3 +110,23 @@ suite "Library":
       assert factorial(n) > 1000
       assert factorial(n) < 10000
       check check() == sat
+
+  test "evaluation":
+    z3:
+      let
+        x = declConst("x", RealSort)
+        y = declConst("y", RealSort)
+        z = declConst("z", RealSort)
+
+      assert x + y + z == 6.0
+      assert x + y < 4.5
+      assert x + z > 2.5
+      assert y > z + 0.8
+
+      check check() == sat
+
+      let model = getModel()
+
+      echo model.eval(x)
+      echo model.eval(y)
+      echo model.eval(z)
