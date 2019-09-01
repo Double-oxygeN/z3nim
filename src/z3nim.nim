@@ -272,23 +272,20 @@ template declFunc*[D](id: int; domains: Sorts[D]; R: typedesc): FuncDecl[D, R] =
   declFunc(sym, domains, R)
 
 
-template defRecursiveFunc[D](sym: Z3Symbol; domains: Sorts[D]; R: typedesc; args: Asts[D]; body: untyped): FuncDecl[D, R] =
+template defRecursiveFunc[D](sym: Z3Symbol; args: Asts[D]; R: typedesc; body: untyped): FuncDecl[D, R] =
   let
-    domainsSeq = seq[Z3Sort](domains)
     argsSeq = seq[Z3Ast](args)
   var
-    domainsPtr = alloc(len(domainsSeq) * sizeof(Z3Sort))
+    domainsPtr = alloc(len(argsSeq) * sizeof(Z3Sort))
     domainsArr = cast[carray[Z3Sort]](domainsPtr)
     argsPtr = alloc(len(argsSeq) * sizeof(Z3Ast))
     argsArr = cast[carray[Z3Ast]](argsPtr)
 
-  for idx, domain in domainsSeq:
-    domainsArr[idx] = domain
-
   for idx, arg in argsSeq:
+    domainsArr[idx] = Z3GetSort(ctx, arg)
     argsArr[idx] = arg
 
-  let recfunc = Z3MKRecFuncDecl(ctx, sym, cuint(len(domainsSeq)), domainsArr, mkSort(ctx, R))
+  let recfunc = Z3MKRecFuncDecl(ctx, sym, cuint(len(argsSeq)), domainsArr, mkSort(ctx, R))
 
   block:
     let
@@ -302,7 +299,7 @@ template defRecursiveFunc[D](sym: Z3Symbol; domains: Sorts[D]; R: typedesc; args
 
   FuncDecl[D, R](recfunc)
 
-template defRecursiveFunc*[D](id: string; domains: Sorts[D]; R: typedesc; args: Asts[D]; body: untyped): FuncDecl[D, R] =
+template defRecursiveFunc*[D](id: string; args: Asts[D]; R: typedesc; body: untyped): FuncDecl[D, R] =
   ## Define a recursive function.
   ##
   ## In ``body``, you can use ``recur`` as the function itself.
@@ -312,7 +309,7 @@ template defRecursiveFunc*[D](id: string; domains: Sorts[D]; R: typedesc; args: 
         x = declConst("x", IntSort)
         a = declConst("a", IntSort)
 
-        f = defRecursiveFunc("f", params(IntSort, IntSort), IntSort, params(x, a)):
+        f = defRecursiveFunc("f", params(x, a), IntSort):
           ite(x <= 0, a, recur.apply(params(x - 1, a * x)))
 
       proc factorial(x: Ast[IntSort]): Ast[IntSort] =
@@ -323,7 +320,7 @@ template defRecursiveFunc*[D](id: string; domains: Sorts[D]; R: typedesc; args: 
       assert check() == sat
   
   let sym = Z3MkStringSymbol(ctx, id)
-  defRecursiveFunc(sym, domains, R, args):
+  defRecursiveFunc(sym, args, R):
     body
 
 

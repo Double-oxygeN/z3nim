@@ -936,9 +936,9 @@ function main() {
     title="declFunc[D; ](id: string; domains: Sorts[D]; R: typedesc): FuncDecl[D, R]"><wbr />decl<wbr />Func<span class="attachedType">FuncDecl</span></a></li>
   <li><a class="reference" href="#declFunc.t%2Cint%2CSorts%5BD%5D%2Ctypedesc"
     title="declFunc[D; ](id: int; domains: Sorts[D]; R: typedesc): FuncDecl[D, R]"><wbr />decl<wbr />Func<span class="attachedType">FuncDecl</span></a></li>
-  <li><a class="reference" href="#defRecursiveFunc.t%2Cstring%2CSorts%5BD%5D%2Ctypedesc%2CAsts%5BD%5D%2Cuntyped"
-    title="defRecursiveFunc[D; ](id: string; domains: Sorts[D]; R: typedesc; args: Asts[D];
-                     body: untyped): FuncDecl[D, R]"><wbr />def<wbr />Recursive<wbr />Func<span class="attachedType">FuncDecl</span></a></li>
+  <li><a class="reference" href="#defRecursiveFunc.t%2Cstring%2CAsts%5BD%5D%2Ctypedesc%2Cuntyped"
+    title="defRecursiveFunc[D; ](id: string; args: Asts[D]; R: typedesc; body: untyped): FuncDecl[D,
+    R]"><wbr />def<wbr />Recursive<wbr />Func<span class="attachedType">FuncDecl</span></a></li>
   <li><a class="reference" href="#toAst.t%2CAst%5BS%5D"
     title="toAst[S](a: Ast[S]): Ast[S]"><wbr />to<wbr />Ast<span class="attachedType">Ast</span></a></li>
   <li><a class="reference" href="#toAst.t%2Cbool"
@@ -1620,9 +1620,9 @@ class="link-seesrc" target="_blank">Source</a>
 <a href="https://github.com/Double-oxygeN/z3nim/edit/devel/src/z3nim.nim#L260" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<a id="defRecursiveFunc.t,string,Sorts[D],typedesc,Asts[D],untyped"></a>
-<dt><pre><span class="Keyword">template</span> <a href="#defRecursiveFunc.t%2Cstring%2CSorts%5BD%5D%2Ctypedesc%2CAsts%5BD%5D%2Cuntyped"><span class="Identifier">defRecursiveFunc</span></a><span class="Other">[</span><span class="Identifier">D</span><span class="Other">;</span> <span class="Other">]</span><span class="Other">(</span><span class="Identifier">id</span><span class="Other">:</span> <span class="Identifier">string</span><span class="Other">;</span> <span class="Identifier">domains</span><span class="Other">:</span> <a href="z3nim.html#Sorts"><span class="Identifier">Sorts</span></a><span class="Other">[</span><span class="Identifier">D</span><span class="Other">]</span><span class="Other">;</span> <span class="Identifier">R</span><span class="Other">:</span> <span class="Identifier">typedesc</span><span class="Other">;</span>
-                             <span class="Identifier">args</span><span class="Other">:</span> <a href="z3nim.html#Asts"><span class="Identifier">Asts</span></a><span class="Other">[</span><span class="Identifier">D</span><span class="Other">]</span><span class="Other">;</span> <span class="Identifier">body</span><span class="Other">:</span> <span class="Identifier">untyped</span><span class="Other">)</span><span class="Other">:</span> <a href="z3nim.html#FuncDecl"><span class="Identifier">FuncDecl</span></a><span class="Other">[</span><span class="Identifier">D</span><span class="Other">,</span> <span class="Identifier">R</span><span class="Other">]</span></pre></dt>
+<a id="defRecursiveFunc.t,string,Asts[D],typedesc,untyped"></a>
+<dt><pre><span class="Keyword">template</span> <a href="#defRecursiveFunc.t%2Cstring%2CAsts%5BD%5D%2Ctypedesc%2Cuntyped"><span class="Identifier">defRecursiveFunc</span></a><span class="Other">[</span><span class="Identifier">D</span><span class="Other">;</span> <span class="Other">]</span><span class="Other">(</span><span class="Identifier">id</span><span class="Other">:</span> <span class="Identifier">string</span><span class="Other">;</span> <span class="Identifier">args</span><span class="Other">:</span> <a href="z3nim.html#Asts"><span class="Identifier">Asts</span></a><span class="Other">[</span><span class="Identifier">D</span><span class="Other">]</span><span class="Other">;</span> <span class="Identifier">R</span><span class="Other">:</span> <span class="Identifier">typedesc</span><span class="Other">;</span> <span class="Identifier">body</span><span class="Other">:</span> <span class="Identifier">untyped</span><span class="Other">)</span><span class="Other">:</span> <a href="z3nim.html#FuncDecl"><span class="Identifier">FuncDecl</span></a><span class="Other">[</span>
+    <span class="Identifier">D</span><span class="Other">,</span> <span class="Identifier">R</span><span class="Other">]</span></pre></dt>
 <dd>
 
 <p>Define a recursive function.</p>
@@ -1633,7 +1633,7 @@ class="link-seesrc" target="_blank">Source</a>
   <span class="Keyword">let</span>
     <span class="Identifier">x</span> <span class="Other">=</span> <span class="Identifier">declConst</span><span class="Other">(</span><span class="StringLit">&quot;x&quot;</span><span class="Other">,</span> <span class="Identifier">IntSort</span><span class="Other">)</span>
     <span class="Identifier">a</span> <span class="Other">=</span> <span class="Identifier">declConst</span><span class="Other">(</span><span class="StringLit">&quot;a&quot;</span><span class="Other">,</span> <span class="Identifier">IntSort</span><span class="Other">)</span>
-    <span class="Identifier">f</span> <span class="Other">=</span> <span class="Identifier">defRecursiveFunc</span><span class="Other">(</span><span class="StringLit">&quot;f&quot;</span><span class="Other">,</span> <span class="Identifier">params</span><span class="Other">(</span><span class="Identifier">IntSort</span><span class="Other">,</span> <span class="Identifier">IntSort</span><span class="Other">)</span><span class="Other">,</span> <span class="Identifier">IntSort</span><span class="Other">,</span> <span class="Identifier">params</span><span class="Other">(</span><span class="Identifier">x</span><span class="Other">,</span> <span class="Identifier">a</span><span class="Other">)</span><span class="Other">)</span><span class="Other">:</span>
+    <span class="Identifier">f</span> <span class="Other">=</span> <span class="Identifier">defRecursiveFunc</span><span class="Other">(</span><span class="StringLit">&quot;f&quot;</span><span class="Other">,</span> <span class="Identifier">params</span><span class="Other">(</span><span class="Identifier">x</span><span class="Other">,</span> <span class="Identifier">a</span><span class="Other">)</span><span class="Other">,</span> <span class="Identifier">IntSort</span><span class="Other">)</span><span class="Other">:</span>
       <span class="Identifier">ite</span><span class="Other">(</span><span class="Identifier">x</span> <span class="Operator">&lt;=</span> <span class="DecNumber">0</span><span class="Other">,</span> <span class="Identifier">a</span><span class="Other">,</span> <span class="Identifier">recur</span><span class="Other">.</span><span class="Identifier">apply</span><span class="Other">(</span><span class="Identifier">params</span><span class="Other">(</span><span class="Identifier">x</span> <span class="Operator">-</span> <span class="DecNumber">1</span><span class="Other">,</span> <span class="Identifier">a</span> <span class="Operator">*</span> <span class="Identifier">x</span><span class="Other">)</span><span class="Other">)</span><span class="Other">)</span>
   <span class="Keyword">proc</span> <span class="Identifier">factorial</span><span class="Other">(</span><span class="Identifier">x</span><span class="Other">:</span> <span class="Identifier">Ast</span><span class="Other">[</span><span class="Identifier">IntSort</span><span class="Other">]</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">Ast</span><span class="Other">[</span><span class="Identifier">IntSort</span><span class="Other">]</span> <span class="Other">=</span>
     <span class="Identifier">f</span><span class="Other">.</span><span class="Identifier">apply</span><span class="Other">(</span><span class="Identifier">params</span><span class="Other">(</span><span class="Identifier">x</span><span class="Other">,</span> <span class="Identifier">toAst</span><span class="Other">(</span><span class="DecNumber">1</span><span class="Other">)</span><span class="Other">)</span><span class="Other">)</span>
@@ -1642,9 +1642,9 @@ class="link-seesrc" target="_blank">Source</a>
   <span class="Identifier">assert</span> <span class="Identifier">factorial</span><span class="Other">(</span><span class="Identifier">n</span><span class="Other">)</span> <span class="Operator">&gt;</span> <span class="DecNumber">1000</span>
   <span class="Identifier">assert</span> <span class="Identifier">check</span><span class="Other">(</span><span class="Other">)</span> <span class="Operator">==</span> <span class="Identifier">sat</span></pre>
 &nbsp;&nbsp;<a
-href="https://github.com/Double-oxygeN/z3nim/tree/master/src/z3nim.nim#L305"
+href="https://github.com/Double-oxygeN/z3nim/tree/master/src/z3nim.nim#L302"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/Double-oxygeN/z3nim/edit/devel/src/z3nim.nim#L305" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/Double-oxygeN/z3nim/edit/devel/src/z3nim.nim#L302" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <a id="toAst.t,Ast[S]"></a>
@@ -1653,9 +1653,9 @@ class="link-seesrc" target="_blank">Source</a>
 
 Convert to Z3 AST. This is an identity function.
 &nbsp;&nbsp;<a
-href="https://github.com/Double-oxygeN/z3nim/tree/master/src/z3nim.nim#L330"
+href="https://github.com/Double-oxygeN/z3nim/tree/master/src/z3nim.nim#L327"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/Double-oxygeN/z3nim/edit/devel/src/z3nim.nim#L330" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/Double-oxygeN/z3nim/edit/devel/src/z3nim.nim#L327" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <a id="toAst.t,bool"></a>
@@ -1664,9 +1664,9 @@ class="link-seesrc" target="_blank">Source</a>
 
 Convert from a boolean value to Z3 AST.
 &nbsp;&nbsp;<a
-href="https://github.com/Double-oxygeN/z3nim/tree/master/src/z3nim.nim#L335"
+href="https://github.com/Double-oxygeN/z3nim/tree/master/src/z3nim.nim#L332"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/Double-oxygeN/z3nim/edit/devel/src/z3nim.nim#L335" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/Double-oxygeN/z3nim/edit/devel/src/z3nim.nim#L332" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <a id="toAst.t,int"></a>
@@ -1675,9 +1675,9 @@ class="link-seesrc" target="_blank">Source</a>
 
 Convert from an integer value to Z3 AST.
 &nbsp;&nbsp;<a
-href="https://github.com/Double-oxygeN/z3nim/tree/master/src/z3nim.nim#L339"
+href="https://github.com/Double-oxygeN/z3nim/tree/master/src/z3nim.nim#L336"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/Double-oxygeN/z3nim/edit/devel/src/z3nim.nim#L339" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/Double-oxygeN/z3nim/edit/devel/src/z3nim.nim#L336" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <a id="toAst.t,float"></a>
@@ -1686,13 +1686,24 @@ class="link-seesrc" target="_blank">Source</a>
 
 Convert from a float value to Z3 AST.
 &nbsp;&nbsp;<a
-href="https://github.com/Double-oxygeN/z3nim/tree/master/src/z3nim.nim#L343"
+href="https://github.com/Double-oxygeN/z3nim/tree/master/src/z3nim.nim#L340"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/Double-oxygeN/z3nim/edit/devel/src/z3nim.nim#L343" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/Double-oxygeN/z3nim/edit/devel/src/z3nim.nim#L340" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <a id="not.t,Ast[BoolSort]"></a>
 <dt><pre><span class="Keyword">template</span> <a href="#not.t%2CAst%5BBoolSort%5D"><span class="Identifier">`not`</span></a><span class="Other">(</span><span class="Identifier">arg</span><span class="Other">:</span> <a href="z3nim.html#Ast"><span class="Identifier">Ast</span></a><span class="Other">[</span><a href="z3nim.html#BoolSort"><span class="Identifier">BoolSort</span></a><span class="Other">]</span><span class="Other">)</span><span class="Other">:</span> <a href="z3nim.html#Ast"><span class="Identifier">Ast</span></a><span class="Other">[</span><a href="z3nim.html#BoolSort"><span class="Identifier">BoolSort</span></a><span class="Other">]</span></pre></dt>
+<dd>
+
+
+&nbsp;&nbsp;<a
+href="https://github.com/Double-oxygeN/z3nim/tree/master/src/z3nim.nim#L345"
+class="link-seesrc" target="_blank">Source</a>
+<a href="https://github.com/Double-oxygeN/z3nim/edit/devel/src/z3nim.nim#L345" class="link-seesrc" target="_blank" >Edit</a>
+
+</dd>
+<a id="boolAnd.t,varargs[Ast[BoolSort],toAst]"></a>
+<dt><pre><span class="Keyword">template</span> <a href="#boolAnd.t%2Cvarargs%5BAst%5BBoolSort%5D%2CtoAst%5D"><span class="Identifier">boolAnd</span></a><span class="Other">(</span><span class="Identifier">args</span><span class="Other">:</span> <span class="Identifier">varargs</span><span class="Other">[</span><a href="z3nim.html#Ast"><span class="Identifier">Ast</span></a><span class="Other">[</span><a href="z3nim.html#BoolSort"><span class="Identifier">BoolSort</span></a><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">toAst</span><span class="Other">]</span><span class="Other">)</span><span class="Other">:</span> <a href="z3nim.html#Ast"><span class="Identifier">Ast</span></a><span class="Other">[</span><a href="z3nim.html#BoolSort"><span class="Identifier">BoolSort</span></a><span class="Other">]</span></pre></dt>
 <dd>
 
 
@@ -1702,19 +1713,19 @@ class="link-seesrc" target="_blank">Source</a>
 <a href="https://github.com/Double-oxygeN/z3nim/edit/devel/src/z3nim.nim#L348" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<a id="boolAnd.t,varargs[Ast[BoolSort],toAst]"></a>
-<dt><pre><span class="Keyword">template</span> <a href="#boolAnd.t%2Cvarargs%5BAst%5BBoolSort%5D%2CtoAst%5D"><span class="Identifier">boolAnd</span></a><span class="Other">(</span><span class="Identifier">args</span><span class="Other">:</span> <span class="Identifier">varargs</span><span class="Other">[</span><a href="z3nim.html#Ast"><span class="Identifier">Ast</span></a><span class="Other">[</span><a href="z3nim.html#BoolSort"><span class="Identifier">BoolSort</span></a><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">toAst</span><span class="Other">]</span><span class="Other">)</span><span class="Other">:</span> <a href="z3nim.html#Ast"><span class="Identifier">Ast</span></a><span class="Other">[</span><a href="z3nim.html#BoolSort"><span class="Identifier">BoolSort</span></a><span class="Other">]</span></pre></dt>
+<a id="and.t,untyped,untyped"></a>
+<dt><pre><span class="Keyword">template</span> <a href="#and.t%2Cuntyped%2Cuntyped"><span class="Identifier">`and`</span></a><span class="Other">(</span><span class="Identifier">arg1</span><span class="Other">,</span> <span class="Identifier">arg2</span><span class="Other">:</span> <span class="Identifier">untyped</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">untyped</span></pre></dt>
 <dd>
 
 
 &nbsp;&nbsp;<a
-href="https://github.com/Double-oxygeN/z3nim/tree/master/src/z3nim.nim#L351"
+href="https://github.com/Double-oxygeN/z3nim/tree/master/src/z3nim.nim#L362"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/Double-oxygeN/z3nim/edit/devel/src/z3nim.nim#L351" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/Double-oxygeN/z3nim/edit/devel/src/z3nim.nim#L362" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<a id="and.t,untyped,untyped"></a>
-<dt><pre><span class="Keyword">template</span> <a href="#and.t%2Cuntyped%2Cuntyped"><span class="Identifier">`and`</span></a><span class="Other">(</span><span class="Identifier">arg1</span><span class="Other">,</span> <span class="Identifier">arg2</span><span class="Other">:</span> <span class="Identifier">untyped</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">untyped</span></pre></dt>
+<a id="boolOr.t,varargs[Ast[BoolSort],toAst]"></a>
+<dt><pre><span class="Keyword">template</span> <a href="#boolOr.t%2Cvarargs%5BAst%5BBoolSort%5D%2CtoAst%5D"><span class="Identifier">boolOr</span></a><span class="Other">(</span><span class="Identifier">args</span><span class="Other">:</span> <span class="Identifier">varargs</span><span class="Other">[</span><a href="z3nim.html#Ast"><span class="Identifier">Ast</span></a><span class="Other">[</span><a href="z3nim.html#BoolSort"><span class="Identifier">BoolSort</span></a><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">toAst</span><span class="Other">]</span><span class="Other">)</span><span class="Other">:</span> <a href="z3nim.html#Ast"><span class="Identifier">Ast</span></a><span class="Other">[</span><a href="z3nim.html#BoolSort"><span class="Identifier">BoolSort</span></a><span class="Other">]</span></pre></dt>
 <dd>
 
 
@@ -1724,19 +1735,19 @@ class="link-seesrc" target="_blank">Source</a>
 <a href="https://github.com/Double-oxygeN/z3nim/edit/devel/src/z3nim.nim#L365" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<a id="boolOr.t,varargs[Ast[BoolSort],toAst]"></a>
-<dt><pre><span class="Keyword">template</span> <a href="#boolOr.t%2Cvarargs%5BAst%5BBoolSort%5D%2CtoAst%5D"><span class="Identifier">boolOr</span></a><span class="Other">(</span><span class="Identifier">args</span><span class="Other">:</span> <span class="Identifier">varargs</span><span class="Other">[</span><a href="z3nim.html#Ast"><span class="Identifier">Ast</span></a><span class="Other">[</span><a href="z3nim.html#BoolSort"><span class="Identifier">BoolSort</span></a><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">toAst</span><span class="Other">]</span><span class="Other">)</span><span class="Other">:</span> <a href="z3nim.html#Ast"><span class="Identifier">Ast</span></a><span class="Other">[</span><a href="z3nim.html#BoolSort"><span class="Identifier">BoolSort</span></a><span class="Other">]</span></pre></dt>
+<a id="or.t,untyped,untyped"></a>
+<dt><pre><span class="Keyword">template</span> <a href="#or.t%2Cuntyped%2Cuntyped"><span class="Identifier">`or`</span></a><span class="Other">(</span><span class="Identifier">arg1</span><span class="Other">,</span> <span class="Identifier">arg2</span><span class="Other">:</span> <span class="Identifier">untyped</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">untyped</span></pre></dt>
 <dd>
 
 
 &nbsp;&nbsp;<a
-href="https://github.com/Double-oxygeN/z3nim/tree/master/src/z3nim.nim#L368"
+href="https://github.com/Double-oxygeN/z3nim/tree/master/src/z3nim.nim#L379"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/Double-oxygeN/z3nim/edit/devel/src/z3nim.nim#L368" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/Double-oxygeN/z3nim/edit/devel/src/z3nim.nim#L379" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<a id="or.t,untyped,untyped"></a>
-<dt><pre><span class="Keyword">template</span> <a href="#or.t%2Cuntyped%2Cuntyped"><span class="Identifier">`or`</span></a><span class="Other">(</span><span class="Identifier">arg1</span><span class="Other">,</span> <span class="Identifier">arg2</span><span class="Other">:</span> <span class="Identifier">untyped</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">untyped</span></pre></dt>
+<a id="xor.t,Ast[BoolSort],Ast[BoolSort]"></a>
+<dt><pre><span class="Keyword">template</span> <a href="#xor.t%2CAst%5BBoolSort%5D%2CAst%5BBoolSort%5D"><span class="Identifier">`xor`</span></a><span class="Other">(</span><span class="Identifier">arg1</span><span class="Other">,</span> <span class="Identifier">arg2</span><span class="Other">:</span> <a href="z3nim.html#Ast"><span class="Identifier">Ast</span></a><span class="Other">[</span><a href="z3nim.html#BoolSort"><span class="Identifier">BoolSort</span></a><span class="Other">]</span><span class="Other">)</span><span class="Other">:</span> <a href="z3nim.html#Ast"><span class="Identifier">Ast</span></a><span class="Other">[</span><a href="z3nim.html#BoolSort"><span class="Identifier">BoolSort</span></a><span class="Other">]</span></pre></dt>
 <dd>
 
 
@@ -1746,8 +1757,8 @@ class="link-seesrc" target="_blank">Source</a>
 <a href="https://github.com/Double-oxygeN/z3nim/edit/devel/src/z3nim.nim#L382" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<a id="xor.t,Ast[BoolSort],Ast[BoolSort]"></a>
-<dt><pre><span class="Keyword">template</span> <a href="#xor.t%2CAst%5BBoolSort%5D%2CAst%5BBoolSort%5D"><span class="Identifier">`xor`</span></a><span class="Other">(</span><span class="Identifier">arg1</span><span class="Other">,</span> <span class="Identifier">arg2</span><span class="Other">:</span> <a href="z3nim.html#Ast"><span class="Identifier">Ast</span></a><span class="Other">[</span><a href="z3nim.html#BoolSort"><span class="Identifier">BoolSort</span></a><span class="Other">]</span><span class="Other">)</span><span class="Other">:</span> <a href="z3nim.html#Ast"><span class="Identifier">Ast</span></a><span class="Other">[</span><a href="z3nim.html#BoolSort"><span class="Identifier">BoolSort</span></a><span class="Other">]</span></pre></dt>
+<a id="xor.t,bool,Ast[BoolSort]"></a>
+<dt><pre><span class="Keyword">template</span> <a href="#xor.t%2Cbool%2CAst%5BBoolSort%5D"><span class="Identifier">`xor`</span></a><span class="Other">(</span><span class="Identifier">arg1</span><span class="Other">:</span> <span class="Identifier">bool</span><span class="Other">;</span> <span class="Identifier">arg2</span><span class="Other">:</span> <a href="z3nim.html#Ast"><span class="Identifier">Ast</span></a><span class="Other">[</span><a href="z3nim.html#BoolSort"><span class="Identifier">BoolSort</span></a><span class="Other">]</span><span class="Other">)</span><span class="Other">:</span> <a href="z3nim.html#Ast"><span class="Identifier">Ast</span></a><span class="Other">[</span><a href="z3nim.html#BoolSort"><span class="Identifier">BoolSort</span></a><span class="Other">]</span></pre></dt>
 <dd>
 
 
@@ -1757,8 +1768,8 @@ class="link-seesrc" target="_blank">Source</a>
 <a href="https://github.com/Double-oxygeN/z3nim/edit/devel/src/z3nim.nim#L385" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<a id="xor.t,bool,Ast[BoolSort]"></a>
-<dt><pre><span class="Keyword">template</span> <a href="#xor.t%2Cbool%2CAst%5BBoolSort%5D"><span class="Identifier">`xor`</span></a><span class="Other">(</span><span class="Identifier">arg1</span><span class="Other">:</span> <span class="Identifier">bool</span><span class="Other">;</span> <span class="Identifier">arg2</span><span class="Other">:</span> <a href="z3nim.html#Ast"><span class="Identifier">Ast</span></a><span class="Other">[</span><a href="z3nim.html#BoolSort"><span class="Identifier">BoolSort</span></a><span class="Other">]</span><span class="Other">)</span><span class="Other">:</span> <a href="z3nim.html#Ast"><span class="Identifier">Ast</span></a><span class="Other">[</span><a href="z3nim.html#BoolSort"><span class="Identifier">BoolSort</span></a><span class="Other">]</span></pre></dt>
+<a id="xor.t,Ast[BoolSort],bool"></a>
+<dt><pre><span class="Keyword">template</span> <a href="#xor.t%2CAst%5BBoolSort%5D%2Cbool"><span class="Identifier">`xor`</span></a><span class="Other">(</span><span class="Identifier">arg1</span><span class="Other">:</span> <a href="z3nim.html#Ast"><span class="Identifier">Ast</span></a><span class="Other">[</span><a href="z3nim.html#BoolSort"><span class="Identifier">BoolSort</span></a><span class="Other">]</span><span class="Other">;</span> <span class="Identifier">arg2</span><span class="Other">:</span> <span class="Identifier">bool</span><span class="Other">)</span><span class="Other">:</span> <a href="z3nim.html#Ast"><span class="Identifier">Ast</span></a><span class="Other">[</span><a href="z3nim.html#BoolSort"><span class="Identifier">BoolSort</span></a><span class="Other">]</span></pre></dt>
 <dd>
 
 
@@ -1768,30 +1779,30 @@ class="link-seesrc" target="_blank">Source</a>
 <a href="https://github.com/Double-oxygeN/z3nim/edit/devel/src/z3nim.nim#L388" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<a id="xor.t,Ast[BoolSort],bool"></a>
-<dt><pre><span class="Keyword">template</span> <a href="#xor.t%2CAst%5BBoolSort%5D%2Cbool"><span class="Identifier">`xor`</span></a><span class="Other">(</span><span class="Identifier">arg1</span><span class="Other">:</span> <a href="z3nim.html#Ast"><span class="Identifier">Ast</span></a><span class="Other">[</span><a href="z3nim.html#BoolSort"><span class="Identifier">BoolSort</span></a><span class="Other">]</span><span class="Other">;</span> <span class="Identifier">arg2</span><span class="Other">:</span> <span class="Identifier">bool</span><span class="Other">)</span><span class="Other">:</span> <a href="z3nim.html#Ast"><span class="Identifier">Ast</span></a><span class="Other">[</span><a href="z3nim.html#BoolSort"><span class="Identifier">BoolSort</span></a><span class="Other">]</span></pre></dt>
-<dd>
-
-
-&nbsp;&nbsp;<a
-href="https://github.com/Double-oxygeN/z3nim/tree/master/src/z3nim.nim#L391"
-class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/Double-oxygeN/z3nim/edit/devel/src/z3nim.nim#L391" class="link-seesrc" target="_blank" >Edit</a>
-
-</dd>
 <a id="==.t,Ast[S],Ast[S]"></a>
 <dt><pre><span class="Keyword">template</span> <a href="#%3D%3D.t%2CAst%5BS%5D%2CAst%5BS%5D"><span class="Identifier">`==`</span></a><span class="Other">[</span><span class="Identifier">S</span><span class="Other">]</span><span class="Other">(</span><span class="Identifier">arg1</span><span class="Other">,</span> <span class="Identifier">arg2</span><span class="Other">:</span> <a href="z3nim.html#Ast"><span class="Identifier">Ast</span></a><span class="Other">[</span><span class="Identifier">S</span><span class="Other">]</span><span class="Other">)</span><span class="Other">:</span> <a href="z3nim.html#Ast"><span class="Identifier">Ast</span></a><span class="Other">[</span><a href="z3nim.html#BoolSort"><span class="Identifier">BoolSort</span></a><span class="Other">]</span></pre></dt>
 <dd>
 
 
 &nbsp;&nbsp;<a
-href="https://github.com/Double-oxygeN/z3nim/tree/master/src/z3nim.nim#L393"
+href="https://github.com/Double-oxygeN/z3nim/tree/master/src/z3nim.nim#L390"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/Double-oxygeN/z3nim/edit/devel/src/z3nim.nim#L393" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/Double-oxygeN/z3nim/edit/devel/src/z3nim.nim#L390" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <a id="==.t,bool,Ast[BoolSort]"></a>
 <dt><pre><span class="Keyword">template</span> <a href="#%3D%3D.t%2Cbool%2CAst%5BBoolSort%5D"><span class="Identifier">`==`</span></a><span class="Other">(</span><span class="Identifier">arg1</span><span class="Other">:</span> <span class="Identifier">bool</span><span class="Other">;</span> <span class="Identifier">arg2</span><span class="Other">:</span> <a href="z3nim.html#Ast"><span class="Identifier">Ast</span></a><span class="Other">[</span><a href="z3nim.html#BoolSort"><span class="Identifier">BoolSort</span></a><span class="Other">]</span><span class="Other">)</span><span class="Other">:</span> <a href="z3nim.html#Ast"><span class="Identifier">Ast</span></a><span class="Other">[</span><a href="z3nim.html#BoolSort"><span class="Identifier">BoolSort</span></a><span class="Other">]</span></pre></dt>
+<dd>
+
+
+&nbsp;&nbsp;<a
+href="https://github.com/Double-oxygeN/z3nim/tree/master/src/z3nim.nim#L396"
+class="link-seesrc" target="_blank">Source</a>
+<a href="https://github.com/Double-oxygeN/z3nim/edit/devel/src/z3nim.nim#L396" class="link-seesrc" target="_blank" >Edit</a>
+
+</dd>
+<a id="==.t,Ast[BoolSort],bool"></a>
+<dt><pre><span class="Keyword">template</span> <a href="#%3D%3D.t%2CAst%5BBoolSort%5D%2Cbool"><span class="Identifier">`==`</span></a><span class="Other">(</span><span class="Identifier">arg1</span><span class="Other">:</span> <a href="z3nim.html#Ast"><span class="Identifier">Ast</span></a><span class="Other">[</span><a href="z3nim.html#BoolSort"><span class="Identifier">BoolSort</span></a><span class="Other">]</span><span class="Other">;</span> <span class="Identifier">arg2</span><span class="Other">:</span> <span class="Identifier">bool</span><span class="Other">)</span><span class="Other">:</span> <a href="z3nim.html#Ast"><span class="Identifier">Ast</span></a><span class="Other">[</span><a href="z3nim.html#BoolSort"><span class="Identifier">BoolSort</span></a><span class="Other">]</span></pre></dt>
 <dd>
 
 
@@ -1801,8 +1812,8 @@ class="link-seesrc" target="_blank">Source</a>
 <a href="https://github.com/Double-oxygeN/z3nim/edit/devel/src/z3nim.nim#L399" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<a id="==.t,Ast[BoolSort],bool"></a>
-<dt><pre><span class="Keyword">template</span> <a href="#%3D%3D.t%2CAst%5BBoolSort%5D%2Cbool"><span class="Identifier">`==`</span></a><span class="Other">(</span><span class="Identifier">arg1</span><span class="Other">:</span> <a href="z3nim.html#Ast"><span class="Identifier">Ast</span></a><span class="Other">[</span><a href="z3nim.html#BoolSort"><span class="Identifier">BoolSort</span></a><span class="Other">]</span><span class="Other">;</span> <span class="Identifier">arg2</span><span class="Other">:</span> <span class="Identifier">bool</span><span class="Other">)</span><span class="Other">:</span> <a href="z3nim.html#Ast"><span class="Identifier">Ast</span></a><span class="Other">[</span><a href="z3nim.html#BoolSort"><span class="Identifier">BoolSort</span></a><span class="Other">]</span></pre></dt>
+<a id="==.t,int,Ast[IntSort]"></a>
+<dt><pre><span class="Keyword">template</span> <a href="#%3D%3D.t%2Cint%2CAst%5BIntSort%5D"><span class="Identifier">`==`</span></a><span class="Other">(</span><span class="Identifier">arg1</span><span class="Other">:</span> <span class="Identifier">int</span><span class="Other">;</span> <span class="Identifier">arg2</span><span class="Other">:</span> <a href="z3nim.html#Ast"><span class="Identifier">Ast</span></a><span class="Other">[</span><a href="z3nim.html#IntSort"><span class="Identifier">IntSort</span></a><span class="Other">]</span><span class="Other">)</span><span class="Other">:</span> <a href="z3nim.html#Ast"><span class="Identifier">Ast</span></a><span class="Other">[</span><a href="z3nim.html#BoolSort"><span class="Identifier">BoolSort</span></a><span class="Other">]</span></pre></dt>
 <dd>
 
 
@@ -1812,8 +1823,8 @@ class="link-seesrc" target="_blank">Source</a>
 <a href="https://github.com/Double-oxygeN/z3nim/edit/devel/src/z3nim.nim#L402" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<a id="==.t,int,Ast[IntSort]"></a>
-<dt><pre><span class="Keyword">template</span> <a href="#%3D%3D.t%2Cint%2CAst%5BIntSort%5D"><span class="Identifier">`==`</span></a><span class="Other">(</span><span class="Identifier">arg1</span><span class="Other">:</span> <span class="Identifier">int</span><span class="Other">;</span> <span class="Identifier">arg2</span><span class="Other">:</span> <a href="z3nim.html#Ast"><span class="Identifier">Ast</span></a><span class="Other">[</span><a href="z3nim.html#IntSort"><span class="Identifier">IntSort</span></a><span class="Other">]</span><span class="Other">)</span><span class="Other">:</span> <a href="z3nim.html#Ast"><span class="Identifier">Ast</span></a><span class="Other">[</span><a href="z3nim.html#BoolSort"><span class="Identifier">BoolSort</span></a><span class="Other">]</span></pre></dt>
+<a id="==.t,Ast[IntSort],int"></a>
+<dt><pre><span class="Keyword">template</span> <a href="#%3D%3D.t%2CAst%5BIntSort%5D%2Cint"><span class="Identifier">`==`</span></a><span class="Other">(</span><span class="Identifier">arg1</span><span class="Other">:</span> <a href="z3nim.html#Ast"><span class="Identifier">Ast</span></a><span class="Other">[</span><a href="z3nim.html#IntSort"><span class="Identifier">IntSort</span></a><span class="Other">]</span><span class="Other">;</span> <span class="Identifier">arg2</span><span class="Other">:</span> <span class="Identifier">int</span><span class="Other">)</span><span class="Other">:</span> <a href="z3nim.html#Ast"><span class="Identifier">Ast</span></a><span class="Other">[</span><a href="z3nim.html#BoolSort"><span class="Identifier">BoolSort</span></a><span class="Other">]</span></pre></dt>
 <dd>
 
 
@@ -1823,8 +1834,8 @@ class="link-seesrc" target="_blank">Source</a>
 <a href="https://github.com/Double-oxygeN/z3nim/edit/devel/src/z3nim.nim#L405" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<a id="==.t,Ast[IntSort],int"></a>
-<dt><pre><span class="Keyword">template</span> <a href="#%3D%3D.t%2CAst%5BIntSort%5D%2Cint"><span class="Identifier">`==`</span></a><span class="Other">(</span><span class="Identifier">arg1</span><span class="Other">:</span> <a href="z3nim.html#Ast"><span class="Identifier">Ast</span></a><span class="Other">[</span><a href="z3nim.html#IntSort"><span class="Identifier">IntSort</span></a><span class="Other">]</span><span class="Other">;</span> <span class="Identifier">arg2</span><span class="Other">:</span> <span class="Identifier">int</span><span class="Other">)</span><span class="Other">:</span> <a href="z3nim.html#Ast"><span class="Identifier">Ast</span></a><span class="Other">[</span><a href="z3nim.html#BoolSort"><span class="Identifier">BoolSort</span></a><span class="Other">]</span></pre></dt>
+<a id="==.t,float,Ast[RealSort]"></a>
+<dt><pre><span class="Keyword">template</span> <a href="#%3D%3D.t%2Cfloat%2CAst%5BRealSort%5D"><span class="Identifier">`==`</span></a><span class="Other">(</span><span class="Identifier">arg1</span><span class="Other">:</span> <span class="Identifier">float</span><span class="Other">;</span> <span class="Identifier">arg2</span><span class="Other">:</span> <a href="z3nim.html#Ast"><span class="Identifier">Ast</span></a><span class="Other">[</span><a href="z3nim.html#RealSort"><span class="Identifier">RealSort</span></a><span class="Other">]</span><span class="Other">)</span><span class="Other">:</span> <a href="z3nim.html#Ast"><span class="Identifier">Ast</span></a><span class="Other">[</span><a href="z3nim.html#BoolSort"><span class="Identifier">BoolSort</span></a><span class="Other">]</span></pre></dt>
 <dd>
 
 
@@ -1834,8 +1845,8 @@ class="link-seesrc" target="_blank">Source</a>
 <a href="https://github.com/Double-oxygeN/z3nim/edit/devel/src/z3nim.nim#L408" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<a id="==.t,float,Ast[RealSort]"></a>
-<dt><pre><span class="Keyword">template</span> <a href="#%3D%3D.t%2Cfloat%2CAst%5BRealSort%5D"><span class="Identifier">`==`</span></a><span class="Other">(</span><span class="Identifier">arg1</span><span class="Other">:</span> <span class="Identifier">float</span><span class="Other">;</span> <span class="Identifier">arg2</span><span class="Other">:</span> <a href="z3nim.html#Ast"><span class="Identifier">Ast</span></a><span class="Other">[</span><a href="z3nim.html#RealSort"><span class="Identifier">RealSort</span></a><span class="Other">]</span><span class="Other">)</span><span class="Other">:</span> <a href="z3nim.html#Ast"><span class="Identifier">Ast</span></a><span class="Other">[</span><a href="z3nim.html#BoolSort"><span class="Identifier">BoolSort</span></a><span class="Other">]</span></pre></dt>
+<a id="==.t,Ast[RealSort],float"></a>
+<dt><pre><span class="Keyword">template</span> <a href="#%3D%3D.t%2CAst%5BRealSort%5D%2Cfloat"><span class="Identifier">`==`</span></a><span class="Other">(</span><span class="Identifier">arg1</span><span class="Other">:</span> <a href="z3nim.html#Ast"><span class="Identifier">Ast</span></a><span class="Other">[</span><a href="z3nim.html#RealSort"><span class="Identifier">RealSort</span></a><span class="Other">]</span><span class="Other">;</span> <span class="Identifier">arg2</span><span class="Other">:</span> <span class="Identifier">float</span><span class="Other">)</span><span class="Other">:</span> <a href="z3nim.html#Ast"><span class="Identifier">Ast</span></a><span class="Other">[</span><a href="z3nim.html#BoolSort"><span class="Identifier">BoolSort</span></a><span class="Other">]</span></pre></dt>
 <dd>
 
 
@@ -1845,8 +1856,8 @@ class="link-seesrc" target="_blank">Source</a>
 <a href="https://github.com/Double-oxygeN/z3nim/edit/devel/src/z3nim.nim#L411" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<a id="==.t,Ast[RealSort],float"></a>
-<dt><pre><span class="Keyword">template</span> <a href="#%3D%3D.t%2CAst%5BRealSort%5D%2Cfloat"><span class="Identifier">`==`</span></a><span class="Other">(</span><span class="Identifier">arg1</span><span class="Other">:</span> <a href="z3nim.html#Ast"><span class="Identifier">Ast</span></a><span class="Other">[</span><a href="z3nim.html#RealSort"><span class="Identifier">RealSort</span></a><span class="Other">]</span><span class="Other">;</span> <span class="Identifier">arg2</span><span class="Other">:</span> <span class="Identifier">float</span><span class="Other">)</span><span class="Other">:</span> <a href="z3nim.html#Ast"><span class="Identifier">Ast</span></a><span class="Other">[</span><a href="z3nim.html#BoolSort"><span class="Identifier">BoolSort</span></a><span class="Other">]</span></pre></dt>
+<a id="distinc.t,varargs[Ast[S],toAst]"></a>
+<dt><pre><span class="Keyword">template</span> <a href="#distinc.t%2Cvarargs%5BAst%5BS%5D%2CtoAst%5D"><span class="Identifier">distinc</span></a><span class="Other">[</span><span class="Identifier">S</span><span class="Other">]</span><span class="Other">(</span><span class="Identifier">args</span><span class="Other">:</span> <span class="Identifier">varargs</span><span class="Other">[</span><a href="z3nim.html#Ast"><span class="Identifier">Ast</span></a><span class="Other">[</span><span class="Identifier">S</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">toAst</span><span class="Other">]</span><span class="Other">)</span><span class="Other">:</span> <a href="z3nim.html#Ast"><span class="Identifier">Ast</span></a><span class="Other">[</span><a href="z3nim.html#BoolSort"><span class="Identifier">BoolSort</span></a><span class="Other">]</span></pre></dt>
 <dd>
 
 
@@ -1856,19 +1867,19 @@ class="link-seesrc" target="_blank">Source</a>
 <a href="https://github.com/Double-oxygeN/z3nim/edit/devel/src/z3nim.nim#L414" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<a id="distinc.t,varargs[Ast[S],toAst]"></a>
-<dt><pre><span class="Keyword">template</span> <a href="#distinc.t%2Cvarargs%5BAst%5BS%5D%2CtoAst%5D"><span class="Identifier">distinc</span></a><span class="Other">[</span><span class="Identifier">S</span><span class="Other">]</span><span class="Other">(</span><span class="Identifier">args</span><span class="Other">:</span> <span class="Identifier">varargs</span><span class="Other">[</span><a href="z3nim.html#Ast"><span class="Identifier">Ast</span></a><span class="Other">[</span><span class="Identifier">S</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">toAst</span><span class="Other">]</span><span class="Other">)</span><span class="Other">:</span> <a href="z3nim.html#Ast"><span class="Identifier">Ast</span></a><span class="Other">[</span><a href="z3nim.html#BoolSort"><span class="Identifier">BoolSort</span></a><span class="Other">]</span></pre></dt>
+<a id="==>.t,Ast[BoolSort],Ast[BoolSort]"></a>
+<dt><pre><span class="Keyword">template</span> <a href="#%3D%3D%3E.t%2CAst%5BBoolSort%5D%2CAst%5BBoolSort%5D"><span class="Identifier">`==&gt;`</span></a><span class="Other">(</span><span class="Identifier">arg1</span><span class="Other">,</span> <span class="Identifier">arg2</span><span class="Other">:</span> <a href="z3nim.html#Ast"><span class="Identifier">Ast</span></a><span class="Other">[</span><a href="z3nim.html#BoolSort"><span class="Identifier">BoolSort</span></a><span class="Other">]</span><span class="Other">)</span><span class="Other">:</span> <a href="z3nim.html#Ast"><span class="Identifier">Ast</span></a><span class="Other">[</span><a href="z3nim.html#BoolSort"><span class="Identifier">BoolSort</span></a><span class="Other">]</span></pre></dt>
 <dd>
 
 
 &nbsp;&nbsp;<a
-href="https://github.com/Double-oxygeN/z3nim/tree/master/src/z3nim.nim#L417"
+href="https://github.com/Double-oxygeN/z3nim/tree/master/src/z3nim.nim#L428"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/Double-oxygeN/z3nim/edit/devel/src/z3nim.nim#L417" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/Double-oxygeN/z3nim/edit/devel/src/z3nim.nim#L428" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<a id="==>.t,Ast[BoolSort],Ast[BoolSort]"></a>
-<dt><pre><span class="Keyword">template</span> <a href="#%3D%3D%3E.t%2CAst%5BBoolSort%5D%2CAst%5BBoolSort%5D"><span class="Identifier">`==&gt;`</span></a><span class="Other">(</span><span class="Identifier">arg1</span><span class="Other">,</span> <span class="Identifier">arg2</span><span class="Other">:</span> <a href="z3nim.html#Ast"><span class="Identifier">Ast</span></a><span class="Other">[</span><a href="z3nim.html#BoolSort"><span class="Identifier">BoolSort</span></a><span class="Other">]</span><span class="Other">)</span><span class="Other">:</span> <a href="z3nim.html#Ast"><span class="Identifier">Ast</span></a><span class="Other">[</span><a href="z3nim.html#BoolSort"><span class="Identifier">BoolSort</span></a><span class="Other">]</span></pre></dt>
+<a id="==>.t,bool,Ast[BoolSort]"></a>
+<dt><pre><span class="Keyword">template</span> <a href="#%3D%3D%3E.t%2Cbool%2CAst%5BBoolSort%5D"><span class="Identifier">`==&gt;`</span></a><span class="Other">(</span><span class="Identifier">arg1</span><span class="Other">:</span> <span class="Identifier">bool</span><span class="Other">;</span> <span class="Identifier">arg2</span><span class="Other">:</span> <a href="z3nim.html#Ast"><span class="Identifier">Ast</span></a><span class="Other">[</span><a href="z3nim.html#BoolSort"><span class="Identifier">BoolSort</span></a><span class="Other">]</span><span class="Other">)</span><span class="Other">:</span> <a href="z3nim.html#Ast"><span class="Identifier">Ast</span></a><span class="Other">[</span><a href="z3nim.html#BoolSort"><span class="Identifier">BoolSort</span></a><span class="Other">]</span></pre></dt>
 <dd>
 
 
@@ -1878,8 +1889,8 @@ class="link-seesrc" target="_blank">Source</a>
 <a href="https://github.com/Double-oxygeN/z3nim/edit/devel/src/z3nim.nim#L431" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<a id="==>.t,bool,Ast[BoolSort]"></a>
-<dt><pre><span class="Keyword">template</span> <a href="#%3D%3D%3E.t%2Cbool%2CAst%5BBoolSort%5D"><span class="Identifier">`==&gt;`</span></a><span class="Other">(</span><span class="Identifier">arg1</span><span class="Other">:</span> <span class="Identifier">bool</span><span class="Other">;</span> <span class="Identifier">arg2</span><span class="Other">:</span> <a href="z3nim.html#Ast"><span class="Identifier">Ast</span></a><span class="Other">[</span><a href="z3nim.html#BoolSort"><span class="Identifier">BoolSort</span></a><span class="Other">]</span><span class="Other">)</span><span class="Other">:</span> <a href="z3nim.html#Ast"><span class="Identifier">Ast</span></a><span class="Other">[</span><a href="z3nim.html#BoolSort"><span class="Identifier">BoolSort</span></a><span class="Other">]</span></pre></dt>
+<a id="==>.t,Ast[BoolSort],bool"></a>
+<dt><pre><span class="Keyword">template</span> <a href="#%3D%3D%3E.t%2CAst%5BBoolSort%5D%2Cbool"><span class="Identifier">`==&gt;`</span></a><span class="Other">(</span><span class="Identifier">arg1</span><span class="Other">:</span> <a href="z3nim.html#Ast"><span class="Identifier">Ast</span></a><span class="Other">[</span><a href="z3nim.html#BoolSort"><span class="Identifier">BoolSort</span></a><span class="Other">]</span><span class="Other">;</span> <span class="Identifier">arg2</span><span class="Other">:</span> <span class="Identifier">bool</span><span class="Other">)</span><span class="Other">:</span> <a href="z3nim.html#Ast"><span class="Identifier">Ast</span></a><span class="Other">[</span><a href="z3nim.html#BoolSort"><span class="Identifier">BoolSort</span></a><span class="Other">]</span></pre></dt>
 <dd>
 
 
@@ -1889,8 +1900,8 @@ class="link-seesrc" target="_blank">Source</a>
 <a href="https://github.com/Double-oxygeN/z3nim/edit/devel/src/z3nim.nim#L434" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<a id="==>.t,Ast[BoolSort],bool"></a>
-<dt><pre><span class="Keyword">template</span> <a href="#%3D%3D%3E.t%2CAst%5BBoolSort%5D%2Cbool"><span class="Identifier">`==&gt;`</span></a><span class="Other">(</span><span class="Identifier">arg1</span><span class="Other">:</span> <a href="z3nim.html#Ast"><span class="Identifier">Ast</span></a><span class="Other">[</span><a href="z3nim.html#BoolSort"><span class="Identifier">BoolSort</span></a><span class="Other">]</span><span class="Other">;</span> <span class="Identifier">arg2</span><span class="Other">:</span> <span class="Identifier">bool</span><span class="Other">)</span><span class="Other">:</span> <a href="z3nim.html#Ast"><span class="Identifier">Ast</span></a><span class="Other">[</span><a href="z3nim.html#BoolSort"><span class="Identifier">BoolSort</span></a><span class="Other">]</span></pre></dt>
+<a id="ite.t,Ast[BoolSort],Ast[S],Ast[S]"></a>
+<dt><pre><span class="Keyword">template</span> <a href="#ite.t%2CAst%5BBoolSort%5D%2CAst%5BS%5D%2CAst%5BS%5D"><span class="Identifier">ite</span></a><span class="Other">[</span><span class="Identifier">S</span><span class="Other">]</span><span class="Other">(</span><span class="Identifier">arg1</span><span class="Other">:</span> <a href="z3nim.html#Ast"><span class="Identifier">Ast</span></a><span class="Other">[</span><a href="z3nim.html#BoolSort"><span class="Identifier">BoolSort</span></a><span class="Other">]</span><span class="Other">;</span> <span class="Identifier">arg2</span><span class="Other">,</span> <span class="Identifier">arg3</span><span class="Other">:</span> <a href="z3nim.html#Ast"><span class="Identifier">Ast</span></a><span class="Other">[</span><span class="Identifier">S</span><span class="Other">]</span><span class="Other">)</span><span class="Other">:</span> <a href="z3nim.html#Ast"><span class="Identifier">Ast</span></a><span class="Other">[</span><span class="Identifier">S</span><span class="Other">]</span></pre></dt>
 <dd>
 
 
@@ -1900,8 +1911,8 @@ class="link-seesrc" target="_blank">Source</a>
 <a href="https://github.com/Double-oxygeN/z3nim/edit/devel/src/z3nim.nim#L437" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<a id="ite.t,Ast[BoolSort],Ast[S],Ast[S]"></a>
-<dt><pre><span class="Keyword">template</span> <a href="#ite.t%2CAst%5BBoolSort%5D%2CAst%5BS%5D%2CAst%5BS%5D"><span class="Identifier">ite</span></a><span class="Other">[</span><span class="Identifier">S</span><span class="Other">]</span><span class="Other">(</span><span class="Identifier">arg1</span><span class="Other">:</span> <a href="z3nim.html#Ast"><span class="Identifier">Ast</span></a><span class="Other">[</span><a href="z3nim.html#BoolSort"><span class="Identifier">BoolSort</span></a><span class="Other">]</span><span class="Other">;</span> <span class="Identifier">arg2</span><span class="Other">,</span> <span class="Identifier">arg3</span><span class="Other">:</span> <a href="z3nim.html#Ast"><span class="Identifier">Ast</span></a><span class="Other">[</span><span class="Identifier">S</span><span class="Other">]</span><span class="Other">)</span><span class="Other">:</span> <a href="z3nim.html#Ast"><span class="Identifier">Ast</span></a><span class="Other">[</span><span class="Identifier">S</span><span class="Other">]</span></pre></dt>
+<a id="ite.t,bool,Ast[S],Ast[S]"></a>
+<dt><pre><span class="Keyword">template</span> <a href="#ite.t%2Cbool%2CAst%5BS%5D%2CAst%5BS%5D"><span class="Identifier">ite</span></a><span class="Other">[</span><span class="Identifier">S</span><span class="Other">]</span><span class="Other">(</span><span class="Identifier">arg1</span><span class="Other">:</span> <span class="Identifier">bool</span><span class="Other">;</span> <span class="Identifier">arg2</span><span class="Other">,</span> <span class="Identifier">arg3</span><span class="Other">:</span> <a href="z3nim.html#Ast"><span class="Identifier">Ast</span></a><span class="Other">[</span><span class="Identifier">S</span><span class="Other">]</span><span class="Other">)</span><span class="Other">:</span> <a href="z3nim.html#Ast"><span class="Identifier">Ast</span></a><span class="Other">[</span><span class="Identifier">S</span><span class="Other">]</span></pre></dt>
 <dd>
 
 
@@ -1911,8 +1922,8 @@ class="link-seesrc" target="_blank">Source</a>
 <a href="https://github.com/Double-oxygeN/z3nim/edit/devel/src/z3nim.nim#L440" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<a id="ite.t,bool,Ast[S],Ast[S]"></a>
-<dt><pre><span class="Keyword">template</span> <a href="#ite.t%2Cbool%2CAst%5BS%5D%2CAst%5BS%5D"><span class="Identifier">ite</span></a><span class="Other">[</span><span class="Identifier">S</span><span class="Other">]</span><span class="Other">(</span><span class="Identifier">arg1</span><span class="Other">:</span> <span class="Identifier">bool</span><span class="Other">;</span> <span class="Identifier">arg2</span><span class="Other">,</span> <span class="Identifier">arg3</span><span class="Other">:</span> <a href="z3nim.html#Ast"><span class="Identifier">Ast</span></a><span class="Other">[</span><span class="Identifier">S</span><span class="Other">]</span><span class="Other">)</span><span class="Other">:</span> <a href="z3nim.html#Ast"><span class="Identifier">Ast</span></a><span class="Other">[</span><span class="Identifier">S</span><span class="Other">]</span></pre></dt>
+<a id="astAdd.t,varargs[Ast[S: NumericSort],toAst]"></a>
+<dt><pre><span class="Keyword">template</span> <a href="#astAdd.t%2Cvarargs%5BAst%5BS%3A+NumericSort%5D%2CtoAst%5D"><span class="Identifier">astAdd</span></a><span class="Other">[</span><span class="Identifier">S</span><span class="Other">]</span><span class="Other">(</span><span class="Identifier">args</span><span class="Other">:</span> <span class="Identifier">varargs</span><span class="Other">[</span><a href="z3nim.html#Ast"><span class="Identifier">Ast</span></a><span class="Other">[</span><span class="Identifier">S</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">toAst</span><span class="Other">]</span><span class="Other">)</span><span class="Other">:</span> <a href="z3nim.html#Ast"><span class="Identifier">Ast</span></a><span class="Other">[</span><span class="Identifier">S</span><span class="Other">]</span></pre></dt>
 <dd>
 
 
@@ -1922,19 +1933,19 @@ class="link-seesrc" target="_blank">Source</a>
 <a href="https://github.com/Double-oxygeN/z3nim/edit/devel/src/z3nim.nim#L443" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<a id="astAdd.t,varargs[Ast[S: NumericSort],toAst]"></a>
-<dt><pre><span class="Keyword">template</span> <a href="#astAdd.t%2Cvarargs%5BAst%5BS%3A+NumericSort%5D%2CtoAst%5D"><span class="Identifier">astAdd</span></a><span class="Other">[</span><span class="Identifier">S</span><span class="Other">]</span><span class="Other">(</span><span class="Identifier">args</span><span class="Other">:</span> <span class="Identifier">varargs</span><span class="Other">[</span><a href="z3nim.html#Ast"><span class="Identifier">Ast</span></a><span class="Other">[</span><span class="Identifier">S</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">toAst</span><span class="Other">]</span><span class="Other">)</span><span class="Other">:</span> <a href="z3nim.html#Ast"><span class="Identifier">Ast</span></a><span class="Other">[</span><span class="Identifier">S</span><span class="Other">]</span></pre></dt>
+<a id="+.t,untyped,untyped"></a>
+<dt><pre><span class="Keyword">template</span> <a href="#%2B.t%2Cuntyped%2Cuntyped"><span class="Identifier">`+`</span></a><span class="Other">(</span><span class="Identifier">arg1</span><span class="Other">,</span> <span class="Identifier">arg2</span><span class="Other">:</span> <span class="Identifier">untyped</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">untyped</span></pre></dt>
 <dd>
 
 
 &nbsp;&nbsp;<a
-href="https://github.com/Double-oxygeN/z3nim/tree/master/src/z3nim.nim#L446"
+href="https://github.com/Double-oxygeN/z3nim/tree/master/src/z3nim.nim#L457"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/Double-oxygeN/z3nim/edit/devel/src/z3nim.nim#L446" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/Double-oxygeN/z3nim/edit/devel/src/z3nim.nim#L457" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<a id="+.t,untyped,untyped"></a>
-<dt><pre><span class="Keyword">template</span> <a href="#%2B.t%2Cuntyped%2Cuntyped"><span class="Identifier">`+`</span></a><span class="Other">(</span><span class="Identifier">arg1</span><span class="Other">,</span> <span class="Identifier">arg2</span><span class="Other">:</span> <span class="Identifier">untyped</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">untyped</span></pre></dt>
+<a id="astMul.t,varargs[Ast[S: NumericSort],toAst]"></a>
+<dt><pre><span class="Keyword">template</span> <a href="#astMul.t%2Cvarargs%5BAst%5BS%3A+NumericSort%5D%2CtoAst%5D"><span class="Identifier">astMul</span></a><span class="Other">[</span><span class="Identifier">S</span><span class="Other">]</span><span class="Other">(</span><span class="Identifier">args</span><span class="Other">:</span> <span class="Identifier">varargs</span><span class="Other">[</span><a href="z3nim.html#Ast"><span class="Identifier">Ast</span></a><span class="Other">[</span><span class="Identifier">S</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">toAst</span><span class="Other">]</span><span class="Other">)</span><span class="Other">:</span> <a href="z3nim.html#Ast"><span class="Identifier">Ast</span></a><span class="Other">[</span><span class="Identifier">S</span><span class="Other">]</span></pre></dt>
 <dd>
 
 
@@ -1944,19 +1955,19 @@ class="link-seesrc" target="_blank">Source</a>
 <a href="https://github.com/Double-oxygeN/z3nim/edit/devel/src/z3nim.nim#L460" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<a id="astMul.t,varargs[Ast[S: NumericSort],toAst]"></a>
-<dt><pre><span class="Keyword">template</span> <a href="#astMul.t%2Cvarargs%5BAst%5BS%3A+NumericSort%5D%2CtoAst%5D"><span class="Identifier">astMul</span></a><span class="Other">[</span><span class="Identifier">S</span><span class="Other">]</span><span class="Other">(</span><span class="Identifier">args</span><span class="Other">:</span> <span class="Identifier">varargs</span><span class="Other">[</span><a href="z3nim.html#Ast"><span class="Identifier">Ast</span></a><span class="Other">[</span><span class="Identifier">S</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">toAst</span><span class="Other">]</span><span class="Other">)</span><span class="Other">:</span> <a href="z3nim.html#Ast"><span class="Identifier">Ast</span></a><span class="Other">[</span><span class="Identifier">S</span><span class="Other">]</span></pre></dt>
+<a id="*.t,untyped,untyped"></a>
+<dt><pre><span class="Keyword">template</span> <a href="#%2A.t%2Cuntyped%2Cuntyped"><span class="Identifier">`*`</span></a><span class="Other">(</span><span class="Identifier">arg1</span><span class="Other">,</span> <span class="Identifier">arg2</span><span class="Other">:</span> <span class="Identifier">untyped</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">untyped</span></pre></dt>
 <dd>
 
 
 &nbsp;&nbsp;<a
-href="https://github.com/Double-oxygeN/z3nim/tree/master/src/z3nim.nim#L463"
+href="https://github.com/Double-oxygeN/z3nim/tree/master/src/z3nim.nim#L474"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/Double-oxygeN/z3nim/edit/devel/src/z3nim.nim#L463" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/Double-oxygeN/z3nim/edit/devel/src/z3nim.nim#L474" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<a id="*.t,untyped,untyped"></a>
-<dt><pre><span class="Keyword">template</span> <a href="#%2A.t%2Cuntyped%2Cuntyped"><span class="Identifier">`*`</span></a><span class="Other">(</span><span class="Identifier">arg1</span><span class="Other">,</span> <span class="Identifier">arg2</span><span class="Other">:</span> <span class="Identifier">untyped</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">untyped</span></pre></dt>
+<a id="-.t,Ast[S: NumericSort]"></a>
+<dt><pre><span class="Keyword">template</span> <a href="#-.t%2CAst%5BS%3A+NumericSort%5D"><span class="Identifier">`-`</span></a><span class="Other">[</span><span class="Identifier">S</span><span class="Other">]</span><span class="Other">(</span><span class="Identifier">arg</span><span class="Other">:</span> <a href="z3nim.html#Ast"><span class="Identifier">Ast</span></a><span class="Other">[</span><span class="Identifier">S</span><span class="Other">]</span><span class="Other">)</span><span class="Other">:</span> <a href="z3nim.html#Ast"><span class="Identifier">Ast</span></a><span class="Other">[</span><span class="Identifier">S</span><span class="Other">]</span></pre></dt>
 <dd>
 
 
@@ -1966,8 +1977,8 @@ class="link-seesrc" target="_blank">Source</a>
 <a href="https://github.com/Double-oxygeN/z3nim/edit/devel/src/z3nim.nim#L477" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<a id="-.t,Ast[S: NumericSort]"></a>
-<dt><pre><span class="Keyword">template</span> <a href="#-.t%2CAst%5BS%3A+NumericSort%5D"><span class="Identifier">`-`</span></a><span class="Other">[</span><span class="Identifier">S</span><span class="Other">]</span><span class="Other">(</span><span class="Identifier">arg</span><span class="Other">:</span> <a href="z3nim.html#Ast"><span class="Identifier">Ast</span></a><span class="Other">[</span><span class="Identifier">S</span><span class="Other">]</span><span class="Other">)</span><span class="Other">:</span> <a href="z3nim.html#Ast"><span class="Identifier">Ast</span></a><span class="Other">[</span><span class="Identifier">S</span><span class="Other">]</span></pre></dt>
+<a id="astSub.t,varargs[Ast[S: NumericSort],toAst]"></a>
+<dt><pre><span class="Keyword">template</span> <a href="#astSub.t%2Cvarargs%5BAst%5BS%3A+NumericSort%5D%2CtoAst%5D"><span class="Identifier">astSub</span></a><span class="Other">[</span><span class="Identifier">S</span><span class="Other">]</span><span class="Other">(</span><span class="Identifier">args</span><span class="Other">:</span> <span class="Identifier">varargs</span><span class="Other">[</span><a href="z3nim.html#Ast"><span class="Identifier">Ast</span></a><span class="Other">[</span><span class="Identifier">S</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">toAst</span><span class="Other">]</span><span class="Other">)</span><span class="Other">:</span> <a href="z3nim.html#Ast"><span class="Identifier">Ast</span></a><span class="Other">[</span><span class="Identifier">S</span><span class="Other">]</span></pre></dt>
 <dd>
 
 
@@ -1977,19 +1988,19 @@ class="link-seesrc" target="_blank">Source</a>
 <a href="https://github.com/Double-oxygeN/z3nim/edit/devel/src/z3nim.nim#L480" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<a id="astSub.t,varargs[Ast[S: NumericSort],toAst]"></a>
-<dt><pre><span class="Keyword">template</span> <a href="#astSub.t%2Cvarargs%5BAst%5BS%3A+NumericSort%5D%2CtoAst%5D"><span class="Identifier">astSub</span></a><span class="Other">[</span><span class="Identifier">S</span><span class="Other">]</span><span class="Other">(</span><span class="Identifier">args</span><span class="Other">:</span> <span class="Identifier">varargs</span><span class="Other">[</span><a href="z3nim.html#Ast"><span class="Identifier">Ast</span></a><span class="Other">[</span><span class="Identifier">S</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">toAst</span><span class="Other">]</span><span class="Other">)</span><span class="Other">:</span> <a href="z3nim.html#Ast"><span class="Identifier">Ast</span></a><span class="Other">[</span><span class="Identifier">S</span><span class="Other">]</span></pre></dt>
+<a id="-.t,untyped,untyped"></a>
+<dt><pre><span class="Keyword">template</span> <a href="#-.t%2Cuntyped%2Cuntyped"><span class="Identifier">`-`</span></a><span class="Other">(</span><span class="Identifier">arg1</span><span class="Other">,</span> <span class="Identifier">arg2</span><span class="Other">:</span> <span class="Identifier">untyped</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">untyped</span></pre></dt>
 <dd>
 
 
 &nbsp;&nbsp;<a
-href="https://github.com/Double-oxygeN/z3nim/tree/master/src/z3nim.nim#L483"
+href="https://github.com/Double-oxygeN/z3nim/tree/master/src/z3nim.nim#L494"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/Double-oxygeN/z3nim/edit/devel/src/z3nim.nim#L483" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/Double-oxygeN/z3nim/edit/devel/src/z3nim.nim#L494" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<a id="-.t,untyped,untyped"></a>
-<dt><pre><span class="Keyword">template</span> <a href="#-.t%2Cuntyped%2Cuntyped"><span class="Identifier">`-`</span></a><span class="Other">(</span><span class="Identifier">arg1</span><span class="Other">,</span> <span class="Identifier">arg2</span><span class="Other">:</span> <span class="Identifier">untyped</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">untyped</span></pre></dt>
+<a id="div.t,Ast[IntSort],Ast[IntSort]"></a>
+<dt><pre><span class="Keyword">template</span> <a href="#div.t%2CAst%5BIntSort%5D%2CAst%5BIntSort%5D"><span class="Identifier">`div`</span></a><span class="Other">(</span><span class="Identifier">arg1</span><span class="Other">,</span> <span class="Identifier">arg2</span><span class="Other">:</span> <a href="z3nim.html#Ast"><span class="Identifier">Ast</span></a><span class="Other">[</span><a href="z3nim.html#IntSort"><span class="Identifier">IntSort</span></a><span class="Other">]</span><span class="Other">)</span><span class="Other">:</span> <a href="z3nim.html#Ast"><span class="Identifier">Ast</span></a><span class="Other">[</span><a href="z3nim.html#IntSort"><span class="Identifier">IntSort</span></a><span class="Other">]</span></pre></dt>
 <dd>
 
 
@@ -1999,8 +2010,8 @@ class="link-seesrc" target="_blank">Source</a>
 <a href="https://github.com/Double-oxygeN/z3nim/edit/devel/src/z3nim.nim#L497" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<a id="div.t,Ast[IntSort],Ast[IntSort]"></a>
-<dt><pre><span class="Keyword">template</span> <a href="#div.t%2CAst%5BIntSort%5D%2CAst%5BIntSort%5D"><span class="Identifier">`div`</span></a><span class="Other">(</span><span class="Identifier">arg1</span><span class="Other">,</span> <span class="Identifier">arg2</span><span class="Other">:</span> <a href="z3nim.html#Ast"><span class="Identifier">Ast</span></a><span class="Other">[</span><a href="z3nim.html#IntSort"><span class="Identifier">IntSort</span></a><span class="Other">]</span><span class="Other">)</span><span class="Other">:</span> <a href="z3nim.html#Ast"><span class="Identifier">Ast</span></a><span class="Other">[</span><a href="z3nim.html#IntSort"><span class="Identifier">IntSort</span></a><span class="Other">]</span></pre></dt>
+<a id="div.t,int,Ast[IntSort]"></a>
+<dt><pre><span class="Keyword">template</span> <a href="#div.t%2Cint%2CAst%5BIntSort%5D"><span class="Identifier">`div`</span></a><span class="Other">(</span><span class="Identifier">arg1</span><span class="Other">:</span> <span class="Identifier">int</span><span class="Other">;</span> <span class="Identifier">arg2</span><span class="Other">:</span> <a href="z3nim.html#Ast"><span class="Identifier">Ast</span></a><span class="Other">[</span><a href="z3nim.html#IntSort"><span class="Identifier">IntSort</span></a><span class="Other">]</span><span class="Other">)</span><span class="Other">:</span> <a href="z3nim.html#Ast"><span class="Identifier">Ast</span></a><span class="Other">[</span><a href="z3nim.html#IntSort"><span class="Identifier">IntSort</span></a><span class="Other">]</span></pre></dt>
 <dd>
 
 
@@ -2010,8 +2021,8 @@ class="link-seesrc" target="_blank">Source</a>
 <a href="https://github.com/Double-oxygeN/z3nim/edit/devel/src/z3nim.nim#L500" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<a id="div.t,int,Ast[IntSort]"></a>
-<dt><pre><span class="Keyword">template</span> <a href="#div.t%2Cint%2CAst%5BIntSort%5D"><span class="Identifier">`div`</span></a><span class="Other">(</span><span class="Identifier">arg1</span><span class="Other">:</span> <span class="Identifier">int</span><span class="Other">;</span> <span class="Identifier">arg2</span><span class="Other">:</span> <a href="z3nim.html#Ast"><span class="Identifier">Ast</span></a><span class="Other">[</span><a href="z3nim.html#IntSort"><span class="Identifier">IntSort</span></a><span class="Other">]</span><span class="Other">)</span><span class="Other">:</span> <a href="z3nim.html#Ast"><span class="Identifier">Ast</span></a><span class="Other">[</span><a href="z3nim.html#IntSort"><span class="Identifier">IntSort</span></a><span class="Other">]</span></pre></dt>
+<a id="div.t,Ast[IntSort],int"></a>
+<dt><pre><span class="Keyword">template</span> <a href="#div.t%2CAst%5BIntSort%5D%2Cint"><span class="Identifier">`div`</span></a><span class="Other">(</span><span class="Identifier">arg1</span><span class="Other">:</span> <a href="z3nim.html#Ast"><span class="Identifier">Ast</span></a><span class="Other">[</span><a href="z3nim.html#IntSort"><span class="Identifier">IntSort</span></a><span class="Other">]</span><span class="Other">;</span> <span class="Identifier">arg2</span><span class="Other">:</span> <span class="Identifier">int</span><span class="Other">)</span><span class="Other">:</span> <a href="z3nim.html#Ast"><span class="Identifier">Ast</span></a><span class="Other">[</span><a href="z3nim.html#IntSort"><span class="Identifier">IntSort</span></a><span class="Other">]</span></pre></dt>
 <dd>
 
 
@@ -2021,8 +2032,8 @@ class="link-seesrc" target="_blank">Source</a>
 <a href="https://github.com/Double-oxygeN/z3nim/edit/devel/src/z3nim.nim#L503" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<a id="div.t,Ast[IntSort],int"></a>
-<dt><pre><span class="Keyword">template</span> <a href="#div.t%2CAst%5BIntSort%5D%2Cint"><span class="Identifier">`div`</span></a><span class="Other">(</span><span class="Identifier">arg1</span><span class="Other">:</span> <a href="z3nim.html#Ast"><span class="Identifier">Ast</span></a><span class="Other">[</span><a href="z3nim.html#IntSort"><span class="Identifier">IntSort</span></a><span class="Other">]</span><span class="Other">;</span> <span class="Identifier">arg2</span><span class="Other">:</span> <span class="Identifier">int</span><span class="Other">)</span><span class="Other">:</span> <a href="z3nim.html#Ast"><span class="Identifier">Ast</span></a><span class="Other">[</span><a href="z3nim.html#IntSort"><span class="Identifier">IntSort</span></a><span class="Other">]</span></pre></dt>
+<a id="/.t,Ast[RealSort],Ast[RealSort]"></a>
+<dt><pre><span class="Keyword">template</span> <a href="#%2F.t%2CAst%5BRealSort%5D%2CAst%5BRealSort%5D"><span class="Identifier">`/`</span></a><span class="Other">(</span><span class="Identifier">arg1</span><span class="Other">,</span> <span class="Identifier">arg2</span><span class="Other">:</span> <a href="z3nim.html#Ast"><span class="Identifier">Ast</span></a><span class="Other">[</span><a href="z3nim.html#RealSort"><span class="Identifier">RealSort</span></a><span class="Other">]</span><span class="Other">)</span><span class="Other">:</span> <a href="z3nim.html#Ast"><span class="Identifier">Ast</span></a><span class="Other">[</span><a href="z3nim.html#RealSort"><span class="Identifier">RealSort</span></a><span class="Other">]</span></pre></dt>
 <dd>
 
 
@@ -2032,8 +2043,8 @@ class="link-seesrc" target="_blank">Source</a>
 <a href="https://github.com/Double-oxygeN/z3nim/edit/devel/src/z3nim.nim#L506" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<a id="/.t,Ast[RealSort],Ast[RealSort]"></a>
-<dt><pre><span class="Keyword">template</span> <a href="#%2F.t%2CAst%5BRealSort%5D%2CAst%5BRealSort%5D"><span class="Identifier">`/`</span></a><span class="Other">(</span><span class="Identifier">arg1</span><span class="Other">,</span> <span class="Identifier">arg2</span><span class="Other">:</span> <a href="z3nim.html#Ast"><span class="Identifier">Ast</span></a><span class="Other">[</span><a href="z3nim.html#RealSort"><span class="Identifier">RealSort</span></a><span class="Other">]</span><span class="Other">)</span><span class="Other">:</span> <a href="z3nim.html#Ast"><span class="Identifier">Ast</span></a><span class="Other">[</span><a href="z3nim.html#RealSort"><span class="Identifier">RealSort</span></a><span class="Other">]</span></pre></dt>
+<a id="/.t,float,Ast[RealSort]"></a>
+<dt><pre><span class="Keyword">template</span> <a href="#%2F.t%2Cfloat%2CAst%5BRealSort%5D"><span class="Identifier">`/`</span></a><span class="Other">(</span><span class="Identifier">arg1</span><span class="Other">:</span> <span class="Identifier">float</span><span class="Other">;</span> <span class="Identifier">arg2</span><span class="Other">:</span> <a href="z3nim.html#Ast"><span class="Identifier">Ast</span></a><span class="Other">[</span><a href="z3nim.html#RealSort"><span class="Identifier">RealSort</span></a><span class="Other">]</span><span class="Other">)</span><span class="Other">:</span> <a href="z3nim.html#Ast"><span class="Identifier">Ast</span></a><span class="Other">[</span><a href="z3nim.html#RealSort"><span class="Identifier">RealSort</span></a><span class="Other">]</span></pre></dt>
 <dd>
 
 
@@ -2043,8 +2054,8 @@ class="link-seesrc" target="_blank">Source</a>
 <a href="https://github.com/Double-oxygeN/z3nim/edit/devel/src/z3nim.nim#L509" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<a id="/.t,float,Ast[RealSort]"></a>
-<dt><pre><span class="Keyword">template</span> <a href="#%2F.t%2Cfloat%2CAst%5BRealSort%5D"><span class="Identifier">`/`</span></a><span class="Other">(</span><span class="Identifier">arg1</span><span class="Other">:</span> <span class="Identifier">float</span><span class="Other">;</span> <span class="Identifier">arg2</span><span class="Other">:</span> <a href="z3nim.html#Ast"><span class="Identifier">Ast</span></a><span class="Other">[</span><a href="z3nim.html#RealSort"><span class="Identifier">RealSort</span></a><span class="Other">]</span><span class="Other">)</span><span class="Other">:</span> <a href="z3nim.html#Ast"><span class="Identifier">Ast</span></a><span class="Other">[</span><a href="z3nim.html#RealSort"><span class="Identifier">RealSort</span></a><span class="Other">]</span></pre></dt>
+<a id="/.t,Ast[RealSort],float"></a>
+<dt><pre><span class="Keyword">template</span> <a href="#%2F.t%2CAst%5BRealSort%5D%2Cfloat"><span class="Identifier">`/`</span></a><span class="Other">(</span><span class="Identifier">arg1</span><span class="Other">:</span> <a href="z3nim.html#Ast"><span class="Identifier">Ast</span></a><span class="Other">[</span><a href="z3nim.html#RealSort"><span class="Identifier">RealSort</span></a><span class="Other">]</span><span class="Other">;</span> <span class="Identifier">arg2</span><span class="Other">:</span> <span class="Identifier">float</span><span class="Other">)</span><span class="Other">:</span> <a href="z3nim.html#Ast"><span class="Identifier">Ast</span></a><span class="Other">[</span><a href="z3nim.html#RealSort"><span class="Identifier">RealSort</span></a><span class="Other">]</span></pre></dt>
 <dd>
 
 
@@ -2054,8 +2065,8 @@ class="link-seesrc" target="_blank">Source</a>
 <a href="https://github.com/Double-oxygeN/z3nim/edit/devel/src/z3nim.nim#L512" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<a id="/.t,Ast[RealSort],float"></a>
-<dt><pre><span class="Keyword">template</span> <a href="#%2F.t%2CAst%5BRealSort%5D%2Cfloat"><span class="Identifier">`/`</span></a><span class="Other">(</span><span class="Identifier">arg1</span><span class="Other">:</span> <a href="z3nim.html#Ast"><span class="Identifier">Ast</span></a><span class="Other">[</span><a href="z3nim.html#RealSort"><span class="Identifier">RealSort</span></a><span class="Other">]</span><span class="Other">;</span> <span class="Identifier">arg2</span><span class="Other">:</span> <span class="Identifier">float</span><span class="Other">)</span><span class="Other">:</span> <a href="z3nim.html#Ast"><span class="Identifier">Ast</span></a><span class="Other">[</span><a href="z3nim.html#RealSort"><span class="Identifier">RealSort</span></a><span class="Other">]</span></pre></dt>
+<a id="mod.t,Ast[IntSort],Ast[IntSort]"></a>
+<dt><pre><span class="Keyword">template</span> <a href="#mod.t%2CAst%5BIntSort%5D%2CAst%5BIntSort%5D"><span class="Identifier">`mod`</span></a><span class="Other">(</span><span class="Identifier">arg1</span><span class="Other">,</span> <span class="Identifier">arg2</span><span class="Other">:</span> <a href="z3nim.html#Ast"><span class="Identifier">Ast</span></a><span class="Other">[</span><a href="z3nim.html#IntSort"><span class="Identifier">IntSort</span></a><span class="Other">]</span><span class="Other">)</span><span class="Other">:</span> <a href="z3nim.html#Ast"><span class="Identifier">Ast</span></a><span class="Other">[</span><a href="z3nim.html#IntSort"><span class="Identifier">IntSort</span></a><span class="Other">]</span></pre></dt>
 <dd>
 
 
@@ -2065,8 +2076,8 @@ class="link-seesrc" target="_blank">Source</a>
 <a href="https://github.com/Double-oxygeN/z3nim/edit/devel/src/z3nim.nim#L515" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<a id="mod.t,Ast[IntSort],Ast[IntSort]"></a>
-<dt><pre><span class="Keyword">template</span> <a href="#mod.t%2CAst%5BIntSort%5D%2CAst%5BIntSort%5D"><span class="Identifier">`mod`</span></a><span class="Other">(</span><span class="Identifier">arg1</span><span class="Other">,</span> <span class="Identifier">arg2</span><span class="Other">:</span> <a href="z3nim.html#Ast"><span class="Identifier">Ast</span></a><span class="Other">[</span><a href="z3nim.html#IntSort"><span class="Identifier">IntSort</span></a><span class="Other">]</span><span class="Other">)</span><span class="Other">:</span> <a href="z3nim.html#Ast"><span class="Identifier">Ast</span></a><span class="Other">[</span><a href="z3nim.html#IntSort"><span class="Identifier">IntSort</span></a><span class="Other">]</span></pre></dt>
+<a id="mod.t,int,Ast[IntSort]"></a>
+<dt><pre><span class="Keyword">template</span> <a href="#mod.t%2Cint%2CAst%5BIntSort%5D"><span class="Identifier">`mod`</span></a><span class="Other">(</span><span class="Identifier">arg1</span><span class="Other">:</span> <span class="Identifier">int</span><span class="Other">;</span> <span class="Identifier">arg2</span><span class="Other">:</span> <a href="z3nim.html#Ast"><span class="Identifier">Ast</span></a><span class="Other">[</span><a href="z3nim.html#IntSort"><span class="Identifier">IntSort</span></a><span class="Other">]</span><span class="Other">)</span><span class="Other">:</span> <a href="z3nim.html#Ast"><span class="Identifier">Ast</span></a><span class="Other">[</span><a href="z3nim.html#IntSort"><span class="Identifier">IntSort</span></a><span class="Other">]</span></pre></dt>
 <dd>
 
 
@@ -2076,8 +2087,8 @@ class="link-seesrc" target="_blank">Source</a>
 <a href="https://github.com/Double-oxygeN/z3nim/edit/devel/src/z3nim.nim#L518" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<a id="mod.t,int,Ast[IntSort]"></a>
-<dt><pre><span class="Keyword">template</span> <a href="#mod.t%2Cint%2CAst%5BIntSort%5D"><span class="Identifier">`mod`</span></a><span class="Other">(</span><span class="Identifier">arg1</span><span class="Other">:</span> <span class="Identifier">int</span><span class="Other">;</span> <span class="Identifier">arg2</span><span class="Other">:</span> <a href="z3nim.html#Ast"><span class="Identifier">Ast</span></a><span class="Other">[</span><a href="z3nim.html#IntSort"><span class="Identifier">IntSort</span></a><span class="Other">]</span><span class="Other">)</span><span class="Other">:</span> <a href="z3nim.html#Ast"><span class="Identifier">Ast</span></a><span class="Other">[</span><a href="z3nim.html#IntSort"><span class="Identifier">IntSort</span></a><span class="Other">]</span></pre></dt>
+<a id="mod.t,Ast[IntSort],int"></a>
+<dt><pre><span class="Keyword">template</span> <a href="#mod.t%2CAst%5BIntSort%5D%2Cint"><span class="Identifier">`mod`</span></a><span class="Other">(</span><span class="Identifier">arg1</span><span class="Other">:</span> <a href="z3nim.html#Ast"><span class="Identifier">Ast</span></a><span class="Other">[</span><a href="z3nim.html#IntSort"><span class="Identifier">IntSort</span></a><span class="Other">]</span><span class="Other">;</span> <span class="Identifier">arg2</span><span class="Other">:</span> <span class="Identifier">int</span><span class="Other">)</span><span class="Other">:</span> <a href="z3nim.html#Ast"><span class="Identifier">Ast</span></a><span class="Other">[</span><a href="z3nim.html#IntSort"><span class="Identifier">IntSort</span></a><span class="Other">]</span></pre></dt>
 <dd>
 
 
@@ -2087,8 +2098,8 @@ class="link-seesrc" target="_blank">Source</a>
 <a href="https://github.com/Double-oxygeN/z3nim/edit/devel/src/z3nim.nim#L521" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<a id="mod.t,Ast[IntSort],int"></a>
-<dt><pre><span class="Keyword">template</span> <a href="#mod.t%2CAst%5BIntSort%5D%2Cint"><span class="Identifier">`mod`</span></a><span class="Other">(</span><span class="Identifier">arg1</span><span class="Other">:</span> <a href="z3nim.html#Ast"><span class="Identifier">Ast</span></a><span class="Other">[</span><a href="z3nim.html#IntSort"><span class="Identifier">IntSort</span></a><span class="Other">]</span><span class="Other">;</span> <span class="Identifier">arg2</span><span class="Other">:</span> <span class="Identifier">int</span><span class="Other">)</span><span class="Other">:</span> <a href="z3nim.html#Ast"><span class="Identifier">Ast</span></a><span class="Other">[</span><a href="z3nim.html#IntSort"><span class="Identifier">IntSort</span></a><span class="Other">]</span></pre></dt>
+<a id="^.t,Ast[S: NumericSort],Ast[S: NumericSort]"></a>
+<dt><pre><span class="Keyword">template</span> <a href="#%5E.t%2CAst%5BS%3A+NumericSort%5D%2CAst%5BS%3A+NumericSort%5D"><span class="Identifier">`^`</span></a><span class="Other">[</span><span class="Identifier">S</span><span class="Other">]</span><span class="Other">(</span><span class="Identifier">arg1</span><span class="Other">,</span> <span class="Identifier">arg2</span><span class="Other">:</span> <a href="z3nim.html#Ast"><span class="Identifier">Ast</span></a><span class="Other">[</span><span class="Identifier">S</span><span class="Other">]</span><span class="Other">)</span><span class="Other">:</span> <a href="z3nim.html#Ast"><span class="Identifier">Ast</span></a><span class="Other">[</span><span class="Identifier">S</span><span class="Other">]</span></pre></dt>
 <dd>
 
 
@@ -2098,8 +2109,8 @@ class="link-seesrc" target="_blank">Source</a>
 <a href="https://github.com/Double-oxygeN/z3nim/edit/devel/src/z3nim.nim#L524" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<a id="^.t,Ast[S: NumericSort],Ast[S: NumericSort]"></a>
-<dt><pre><span class="Keyword">template</span> <a href="#%5E.t%2CAst%5BS%3A+NumericSort%5D%2CAst%5BS%3A+NumericSort%5D"><span class="Identifier">`^`</span></a><span class="Other">[</span><span class="Identifier">S</span><span class="Other">]</span><span class="Other">(</span><span class="Identifier">arg1</span><span class="Other">,</span> <span class="Identifier">arg2</span><span class="Other">:</span> <a href="z3nim.html#Ast"><span class="Identifier">Ast</span></a><span class="Other">[</span><span class="Identifier">S</span><span class="Other">]</span><span class="Other">)</span><span class="Other">:</span> <a href="z3nim.html#Ast"><span class="Identifier">Ast</span></a><span class="Other">[</span><span class="Identifier">S</span><span class="Other">]</span></pre></dt>
+<a id="^.t,int,Ast[IntSort]"></a>
+<dt><pre><span class="Keyword">template</span> <a href="#%5E.t%2Cint%2CAst%5BIntSort%5D"><span class="Identifier">`^`</span></a><span class="Other">(</span><span class="Identifier">arg1</span><span class="Other">:</span> <span class="Identifier">int</span><span class="Other">;</span> <span class="Identifier">arg2</span><span class="Other">:</span> <a href="z3nim.html#Ast"><span class="Identifier">Ast</span></a><span class="Other">[</span><a href="z3nim.html#IntSort"><span class="Identifier">IntSort</span></a><span class="Other">]</span><span class="Other">)</span><span class="Other">:</span> <a href="z3nim.html#Ast"><span class="Identifier">Ast</span></a><span class="Other">[</span><a href="z3nim.html#IntSort"><span class="Identifier">IntSort</span></a><span class="Other">]</span></pre></dt>
 <dd>
 
 
@@ -2109,8 +2120,8 @@ class="link-seesrc" target="_blank">Source</a>
 <a href="https://github.com/Double-oxygeN/z3nim/edit/devel/src/z3nim.nim#L527" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<a id="^.t,int,Ast[IntSort]"></a>
-<dt><pre><span class="Keyword">template</span> <a href="#%5E.t%2Cint%2CAst%5BIntSort%5D"><span class="Identifier">`^`</span></a><span class="Other">(</span><span class="Identifier">arg1</span><span class="Other">:</span> <span class="Identifier">int</span><span class="Other">;</span> <span class="Identifier">arg2</span><span class="Other">:</span> <a href="z3nim.html#Ast"><span class="Identifier">Ast</span></a><span class="Other">[</span><a href="z3nim.html#IntSort"><span class="Identifier">IntSort</span></a><span class="Other">]</span><span class="Other">)</span><span class="Other">:</span> <a href="z3nim.html#Ast"><span class="Identifier">Ast</span></a><span class="Other">[</span><a href="z3nim.html#IntSort"><span class="Identifier">IntSort</span></a><span class="Other">]</span></pre></dt>
+<a id="^.t,Ast[IntSort],int"></a>
+<dt><pre><span class="Keyword">template</span> <a href="#%5E.t%2CAst%5BIntSort%5D%2Cint"><span class="Identifier">`^`</span></a><span class="Other">(</span><span class="Identifier">arg1</span><span class="Other">:</span> <a href="z3nim.html#Ast"><span class="Identifier">Ast</span></a><span class="Other">[</span><a href="z3nim.html#IntSort"><span class="Identifier">IntSort</span></a><span class="Other">]</span><span class="Other">;</span> <span class="Identifier">arg2</span><span class="Other">:</span> <span class="Identifier">int</span><span class="Other">)</span><span class="Other">:</span> <a href="z3nim.html#Ast"><span class="Identifier">Ast</span></a><span class="Other">[</span><a href="z3nim.html#IntSort"><span class="Identifier">IntSort</span></a><span class="Other">]</span></pre></dt>
 <dd>
 
 
@@ -2120,19 +2131,19 @@ class="link-seesrc" target="_blank">Source</a>
 <a href="https://github.com/Double-oxygeN/z3nim/edit/devel/src/z3nim.nim#L530" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<a id="^.t,Ast[IntSort],int"></a>
-<dt><pre><span class="Keyword">template</span> <a href="#%5E.t%2CAst%5BIntSort%5D%2Cint"><span class="Identifier">`^`</span></a><span class="Other">(</span><span class="Identifier">arg1</span><span class="Other">:</span> <a href="z3nim.html#Ast"><span class="Identifier">Ast</span></a><span class="Other">[</span><a href="z3nim.html#IntSort"><span class="Identifier">IntSort</span></a><span class="Other">]</span><span class="Other">;</span> <span class="Identifier">arg2</span><span class="Other">:</span> <span class="Identifier">int</span><span class="Other">)</span><span class="Other">:</span> <a href="z3nim.html#Ast"><span class="Identifier">Ast</span></a><span class="Other">[</span><a href="z3nim.html#IntSort"><span class="Identifier">IntSort</span></a><span class="Other">]</span></pre></dt>
+<a id="^.t,float,Ast[RealSort]"></a>
+<dt><pre><span class="Keyword">template</span> <a href="#%5E.t%2Cfloat%2CAst%5BRealSort%5D"><span class="Identifier">`^`</span></a><span class="Other">(</span><span class="Identifier">arg1</span><span class="Other">:</span> <span class="Identifier">float</span><span class="Other">;</span> <span class="Identifier">arg2</span><span class="Other">:</span> <a href="z3nim.html#Ast"><span class="Identifier">Ast</span></a><span class="Other">[</span><a href="z3nim.html#RealSort"><span class="Identifier">RealSort</span></a><span class="Other">]</span><span class="Other">)</span><span class="Other">:</span> <a href="z3nim.html#Ast"><span class="Identifier">Ast</span></a><span class="Other">[</span><a href="z3nim.html#RealSort"><span class="Identifier">RealSort</span></a><span class="Other">]</span></pre></dt>
 <dd>
 
 
 &nbsp;&nbsp;<a
-href="https://github.com/Double-oxygeN/z3nim/tree/master/src/z3nim.nim#L533"
+href="https://github.com/Double-oxygeN/z3nim/tree/master/src/z3nim.nim#L537"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/Double-oxygeN/z3nim/edit/devel/src/z3nim.nim#L533" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/Double-oxygeN/z3nim/edit/devel/src/z3nim.nim#L537" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<a id="^.t,float,Ast[RealSort]"></a>
-<dt><pre><span class="Keyword">template</span> <a href="#%5E.t%2Cfloat%2CAst%5BRealSort%5D"><span class="Identifier">`^`</span></a><span class="Other">(</span><span class="Identifier">arg1</span><span class="Other">:</span> <span class="Identifier">float</span><span class="Other">;</span> <span class="Identifier">arg2</span><span class="Other">:</span> <a href="z3nim.html#Ast"><span class="Identifier">Ast</span></a><span class="Other">[</span><a href="z3nim.html#RealSort"><span class="Identifier">RealSort</span></a><span class="Other">]</span><span class="Other">)</span><span class="Other">:</span> <a href="z3nim.html#Ast"><span class="Identifier">Ast</span></a><span class="Other">[</span><a href="z3nim.html#RealSort"><span class="Identifier">RealSort</span></a><span class="Other">]</span></pre></dt>
+<a id="^.t,Ast[RealSort],float"></a>
+<dt><pre><span class="Keyword">template</span> <a href="#%5E.t%2CAst%5BRealSort%5D%2Cfloat"><span class="Identifier">`^`</span></a><span class="Other">(</span><span class="Identifier">arg1</span><span class="Other">:</span> <a href="z3nim.html#Ast"><span class="Identifier">Ast</span></a><span class="Other">[</span><a href="z3nim.html#RealSort"><span class="Identifier">RealSort</span></a><span class="Other">]</span><span class="Other">;</span> <span class="Identifier">arg2</span><span class="Other">:</span> <span class="Identifier">float</span><span class="Other">)</span><span class="Other">:</span> <a href="z3nim.html#Ast"><span class="Identifier">Ast</span></a><span class="Other">[</span><a href="z3nim.html#RealSort"><span class="Identifier">RealSort</span></a><span class="Other">]</span></pre></dt>
 <dd>
 
 
@@ -2142,8 +2153,8 @@ class="link-seesrc" target="_blank">Source</a>
 <a href="https://github.com/Double-oxygeN/z3nim/edit/devel/src/z3nim.nim#L540" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<a id="^.t,Ast[RealSort],float"></a>
-<dt><pre><span class="Keyword">template</span> <a href="#%5E.t%2CAst%5BRealSort%5D%2Cfloat"><span class="Identifier">`^`</span></a><span class="Other">(</span><span class="Identifier">arg1</span><span class="Other">:</span> <a href="z3nim.html#Ast"><span class="Identifier">Ast</span></a><span class="Other">[</span><a href="z3nim.html#RealSort"><span class="Identifier">RealSort</span></a><span class="Other">]</span><span class="Other">;</span> <span class="Identifier">arg2</span><span class="Other">:</span> <span class="Identifier">float</span><span class="Other">)</span><span class="Other">:</span> <a href="z3nim.html#Ast"><span class="Identifier">Ast</span></a><span class="Other">[</span><a href="z3nim.html#RealSort"><span class="Identifier">RealSort</span></a><span class="Other">]</span></pre></dt>
+<a id="<.t,Ast[S: NumericSort],Ast[S: NumericSort]"></a>
+<dt><pre><span class="Keyword">template</span> <a href="#%3C.t%2CAst%5BS%3A+NumericSort%5D%2CAst%5BS%3A+NumericSort%5D"><span class="Identifier">`&lt;`</span></a><span class="Other">[</span><span class="Identifier">S</span><span class="Other">]</span><span class="Other">(</span><span class="Identifier">arg1</span><span class="Other">,</span> <span class="Identifier">arg2</span><span class="Other">:</span> <a href="z3nim.html#Ast"><span class="Identifier">Ast</span></a><span class="Other">[</span><span class="Identifier">S</span><span class="Other">]</span><span class="Other">)</span><span class="Other">:</span> <a href="z3nim.html#Ast"><span class="Identifier">Ast</span></a><span class="Other">[</span><a href="z3nim.html#BoolSort"><span class="Identifier">BoolSort</span></a><span class="Other">]</span></pre></dt>
 <dd>
 
 
@@ -2153,8 +2164,8 @@ class="link-seesrc" target="_blank">Source</a>
 <a href="https://github.com/Double-oxygeN/z3nim/edit/devel/src/z3nim.nim#L543" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<a id="<.t,Ast[S: NumericSort],Ast[S: NumericSort]"></a>
-<dt><pre><span class="Keyword">template</span> <a href="#%3C.t%2CAst%5BS%3A+NumericSort%5D%2CAst%5BS%3A+NumericSort%5D"><span class="Identifier">`&lt;`</span></a><span class="Other">[</span><span class="Identifier">S</span><span class="Other">]</span><span class="Other">(</span><span class="Identifier">arg1</span><span class="Other">,</span> <span class="Identifier">arg2</span><span class="Other">:</span> <a href="z3nim.html#Ast"><span class="Identifier">Ast</span></a><span class="Other">[</span><span class="Identifier">S</span><span class="Other">]</span><span class="Other">)</span><span class="Other">:</span> <a href="z3nim.html#Ast"><span class="Identifier">Ast</span></a><span class="Other">[</span><a href="z3nim.html#BoolSort"><span class="Identifier">BoolSort</span></a><span class="Other">]</span></pre></dt>
+<a id="<.t,int,Ast[IntSort]"></a>
+<dt><pre><span class="Keyword">template</span> <a href="#%3C.t%2Cint%2CAst%5BIntSort%5D"><span class="Identifier">`&lt;`</span></a><span class="Other">(</span><span class="Identifier">arg1</span><span class="Other">:</span> <span class="Identifier">int</span><span class="Other">;</span> <span class="Identifier">arg2</span><span class="Other">:</span> <a href="z3nim.html#Ast"><span class="Identifier">Ast</span></a><span class="Other">[</span><a href="z3nim.html#IntSort"><span class="Identifier">IntSort</span></a><span class="Other">]</span><span class="Other">)</span><span class="Other">:</span> <a href="z3nim.html#Ast"><span class="Identifier">Ast</span></a><span class="Other">[</span><a href="z3nim.html#BoolSort"><span class="Identifier">BoolSort</span></a><span class="Other">]</span></pre></dt>
 <dd>
 
 
@@ -2164,8 +2175,8 @@ class="link-seesrc" target="_blank">Source</a>
 <a href="https://github.com/Double-oxygeN/z3nim/edit/devel/src/z3nim.nim#L546" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<a id="<.t,int,Ast[IntSort]"></a>
-<dt><pre><span class="Keyword">template</span> <a href="#%3C.t%2Cint%2CAst%5BIntSort%5D"><span class="Identifier">`&lt;`</span></a><span class="Other">(</span><span class="Identifier">arg1</span><span class="Other">:</span> <span class="Identifier">int</span><span class="Other">;</span> <span class="Identifier">arg2</span><span class="Other">:</span> <a href="z3nim.html#Ast"><span class="Identifier">Ast</span></a><span class="Other">[</span><a href="z3nim.html#IntSort"><span class="Identifier">IntSort</span></a><span class="Other">]</span><span class="Other">)</span><span class="Other">:</span> <a href="z3nim.html#Ast"><span class="Identifier">Ast</span></a><span class="Other">[</span><a href="z3nim.html#BoolSort"><span class="Identifier">BoolSort</span></a><span class="Other">]</span></pre></dt>
+<a id="<.t,Ast[IntSort],int"></a>
+<dt><pre><span class="Keyword">template</span> <a href="#%3C.t%2CAst%5BIntSort%5D%2Cint"><span class="Identifier">`&lt;`</span></a><span class="Other">(</span><span class="Identifier">arg1</span><span class="Other">:</span> <a href="z3nim.html#Ast"><span class="Identifier">Ast</span></a><span class="Other">[</span><a href="z3nim.html#IntSort"><span class="Identifier">IntSort</span></a><span class="Other">]</span><span class="Other">;</span> <span class="Identifier">arg2</span><span class="Other">:</span> <span class="Identifier">int</span><span class="Other">)</span><span class="Other">:</span> <a href="z3nim.html#Ast"><span class="Identifier">Ast</span></a><span class="Other">[</span><a href="z3nim.html#BoolSort"><span class="Identifier">BoolSort</span></a><span class="Other">]</span></pre></dt>
 <dd>
 
 
@@ -2175,8 +2186,8 @@ class="link-seesrc" target="_blank">Source</a>
 <a href="https://github.com/Double-oxygeN/z3nim/edit/devel/src/z3nim.nim#L549" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<a id="<.t,Ast[IntSort],int"></a>
-<dt><pre><span class="Keyword">template</span> <a href="#%3C.t%2CAst%5BIntSort%5D%2Cint"><span class="Identifier">`&lt;`</span></a><span class="Other">(</span><span class="Identifier">arg1</span><span class="Other">:</span> <a href="z3nim.html#Ast"><span class="Identifier">Ast</span></a><span class="Other">[</span><a href="z3nim.html#IntSort"><span class="Identifier">IntSort</span></a><span class="Other">]</span><span class="Other">;</span> <span class="Identifier">arg2</span><span class="Other">:</span> <span class="Identifier">int</span><span class="Other">)</span><span class="Other">:</span> <a href="z3nim.html#Ast"><span class="Identifier">Ast</span></a><span class="Other">[</span><a href="z3nim.html#BoolSort"><span class="Identifier">BoolSort</span></a><span class="Other">]</span></pre></dt>
+<a id="<.t,float,Ast[RealSort]"></a>
+<dt><pre><span class="Keyword">template</span> <a href="#%3C.t%2Cfloat%2CAst%5BRealSort%5D"><span class="Identifier">`&lt;`</span></a><span class="Other">(</span><span class="Identifier">arg1</span><span class="Other">:</span> <span class="Identifier">float</span><span class="Other">;</span> <span class="Identifier">arg2</span><span class="Other">:</span> <a href="z3nim.html#Ast"><span class="Identifier">Ast</span></a><span class="Other">[</span><a href="z3nim.html#RealSort"><span class="Identifier">RealSort</span></a><span class="Other">]</span><span class="Other">)</span><span class="Other">:</span> <a href="z3nim.html#Ast"><span class="Identifier">Ast</span></a><span class="Other">[</span><a href="z3nim.html#BoolSort"><span class="Identifier">BoolSort</span></a><span class="Other">]</span></pre></dt>
 <dd>
 
 
@@ -2186,8 +2197,8 @@ class="link-seesrc" target="_blank">Source</a>
 <a href="https://github.com/Double-oxygeN/z3nim/edit/devel/src/z3nim.nim#L552" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<a id="<.t,float,Ast[RealSort]"></a>
-<dt><pre><span class="Keyword">template</span> <a href="#%3C.t%2Cfloat%2CAst%5BRealSort%5D"><span class="Identifier">`&lt;`</span></a><span class="Other">(</span><span class="Identifier">arg1</span><span class="Other">:</span> <span class="Identifier">float</span><span class="Other">;</span> <span class="Identifier">arg2</span><span class="Other">:</span> <a href="z3nim.html#Ast"><span class="Identifier">Ast</span></a><span class="Other">[</span><a href="z3nim.html#RealSort"><span class="Identifier">RealSort</span></a><span class="Other">]</span><span class="Other">)</span><span class="Other">:</span> <a href="z3nim.html#Ast"><span class="Identifier">Ast</span></a><span class="Other">[</span><a href="z3nim.html#BoolSort"><span class="Identifier">BoolSort</span></a><span class="Other">]</span></pre></dt>
+<a id="<.t,Ast[RealSort],float"></a>
+<dt><pre><span class="Keyword">template</span> <a href="#%3C.t%2CAst%5BRealSort%5D%2Cfloat"><span class="Identifier">`&lt;`</span></a><span class="Other">(</span><span class="Identifier">arg1</span><span class="Other">:</span> <a href="z3nim.html#Ast"><span class="Identifier">Ast</span></a><span class="Other">[</span><a href="z3nim.html#RealSort"><span class="Identifier">RealSort</span></a><span class="Other">]</span><span class="Other">;</span> <span class="Identifier">arg2</span><span class="Other">:</span> <span class="Identifier">float</span><span class="Other">)</span><span class="Other">:</span> <a href="z3nim.html#Ast"><span class="Identifier">Ast</span></a><span class="Other">[</span><a href="z3nim.html#BoolSort"><span class="Identifier">BoolSort</span></a><span class="Other">]</span></pre></dt>
 <dd>
 
 
@@ -2197,8 +2208,8 @@ class="link-seesrc" target="_blank">Source</a>
 <a href="https://github.com/Double-oxygeN/z3nim/edit/devel/src/z3nim.nim#L555" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<a id="<.t,Ast[RealSort],float"></a>
-<dt><pre><span class="Keyword">template</span> <a href="#%3C.t%2CAst%5BRealSort%5D%2Cfloat"><span class="Identifier">`&lt;`</span></a><span class="Other">(</span><span class="Identifier">arg1</span><span class="Other">:</span> <a href="z3nim.html#Ast"><span class="Identifier">Ast</span></a><span class="Other">[</span><a href="z3nim.html#RealSort"><span class="Identifier">RealSort</span></a><span class="Other">]</span><span class="Other">;</span> <span class="Identifier">arg2</span><span class="Other">:</span> <span class="Identifier">float</span><span class="Other">)</span><span class="Other">:</span> <a href="z3nim.html#Ast"><span class="Identifier">Ast</span></a><span class="Other">[</span><a href="z3nim.html#BoolSort"><span class="Identifier">BoolSort</span></a><span class="Other">]</span></pre></dt>
+<a id="<=.t,Ast[S: NumericSort],Ast[S: NumericSort]"></a>
+<dt><pre><span class="Keyword">template</span> <a href="#%3C%3D.t%2CAst%5BS%3A+NumericSort%5D%2CAst%5BS%3A+NumericSort%5D"><span class="Identifier">`&lt;=`</span></a><span class="Other">[</span><span class="Identifier">S</span><span class="Other">]</span><span class="Other">(</span><span class="Identifier">arg1</span><span class="Other">,</span> <span class="Identifier">arg2</span><span class="Other">:</span> <a href="z3nim.html#Ast"><span class="Identifier">Ast</span></a><span class="Other">[</span><span class="Identifier">S</span><span class="Other">]</span><span class="Other">)</span><span class="Other">:</span> <a href="z3nim.html#Ast"><span class="Identifier">Ast</span></a><span class="Other">[</span><a href="z3nim.html#BoolSort"><span class="Identifier">BoolSort</span></a><span class="Other">]</span></pre></dt>
 <dd>
 
 
@@ -2208,8 +2219,8 @@ class="link-seesrc" target="_blank">Source</a>
 <a href="https://github.com/Double-oxygeN/z3nim/edit/devel/src/z3nim.nim#L558" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<a id="<=.t,Ast[S: NumericSort],Ast[S: NumericSort]"></a>
-<dt><pre><span class="Keyword">template</span> <a href="#%3C%3D.t%2CAst%5BS%3A+NumericSort%5D%2CAst%5BS%3A+NumericSort%5D"><span class="Identifier">`&lt;=`</span></a><span class="Other">[</span><span class="Identifier">S</span><span class="Other">]</span><span class="Other">(</span><span class="Identifier">arg1</span><span class="Other">,</span> <span class="Identifier">arg2</span><span class="Other">:</span> <a href="z3nim.html#Ast"><span class="Identifier">Ast</span></a><span class="Other">[</span><span class="Identifier">S</span><span class="Other">]</span><span class="Other">)</span><span class="Other">:</span> <a href="z3nim.html#Ast"><span class="Identifier">Ast</span></a><span class="Other">[</span><a href="z3nim.html#BoolSort"><span class="Identifier">BoolSort</span></a><span class="Other">]</span></pre></dt>
+<a id="<=.t,int,Ast[IntSort]"></a>
+<dt><pre><span class="Keyword">template</span> <a href="#%3C%3D.t%2Cint%2CAst%5BIntSort%5D"><span class="Identifier">`&lt;=`</span></a><span class="Other">(</span><span class="Identifier">arg1</span><span class="Other">:</span> <span class="Identifier">int</span><span class="Other">;</span> <span class="Identifier">arg2</span><span class="Other">:</span> <a href="z3nim.html#Ast"><span class="Identifier">Ast</span></a><span class="Other">[</span><a href="z3nim.html#IntSort"><span class="Identifier">IntSort</span></a><span class="Other">]</span><span class="Other">)</span><span class="Other">:</span> <a href="z3nim.html#Ast"><span class="Identifier">Ast</span></a><span class="Other">[</span><a href="z3nim.html#BoolSort"><span class="Identifier">BoolSort</span></a><span class="Other">]</span></pre></dt>
 <dd>
 
 
@@ -2219,8 +2230,8 @@ class="link-seesrc" target="_blank">Source</a>
 <a href="https://github.com/Double-oxygeN/z3nim/edit/devel/src/z3nim.nim#L561" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<a id="<=.t,int,Ast[IntSort]"></a>
-<dt><pre><span class="Keyword">template</span> <a href="#%3C%3D.t%2Cint%2CAst%5BIntSort%5D"><span class="Identifier">`&lt;=`</span></a><span class="Other">(</span><span class="Identifier">arg1</span><span class="Other">:</span> <span class="Identifier">int</span><span class="Other">;</span> <span class="Identifier">arg2</span><span class="Other">:</span> <a href="z3nim.html#Ast"><span class="Identifier">Ast</span></a><span class="Other">[</span><a href="z3nim.html#IntSort"><span class="Identifier">IntSort</span></a><span class="Other">]</span><span class="Other">)</span><span class="Other">:</span> <a href="z3nim.html#Ast"><span class="Identifier">Ast</span></a><span class="Other">[</span><a href="z3nim.html#BoolSort"><span class="Identifier">BoolSort</span></a><span class="Other">]</span></pre></dt>
+<a id="<=.t,Ast[IntSort],int"></a>
+<dt><pre><span class="Keyword">template</span> <a href="#%3C%3D.t%2CAst%5BIntSort%5D%2Cint"><span class="Identifier">`&lt;=`</span></a><span class="Other">(</span><span class="Identifier">arg1</span><span class="Other">:</span> <a href="z3nim.html#Ast"><span class="Identifier">Ast</span></a><span class="Other">[</span><a href="z3nim.html#IntSort"><span class="Identifier">IntSort</span></a><span class="Other">]</span><span class="Other">;</span> <span class="Identifier">arg2</span><span class="Other">:</span> <span class="Identifier">int</span><span class="Other">)</span><span class="Other">:</span> <a href="z3nim.html#Ast"><span class="Identifier">Ast</span></a><span class="Other">[</span><a href="z3nim.html#BoolSort"><span class="Identifier">BoolSort</span></a><span class="Other">]</span></pre></dt>
 <dd>
 
 
@@ -2230,8 +2241,8 @@ class="link-seesrc" target="_blank">Source</a>
 <a href="https://github.com/Double-oxygeN/z3nim/edit/devel/src/z3nim.nim#L564" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<a id="<=.t,Ast[IntSort],int"></a>
-<dt><pre><span class="Keyword">template</span> <a href="#%3C%3D.t%2CAst%5BIntSort%5D%2Cint"><span class="Identifier">`&lt;=`</span></a><span class="Other">(</span><span class="Identifier">arg1</span><span class="Other">:</span> <a href="z3nim.html#Ast"><span class="Identifier">Ast</span></a><span class="Other">[</span><a href="z3nim.html#IntSort"><span class="Identifier">IntSort</span></a><span class="Other">]</span><span class="Other">;</span> <span class="Identifier">arg2</span><span class="Other">:</span> <span class="Identifier">int</span><span class="Other">)</span><span class="Other">:</span> <a href="z3nim.html#Ast"><span class="Identifier">Ast</span></a><span class="Other">[</span><a href="z3nim.html#BoolSort"><span class="Identifier">BoolSort</span></a><span class="Other">]</span></pre></dt>
+<a id="<=.t,float,Ast[RealSort]"></a>
+<dt><pre><span class="Keyword">template</span> <a href="#%3C%3D.t%2Cfloat%2CAst%5BRealSort%5D"><span class="Identifier">`&lt;=`</span></a><span class="Other">(</span><span class="Identifier">arg1</span><span class="Other">:</span> <span class="Identifier">float</span><span class="Other">;</span> <span class="Identifier">arg2</span><span class="Other">:</span> <a href="z3nim.html#Ast"><span class="Identifier">Ast</span></a><span class="Other">[</span><a href="z3nim.html#RealSort"><span class="Identifier">RealSort</span></a><span class="Other">]</span><span class="Other">)</span><span class="Other">:</span> <a href="z3nim.html#Ast"><span class="Identifier">Ast</span></a><span class="Other">[</span><a href="z3nim.html#BoolSort"><span class="Identifier">BoolSort</span></a><span class="Other">]</span></pre></dt>
 <dd>
 
 
@@ -2241,8 +2252,8 @@ class="link-seesrc" target="_blank">Source</a>
 <a href="https://github.com/Double-oxygeN/z3nim/edit/devel/src/z3nim.nim#L567" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<a id="<=.t,float,Ast[RealSort]"></a>
-<dt><pre><span class="Keyword">template</span> <a href="#%3C%3D.t%2Cfloat%2CAst%5BRealSort%5D"><span class="Identifier">`&lt;=`</span></a><span class="Other">(</span><span class="Identifier">arg1</span><span class="Other">:</span> <span class="Identifier">float</span><span class="Other">;</span> <span class="Identifier">arg2</span><span class="Other">:</span> <a href="z3nim.html#Ast"><span class="Identifier">Ast</span></a><span class="Other">[</span><a href="z3nim.html#RealSort"><span class="Identifier">RealSort</span></a><span class="Other">]</span><span class="Other">)</span><span class="Other">:</span> <a href="z3nim.html#Ast"><span class="Identifier">Ast</span></a><span class="Other">[</span><a href="z3nim.html#BoolSort"><span class="Identifier">BoolSort</span></a><span class="Other">]</span></pre></dt>
+<a id="<=.t,Ast[RealSort],float"></a>
+<dt><pre><span class="Keyword">template</span> <a href="#%3C%3D.t%2CAst%5BRealSort%5D%2Cfloat"><span class="Identifier">`&lt;=`</span></a><span class="Other">(</span><span class="Identifier">arg1</span><span class="Other">:</span> <a href="z3nim.html#Ast"><span class="Identifier">Ast</span></a><span class="Other">[</span><a href="z3nim.html#RealSort"><span class="Identifier">RealSort</span></a><span class="Other">]</span><span class="Other">;</span> <span class="Identifier">arg2</span><span class="Other">:</span> <span class="Identifier">float</span><span class="Other">)</span><span class="Other">:</span> <a href="z3nim.html#Ast"><span class="Identifier">Ast</span></a><span class="Other">[</span><a href="z3nim.html#BoolSort"><span class="Identifier">BoolSort</span></a><span class="Other">]</span></pre></dt>
 <dd>
 
 
@@ -2252,8 +2263,8 @@ class="link-seesrc" target="_blank">Source</a>
 <a href="https://github.com/Double-oxygeN/z3nim/edit/devel/src/z3nim.nim#L570" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<a id="<=.t,Ast[RealSort],float"></a>
-<dt><pre><span class="Keyword">template</span> <a href="#%3C%3D.t%2CAst%5BRealSort%5D%2Cfloat"><span class="Identifier">`&lt;=`</span></a><span class="Other">(</span><span class="Identifier">arg1</span><span class="Other">:</span> <a href="z3nim.html#Ast"><span class="Identifier">Ast</span></a><span class="Other">[</span><a href="z3nim.html#RealSort"><span class="Identifier">RealSort</span></a><span class="Other">]</span><span class="Other">;</span> <span class="Identifier">arg2</span><span class="Other">:</span> <span class="Identifier">float</span><span class="Other">)</span><span class="Other">:</span> <a href="z3nim.html#Ast"><span class="Identifier">Ast</span></a><span class="Other">[</span><a href="z3nim.html#BoolSort"><span class="Identifier">BoolSort</span></a><span class="Other">]</span></pre></dt>
+<a id=">.t,Ast[S: NumericSort],Ast[S: NumericSort]"></a>
+<dt><pre><span class="Keyword">template</span> <a href="#%3E.t%2CAst%5BS%3A+NumericSort%5D%2CAst%5BS%3A+NumericSort%5D"><span class="Identifier">`&gt;`</span></a><span class="Other">[</span><span class="Identifier">S</span><span class="Other">]</span><span class="Other">(</span><span class="Identifier">arg1</span><span class="Other">,</span> <span class="Identifier">arg2</span><span class="Other">:</span> <a href="z3nim.html#Ast"><span class="Identifier">Ast</span></a><span class="Other">[</span><span class="Identifier">S</span><span class="Other">]</span><span class="Other">)</span><span class="Other">:</span> <a href="z3nim.html#Ast"><span class="Identifier">Ast</span></a><span class="Other">[</span><a href="z3nim.html#BoolSort"><span class="Identifier">BoolSort</span></a><span class="Other">]</span></pre></dt>
 <dd>
 
 
@@ -2263,8 +2274,8 @@ class="link-seesrc" target="_blank">Source</a>
 <a href="https://github.com/Double-oxygeN/z3nim/edit/devel/src/z3nim.nim#L573" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<a id=">.t,Ast[S: NumericSort],Ast[S: NumericSort]"></a>
-<dt><pre><span class="Keyword">template</span> <a href="#%3E.t%2CAst%5BS%3A+NumericSort%5D%2CAst%5BS%3A+NumericSort%5D"><span class="Identifier">`&gt;`</span></a><span class="Other">[</span><span class="Identifier">S</span><span class="Other">]</span><span class="Other">(</span><span class="Identifier">arg1</span><span class="Other">,</span> <span class="Identifier">arg2</span><span class="Other">:</span> <a href="z3nim.html#Ast"><span class="Identifier">Ast</span></a><span class="Other">[</span><span class="Identifier">S</span><span class="Other">]</span><span class="Other">)</span><span class="Other">:</span> <a href="z3nim.html#Ast"><span class="Identifier">Ast</span></a><span class="Other">[</span><a href="z3nim.html#BoolSort"><span class="Identifier">BoolSort</span></a><span class="Other">]</span></pre></dt>
+<a id=">.t,int,Ast[IntSort]"></a>
+<dt><pre><span class="Keyword">template</span> <a href="#%3E.t%2Cint%2CAst%5BIntSort%5D"><span class="Identifier">`&gt;`</span></a><span class="Other">(</span><span class="Identifier">arg1</span><span class="Other">:</span> <span class="Identifier">int</span><span class="Other">;</span> <span class="Identifier">arg2</span><span class="Other">:</span> <a href="z3nim.html#Ast"><span class="Identifier">Ast</span></a><span class="Other">[</span><a href="z3nim.html#IntSort"><span class="Identifier">IntSort</span></a><span class="Other">]</span><span class="Other">)</span><span class="Other">:</span> <a href="z3nim.html#Ast"><span class="Identifier">Ast</span></a><span class="Other">[</span><a href="z3nim.html#BoolSort"><span class="Identifier">BoolSort</span></a><span class="Other">]</span></pre></dt>
 <dd>
 
 
@@ -2274,8 +2285,8 @@ class="link-seesrc" target="_blank">Source</a>
 <a href="https://github.com/Double-oxygeN/z3nim/edit/devel/src/z3nim.nim#L576" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<a id=">.t,int,Ast[IntSort]"></a>
-<dt><pre><span class="Keyword">template</span> <a href="#%3E.t%2Cint%2CAst%5BIntSort%5D"><span class="Identifier">`&gt;`</span></a><span class="Other">(</span><span class="Identifier">arg1</span><span class="Other">:</span> <span class="Identifier">int</span><span class="Other">;</span> <span class="Identifier">arg2</span><span class="Other">:</span> <a href="z3nim.html#Ast"><span class="Identifier">Ast</span></a><span class="Other">[</span><a href="z3nim.html#IntSort"><span class="Identifier">IntSort</span></a><span class="Other">]</span><span class="Other">)</span><span class="Other">:</span> <a href="z3nim.html#Ast"><span class="Identifier">Ast</span></a><span class="Other">[</span><a href="z3nim.html#BoolSort"><span class="Identifier">BoolSort</span></a><span class="Other">]</span></pre></dt>
+<a id=">.t,Ast[IntSort],int"></a>
+<dt><pre><span class="Keyword">template</span> <a href="#%3E.t%2CAst%5BIntSort%5D%2Cint"><span class="Identifier">`&gt;`</span></a><span class="Other">(</span><span class="Identifier">arg1</span><span class="Other">:</span> <a href="z3nim.html#Ast"><span class="Identifier">Ast</span></a><span class="Other">[</span><a href="z3nim.html#IntSort"><span class="Identifier">IntSort</span></a><span class="Other">]</span><span class="Other">;</span> <span class="Identifier">arg2</span><span class="Other">:</span> <span class="Identifier">int</span><span class="Other">)</span><span class="Other">:</span> <a href="z3nim.html#Ast"><span class="Identifier">Ast</span></a><span class="Other">[</span><a href="z3nim.html#BoolSort"><span class="Identifier">BoolSort</span></a><span class="Other">]</span></pre></dt>
 <dd>
 
 
@@ -2285,8 +2296,8 @@ class="link-seesrc" target="_blank">Source</a>
 <a href="https://github.com/Double-oxygeN/z3nim/edit/devel/src/z3nim.nim#L579" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<a id=">.t,Ast[IntSort],int"></a>
-<dt><pre><span class="Keyword">template</span> <a href="#%3E.t%2CAst%5BIntSort%5D%2Cint"><span class="Identifier">`&gt;`</span></a><span class="Other">(</span><span class="Identifier">arg1</span><span class="Other">:</span> <a href="z3nim.html#Ast"><span class="Identifier">Ast</span></a><span class="Other">[</span><a href="z3nim.html#IntSort"><span class="Identifier">IntSort</span></a><span class="Other">]</span><span class="Other">;</span> <span class="Identifier">arg2</span><span class="Other">:</span> <span class="Identifier">int</span><span class="Other">)</span><span class="Other">:</span> <a href="z3nim.html#Ast"><span class="Identifier">Ast</span></a><span class="Other">[</span><a href="z3nim.html#BoolSort"><span class="Identifier">BoolSort</span></a><span class="Other">]</span></pre></dt>
+<a id=">.t,float,Ast[RealSort]"></a>
+<dt><pre><span class="Keyword">template</span> <a href="#%3E.t%2Cfloat%2CAst%5BRealSort%5D"><span class="Identifier">`&gt;`</span></a><span class="Other">(</span><span class="Identifier">arg1</span><span class="Other">:</span> <span class="Identifier">float</span><span class="Other">;</span> <span class="Identifier">arg2</span><span class="Other">:</span> <a href="z3nim.html#Ast"><span class="Identifier">Ast</span></a><span class="Other">[</span><a href="z3nim.html#RealSort"><span class="Identifier">RealSort</span></a><span class="Other">]</span><span class="Other">)</span><span class="Other">:</span> <a href="z3nim.html#Ast"><span class="Identifier">Ast</span></a><span class="Other">[</span><a href="z3nim.html#BoolSort"><span class="Identifier">BoolSort</span></a><span class="Other">]</span></pre></dt>
 <dd>
 
 
@@ -2296,8 +2307,8 @@ class="link-seesrc" target="_blank">Source</a>
 <a href="https://github.com/Double-oxygeN/z3nim/edit/devel/src/z3nim.nim#L582" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<a id=">.t,float,Ast[RealSort]"></a>
-<dt><pre><span class="Keyword">template</span> <a href="#%3E.t%2Cfloat%2CAst%5BRealSort%5D"><span class="Identifier">`&gt;`</span></a><span class="Other">(</span><span class="Identifier">arg1</span><span class="Other">:</span> <span class="Identifier">float</span><span class="Other">;</span> <span class="Identifier">arg2</span><span class="Other">:</span> <a href="z3nim.html#Ast"><span class="Identifier">Ast</span></a><span class="Other">[</span><a href="z3nim.html#RealSort"><span class="Identifier">RealSort</span></a><span class="Other">]</span><span class="Other">)</span><span class="Other">:</span> <a href="z3nim.html#Ast"><span class="Identifier">Ast</span></a><span class="Other">[</span><a href="z3nim.html#BoolSort"><span class="Identifier">BoolSort</span></a><span class="Other">]</span></pre></dt>
+<a id=">.t,Ast[RealSort],float"></a>
+<dt><pre><span class="Keyword">template</span> <a href="#%3E.t%2CAst%5BRealSort%5D%2Cfloat"><span class="Identifier">`&gt;`</span></a><span class="Other">(</span><span class="Identifier">arg1</span><span class="Other">:</span> <a href="z3nim.html#Ast"><span class="Identifier">Ast</span></a><span class="Other">[</span><a href="z3nim.html#RealSort"><span class="Identifier">RealSort</span></a><span class="Other">]</span><span class="Other">;</span> <span class="Identifier">arg2</span><span class="Other">:</span> <span class="Identifier">float</span><span class="Other">)</span><span class="Other">:</span> <a href="z3nim.html#Ast"><span class="Identifier">Ast</span></a><span class="Other">[</span><a href="z3nim.html#BoolSort"><span class="Identifier">BoolSort</span></a><span class="Other">]</span></pre></dt>
 <dd>
 
 
@@ -2307,8 +2318,8 @@ class="link-seesrc" target="_blank">Source</a>
 <a href="https://github.com/Double-oxygeN/z3nim/edit/devel/src/z3nim.nim#L585" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<a id=">.t,Ast[RealSort],float"></a>
-<dt><pre><span class="Keyword">template</span> <a href="#%3E.t%2CAst%5BRealSort%5D%2Cfloat"><span class="Identifier">`&gt;`</span></a><span class="Other">(</span><span class="Identifier">arg1</span><span class="Other">:</span> <a href="z3nim.html#Ast"><span class="Identifier">Ast</span></a><span class="Other">[</span><a href="z3nim.html#RealSort"><span class="Identifier">RealSort</span></a><span class="Other">]</span><span class="Other">;</span> <span class="Identifier">arg2</span><span class="Other">:</span> <span class="Identifier">float</span><span class="Other">)</span><span class="Other">:</span> <a href="z3nim.html#Ast"><span class="Identifier">Ast</span></a><span class="Other">[</span><a href="z3nim.html#BoolSort"><span class="Identifier">BoolSort</span></a><span class="Other">]</span></pre></dt>
+<a id=">=.t,Ast[S: NumericSort],Ast[S: NumericSort]"></a>
+<dt><pre><span class="Keyword">template</span> <a href="#%3E%3D.t%2CAst%5BS%3A+NumericSort%5D%2CAst%5BS%3A+NumericSort%5D"><span class="Identifier">`&gt;=`</span></a><span class="Other">[</span><span class="Identifier">S</span><span class="Other">]</span><span class="Other">(</span><span class="Identifier">arg1</span><span class="Other">,</span> <span class="Identifier">arg2</span><span class="Other">:</span> <a href="z3nim.html#Ast"><span class="Identifier">Ast</span></a><span class="Other">[</span><span class="Identifier">S</span><span class="Other">]</span><span class="Other">)</span><span class="Other">:</span> <a href="z3nim.html#Ast"><span class="Identifier">Ast</span></a><span class="Other">[</span><a href="z3nim.html#BoolSort"><span class="Identifier">BoolSort</span></a><span class="Other">]</span></pre></dt>
 <dd>
 
 
@@ -2318,8 +2329,8 @@ class="link-seesrc" target="_blank">Source</a>
 <a href="https://github.com/Double-oxygeN/z3nim/edit/devel/src/z3nim.nim#L588" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<a id=">=.t,Ast[S: NumericSort],Ast[S: NumericSort]"></a>
-<dt><pre><span class="Keyword">template</span> <a href="#%3E%3D.t%2CAst%5BS%3A+NumericSort%5D%2CAst%5BS%3A+NumericSort%5D"><span class="Identifier">`&gt;=`</span></a><span class="Other">[</span><span class="Identifier">S</span><span class="Other">]</span><span class="Other">(</span><span class="Identifier">arg1</span><span class="Other">,</span> <span class="Identifier">arg2</span><span class="Other">:</span> <a href="z3nim.html#Ast"><span class="Identifier">Ast</span></a><span class="Other">[</span><span class="Identifier">S</span><span class="Other">]</span><span class="Other">)</span><span class="Other">:</span> <a href="z3nim.html#Ast"><span class="Identifier">Ast</span></a><span class="Other">[</span><a href="z3nim.html#BoolSort"><span class="Identifier">BoolSort</span></a><span class="Other">]</span></pre></dt>
+<a id=">=.t,int,Ast[IntSort]"></a>
+<dt><pre><span class="Keyword">template</span> <a href="#%3E%3D.t%2Cint%2CAst%5BIntSort%5D"><span class="Identifier">`&gt;=`</span></a><span class="Other">(</span><span class="Identifier">arg1</span><span class="Other">:</span> <span class="Identifier">int</span><span class="Other">;</span> <span class="Identifier">arg2</span><span class="Other">:</span> <a href="z3nim.html#Ast"><span class="Identifier">Ast</span></a><span class="Other">[</span><a href="z3nim.html#IntSort"><span class="Identifier">IntSort</span></a><span class="Other">]</span><span class="Other">)</span><span class="Other">:</span> <a href="z3nim.html#Ast"><span class="Identifier">Ast</span></a><span class="Other">[</span><a href="z3nim.html#BoolSort"><span class="Identifier">BoolSort</span></a><span class="Other">]</span></pre></dt>
 <dd>
 
 
@@ -2329,8 +2340,8 @@ class="link-seesrc" target="_blank">Source</a>
 <a href="https://github.com/Double-oxygeN/z3nim/edit/devel/src/z3nim.nim#L591" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<a id=">=.t,int,Ast[IntSort]"></a>
-<dt><pre><span class="Keyword">template</span> <a href="#%3E%3D.t%2Cint%2CAst%5BIntSort%5D"><span class="Identifier">`&gt;=`</span></a><span class="Other">(</span><span class="Identifier">arg1</span><span class="Other">:</span> <span class="Identifier">int</span><span class="Other">;</span> <span class="Identifier">arg2</span><span class="Other">:</span> <a href="z3nim.html#Ast"><span class="Identifier">Ast</span></a><span class="Other">[</span><a href="z3nim.html#IntSort"><span class="Identifier">IntSort</span></a><span class="Other">]</span><span class="Other">)</span><span class="Other">:</span> <a href="z3nim.html#Ast"><span class="Identifier">Ast</span></a><span class="Other">[</span><a href="z3nim.html#BoolSort"><span class="Identifier">BoolSort</span></a><span class="Other">]</span></pre></dt>
+<a id=">=.t,Ast[IntSort],int"></a>
+<dt><pre><span class="Keyword">template</span> <a href="#%3E%3D.t%2CAst%5BIntSort%5D%2Cint"><span class="Identifier">`&gt;=`</span></a><span class="Other">(</span><span class="Identifier">arg1</span><span class="Other">:</span> <a href="z3nim.html#Ast"><span class="Identifier">Ast</span></a><span class="Other">[</span><a href="z3nim.html#IntSort"><span class="Identifier">IntSort</span></a><span class="Other">]</span><span class="Other">;</span> <span class="Identifier">arg2</span><span class="Other">:</span> <span class="Identifier">int</span><span class="Other">)</span><span class="Other">:</span> <a href="z3nim.html#Ast"><span class="Identifier">Ast</span></a><span class="Other">[</span><a href="z3nim.html#BoolSort"><span class="Identifier">BoolSort</span></a><span class="Other">]</span></pre></dt>
 <dd>
 
 
@@ -2340,8 +2351,8 @@ class="link-seesrc" target="_blank">Source</a>
 <a href="https://github.com/Double-oxygeN/z3nim/edit/devel/src/z3nim.nim#L594" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<a id=">=.t,Ast[IntSort],int"></a>
-<dt><pre><span class="Keyword">template</span> <a href="#%3E%3D.t%2CAst%5BIntSort%5D%2Cint"><span class="Identifier">`&gt;=`</span></a><span class="Other">(</span><span class="Identifier">arg1</span><span class="Other">:</span> <a href="z3nim.html#Ast"><span class="Identifier">Ast</span></a><span class="Other">[</span><a href="z3nim.html#IntSort"><span class="Identifier">IntSort</span></a><span class="Other">]</span><span class="Other">;</span> <span class="Identifier">arg2</span><span class="Other">:</span> <span class="Identifier">int</span><span class="Other">)</span><span class="Other">:</span> <a href="z3nim.html#Ast"><span class="Identifier">Ast</span></a><span class="Other">[</span><a href="z3nim.html#BoolSort"><span class="Identifier">BoolSort</span></a><span class="Other">]</span></pre></dt>
+<a id=">=.t,float,Ast[RealSort]"></a>
+<dt><pre><span class="Keyword">template</span> <a href="#%3E%3D.t%2Cfloat%2CAst%5BRealSort%5D"><span class="Identifier">`&gt;=`</span></a><span class="Other">(</span><span class="Identifier">arg1</span><span class="Other">:</span> <span class="Identifier">float</span><span class="Other">;</span> <span class="Identifier">arg2</span><span class="Other">:</span> <a href="z3nim.html#Ast"><span class="Identifier">Ast</span></a><span class="Other">[</span><a href="z3nim.html#RealSort"><span class="Identifier">RealSort</span></a><span class="Other">]</span><span class="Other">)</span><span class="Other">:</span> <a href="z3nim.html#Ast"><span class="Identifier">Ast</span></a><span class="Other">[</span><a href="z3nim.html#BoolSort"><span class="Identifier">BoolSort</span></a><span class="Other">]</span></pre></dt>
 <dd>
 
 
@@ -2351,8 +2362,8 @@ class="link-seesrc" target="_blank">Source</a>
 <a href="https://github.com/Double-oxygeN/z3nim/edit/devel/src/z3nim.nim#L597" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<a id=">=.t,float,Ast[RealSort]"></a>
-<dt><pre><span class="Keyword">template</span> <a href="#%3E%3D.t%2Cfloat%2CAst%5BRealSort%5D"><span class="Identifier">`&gt;=`</span></a><span class="Other">(</span><span class="Identifier">arg1</span><span class="Other">:</span> <span class="Identifier">float</span><span class="Other">;</span> <span class="Identifier">arg2</span><span class="Other">:</span> <a href="z3nim.html#Ast"><span class="Identifier">Ast</span></a><span class="Other">[</span><a href="z3nim.html#RealSort"><span class="Identifier">RealSort</span></a><span class="Other">]</span><span class="Other">)</span><span class="Other">:</span> <a href="z3nim.html#Ast"><span class="Identifier">Ast</span></a><span class="Other">[</span><a href="z3nim.html#BoolSort"><span class="Identifier">BoolSort</span></a><span class="Other">]</span></pre></dt>
+<a id=">=.t,Ast[RealSort],float"></a>
+<dt><pre><span class="Keyword">template</span> <a href="#%3E%3D.t%2CAst%5BRealSort%5D%2Cfloat"><span class="Identifier">`&gt;=`</span></a><span class="Other">(</span><span class="Identifier">arg1</span><span class="Other">:</span> <a href="z3nim.html#Ast"><span class="Identifier">Ast</span></a><span class="Other">[</span><a href="z3nim.html#RealSort"><span class="Identifier">RealSort</span></a><span class="Other">]</span><span class="Other">;</span> <span class="Identifier">arg2</span><span class="Other">:</span> <span class="Identifier">float</span><span class="Other">)</span><span class="Other">:</span> <a href="z3nim.html#Ast"><span class="Identifier">Ast</span></a><span class="Other">[</span><a href="z3nim.html#BoolSort"><span class="Identifier">BoolSort</span></a><span class="Other">]</span></pre></dt>
 <dd>
 
 
@@ -2362,8 +2373,8 @@ class="link-seesrc" target="_blank">Source</a>
 <a href="https://github.com/Double-oxygeN/z3nim/edit/devel/src/z3nim.nim#L600" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<a id=">=.t,Ast[RealSort],float"></a>
-<dt><pre><span class="Keyword">template</span> <a href="#%3E%3D.t%2CAst%5BRealSort%5D%2Cfloat"><span class="Identifier">`&gt;=`</span></a><span class="Other">(</span><span class="Identifier">arg1</span><span class="Other">:</span> <a href="z3nim.html#Ast"><span class="Identifier">Ast</span></a><span class="Other">[</span><a href="z3nim.html#RealSort"><span class="Identifier">RealSort</span></a><span class="Other">]</span><span class="Other">;</span> <span class="Identifier">arg2</span><span class="Other">:</span> <span class="Identifier">float</span><span class="Other">)</span><span class="Other">:</span> <a href="z3nim.html#Ast"><span class="Identifier">Ast</span></a><span class="Other">[</span><a href="z3nim.html#BoolSort"><span class="Identifier">BoolSort</span></a><span class="Other">]</span></pre></dt>
+<a id="int2real.t,Ast[IntSort]"></a>
+<dt><pre><span class="Keyword">template</span> <a href="#int2real.t%2CAst%5BIntSort%5D"><span class="Identifier">int2real</span></a><span class="Other">(</span><span class="Identifier">arg</span><span class="Other">:</span> <a href="z3nim.html#Ast"><span class="Identifier">Ast</span></a><span class="Other">[</span><a href="z3nim.html#IntSort"><span class="Identifier">IntSort</span></a><span class="Other">]</span><span class="Other">)</span><span class="Other">:</span> <a href="z3nim.html#Ast"><span class="Identifier">Ast</span></a><span class="Other">[</span><a href="z3nim.html#RealSort"><span class="Identifier">RealSort</span></a><span class="Other">]</span></pre></dt>
 <dd>
 
 
@@ -2373,8 +2384,8 @@ class="link-seesrc" target="_blank">Source</a>
 <a href="https://github.com/Double-oxygeN/z3nim/edit/devel/src/z3nim.nim#L603" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<a id="int2real.t,Ast[IntSort]"></a>
-<dt><pre><span class="Keyword">template</span> <a href="#int2real.t%2CAst%5BIntSort%5D"><span class="Identifier">int2real</span></a><span class="Other">(</span><span class="Identifier">arg</span><span class="Other">:</span> <a href="z3nim.html#Ast"><span class="Identifier">Ast</span></a><span class="Other">[</span><a href="z3nim.html#IntSort"><span class="Identifier">IntSort</span></a><span class="Other">]</span><span class="Other">)</span><span class="Other">:</span> <a href="z3nim.html#Ast"><span class="Identifier">Ast</span></a><span class="Other">[</span><a href="z3nim.html#RealSort"><span class="Identifier">RealSort</span></a><span class="Other">]</span></pre></dt>
+<a id="real2int.t,Ast[RealSort]"></a>
+<dt><pre><span class="Keyword">template</span> <a href="#real2int.t%2CAst%5BRealSort%5D"><span class="Identifier">real2int</span></a><span class="Other">(</span><span class="Identifier">arg</span><span class="Other">:</span> <a href="z3nim.html#Ast"><span class="Identifier">Ast</span></a><span class="Other">[</span><a href="z3nim.html#RealSort"><span class="Identifier">RealSort</span></a><span class="Other">]</span><span class="Other">)</span><span class="Other">:</span> <a href="z3nim.html#Ast"><span class="Identifier">Ast</span></a><span class="Other">[</span><a href="z3nim.html#IntSort"><span class="Identifier">IntSort</span></a><span class="Other">]</span></pre></dt>
 <dd>
 
 
@@ -2384,8 +2395,8 @@ class="link-seesrc" target="_blank">Source</a>
 <a href="https://github.com/Double-oxygeN/z3nim/edit/devel/src/z3nim.nim#L606" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<a id="real2int.t,Ast[RealSort]"></a>
-<dt><pre><span class="Keyword">template</span> <a href="#real2int.t%2CAst%5BRealSort%5D"><span class="Identifier">real2int</span></a><span class="Other">(</span><span class="Identifier">arg</span><span class="Other">:</span> <a href="z3nim.html#Ast"><span class="Identifier">Ast</span></a><span class="Other">[</span><a href="z3nim.html#RealSort"><span class="Identifier">RealSort</span></a><span class="Other">]</span><span class="Other">)</span><span class="Other">:</span> <a href="z3nim.html#Ast"><span class="Identifier">Ast</span></a><span class="Other">[</span><a href="z3nim.html#IntSort"><span class="Identifier">IntSort</span></a><span class="Other">]</span></pre></dt>
+<a id="isInt.t,Ast[RealSort]"></a>
+<dt><pre><span class="Keyword">template</span> <a href="#isInt.t%2CAst%5BRealSort%5D"><span class="Identifier">isInt</span></a><span class="Other">(</span><span class="Identifier">arg</span><span class="Other">:</span> <a href="z3nim.html#Ast"><span class="Identifier">Ast</span></a><span class="Other">[</span><a href="z3nim.html#RealSort"><span class="Identifier">RealSort</span></a><span class="Other">]</span><span class="Other">)</span><span class="Other">:</span> <a href="z3nim.html#Ast"><span class="Identifier">Ast</span></a><span class="Other">[</span><a href="z3nim.html#BoolSort"><span class="Identifier">BoolSort</span></a><span class="Other">]</span></pre></dt>
 <dd>
 
 
@@ -2395,8 +2406,8 @@ class="link-seesrc" target="_blank">Source</a>
 <a href="https://github.com/Double-oxygeN/z3nim/edit/devel/src/z3nim.nim#L609" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<a id="isInt.t,Ast[RealSort]"></a>
-<dt><pre><span class="Keyword">template</span> <a href="#isInt.t%2CAst%5BRealSort%5D"><span class="Identifier">isInt</span></a><span class="Other">(</span><span class="Identifier">arg</span><span class="Other">:</span> <a href="z3nim.html#Ast"><span class="Identifier">Ast</span></a><span class="Other">[</span><a href="z3nim.html#RealSort"><span class="Identifier">RealSort</span></a><span class="Other">]</span><span class="Other">)</span><span class="Other">:</span> <a href="z3nim.html#Ast"><span class="Identifier">Ast</span></a><span class="Other">[</span><a href="z3nim.html#BoolSort"><span class="Identifier">BoolSort</span></a><span class="Other">]</span></pre></dt>
+<a id="apply.t,FuncDecl[D,R],Asts[D]"></a>
+<dt><pre><span class="Keyword">template</span> <a href="#apply.t%2CFuncDecl%5BD%2CR%5D%2CAsts%5BD%5D"><span class="Identifier">apply</span></a><span class="Other">[</span><span class="Identifier">D</span><span class="Other">;</span> <span class="Identifier">R</span><span class="Other">]</span><span class="Other">(</span><span class="Identifier">fn</span><span class="Other">:</span> <a href="z3nim.html#FuncDecl"><span class="Identifier">FuncDecl</span></a><span class="Other">[</span><span class="Identifier">D</span><span class="Other">,</span> <span class="Identifier">R</span><span class="Other">]</span><span class="Other">;</span> <span class="Identifier">args</span><span class="Other">:</span> <a href="z3nim.html#Asts"><span class="Identifier">Asts</span></a><span class="Other">[</span><span class="Identifier">D</span><span class="Other">]</span><span class="Other">)</span><span class="Other">:</span> <a href="z3nim.html#Ast"><span class="Identifier">Ast</span></a><span class="Other">[</span><span class="Identifier">R</span><span class="Other">]</span></pre></dt>
 <dd>
 
 
@@ -2406,19 +2417,19 @@ class="link-seesrc" target="_blank">Source</a>
 <a href="https://github.com/Double-oxygeN/z3nim/edit/devel/src/z3nim.nim#L612" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<a id="apply.t,FuncDecl[D,R],Asts[D]"></a>
-<dt><pre><span class="Keyword">template</span> <a href="#apply.t%2CFuncDecl%5BD%2CR%5D%2CAsts%5BD%5D"><span class="Identifier">apply</span></a><span class="Other">[</span><span class="Identifier">D</span><span class="Other">;</span> <span class="Identifier">R</span><span class="Other">]</span><span class="Other">(</span><span class="Identifier">fn</span><span class="Other">:</span> <a href="z3nim.html#FuncDecl"><span class="Identifier">FuncDecl</span></a><span class="Other">[</span><span class="Identifier">D</span><span class="Other">,</span> <span class="Identifier">R</span><span class="Other">]</span><span class="Other">;</span> <span class="Identifier">args</span><span class="Other">:</span> <a href="z3nim.html#Asts"><span class="Identifier">Asts</span></a><span class="Other">[</span><span class="Identifier">D</span><span class="Other">]</span><span class="Other">)</span><span class="Other">:</span> <a href="z3nim.html#Ast"><span class="Identifier">Ast</span></a><span class="Other">[</span><span class="Identifier">R</span><span class="Other">]</span></pre></dt>
+<a id="forall.t,Asts[V],Ast[S]"></a>
+<dt><pre><span class="Keyword">template</span> <a href="#forall.t%2CAsts%5BV%5D%2CAst%5BS%5D"><span class="Identifier">forall</span></a><span class="Other">[</span><span class="Identifier">V</span><span class="Other">;</span> <span class="Identifier">S</span><span class="Other">]</span><span class="Other">(</span><span class="Identifier">apps</span><span class="Other">:</span> <a href="z3nim.html#Asts"><span class="Identifier">Asts</span></a><span class="Other">[</span><span class="Identifier">V</span><span class="Other">]</span><span class="Other">;</span> <span class="Identifier">body</span><span class="Other">:</span> <a href="z3nim.html#Ast"><span class="Identifier">Ast</span></a><span class="Other">[</span><span class="Identifier">S</span><span class="Other">]</span><span class="Other">)</span><span class="Other">:</span> <a href="z3nim.html#Ast"><span class="Identifier">Ast</span></a><span class="Other">[</span><span class="Identifier">S</span><span class="Other">]</span></pre></dt>
 <dd>
 
 
 &nbsp;&nbsp;<a
-href="https://github.com/Double-oxygeN/z3nim/tree/master/src/z3nim.nim#L615"
+href="https://github.com/Double-oxygeN/z3nim/tree/master/src/z3nim.nim#L643"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/Double-oxygeN/z3nim/edit/devel/src/z3nim.nim#L615" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/Double-oxygeN/z3nim/edit/devel/src/z3nim.nim#L643" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<a id="forall.t,Asts[V],Ast[S]"></a>
-<dt><pre><span class="Keyword">template</span> <a href="#forall.t%2CAsts%5BV%5D%2CAst%5BS%5D"><span class="Identifier">forall</span></a><span class="Other">[</span><span class="Identifier">V</span><span class="Other">;</span> <span class="Identifier">S</span><span class="Other">]</span><span class="Other">(</span><span class="Identifier">apps</span><span class="Other">:</span> <a href="z3nim.html#Asts"><span class="Identifier">Asts</span></a><span class="Other">[</span><span class="Identifier">V</span><span class="Other">]</span><span class="Other">;</span> <span class="Identifier">body</span><span class="Other">:</span> <a href="z3nim.html#Ast"><span class="Identifier">Ast</span></a><span class="Other">[</span><span class="Identifier">S</span><span class="Other">]</span><span class="Other">)</span><span class="Other">:</span> <a href="z3nim.html#Ast"><span class="Identifier">Ast</span></a><span class="Other">[</span><span class="Identifier">S</span><span class="Other">]</span></pre></dt>
+<a id="exists.t,Asts[V],Ast[S]"></a>
+<dt><pre><span class="Keyword">template</span> <a href="#exists.t%2CAsts%5BV%5D%2CAst%5BS%5D"><span class="Identifier">exists</span></a><span class="Other">[</span><span class="Identifier">V</span><span class="Other">;</span> <span class="Identifier">S</span><span class="Other">]</span><span class="Other">(</span><span class="Identifier">apps</span><span class="Other">:</span> <a href="z3nim.html#Asts"><span class="Identifier">Asts</span></a><span class="Other">[</span><span class="Identifier">V</span><span class="Other">]</span><span class="Other">;</span> <span class="Identifier">body</span><span class="Other">:</span> <a href="z3nim.html#Ast"><span class="Identifier">Ast</span></a><span class="Other">[</span><span class="Identifier">S</span><span class="Other">]</span><span class="Other">)</span><span class="Other">:</span> <a href="z3nim.html#Ast"><span class="Identifier">Ast</span></a><span class="Other">[</span><span class="Identifier">S</span><span class="Other">]</span></pre></dt>
 <dd>
 
 
@@ -2428,26 +2439,15 @@ class="link-seesrc" target="_blank">Source</a>
 <a href="https://github.com/Double-oxygeN/z3nim/edit/devel/src/z3nim.nim#L646" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<a id="exists.t,Asts[V],Ast[S]"></a>
-<dt><pre><span class="Keyword">template</span> <a href="#exists.t%2CAsts%5BV%5D%2CAst%5BS%5D"><span class="Identifier">exists</span></a><span class="Other">[</span><span class="Identifier">V</span><span class="Other">;</span> <span class="Identifier">S</span><span class="Other">]</span><span class="Other">(</span><span class="Identifier">apps</span><span class="Other">:</span> <a href="z3nim.html#Asts"><span class="Identifier">Asts</span></a><span class="Other">[</span><span class="Identifier">V</span><span class="Other">]</span><span class="Other">;</span> <span class="Identifier">body</span><span class="Other">:</span> <a href="z3nim.html#Ast"><span class="Identifier">Ast</span></a><span class="Other">[</span><span class="Identifier">S</span><span class="Other">]</span><span class="Other">)</span><span class="Other">:</span> <a href="z3nim.html#Ast"><span class="Identifier">Ast</span></a><span class="Other">[</span><span class="Identifier">S</span><span class="Other">]</span></pre></dt>
-<dd>
-
-
-&nbsp;&nbsp;<a
-href="https://github.com/Double-oxygeN/z3nim/tree/master/src/z3nim.nim#L649"
-class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/Double-oxygeN/z3nim/edit/devel/src/z3nim.nim#L649" class="link-seesrc" target="_blank" >Edit</a>
-
-</dd>
 <a id="assert.t,Ast[BoolSort]"></a>
 <dt><pre><span class="Keyword">template</span> <a href="#assert.t%2CAst%5BBoolSort%5D"><span class="Identifier">assert</span></a><span class="Other">(</span><span class="Identifier">t</span><span class="Other">:</span> <a href="z3nim.html#Ast"><span class="Identifier">Ast</span></a><span class="Other">[</span><a href="z3nim.html#BoolSort"><span class="Identifier">BoolSort</span></a><span class="Other">]</span><span class="Other">)</span></pre></dt>
 <dd>
 
 Add an assertion.
 &nbsp;&nbsp;<a
-href="https://github.com/Double-oxygeN/z3nim/tree/master/src/z3nim.nim#L652"
+href="https://github.com/Double-oxygeN/z3nim/tree/master/src/z3nim.nim#L649"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/Double-oxygeN/z3nim/edit/devel/src/z3nim.nim#L652" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/Double-oxygeN/z3nim/edit/devel/src/z3nim.nim#L649" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <a id="check.t"></a>
@@ -2456,9 +2456,9 @@ class="link-seesrc" target="_blank">Source</a>
 
 Check if all assertions satisfy or not.
 &nbsp;&nbsp;<a
-href="https://github.com/Double-oxygeN/z3nim/tree/master/src/z3nim.nim#L656"
+href="https://github.com/Double-oxygeN/z3nim/tree/master/src/z3nim.nim#L653"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/Double-oxygeN/z3nim/edit/devel/src/z3nim.nim#L656" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/Double-oxygeN/z3nim/edit/devel/src/z3nim.nim#L653" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <a id="getModel.t"></a>
@@ -2467,9 +2467,9 @@ class="link-seesrc" target="_blank">Source</a>
 
 Get model. Do not call this procedure before calling <tt class="docutils literal"><span class="pre">check</span></tt>.
 &nbsp;&nbsp;<a
-href="https://github.com/Double-oxygeN/z3nim/tree/master/src/z3nim.nim#L661"
+href="https://github.com/Double-oxygeN/z3nim/tree/master/src/z3nim.nim#L658"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/Double-oxygeN/z3nim/edit/devel/src/z3nim.nim#L661" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/Double-oxygeN/z3nim/edit/devel/src/z3nim.nim#L658" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <a id="getAssertions.t"></a>
@@ -2478,9 +2478,9 @@ class="link-seesrc" target="_blank">Source</a>
 
 Get assertions.
 &nbsp;&nbsp;<a
-href="https://github.com/Double-oxygeN/z3nim/tree/master/src/z3nim.nim#L666"
+href="https://github.com/Double-oxygeN/z3nim/tree/master/src/z3nim.nim#L663"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/Double-oxygeN/z3nim/edit/devel/src/z3nim.nim#L666" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/Double-oxygeN/z3nim/edit/devel/src/z3nim.nim#L663" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <a id="getProof.t"></a>
@@ -2489,9 +2489,9 @@ class="link-seesrc" target="_blank">Source</a>
 
 Get proof for unsat. Do not call this procedure before calling <tt class="docutils literal"><span class="pre">check</span></tt>.
 &nbsp;&nbsp;<a
-href="https://github.com/Double-oxygeN/z3nim/tree/master/src/z3nim.nim#L670"
+href="https://github.com/Double-oxygeN/z3nim/tree/master/src/z3nim.nim#L667"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/Double-oxygeN/z3nim/edit/devel/src/z3nim.nim#L670" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/Double-oxygeN/z3nim/edit/devel/src/z3nim.nim#L667" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <a id="getReason.t"></a>
@@ -2500,13 +2500,24 @@ class="link-seesrc" target="_blank">Source</a>
 
 Get reason for <tt class="docutils literal"><span class="pre">undefined</span></tt>. Do not call this procedure before calling <tt class="docutils literal"><span class="pre">check</span></tt>.
 &nbsp;&nbsp;<a
-href="https://github.com/Double-oxygeN/z3nim/tree/master/src/z3nim.nim#L675"
+href="https://github.com/Double-oxygeN/z3nim/tree/master/src/z3nim.nim#L672"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/Double-oxygeN/z3nim/edit/devel/src/z3nim.nim#L675" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/Double-oxygeN/z3nim/edit/devel/src/z3nim.nim#L672" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <a id="$.t,Sort[S]"></a>
 <dt><pre><span class="Keyword">template</span> <a href="#%24.t%2CSort%5BS%5D"><span class="Identifier">`$`</span></a><span class="Other">[</span><span class="Identifier">S</span><span class="Other">]</span><span class="Other">(</span><span class="Identifier">sort</span><span class="Other">:</span> <a href="z3nim.html#Sort"><span class="Identifier">Sort</span></a><span class="Other">[</span><span class="Identifier">S</span><span class="Other">]</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">string</span></pre></dt>
+<dd>
+
+
+&nbsp;&nbsp;<a
+href="https://github.com/Double-oxygeN/z3nim/tree/master/src/z3nim.nim#L677"
+class="link-seesrc" target="_blank">Source</a>
+<a href="https://github.com/Double-oxygeN/z3nim/edit/devel/src/z3nim.nim#L677" class="link-seesrc" target="_blank" >Edit</a>
+
+</dd>
+<a id="$.t,Sorts[S]"></a>
+<dt><pre><span class="Keyword">template</span> <a href="#%24.t%2CSorts%5BS%5D"><span class="Identifier">`$`</span></a><span class="Other">[</span><span class="Identifier">S</span><span class="Other">]</span><span class="Other">(</span><span class="Identifier">sorts</span><span class="Other">:</span> <a href="z3nim.html#Sorts"><span class="Identifier">Sorts</span></a><span class="Other">[</span><span class="Identifier">S</span><span class="Other">]</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">string</span></pre></dt>
 <dd>
 
 
@@ -2516,19 +2527,19 @@ class="link-seesrc" target="_blank">Source</a>
 <a href="https://github.com/Double-oxygeN/z3nim/edit/devel/src/z3nim.nim#L680" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<a id="$.t,Sorts[S]"></a>
-<dt><pre><span class="Keyword">template</span> <a href="#%24.t%2CSorts%5BS%5D"><span class="Identifier">`$`</span></a><span class="Other">[</span><span class="Identifier">S</span><span class="Other">]</span><span class="Other">(</span><span class="Identifier">sorts</span><span class="Other">:</span> <a href="z3nim.html#Sorts"><span class="Identifier">Sorts</span></a><span class="Other">[</span><span class="Identifier">S</span><span class="Other">]</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">string</span></pre></dt>
+<a id="$.t,Ast[S]"></a>
+<dt><pre><span class="Keyword">template</span> <a href="#%24.t%2CAst%5BS%5D"><span class="Identifier">`$`</span></a><span class="Other">[</span><span class="Identifier">S</span><span class="Other">]</span><span class="Other">(</span><span class="Identifier">ast</span><span class="Other">:</span> <a href="z3nim.html#Ast"><span class="Identifier">Ast</span></a><span class="Other">[</span><span class="Identifier">S</span><span class="Other">]</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">string</span></pre></dt>
 <dd>
 
 
 &nbsp;&nbsp;<a
-href="https://github.com/Double-oxygeN/z3nim/tree/master/src/z3nim.nim#L683"
+href="https://github.com/Double-oxygeN/z3nim/tree/master/src/z3nim.nim#L694"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/Double-oxygeN/z3nim/edit/devel/src/z3nim.nim#L683" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/Double-oxygeN/z3nim/edit/devel/src/z3nim.nim#L694" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<a id="$.t,Ast[S]"></a>
-<dt><pre><span class="Keyword">template</span> <a href="#%24.t%2CAst%5BS%5D"><span class="Identifier">`$`</span></a><span class="Other">[</span><span class="Identifier">S</span><span class="Other">]</span><span class="Other">(</span><span class="Identifier">ast</span><span class="Other">:</span> <a href="z3nim.html#Ast"><span class="Identifier">Ast</span></a><span class="Other">[</span><span class="Identifier">S</span><span class="Other">]</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">string</span></pre></dt>
+<a id="$.t,Asts[S]"></a>
+<dt><pre><span class="Keyword">template</span> <a href="#%24.t%2CAsts%5BS%5D"><span class="Identifier">`$`</span></a><span class="Other">[</span><span class="Identifier">S</span><span class="Other">]</span><span class="Other">(</span><span class="Identifier">asts</span><span class="Other">:</span> <a href="z3nim.html#Asts"><span class="Identifier">Asts</span></a><span class="Other">[</span><span class="Identifier">S</span><span class="Other">]</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">string</span></pre></dt>
 <dd>
 
 
@@ -2538,19 +2549,19 @@ class="link-seesrc" target="_blank">Source</a>
 <a href="https://github.com/Double-oxygeN/z3nim/edit/devel/src/z3nim.nim#L697" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<a id="$.t,Asts[S]"></a>
-<dt><pre><span class="Keyword">template</span> <a href="#%24.t%2CAsts%5BS%5D"><span class="Identifier">`$`</span></a><span class="Other">[</span><span class="Identifier">S</span><span class="Other">]</span><span class="Other">(</span><span class="Identifier">asts</span><span class="Other">:</span> <a href="z3nim.html#Asts"><span class="Identifier">Asts</span></a><span class="Other">[</span><span class="Identifier">S</span><span class="Other">]</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">string</span></pre></dt>
+<a id="$.t,Model"></a>
+<dt><pre><span class="Keyword">template</span> <a href="#%24.t%2CModel"><span class="Identifier">`$`</span></a><span class="Other">(</span><span class="Identifier">model</span><span class="Other">:</span> <a href="z3nim.html#Model"><span class="Identifier">Model</span></a><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">string</span></pre></dt>
 <dd>
 
 
 &nbsp;&nbsp;<a
-href="https://github.com/Double-oxygeN/z3nim/tree/master/src/z3nim.nim#L700"
+href="https://github.com/Double-oxygeN/z3nim/tree/master/src/z3nim.nim#L711"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/Double-oxygeN/z3nim/edit/devel/src/z3nim.nim#L700" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/Double-oxygeN/z3nim/edit/devel/src/z3nim.nim#L711" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<a id="$.t,Model"></a>
-<dt><pre><span class="Keyword">template</span> <a href="#%24.t%2CModel"><span class="Identifier">`$`</span></a><span class="Other">(</span><span class="Identifier">model</span><span class="Other">:</span> <a href="z3nim.html#Model"><span class="Identifier">Model</span></a><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">string</span></pre></dt>
+<a id="$.t,FuncDecl[D,R]"></a>
+<dt><pre><span class="Keyword">template</span> <a href="#%24.t%2CFuncDecl%5BD%2CR%5D"><span class="Identifier">`$`</span></a><span class="Other">[</span><span class="Identifier">D</span><span class="Other">;</span> <span class="Identifier">R</span><span class="Other">]</span><span class="Other">(</span><span class="Identifier">fn</span><span class="Other">:</span> <a href="z3nim.html#FuncDecl"><span class="Identifier">FuncDecl</span></a><span class="Other">[</span><span class="Identifier">D</span><span class="Other">,</span> <span class="Identifier">R</span><span class="Other">]</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">string</span></pre></dt>
 <dd>
 
 
@@ -2560,8 +2571,8 @@ class="link-seesrc" target="_blank">Source</a>
 <a href="https://github.com/Double-oxygeN/z3nim/edit/devel/src/z3nim.nim#L714" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<a id="$.t,FuncDecl[D,R]"></a>
-<dt><pre><span class="Keyword">template</span> <a href="#%24.t%2CFuncDecl%5BD%2CR%5D"><span class="Identifier">`$`</span></a><span class="Other">[</span><span class="Identifier">D</span><span class="Other">;</span> <span class="Identifier">R</span><span class="Other">]</span><span class="Other">(</span><span class="Identifier">fn</span><span class="Other">:</span> <a href="z3nim.html#FuncDecl"><span class="Identifier">FuncDecl</span></a><span class="Other">[</span><span class="Identifier">D</span><span class="Other">,</span> <span class="Identifier">R</span><span class="Other">]</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">string</span></pre></dt>
+<a id="$.t,AstVector"></a>
+<dt><pre><span class="Keyword">template</span> <a href="#%24.t%2CAstVector"><span class="Identifier">`$`</span></a><span class="Other">(</span><span class="Identifier">astvec</span><span class="Other">:</span> <a href="z3nim.html#AstVector"><span class="Identifier">AstVector</span></a><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">string</span></pre></dt>
 <dd>
 
 
@@ -2571,8 +2582,8 @@ class="link-seesrc" target="_blank">Source</a>
 <a href="https://github.com/Double-oxygeN/z3nim/edit/devel/src/z3nim.nim#L717" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<a id="$.t,AstVector"></a>
-<dt><pre><span class="Keyword">template</span> <a href="#%24.t%2CAstVector"><span class="Identifier">`$`</span></a><span class="Other">(</span><span class="Identifier">astvec</span><span class="Other">:</span> <a href="z3nim.html#AstVector"><span class="Identifier">AstVector</span></a><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">string</span></pre></dt>
+<a id="len.t,AstVector"></a>
+<dt><pre><span class="Keyword">template</span> <a href="#len.t%2CAstVector"><span class="Identifier">len</span></a><span class="Other">(</span><span class="Identifier">astvec</span><span class="Other">:</span> <a href="z3nim.html#AstVector"><span class="Identifier">AstVector</span></a><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">int</span></pre></dt>
 <dd>
 
 
@@ -2582,8 +2593,8 @@ class="link-seesrc" target="_blank">Source</a>
 <a href="https://github.com/Double-oxygeN/z3nim/edit/devel/src/z3nim.nim#L720" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<a id="len.t,AstVector"></a>
-<dt><pre><span class="Keyword">template</span> <a href="#len.t%2CAstVector"><span class="Identifier">len</span></a><span class="Other">(</span><span class="Identifier">astvec</span><span class="Other">:</span> <a href="z3nim.html#AstVector"><span class="Identifier">AstVector</span></a><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">int</span></pre></dt>
+<a id="===.t,Ast[S],Ast[S]"></a>
+<dt><pre><span class="Keyword">template</span> <a href="#%3D%3D%3D.t%2CAst%5BS%5D%2CAst%5BS%5D"><span class="Identifier">`===`</span></a><span class="Other">[</span><span class="Identifier">S</span><span class="Other">]</span><span class="Other">(</span><span class="Identifier">t1</span><span class="Other">,</span> <span class="Identifier">t2</span><span class="Other">:</span> <a href="z3nim.html#Ast"><span class="Identifier">Ast</span></a><span class="Other">[</span><span class="Identifier">S</span><span class="Other">]</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">bool</span></pre></dt>
 <dd>
 
 
@@ -2593,8 +2604,8 @@ class="link-seesrc" target="_blank">Source</a>
 <a href="https://github.com/Double-oxygeN/z3nim/edit/devel/src/z3nim.nim#L723" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<a id="===.t,Ast[S],Ast[S]"></a>
-<dt><pre><span class="Keyword">template</span> <a href="#%3D%3D%3D.t%2CAst%5BS%5D%2CAst%5BS%5D"><span class="Identifier">`===`</span></a><span class="Other">[</span><span class="Identifier">S</span><span class="Other">]</span><span class="Other">(</span><span class="Identifier">t1</span><span class="Other">,</span> <span class="Identifier">t2</span><span class="Other">:</span> <a href="z3nim.html#Ast"><span class="Identifier">Ast</span></a><span class="Other">[</span><span class="Identifier">S</span><span class="Other">]</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">bool</span></pre></dt>
+<a id="==.t,Sort[S],Sort[S]"></a>
+<dt><pre><span class="Keyword">template</span> <a href="#%3D%3D.t%2CSort%5BS%5D%2CSort%5BS%5D"><span class="Identifier">`==`</span></a><span class="Other">[</span><span class="Identifier">S</span><span class="Other">]</span><span class="Other">(</span><span class="Identifier">s1</span><span class="Other">,</span> <span class="Identifier">s2</span><span class="Other">:</span> <a href="z3nim.html#Sort"><span class="Identifier">Sort</span></a><span class="Other">[</span><span class="Identifier">S</span><span class="Other">]</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">bool</span></pre></dt>
 <dd>
 
 
@@ -2604,8 +2615,8 @@ class="link-seesrc" target="_blank">Source</a>
 <a href="https://github.com/Double-oxygeN/z3nim/edit/devel/src/z3nim.nim#L726" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<a id="==.t,Sort[S],Sort[S]"></a>
-<dt><pre><span class="Keyword">template</span> <a href="#%3D%3D.t%2CSort%5BS%5D%2CSort%5BS%5D"><span class="Identifier">`==`</span></a><span class="Other">[</span><span class="Identifier">S</span><span class="Other">]</span><span class="Other">(</span><span class="Identifier">s1</span><span class="Other">,</span> <span class="Identifier">s2</span><span class="Other">:</span> <a href="z3nim.html#Sort"><span class="Identifier">Sort</span></a><span class="Other">[</span><span class="Identifier">S</span><span class="Other">]</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">bool</span></pre></dt>
+<a id="==.t,FuncDecl[D,R],FuncDecl[D,R]"></a>
+<dt><pre><span class="Keyword">template</span> <a href="#%3D%3D.t%2CFuncDecl%5BD%2CR%5D%2CFuncDecl%5BD%2CR%5D"><span class="Identifier">`==`</span></a><span class="Other">[</span><span class="Identifier">D</span><span class="Other">;</span> <span class="Identifier">R</span><span class="Other">]</span><span class="Other">(</span><span class="Identifier">f1</span><span class="Other">,</span> <span class="Identifier">f2</span><span class="Other">:</span> <a href="z3nim.html#FuncDecl"><span class="Identifier">FuncDecl</span></a><span class="Other">[</span><span class="Identifier">D</span><span class="Other">,</span> <span class="Identifier">R</span><span class="Other">]</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">bool</span></pre></dt>
 <dd>
 
 
@@ -2615,8 +2626,8 @@ class="link-seesrc" target="_blank">Source</a>
 <a href="https://github.com/Double-oxygeN/z3nim/edit/devel/src/z3nim.nim#L729" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<a id="==.t,FuncDecl[D,R],FuncDecl[D,R]"></a>
-<dt><pre><span class="Keyword">template</span> <a href="#%3D%3D.t%2CFuncDecl%5BD%2CR%5D%2CFuncDecl%5BD%2CR%5D"><span class="Identifier">`==`</span></a><span class="Other">[</span><span class="Identifier">D</span><span class="Other">;</span> <span class="Identifier">R</span><span class="Other">]</span><span class="Other">(</span><span class="Identifier">f1</span><span class="Other">,</span> <span class="Identifier">f2</span><span class="Other">:</span> <a href="z3nim.html#FuncDecl"><span class="Identifier">FuncDecl</span></a><span class="Other">[</span><span class="Identifier">D</span><span class="Other">,</span> <span class="Identifier">R</span><span class="Other">]</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">bool</span></pre></dt>
+<a id="hash.t,Ast[S]"></a>
+<dt><pre><span class="Keyword">template</span> <a href="#hash.t%2CAst%5BS%5D"><span class="Identifier">hash</span></a><span class="Other">[</span><span class="Identifier">S</span><span class="Other">]</span><span class="Other">(</span><span class="Identifier">a</span><span class="Other">:</span> <a href="z3nim.html#Ast"><span class="Identifier">Ast</span></a><span class="Other">[</span><span class="Identifier">S</span><span class="Other">]</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">Hash</span></pre></dt>
 <dd>
 
 
@@ -2624,17 +2635,6 @@ class="link-seesrc" target="_blank">Source</a>
 href="https://github.com/Double-oxygeN/z3nim/tree/master/src/z3nim.nim#L732"
 class="link-seesrc" target="_blank">Source</a>
 <a href="https://github.com/Double-oxygeN/z3nim/edit/devel/src/z3nim.nim#L732" class="link-seesrc" target="_blank" >Edit</a>
-
-</dd>
-<a id="hash.t,Ast[S]"></a>
-<dt><pre><span class="Keyword">template</span> <a href="#hash.t%2CAst%5BS%5D"><span class="Identifier">hash</span></a><span class="Other">[</span><span class="Identifier">S</span><span class="Other">]</span><span class="Other">(</span><span class="Identifier">a</span><span class="Other">:</span> <a href="z3nim.html#Ast"><span class="Identifier">Ast</span></a><span class="Other">[</span><span class="Identifier">S</span><span class="Other">]</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">Hash</span></pre></dt>
-<dd>
-
-
-&nbsp;&nbsp;<a
-href="https://github.com/Double-oxygeN/z3nim/tree/master/src/z3nim.nim#L735"
-class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/Double-oxygeN/z3nim/edit/devel/src/z3nim.nim#L735" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 
@@ -2647,7 +2647,7 @@ class="link-seesrc" target="_blank">Source</a>
       <div class="twelve-columns footer">
         <span class="nim-sprite"></span>
         <br/>
-        <small>Made with Nim. Generated: 2019-08-30 08:10:38 UTC</small>
+        <small>Made with Nim. Generated: 2019-09-01 05:34:54 UTC</small>
       </div>
     </div>
   </div>

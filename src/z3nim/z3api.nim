@@ -377,6 +377,7 @@ proc Z3_is_eq_sort*(c: Z3_context; s1, s2: Z3_sort): bool {.libz3.}
 proc Z3_is_eq_func_decl*(c: Z3_context; f1, f2: Z3_func_decl): bool {.libz3.}
 proc Z3_is_eq_ast*(c: Z3_context; t1, t2: Z3_ast): bool {.libz3.}
 proc Z3_get_ast_hash*(c: Z3_context; a: Z3_ast): cuint {.libz3.}
+proc Z3_get_sort*(c: Z3_context; a: Z3_ast): Z3_sort {.libz3.}
 proc Z3_is_app*(c: Z3_context; a: Z3_ast): bool {.libz3.}
 proc Z3_to_app*(c: Z3_context; a: Z3_ast): Z3_app {.libz3.}
 proc Z3_simplify*(c: Z3_context; a: Z3_ast): Z3_ast {.libz3.}

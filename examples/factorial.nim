@@ -5,7 +5,7 @@ z3:
     x = declConst(0, IntSort)
     a = declConst(1, IntSort)
 
-    f = defRecursiveFunc("f", params(IntSort, IntSort), IntSort, params(x, a)):
+    f = defRecursiveFunc("f", params(x, a), IntSort):
       ite(x <= 0, a, recur.apply(params(x - 1, a * x)))
 
     n = declConst(3, IntSort)
