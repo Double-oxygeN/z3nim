@@ -545,6 +545,67 @@ proc Z3_ast_vector_to_string*(c: Z3_context; v: Z3_ast_vector): Z3_string {.libz
 # Floating-Point Arithmetic
 # =========================
 
+proc Z3_mk_fpa_rounding_mode_sort*(c: Z3_context): Z3_sort {.libz3.}
+proc Z3_mk_fpa_round_nearest_ties_to_even*(c: Z3_context): Z3_ast {.libz3.}
+proc Z3_mk_fpa_rne*(c: Z3_context): Z3_ast {.libz3.}
+proc Z3_mk_fpa_round_nearest_ties_to_away*(c: Z3_context): Z3_ast {.libz3.}
+proc Z3_mk_fpa_rna*(c: Z3_context): Z3_ast {.libz3.}
+proc Z3_mk_fpa_round_toward_positive*(c: Z3_context): Z3_ast {.libz3.}
+proc Z3_mk_fpa_rtp*(c: Z3_context): Z3_ast {.libz3.}
+proc Z3_mk_fpa_round_toward_negative*(c: Z3_context): Z3_ast {.libz3.}
+proc Z3_mk_fpa_rtn*(c: Z3_context): Z3_ast {.libz3.}
+proc Z3_mk_fpa_round_toward_zero*(c: Z3_context): Z3_ast {.libz3.}
+proc Z3_mk_fpa_rtz*(c: Z3_context): Z3_ast {.libz3.}
+proc Z3_mk_fpa_sort*(c: Z3_context; ebits, sbits: cuint): Z3_sort {.libz3.}
+proc Z3_mk_fpa_sort_half*(c: Z3_context): Z3_sort {.libz3.}
+proc Z3_mk_fpa_sort_16*(c: Z3_context): Z3_sort {.libz3.}
+proc Z3_mk_fpa_sort_single*(c: Z3_context): Z3_sort {.libz3.}
+proc Z3_mk_fpa_sort_32*(c: Z3_context): Z3_sort {.libz3.}
+proc Z3_mk_fpa_sort_double*(c: Z3_context): Z3_sort {.libz3.}
+proc Z3_mk_fpa_sort_64*(c: Z3_context): Z3_sort {.libz3.}
+proc Z3_mk_fpa_sort_quadruple*(c: Z3_context): Z3_sort {.libz3.}
+proc Z3_mk_fpa_sort_128*(c: Z3_context): Z3_sort {.libz3.}
+proc Z3_mk_fpa_nan*(c: Z3_context; s: Z3_sort): Z3_ast {.libz3.}
+proc Z3_mk_fpa_inf*(c: Z3_context; s: Z3_sort; negative: bool): Z3_ast {.libz3.}
+proc Z3_mk_fpa_zero*(c: Z3_context; s: Z3_sort; negative: bool): Z3_ast {.libz3.}
+proc Z3_mk_fpa_fp*(c: Z3_context; sgn, exp, sig: Z3_ast): Z3_ast {.libz3.}
+proc Z3_mk_fpa_numeral_float*(c: Z3_context; v: cfloat; ty: Z3_sort): Z3_ast {.libz3.}
+proc Z3_mk_fpa_numeral_double*(c: Z3_context; v: cdouble; ty: Z3_sort): Z3_ast {.libz3.}
+proc Z3_mk_fpa_numeral_int*(c: Z3_context; v: cint; ty: Z3_sort): Z3_ast {.libz3.}
+proc Z3_mk_fpa_numeral_int_uint*(c: Z3_context; sgn: bool, exp: cint; sig: cuint; ty: Z3_sort): Z3_ast {.libz3.}
+proc Z3_mk_fpa_numeral_int64_uint64*(c: Z3_context; sgn: bool, exp: int64; sig: uint64; ty: Z3_sort): Z3_ast {.libz3.}
+proc Z3_mk_fpa_abs*(c: Z3_context; t: Z3_ast): Z3_ast {.libz3.}
+proc Z3_mk_fpa_neg*(c: Z3_context; t: Z3_ast): Z3_ast {.libz3.}
+proc Z3_mk_fpa_add*(c: Z3_context; rm, t1, t2: Z3_ast): Z3_ast {.libz3.}
+proc Z3_mk_fpa_sub*(c: Z3_context; rm, t1, t2: Z3_ast): Z3_ast {.libz3.}
+proc Z3_mk_fpa_mul*(c: Z3_context; rm, t1, t2: Z3_ast): Z3_ast {.libz3.}
+proc Z3_mk_fpa_div*(c: Z3_context; rm, t1, t2: Z3_ast): Z3_ast {.libz3.}
+proc Z3_mk_fpa_fma*(c: Z3_context; rm, t1, t2, t3: Z3_ast): Z3_ast {.libz3.}
+proc Z3_mk_fpa_sqrt*(c: Z3_context; rm, t: Z3_ast): Z3_ast {.libz3.}
+proc Z3_mk_fpa_rem*(c: Z3_context; t1, t2: Z3_ast): Z3_ast {.libz3.}
+proc Z3_mk_fpa_round_to_integral*(c: Z3_context; rm, t: Z3_ast): Z3_ast {.libz3.}
+proc Z3_mk_fpa_min*(c: Z3_context; t1, t2: Z3_ast): Z3_ast {.libz3.}
+proc Z3_mk_fpa_max*(c: Z3_context; t1, t2: Z3_ast): Z3_ast {.libz3.}
+proc Z3_mk_fpa_leq*(c: Z3_context; t1, t2: Z3_ast): Z3_ast {.libz3.}
+proc Z3_mk_fpa_lt*(c: Z3_context; t1, t2: Z3_ast): Z3_ast {.libz3.}
+proc Z3_mk_fpa_geq*(c: Z3_context; t1, t2: Z3_ast): Z3_ast {.libz3.}
+proc Z3_mk_fpa_gt*(c: Z3_context; t1, t2: Z3_ast): Z3_ast {.libz3.}
+proc Z3_mk_fpa_eq*(c: Z3_context; t1, t2: Z3_ast): Z3_ast {.libz3.}
+proc Z3_mk_fpa_is_normal*(c: Z3_context; t: Z3_ast): Z3_ast {.libz3.}
+proc Z3_mk_fpa_is_subnormal*(c: Z3_context; t: Z3_ast): Z3_ast {.libz3.}
+proc Z3_mk_fpa_is_zero*(c: Z3_context; t: Z3_ast): Z3_ast {.libz3.}
+proc Z3_mk_fpa_is_infinite*(c: Z3_context; t: Z3_ast): Z3_ast {.libz3.}
+proc Z3_mk_fpa_is_nan*(c: Z3_context; t: Z3_ast): Z3_ast {.libz3.}
+proc Z3_mk_fpa_is_negative*(c: Z3_context; t: Z3_ast): Z3_ast {.libz3.}
+proc Z3_mk_fpa_is_positive*(c: Z3_context; t: Z3_ast): Z3_ast {.libz3.}
+proc Z3_mk_fpa_to_fp_bv*(c: Z3_context; bv: Z3_ast; s: Z3_sort): Z3_ast {.libz3.}
+proc Z3_mk_fpa_to_fp_float*(c: Z3_context; rm, t: Z3_ast; s: Z3_sort): Z3_ast {.libz3.}
+proc Z3_mk_fpa_to_fp_real*(c: Z3_context; rm, t: Z3_ast; s: Z3_sort): Z3_ast {.libz3.}
+proc Z3_mk_fpa_to_fp_signed*(c: Z3_context; rm, t: Z3_ast; s: Z3_sort): Z3_ast {.libz3.}
+proc Z3_mk_fpa_to_fp_unsigned*(c: Z3_context; rm, t: Z3_ast; s: Z3_sort): Z3_ast {.libz3.}
+proc Z3_mk_fpa_to_ubv*(c: Z3_context; rm, t: Z3_ast; sz: cuint): Z3_ast {.libz3.}
+proc Z3_mk_fpa_to_sbv*(c: Z3_context; rm, t: Z3_ast; sz: cuint): Z3_ast {.libz3.}
+proc Z3_mk_fpa_to_real*(c: Z3_context; t: Z3_ast): Z3_ast {.libz3.}
 
 # Z3-specific floating-point extensions
 # =====================================

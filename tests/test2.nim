@@ -32,9 +32,12 @@ suite "Library":
 
       check check() == sat
 
-      echo getModel()
+      let model = getModel()
 
-      echo getAssertions()
+      echo model.eval(x1).toFloat()
+      echo model.eval(x2).toFloat()
+      echo model.eval(x3).toFloat()
+      echo model.eval(x4).toFloat()
 
   test "Contamination-free":
     z3:
@@ -73,6 +76,30 @@ suite "Library":
 
       check getAssertions().len == 1
 
+  test "floating-point number":
+    z3:
+      const
+        sumXY = 0b0_10000001_10111000_00000000_0000000'f32
+        diffXY = 0b0_10000000_10110000_00000000_0000000'f32
+      let
+        x = declConst("x", Float32Sort)
+        y = declConst("y", Float32Sort)
+        z = declConst("z", Float64Sort)
+
+      assert x + y == toFloat32Ast(sumXY)
+      assert x - y == toFloat32Ast(diffXY)
+      assert z.isNaN()
+
+      check check() == sat
+      let model = getModel()
+
+      echo "x -> ", model.eval(x)
+      echo "y -> ", model.eval(y)
+      check model.eval((x + y).toReal()).toFloat() == sumXY
+      check model.eval((x - y).toReal()).toFloat() == diffXY
+
+      echo "z -> ", model.eval(z)
+
   test "timeout":
     z3:
       # negation of Goldbach's conjecture (one of unsolved problems)
@@ -89,9 +116,9 @@ suite "Library":
       assert forall(params(y, z, wy, wz), (((1 < wy and wy < y) ==> (y mod wy != 0)) and ((1 < wz and wz < z) ==> (z mod wz != 0))) ==> (x != y + z))
 
       z3block:
-        setTimeout(3_000'u)
+        setTimeout(1_000'u)
         check check() == undefined
-        check getReason() == "canceled"
+        check getReason() in ["canceled", "timeout"]
 
   test "recursive function":
     z3:

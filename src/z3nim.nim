@@ -14,20 +14,34 @@ import macros except params
 
 type
   Version* = object
+    ## Z3 Version.
     major, minor, build, revision: uint
 
   CheckResult* = enum
+    ## Result of ``check()``.
     unsat = -1, undefined, sat
+
+  RoundingMode* = enum
+    ## IEEE 754 rounding mode.
+    nearestTiesToEven
+    nearestTiesToAway
+    towardPositive
+    towardNegative
+    towardZero
 
   BoolSort* = object
   IntSort* = object
   RealSort* = object
+  Float32Sort* = object
+  Float64Sort* = object
   BitVecSort*[N: static uint] = object
   ArraySort*[D, R] = object
   SetSort*[T] = object
+  RoundingModeSort* = object
   UnknownSort* = object
 
   NumericSort* = IntSort | RealSort
+  FloatSort* = Float32Sort | Float64Sort
 
   Pair[T1, T2] = object
 
@@ -95,6 +109,8 @@ template z3*(body: untyped): untyped =
     let solverParams {.inject, used.} = Z3MkParams(ctx)
     Z3ParamsIncRef(ctx, solverParams)
 
+    let roundingModeAst {.inject, used.} = Z3MkFpaRoundNearestTiesToEven(ctx)
+
     Z3SetErrorHandler(ctx) do (c: Z3Context; e: Z3ErrorCode):
       let errorMessage = $Z3GetErrorMsg(c, e)
       raise newException(Z3Exception, errorMessage)
@@ -137,9 +153,19 @@ template setZeroAccuracy*(k: uint) =
   let sym = Z3MkStringSymbol(ctx, "zero_accuracy")
   Z3ParamsSetUint(ctx, solverParams, sym, cuint(k))
 
+template setRoundingMode*(rm: RoundingMode) =
+  roundingModeAst = case rm
+    of nearestTiesToEven: Z3MkFpaRoundNearestTiesToEven(ctx)
+    of nearestTiesToAway: Z3MkFpaRoundNearestTiesToAway(ctx)
+    of towardPositive: Z3MkFpaRoundTowardPositive(ctx)
+    of towardNegative: Z3MkFpaRoundTowardNegative(ctx)
+    of towardZero: Z3MkFpaRoundTowardZero(ctx)
+
 proc mkSort(ctx: Z3Context; s: typedesc[BoolSort]): Z3Sort = ctx.Z3MkBoolSort()
 proc mkSort(ctx: Z3Context; s: typedesc[IntSort]): Z3Sort = ctx.Z3MkIntSort()
 proc mkSort(ctx: Z3Context; s: typedesc[RealSort]): Z3Sort = ctx.Z3MkRealSort()
+proc mkSort(ctx: Z3Context; s: typedesc[Float32Sort]): Z3Sort = ctx.Z3MkFpaSort32()
+proc mkSort(ctx: Z3Context; s: typedesc[Float64Sort]): Z3Sort = ctx.Z3MkFpaSort64()
 proc mkSort[N: static uint](ctx: Z3Context; s: typedesc[BitVecSort[N]]): Z3Sort = ctx.Z3MkBvSort(N.cuint)
 proc mkSort[D, R](ctx: Z3Context; s: typedesc[ArraySort[D, R]]): Z3Sort = ctx.Z3MkArraySort(mkSort(ctx, D), mkSort(ctx, R))
 proc mkSort[T](ctx: Z3Context; s: typedesc[SetSort[T]]): Z3Sort = ctx.Z3MkSetSort(mkSort(ctx, T))
@@ -349,6 +375,15 @@ template toAst*(r: float): Ast[RealSort] =
   Ast[RealSort](Z3MkNumeral(ctx, $r, Z3MkRealSort(ctx)))
 
 
+template toFloat32Ast*(f: float32): Ast[Float32Sort] =
+  ## Convert from a float value to Z3 AST with a 32-bit float sort.
+  Ast[Float32Sort](Z3MkFpaNumeralFloat(ctx, f, Z3MkFpaSort32(ctx)))
+
+template toFloat64Ast*(f: float64): Ast[Float64Sort] =
+  ## Convert from a float value to Z3 AST with a 64-bit float sort.
+  Ast[Float64Sort](Z3MkFpaNumeralDouble(ctx, f, Z3MkFpaSort64(ctx)))
+
+
 template `not`*(arg: Ast[BoolSort]): Ast[BoolSort] =
   Ast[BoolSort](Z3MkNot(ctx, Z3Ast(arg)))
 
@@ -406,7 +441,7 @@ template `xor`*(arg1: bool; arg2: Ast[BoolSort]): Ast[BoolSort] =
 
 template `xor`*(arg1: Ast[BoolSort]; arg2: bool): Ast[BoolSort] = arg2 xor arg1
 
-template `==`*[S](arg1, arg2: Ast[S]): Ast[BoolSort] =
+template `==`*[S: not FloatSort](arg1, arg2: Ast[S]): Ast[BoolSort] =
   when S is BoolSort:
     Ast[BoolSort](Z3MkIff(ctx, Z3Ast(arg1), Z3Ast(arg2)))
   else:
@@ -429,6 +464,9 @@ template `==`*(arg1: float; arg2: Ast[RealSort]): Ast[BoolSort] =
 
 template `==`*(arg1: Ast[RealSort]; arg2: float): Ast[BoolSort] =
   arg1 == toAst(arg2)
+
+template `==`*[S: FloatSort](arg1, arg2: Ast[S]): Ast[BoolSort] =
+  Ast[BoolSort](Z3MkFpaEq(ctx, Z3Ast(arg1), Z3Ast(arg2)))
 
 template distinc*[S](args: varargs[Ast[S], toAst]): Ast[BoolSort] =
   var
@@ -459,7 +497,7 @@ template ite*[S](arg1: Ast[BoolSort]; arg2, arg3: Ast[S]): Ast[S] =
 template ite*[S](arg1: bool; arg2, arg3: Ast[S]): Ast[S] =
   if arg1: arg2 else: arg3
 
-template astAdd*[S: NumericSort](args: varargs[Ast[S], toAst]): Ast[S] =
+template numAdd*[S: NumericSort](args: varargs[Ast[S], toAst]): Ast[S] =
   var
     argsPtr = alloc(len(args) * sizeof(Z3Ast))
     argsArr = cast[carray[Z3Ast]](argsPtr)
@@ -474,24 +512,27 @@ template astAdd*[S: NumericSort](args: varargs[Ast[S], toAst]): Ast[S] =
   a
 
 template `+`*(arg1, arg2: Ast[IntSort]): Ast[IntSort] =
-  astAdd(arg1, arg2)
+  numAdd(arg1, arg2)
 
 template `+`*(arg1: Ast[IntSort]; arg2: int): Ast[IntSort] =
-  astAdd(arg1, arg2)
+  numAdd(arg1, arg2)
 
 template `+`*(arg1: int; arg2: Ast[IntSort]): Ast[IntSort] =
-  astAdd(arg1, arg2)
+  numAdd(arg1, arg2)
 
 template `+`*(arg1, arg2: Ast[RealSort]): Ast[RealSort] =
-  astAdd(arg1, arg2)
+  numAdd(arg1, arg2)
 
 template `+`*(arg1: Ast[RealSort]; arg2: float): Ast[RealSort] =
-  astAdd(arg1, arg2)
+  numAdd(arg1, arg2)
 
 template `+`*(arg1: float; arg2: Ast[RealSort]): Ast[RealSort] =
-  astAdd(arg1, arg2)
+  numAdd(arg1, arg2)
 
-template astMul*[S: NumericSort](args: varargs[Ast[S], toAst]): Ast[S] =
+template `+`*[S: FloatSort](arg1, arg2: Ast[S]): Ast[S] =
+  Ast[S](Z3MkFpaAdd(ctx, roundingModeAst, Z3Ast(arg1), Z3Ast(arg2)))
+
+template numMul*[S: NumericSort](args: varargs[Ast[S], toAst]): Ast[S] =
   var
     argsPtr = alloc(len(args) * sizeof(Z3Ast))
     argsArr = cast[carray[Z3Ast]](argsPtr)
@@ -506,25 +547,31 @@ template astMul*[S: NumericSort](args: varargs[Ast[S], toAst]): Ast[S] =
   a
 
 template `*`*(arg1, arg2: Ast[IntSort]): Ast[IntSort] =
-  astMul(arg1, arg2)
+  numMul(arg1, arg2)
 
 template `*`*(arg1: Ast[IntSort]; arg2: int): Ast[IntSort] =
-  astMul(arg1, arg2)
+  numMul(arg1, arg2)
 
 template `*`*(arg1: int; arg2: Ast[IntSort]): Ast[IntSort] =
-  astMul(arg1, arg2)
+  numMul(arg1, arg2)
 
 template `*`*(arg1, arg2: Ast[RealSort]): Ast[RealSort] =
-  astMul(arg1, arg2)
+  numMul(arg1, arg2)
 
 template `*`*(arg1: Ast[RealSort]; arg2: float): Ast[RealSort] =
-  astMul(arg1, arg2)
+  numMul(arg1, arg2)
 
 template `*`*(arg1: float; arg2: Ast[RealSort]): Ast[RealSort] =
-  astMul(arg1, arg2)
+  numMul(arg1, arg2)
+
+template `-`*[S: FloatSort](arg1, arg2: Ast[S]): Ast[S] =
+  Ast[S](Z3MkFpaMul(ctx, roundingModeAst, Z3Ast(arg1), Z3Ast(arg2)))
 
 template `-`*[S: NumericSort](arg: Ast[S]): Ast[S] =
   Ast[S](Z3MkUnaryMinus(ctx, Z3Ast(arg)))
+
+template `-`*[S: FloatSort](arg: Ast[S]): Ast[S] =
+  Ast[S](Z3MkFpaNeg(ctx, Z3Ast(arg)))
 
 template astSub*[S: NumericSort](args: varargs[Ast[S], toAst]): Ast[S] =
   var
@@ -558,6 +605,9 @@ template `-`*(arg1: Ast[RealSort]; arg2: float): Ast[RealSort] =
 template `-`*(arg1: float; arg2: Ast[RealSort]): Ast[RealSort] =
   astSub(arg1, arg2)
 
+template `-`*[S: FloatSort](arg1, arg2: Ast[S]): Ast[S] =
+  Ast[S](Z3MkFpaSub(ctx, roundingModeAst, Z3Ast(arg1), Z3Ast(arg2)))
+
 template `div`*(arg1, arg2: Ast[IntSort]): Ast[IntSort] =
   Ast[IntSort](Z3MkDiv(ctx, Z3Ast(arg1), Z3Ast(arg2)))
 
@@ -576,6 +626,9 @@ template `/`*(arg1: float; arg2: Ast[RealSort]): Ast[RealSort] =
 template `/`*(arg1: Ast[RealSort]; arg2: float): Ast[RealSort] =
   arg1 / toAst(arg2)
 
+template `/`*[S: FloatSort](arg1, arg2: Ast[S]): Ast[S] =
+  Ast[S](Z3MkFpaDiv(ctx, roundingModeAst, Z3Ast(arg1), Z3Ast(arg2)))
+
 template `mod`*(arg1, arg2: Ast[IntSort]): Ast[IntSort] =
   Ast[IntSort](Z3MkMod(ctx, Z3Ast(arg1), Z3Ast(arg2)))
 
@@ -584,6 +637,9 @@ template `mod`*(arg1: int; arg2: Ast[IntSort]): Ast[IntSort] =
 
 template `mod`*(arg1: Ast[IntSort]; arg2: int): Ast[IntSort] =
   arg1 mod toAst(arg2)
+
+template remainder*[S: FloatSort](arg1, arg2: Ast[S]): Ast[S] =
+  Ast[S](Z3MkFpaRem(ctx, roundingModeAst, Z3Ast(arg1), Z3Ast(arg2)))
 
 template `^`*[S: NumericSort](arg1, arg2: Ast[S]): Ast[S] =
   Ast[S](Z3MkPower(ctx, Z3Ast(arg1), Z3Ast(arg2)))
@@ -619,6 +675,9 @@ template `<`*(arg1: float; arg2: Ast[RealSort]): Ast[BoolSort] =
 template `<`*(arg1: Ast[RealSort]; arg2: float): Ast[BoolSort] =
   arg1 < toAst(arg2)
 
+template `<`*[S: FloatSort](arg1, arg2: Ast[S]): Ast[BoolSort] =
+  Ast[BoolSort](Z3MkFpaLt(ctx, Z3Ast(arg1), Z3Ast(arg2)))
+
 template `<=`*[S: NumericSort](arg1, arg2: Ast[S]): Ast[BoolSort] =
   Ast[BoolSort](Z3MkLe(ctx, Z3Ast(arg1), Z3Ast(arg2)))
 
@@ -633,6 +692,9 @@ template `<=`*(arg1: float; arg2: Ast[RealSort]): Ast[BoolSort] =
 
 template `<=`*(arg1: Ast[RealSort]; arg2: float): Ast[BoolSort] =
   arg1 <= toAst(arg2)
+
+template `<=`*[S: FloatSort](arg1, arg2: Ast[S]): Ast[BoolSort] =
+  Ast[BoolSort](Z3MkFpaLeq(ctx, Z3Ast(arg1), Z3Ast(arg2)))
 
 template `>`*[S: NumericSort](arg1, arg2: Ast[S]): Ast[BoolSort] =
   Ast[BoolSort](Z3MkGt(ctx, Z3Ast(arg1), Z3Ast(arg2)))
@@ -649,6 +711,9 @@ template `>`*(arg1: float; arg2: Ast[RealSort]): Ast[BoolSort] =
 template `>`*(arg1: Ast[RealSort]; arg2: float): Ast[BoolSort] =
   arg1 > toAst(arg2)
 
+template `>`*[S: FloatSort](arg1, arg2: Ast[S]): Ast[BoolSort] =
+  Ast[BoolSort](Z3MkFpaGt(ctx, Z3Ast(arg1), Z3Ast(arg2)))
+
 template `>=`*[S: NumericSort](arg1, arg2: Ast[S]): Ast[BoolSort] =
   Ast[BoolSort](Z3MkGe(ctx, Z3Ast(arg1), Z3Ast(arg2)))
 
@@ -664,6 +729,9 @@ template `>=`*(arg1: float; arg2: Ast[RealSort]): Ast[BoolSort] =
 template `>=`*(arg1: Ast[RealSort]; arg2: float): Ast[BoolSort] =
   arg1 >= toAst(arg2)
 
+template `>=`*[S: FloatSort](arg1, arg2: Ast[S]): Ast[BoolSort] =
+  Ast[BoolSort](Z3MkFpaGeq(ctx, Z3Ast(arg1), Z3Ast(arg2)))
+
 template int2real*(arg: Ast[IntSort]): Ast[RealSort] =
   Ast[RealSort](Z3MkInt2Real(ctx, Z3Ast(arg)))
 
@@ -672,6 +740,51 @@ template real2int*(arg: Ast[RealSort]): Ast[IntSort] =
 
 template isInt*(arg: Ast[RealSort]): Ast[BoolSort] =
   Ast[BoolSort](Z3MkIsInt(ctx, Z3Ast(arg)))
+
+template abs*(arg: Ast[IntSort]): Ast[IntSort] =
+  ite(arg > 0, arg, -arg)
+
+template abs*(arg: Ast[RealSort]): Ast[RealSort] =
+  ite(arg > 0.0, arg, -arg)
+
+template abs*[S: FloatSort](arg: Ast[S]): Ast[S] =
+  Ast[S](Z3MkFpaAbs(ctx, Z3Ast(arg)))
+
+template sqrt*[S: FloatSort](arg: Ast[S]): Ast[S] =
+  Ast[S](Z3MkFpaSqrt(ctx, Z3Ast(arg)))
+
+template round*[S: FloatSort](arg: Ast[S]): Ast[S] =
+  Ast[S](Z3MkFpaRoundToIntegral(ctx, roundingModeAst, Z3Ast(arg)))
+
+template min*[S: FloatSort](arg1, arg2: Ast[S]): Ast[S] =
+  Ast[S](Z3MkFpaMin(ctx, Z3Ast(arg1), Z3Ast(arg2)))
+
+template max*[S: FloatSort](arg1, arg2: Ast[S]): Ast[S] =
+  Ast[S](Z3MkFpaMax(ctx, Z3Ast(arg1), Z3Ast(arg2)))
+
+template isNormal*[S: FloatSort](arg: Ast[S]): Ast[BoolSort] =
+  Ast[BoolSort](Z3MkFpaIsNormal(ctx, Z3Ast(arg)))
+
+template isSubNormal*[S: FloatSort](arg: Ast[S]): Ast[BoolSort] =
+  Ast[BoolSort](Z3MkFpaIsSubnormal(ctx, Z3Ast(arg)))
+
+template isZero*[S: FloatSort](arg: Ast[S]): Ast[BoolSort] =
+  Ast[BoolSort](Z3MkFpaIsZero(ctx, Z3Ast(arg)))
+
+template isInfinite*[S: FloatSort](arg: Ast[S]): Ast[BoolSort] =
+  Ast[BoolSort](Z3MkFpaIsInfinite(ctx, Z3Ast(arg)))
+
+template isNaN*[S: FloatSort](arg: Ast[S]): Ast[BoolSort] =
+  Ast[BoolSort](Z3MkFpaIsNaN(ctx, Z3Ast(arg)))
+
+template isNegative*[S: FloatSort](arg: Ast[S]): Ast[BoolSort] =
+  Ast[BoolSort](Z3MkFpaIsNegative(ctx, Z3Ast(arg)))
+
+template isPositive*[S: FloatSort](arg: Ast[S]): Ast[BoolSort] =
+  Ast[BoolSort](Z3MkFpaIsPositive(ctx, Z3Ast(arg)))
+
+template toReal*[S: FloatSort](arg: Ast[S]): Ast[RealSort] =
+  Ast[RealSort](Z3MkFpaToReal(ctx, Z3Ast(arg)))
 
 template apply*[D, R](fn: FuncDecl[D, R]; args: Asts[D]): Ast[R] =
   let argsSeq = seq[Z3Ast](args)
