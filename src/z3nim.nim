@@ -109,7 +109,7 @@ template z3*(body: untyped): untyped =
     let solverParams {.inject, used.} = Z3MkParams(ctx)
     Z3ParamsIncRef(ctx, solverParams)
 
-    let roundingModeAst {.inject, used.} = Z3MkFpaRoundNearestTiesToEven(ctx)
+    var roundingModeAst {.inject, used.} = Z3MkFpaRoundNearestTiesToEven(ctx)
 
     Z3SetErrorHandler(ctx) do (c: Z3Context; e: Z3ErrorCode):
       let errorMessage = $Z3GetErrorMsg(c, e)
