@@ -366,7 +366,13 @@ template boolAnd*(args: varargs[Ast[BoolSort], toAst]): Ast[BoolSort] =
 
   a
 
-template `and`*(arg1, arg2: untyped): untyped =
+template `and`*(arg1, arg2: Ast[BoolSort]): Ast[BoolSort] =
+  boolAnd(arg1, arg2)
+
+template `and`*(arg1: Ast[BoolSort]; arg2: bool): Ast[BoolSort] =
+  boolAnd(arg1, arg2)
+
+template `and`*(arg1: bool; arg2: Ast[BoolSort]): Ast[BoolSort] =
   boolAnd(arg1, arg2)
 
 template boolOr*(args: varargs[Ast[BoolSort], toAst]): Ast[BoolSort] =
@@ -383,7 +389,13 @@ template boolOr*(args: varargs[Ast[BoolSort], toAst]): Ast[BoolSort] =
 
   a
 
-template `or`*(arg1, arg2: untyped): untyped =
+template `or`*(arg1, arg2: Ast[BoolSort]): Ast[BoolSort] =
+  boolOr(arg1, arg2)
+
+template `or`*(arg1: Ast[BoolSort]; arg2: bool): Ast[BoolSort] =
+  boolOr(arg1, arg2)
+
+template `or`*(arg1: bool; arg2: Ast[BoolSort]): Ast[BoolSort] =
   boolOr(arg1, arg2)
 
 template `xor`*(arg1, arg2: Ast[BoolSort]): Ast[BoolSort] =
@@ -461,7 +473,22 @@ template astAdd*[S: NumericSort](args: varargs[Ast[S], toAst]): Ast[S] =
 
   a
 
-template `+`*(arg1, arg2: untyped): untyped =
+template `+`*(arg1, arg2: Ast[IntSort]): Ast[IntSort] =
+  astAdd(arg1, arg2)
+
+template `+`*(arg1: Ast[IntSort]; arg2: int): Ast[IntSort] =
+  astAdd(arg1, arg2)
+
+template `+`*(arg1: int; arg2: Ast[IntSort]): Ast[IntSort] =
+  astAdd(arg1, arg2)
+
+template `+`*(arg1, arg2: Ast[RealSort]): Ast[RealSort] =
+  astAdd(arg1, arg2)
+
+template `+`*(arg1: Ast[RealSort]; arg2: float): Ast[RealSort] =
+  astAdd(arg1, arg2)
+
+template `+`*(arg1: float; arg2: Ast[RealSort]): Ast[RealSort] =
   astAdd(arg1, arg2)
 
 template astMul*[S: NumericSort](args: varargs[Ast[S], toAst]): Ast[S] =
@@ -478,7 +505,22 @@ template astMul*[S: NumericSort](args: varargs[Ast[S], toAst]): Ast[S] =
 
   a
 
-template `*`*(arg1, arg2: untyped): untyped =
+template `*`*(arg1, arg2: Ast[IntSort]): Ast[IntSort] =
+  astMul(arg1, arg2)
+
+template `*`*(arg1: Ast[IntSort]; arg2: int): Ast[IntSort] =
+  astMul(arg1, arg2)
+
+template `*`*(arg1: int; arg2: Ast[IntSort]): Ast[IntSort] =
+  astMul(arg1, arg2)
+
+template `*`*(arg1, arg2: Ast[RealSort]): Ast[RealSort] =
+  astMul(arg1, arg2)
+
+template `*`*(arg1: Ast[RealSort]; arg2: float): Ast[RealSort] =
+  astMul(arg1, arg2)
+
+template `*`*(arg1: float; arg2: Ast[RealSort]): Ast[RealSort] =
   astMul(arg1, arg2)
 
 template `-`*[S: NumericSort](arg: Ast[S]): Ast[S] =
@@ -498,7 +540,22 @@ template astSub*[S: NumericSort](args: varargs[Ast[S], toAst]): Ast[S] =
 
   a
 
-template `-`*(arg1, arg2: untyped): untyped =
+template `-`*(arg1, arg2: Ast[IntSort]): Ast[IntSort] =
+  astSub(arg1, arg2)
+
+template `-`*(arg1: Ast[IntSort]; arg2: int): Ast[IntSort] =
+  astSub(arg1, arg2)
+
+template `-`*(arg1: int; arg2: Ast[IntSort]): Ast[IntSort] =
+  astSub(arg1, arg2)
+
+template `-`*(arg1, arg2: Ast[RealSort]): Ast[RealSort] =
+  astSub(arg1, arg2)
+
+template `-`*(arg1: Ast[RealSort]; arg2: float): Ast[RealSort] =
+  astSub(arg1, arg2)
+
+template `-`*(arg1: float; arg2: Ast[RealSort]): Ast[RealSort] =
   astSub(arg1, arg2)
 
 template `div`*(arg1, arg2: Ast[IntSort]): Ast[IntSort] =
