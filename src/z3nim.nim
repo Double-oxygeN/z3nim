@@ -564,7 +564,7 @@ template `*`*(arg1: Ast[RealSort]; arg2: float): Ast[RealSort] =
 template `*`*(arg1: float; arg2: Ast[RealSort]): Ast[RealSort] =
   numMul(arg1, arg2)
 
-template `-`*[S: FloatSort](arg1, arg2: Ast[S]): Ast[S] =
+template `*`*[S: FloatSort](arg1, arg2: Ast[S]): Ast[S] =
   Ast[S](Z3MkFpaMul(ctx, roundingModeAst, Z3Ast(arg1), Z3Ast(arg2)))
 
 template `-`*[S: NumericSort](arg: Ast[S]): Ast[S] =
@@ -755,6 +755,12 @@ template sqrt*[S: FloatSort](arg: Ast[S]): Ast[S] =
 
 template round*[S: FloatSort](arg: Ast[S]): Ast[S] =
   Ast[S](Z3MkFpaRoundToIntegral(ctx, roundingModeAst, Z3Ast(arg)))
+
+template floor*[S: FloatSort](arg: Ast[S]): Ast[S] =
+  Ast[S](Z3MkFpaRoundToIntegral(ctx, Z3MkFpaRoundTowardNegative(ctx), Z3Ast(arg)))
+
+template ceil*[S: FloatSort](arg: Ast[S]): Ast[S] =
+  Ast[S](Z3MkFpaRoundToIntegral(ctx, Z3MkFpaRoundTowardPositive(ctx), Z3Ast(arg)))
 
 template min*[S: FloatSort](arg1, arg2: Ast[S]): Ast[S] =
   Ast[S](Z3MkFpaMin(ctx, Z3Ast(arg1), Z3Ast(arg2)))
