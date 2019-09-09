@@ -610,6 +610,25 @@ proc Z3_mk_fpa_to_real*(c: Z3_context; t: Z3_ast): Z3_ast {.libz3.}
 # Z3-specific floating-point extensions
 # =====================================
 
+proc Z3_fpa_get_ebits*(c: Z3_context; s: Z3_sort): cuint {.libz3.}
+proc Z3_fpa_get_sbits*(c: Z3_context; s: Z3_sort): cuint {.libz3.}
+proc Z3_fpa_is_numeral_nan*(c: Z3_context; t: Z3_ast): bool {.libz3.}
+proc Z3_fpa_is_numeral_inf*(c: Z3_context; t: Z3_ast): bool {.libz3.}
+proc Z3_fpa_is_numeral_zero*(c: Z3_context; t: Z3_ast): bool {.libz3.}
+proc Z3_fpa_is_numeral_normal*(c: Z3_context; t: Z3_ast): bool {.libz3.}
+proc Z3_fpa_is_numeral_subnormal*(c: Z3_context; t: Z3_ast): bool {.libz3.}
+proc Z3_fpa_is_numeral_positive*(c: Z3_context; t: Z3_ast): bool {.libz3.}
+proc Z3_fpa_is_numeral_negative*(c: Z3_context; t: Z3_ast): bool {.libz3.}
+proc Z3_fpa_get_numeral_sign_bv*(c: Z3_context; t: Z3_ast): Z3_ast {.libz3.}
+proc Z3_fpa_get_numeral_significand_bv*(c: Z3_context; t: Z3_ast): Z3_ast {.libz3.}
+proc Z3_fpa_get_numeral_sign*(c: Z3_context; t: Z3_ast): bool {.libz3.}
+proc Z3_fpa_get_numeral_significand_string*(c: Z3_context; t: Z3_ast): Z3_string {.libz3.}
+proc Z3_fpa_get_numeral_significand_uint64*(c: Z3_context; t: Z3_ast; n: ptr uint64): bool {.libz3.}
+proc Z3_fpa_get_numeral_exponent_string*(c: Z3_context; t: Z3_ast; biased: bool): Z3_string {.libz3.}
+proc Z3_fpa_get_numeral_exponent_int64*(c: Z3_context; t: Z3_ast; n: ptr int64; biased: bool): bool {.libz3.}
+proc Z3_fpa_get_numeral_exponent_bv*(c: Z3_context; t: Z3_ast; biased: bool): Z3_ast {.libz3.}
+proc Z3_mk_fpa_to_ieee_bv*(c: Z3_context; t: Z3_ast): Z3_ast {.libz3.}
+proc Z3_mk_fpa_to_fp_int_real*(c: Z3_context; rm, exp, sig: Z3_ast; s: Z3_sort): Z3_ast {.libz3.}
 
 # Optimization facilities
 # =======================
