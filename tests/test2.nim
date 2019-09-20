@@ -163,3 +163,39 @@ suite "Library":
       assert xVal + yVal < 4.5
       assert xVal + zVal > 2.5
       assert yVal > zVal + 0.8
+
+  test "array1":
+    z3:
+      var
+        arr1 = declConst(1, ArraySort[IntSort, IntSort])
+
+      arr1[3] = toAst(42)
+      arr1[4] = toAst(53)
+
+      for i in 0..2:
+        assert arr1[i + 1] - arr1[i] == arr1[i + 2] - arr1[i + 1]
+
+      check check() == sat
+
+      let model = getModel()
+
+      check model.eval(arr1[0]).toInt() == 9
+
+  test "array2":
+    z3:
+      let
+        b1 = declBoolConst("b1")
+        r1 = declRealConst("r1")
+      var
+        arr2 = declConst(2, ArraySort[BoolSort, RealSort])
+
+      arr2[b1] = r1
+
+      assert r1 > 0'f
+      assert arr2[not b1] == -arr2[b1]
+
+      check check() == sat
+
+      let model = getModel()
+      
+      check model.eval(arr2[not b1]).toFloat() == -model.eval(r1).toFloat()

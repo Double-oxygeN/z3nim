@@ -792,6 +792,18 @@ template isPositive*[S: FloatSort](arg: Ast[S]): Ast[BoolSort] =
 template toReal*[S: FloatSort](arg: Ast[S]): Ast[RealSort] =
   Ast[RealSort](Z3MkFpaToReal(ctx, Z3Ast(arg)))
 
+template `[]`*[D, R](arg: Ast[ArraySort[D, R]]; idx: Ast[D]): Ast[R] =
+  Ast[R](Z3MkSelect(ctx, Z3Ast(arg), Z3Ast(idx)))
+
+template `[]`*[R](arg: Ast[ArraySort[IntSort, R]]; idx: int): Ast[R] =
+  arg[toAst(idx)]
+
+template `[]=`*[D, R](arg: var Ast[ArraySort[D, R]]; idx: Ast[D]; val: Ast[R]) =
+  arg = Ast[ArraySort[D, R]](Z3MkStore(ctx, Z3Ast(arg), Z3Ast(idx), Z3Ast(val)))
+
+template `[]=`*[R](arg: var Ast[ArraySort[IntSort, R]]; idx: int; val: Ast[R]) =
+  arg[toAst(idx)] = val
+
 template apply*[D, R](fn: FuncDecl[D, R]; args: Asts[D]): Ast[R] =
   let argsSeq = seq[Z3Ast](args)
   var
