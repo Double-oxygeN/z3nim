@@ -633,6 +633,33 @@ proc Z3_mk_fpa_to_fp_int_real*(c: Z3_context; rm, exp, sig: Z3_ast; s: Z3_sort):
 # Optimization facilities
 # =======================
 
+proc Z3_mk_optimize*(c: Z3_context): Z3_optimize {.libz3.}
+proc Z3_optimize_inc_ref*(c: Z3_context; d: Z3_optimize) {.libz3.}
+proc Z3_optimize_dec_ref*(c: Z3_context; d: Z3_optimize) {.libz3.}
+proc Z3_optimize_assert*(c: Z3_context; o: Z3_optimize; a: Z3_ast) {.libz3.}
+proc Z3_optimize_assert_and_track*(c: Z3_context; o: Z3_optimize; a: Z3_ast; t: Z3_ast) {.libz3.}
+proc Z3_optimize_assert_soft*(c: Z3_context; o: Z3_optimize; a: Z3_ast; weight: Z3_string; id: Z3_symbol): cuint {.libz3.}
+proc Z3_optimize_maximize*(c: Z3_context; o: Z3_optimize; t: Z3_ast): cuint {.libz3.}
+proc Z3_optimize_minimize*(c: Z3_context; o: Z3_optimize; t: Z3_ast): cuint {.libz3.}
+proc Z3_optimize_push*(c: Z3_context; d: Z3_optimize) {.libz3.}
+proc Z3_optimize_pop*(c: Z3_context; d: Z3_optimize) {.libz3.}
+proc Z3_optimize_check*(c: Z3_context; d: Z3_optimize; num_assumptions: cuint; assumptions: carray[Z3_ast]): Z3_lbool {.libz3.}
+proc Z3_optimize_get_reason_unknown*(c: Z3_context; d: Z3_optimize): Z3_string {.libz3.}
+proc Z3_optimize_get_model*(c: Z3_context; o: Z3_optimize): Z3_model {.libz3.}
+proc Z3_optimize_get_unsat_core*(c: Z3_context; o: Z3_optimize): Z3_ast_vector {.libz3.}
+proc Z3_optimize_set_params*(c: Z3_context; o: Z3_optimize; p: Z3_params) {.libz3.}
+proc Z3_optimize_get_param_descrs*(c: Z3_context; o: Z3_optimize): Z3_param_descrs {.libz3.}
+proc Z3_optimize_get_lower*(c: Z3_context; o: Z3_optimize; idx: cuint): Z3_ast {.libz3.}
+proc Z3_optimize_get_upper*(c: Z3_context; o: Z3_optimize; idx: cuint): Z3_ast {.libz3.}
+proc Z3_optimize_get_lower_as_vector*(c: Z3_context; o: Z3_optimize; idx: cuint): Z3_ast_vector {.libz3.}
+proc Z3_optimize_get_upper_as_vector*(c: Z3_context; o: Z3_optimize; idx: cuint): Z3_ast_vector {.libz3.}
+proc Z3_optimize_to_string*(c: Z3_context; o: Z3_optimize): Z3_string {.libz3.}
+proc Z3_optimize_from_string*(c: Z3_context; o: Z3_optimize; s: Z3_string) {.libz3.}
+proc Z3_optimize_from_file*(c: Z3_context; o: Z3_optimize; s: Z3_string) {.libz3.}
+proc Z3_optimize_get_help*(c: Z3_context; d: Z3_optimize) {.libz3.}
+proc Z3_optimize_get_statistics*(c: Z3_context; d: Z3_optimize): Z3_stats {.libz3.}
+proc Z3_optimize_get_assertions*(c: Z3_context; o: Z3_optimize): Z3_ast_vector {.libz3.}
+proc Z3_optimize_get_objectives*(c: Z3_context; o: Z3_optimize): Z3_ast_vector {.libz3.}
 
 # Polynomials
 # ===========

@@ -199,3 +199,18 @@ suite "Library":
       let model = getModel()
       
       check model.eval(arr2[not b1]).toFloat() == -model.eval(r1).toFloat()
+
+  test "optimize":
+    z3:
+      let
+        x = declIntConst("x")
+        y = declIntConst("y")
+
+      assertOpt x < 2
+      assertOpt (y - x) < 1
+      maximize x + y
+
+      check checkOpt == sat
+
+      let model = getModelOpt()
+      check model.eval(x + y).toInt() == 2

@@ -106,8 +106,13 @@ template z3*(body: untyped): untyped =
     let solver {.inject, used.} = Z3MkSolver(ctx)
     Z3SolverIncRef(ctx, solver)
 
+    let optimize {.inject, used.} = Z3MkOptimize(ctx)
+    Z3OptimizeIncRef(ctx, optimize)
+
     let solverParams {.inject, used.} = Z3MkParams(ctx)
     Z3ParamsIncRef(ctx, solverParams)
+    let optimizeParams {.inject, used.} = Z3MkParams(ctx)
+    Z3ParamsIncRef(ctx, optimizeParams)
 
     var roundingModeAst {.inject, used.} = Z3MkFpaRoundNearestTiesToEven(ctx)
 
@@ -119,7 +124,9 @@ template z3*(body: untyped): untyped =
       body
 
     Z3ParamsDecRef(ctx, solverParams)
+    Z3ParamsDecRef(ctx, optimizeParams)
     Z3SolverDecRef(ctx, solver)
+    Z3OptimizeDecRef(ctx, optimize)
     Z3DelContext(ctx)
 
 
@@ -134,11 +141,13 @@ template z3block*(body: untyped): untyped =
   ##   Z3_solver_pop(ctx, solver, 1);
 
   Z3_solver_push(ctx, solver)
+  Z3_optimize_push(ctx, optimize)
 
   block:
     body
 
   Z3_solver_pop(ctx, solver, 1'u.cuint)
+  Z3_optimize_pop(ctx, optimize)
 
 
 template setTimeout*(ms: uint) =
@@ -148,6 +157,8 @@ template setTimeout*(ms: uint) =
 template setParallelThreads*(count: uint) =
   let sym = Z3MkStringSymbol(ctx, "threads")
   Z3ParamsSetUint(ctx, solverParams, sym, cuint(count))
+  if count > 1'u:
+    Z3GlobalParamSet("parallel.enable", "true")
 
 template setZeroAccuracy*(k: uint) =
   let sym = Z3MkStringSymbol(ctx, "zero_accuracy")
@@ -845,15 +856,37 @@ template assert*(t: Ast[BoolSort]) =
   ## Add an assertion.
   Z3SolverAssert(ctx, solver, Z3Ast(t))
 
+template assertOpt*(t: Ast[BoolSort]) =
+  ## Add an assertion for the optimizer.
+  Z3OptimizeAssert(ctx, optimize, Z3Ast(t))
+
+template minimize*(t: Ast[NumericSort]) =
+  ## Tell the optimizer to minimize the value.
+  discard Z3OptimizeMinimize(ctx, optimize, Z3Ast(t))
+
+template maximize*(t: Ast[NumericSort]) =
+  ## Tell the optimizer to maximize the value.
+  discard Z3OptimizeMaximize(ctx, optimize, Z3Ast(t))
+
 template check*: CheckResult =
   ## Check if all assertions satisfy or not.
   Z3SolverSetParams(ctx, solver, solverParams)
   Z3SolverCheck(ctx, solver).ord.CheckResult
 
+template checkOpt*: CheckResult =
+  ## Check if all assertions satisfy and if optimization succeed.
+  Z3OptimizeSetParams(ctx, optimize, optimizeParams)
+  Z3OptimizeCheck(ctx, optimize, 0, nil).ord.CheckResult
+
 template getModel*: Model =
   ## Get model.
   ## Do not call this procedure before calling ``check``.
   Model(Z3SolverGetModel(ctx, solver))
+
+template getModelOpt*: Model =
+  ## Get model of the optimizer.
+  ## Do not call this procedure before calling ``checkOpt``.
+  Model(Z3OptimizeGetModel(ctx, optimize))
 
 template getAssertions*: AstVector =
   ## Get assertions.

@@ -1190,6 +1190,14 @@ function main() {
     title="isPositive[S](arg: Ast[S]): Ast[BoolSort]"><wbr />is<wbr />Positive<span class="attachedType">Ast</span></a></li>
   <li><a class="reference" href="#toReal.t%2CAst%5BS%3A+FloatSort%5D"
     title="toReal[S](arg: Ast[S]): Ast[RealSort]"><wbr />to<wbr />Real<span class="attachedType">Ast</span></a></li>
+  <li><a class="reference" href="#%5B%5D.t%2CAst%5BArraySort%5BD%2CR%5D%5D%2CAst%5BD%5D"
+    title="`[]`[D; R](arg: Ast[ArraySort[D, R]]; idx: Ast[D]): Ast[R]"><wbr />`[]`<span class="attachedType">Ast</span></a></li>
+  <li><a class="reference" href="#%5B%5D.t%2CAst%5BArraySort%5BIntSort%2CR%5D%5D%2Cint"
+    title="`[]`[R](arg: Ast[ArraySort[IntSort, R]]; idx: int): Ast[R]"><wbr />`[]`<span class="attachedType">Ast</span></a></li>
+  <li><a class="reference" href="#%5B%5D%3D.t%2CAst%5BArraySort%5BD%2CR%5D%5D%2CAst%5BD%5D%2CAst%5BR%5D"
+    title="`[]=`[D; R](arg: var Ast[ArraySort[D, R]]; idx: Ast[D]; val: Ast[R])"><wbr />`[]=`<span class="attachedType">Ast</span></a></li>
+  <li><a class="reference" href="#%5B%5D%3D.t%2CAst%5BArraySort%5BIntSort%2CR%5D%5D%2Cint%2CAst%5BR%5D"
+    title="`[]=`[R](arg: var Ast[ArraySort[IntSort, R]]; idx: int; val: Ast[R])"><wbr />`[]=`<span class="attachedType">Ast</span></a></li>
   <li><a class="reference" href="#apply.t%2CFuncDecl%5BD%2CR%5D%2CAsts%5BD%5D"
     title="apply[D; R](fn: FuncDecl[D, R]; args: Asts[D]): Ast[R]"><wbr />apply<span class="attachedType">FuncDecl</span></a></li>
   <li><a class="reference" href="#forall.t%2CAsts%5BV%5D%2CAst%5BS%5D"
@@ -1198,10 +1206,20 @@ function main() {
     title="exists[V; S](apps: Asts[V]; body: Ast[S]): Ast[S]"><wbr />exists<span class="attachedType">Asts</span></a></li>
   <li><a class="reference" href="#assert.t%2CAst%5BBoolSort%5D"
     title="assert(t: Ast[BoolSort])"><wbr />assert<span class="attachedType">Ast</span></a></li>
+  <li><a class="reference" href="#assertOpt.t%2CAst%5BBoolSort%5D"
+    title="assertOpt(t: Ast[BoolSort])"><wbr />assert<wbr />Opt<span class="attachedType">Ast</span></a></li>
+  <li><a class="reference" href="#minimize.t%2CAst%5BNumericSort%5D"
+    title="minimize(t: Ast[NumericSort])"><wbr />minimize<span class="attachedType">Ast</span></a></li>
+  <li><a class="reference" href="#maximize.t%2CAst%5BNumericSort%5D"
+    title="maximize(t: Ast[NumericSort])"><wbr />maximize<span class="attachedType">Ast</span></a></li>
   <li><a class="reference" href="#check.t"
     title="check(): CheckResult"><wbr />check<span class="attachedType">CheckResult</span></a></li>
+  <li><a class="reference" href="#checkOpt.t"
+    title="checkOpt(): CheckResult"><wbr />check<wbr />Opt<span class="attachedType">CheckResult</span></a></li>
   <li><a class="reference" href="#getModel.t"
     title="getModel(): Model"><wbr />get<wbr />Model<span class="attachedType">Model</span></a></li>
+  <li><a class="reference" href="#getModelOpt.t"
+    title="getModelOpt(): Model"><wbr />get<wbr />Model<wbr />Opt<span class="attachedType">Model</span></a></li>
   <li><a class="reference" href="#getAssertions.t"
     title="getAssertions(): AstVector"><wbr />get<wbr />Assertions<span class="attachedType">AstVector</span></a></li>
   <li><a class="reference" href="#getProof.t"
@@ -1623,9 +1641,9 @@ class="link-seesrc" target="_blank">Source</a>
   <span class="Identifier">assert</span> <span class="Identifier">exists</span><span class="Other">(</span><span class="Identifier">params</span><span class="Other">(</span><span class="Identifier">x</span><span class="Other">)</span><span class="Other">,</span> <span class="Identifier">f2</span><span class="Other">.</span><span class="Identifier">apply</span><span class="Other">(</span><span class="Identifier">params</span><span class="Other">(</span><span class="Identifier">toAst</span><span class="Other">(</span><span class="Identifier">true</span><span class="Other">)</span><span class="Other">,</span> <span class="Identifier">x</span><span class="Other">)</span><span class="Other">)</span><span class="Other">)</span>
   <span class="Identifier">assert</span> <span class="Identifier">check</span><span class="Other">(</span><span class="Other">)</span> <span class="Operator">==</span> <span class="Identifier">sat</span></pre>
 &nbsp;&nbsp;<a
-href="https://github.com/Double-oxygeN/z3nim/tree/master/src/z3nim.nim#L203"
+href="https://github.com/Double-oxygeN/z3nim/tree/master/src/z3nim.nim#L214"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/Double-oxygeN/z3nim/edit/devel/src/z3nim.nim#L203" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/Double-oxygeN/z3nim/edit/devel/src/z3nim.nim#L214" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 
@@ -1661,9 +1679,9 @@ class="link-seesrc" target="_blank">Source</a>
 <span class="LongComment">/* body */</span>
 <span class="Identifier">Z3_solver_pop</span><span class="Punctuation">(</span><span class="Identifier">ctx</span><span class="Punctuation">,</span> <span class="Identifier">solver</span><span class="Punctuation">,</span> <span class="DecNumber">1</span><span class="Punctuation">)</span><span class="Punctuation">;</span></pre>
 &nbsp;&nbsp;<a
-href="https://github.com/Double-oxygeN/z3nim/tree/master/src/z3nim.nim#L126"
+href="https://github.com/Double-oxygeN/z3nim/tree/master/src/z3nim.nim#L133"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/Double-oxygeN/z3nim/edit/devel/src/z3nim.nim#L126" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/Double-oxygeN/z3nim/edit/devel/src/z3nim.nim#L133" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <a id="setTimeout.t,uint"></a>
@@ -1672,9 +1690,9 @@ class="link-seesrc" target="_blank">Source</a>
 
 
 &nbsp;&nbsp;<a
-href="https://github.com/Double-oxygeN/z3nim/tree/master/src/z3nim.nim#L144"
+href="https://github.com/Double-oxygeN/z3nim/tree/master/src/z3nim.nim#L153"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/Double-oxygeN/z3nim/edit/devel/src/z3nim.nim#L144" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/Double-oxygeN/z3nim/edit/devel/src/z3nim.nim#L153" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <a id="setParallelThreads.t,uint"></a>
@@ -1683,9 +1701,9 @@ class="link-seesrc" target="_blank">Source</a>
 
 
 &nbsp;&nbsp;<a
-href="https://github.com/Double-oxygeN/z3nim/tree/master/src/z3nim.nim#L148"
+href="https://github.com/Double-oxygeN/z3nim/tree/master/src/z3nim.nim#L157"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/Double-oxygeN/z3nim/edit/devel/src/z3nim.nim#L148" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/Double-oxygeN/z3nim/edit/devel/src/z3nim.nim#L157" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <a id="setZeroAccuracy.t,uint"></a>
@@ -1694,9 +1712,9 @@ class="link-seesrc" target="_blank">Source</a>
 
 
 &nbsp;&nbsp;<a
-href="https://github.com/Double-oxygeN/z3nim/tree/master/src/z3nim.nim#L152"
+href="https://github.com/Double-oxygeN/z3nim/tree/master/src/z3nim.nim#L163"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/Double-oxygeN/z3nim/edit/devel/src/z3nim.nim#L152" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/Double-oxygeN/z3nim/edit/devel/src/z3nim.nim#L163" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <a id="setRoundingMode.t,RoundingMode"></a>
@@ -1705,9 +1723,9 @@ class="link-seesrc" target="_blank">Source</a>
 
 
 &nbsp;&nbsp;<a
-href="https://github.com/Double-oxygeN/z3nim/tree/master/src/z3nim.nim#L156"
+href="https://github.com/Double-oxygeN/z3nim/tree/master/src/z3nim.nim#L167"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/Double-oxygeN/z3nim/edit/devel/src/z3nim.nim#L156" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/Double-oxygeN/z3nim/edit/devel/src/z3nim.nim#L167" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <a id="makeSort.t,typedesc"></a>
@@ -1716,9 +1734,9 @@ class="link-seesrc" target="_blank">Source</a>
 
 Make a sort.
 &nbsp;&nbsp;<a
-href="https://github.com/Double-oxygeN/z3nim/tree/master/src/z3nim.nim#L174"
+href="https://github.com/Double-oxygeN/z3nim/tree/master/src/z3nim.nim#L185"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/Double-oxygeN/z3nim/edit/devel/src/z3nim.nim#L174" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/Double-oxygeN/z3nim/edit/devel/src/z3nim.nim#L185" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <a id="declConst.t,string,typedesc"></a>
@@ -1727,9 +1745,9 @@ class="link-seesrc" target="_blank">Source</a>
 
 Declare a constant.
 &nbsp;&nbsp;<a
-href="https://github.com/Double-oxygeN/z3nim/tree/master/src/z3nim.nim#L234"
+href="https://github.com/Double-oxygeN/z3nim/tree/master/src/z3nim.nim#L245"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/Double-oxygeN/z3nim/edit/devel/src/z3nim.nim#L234" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/Double-oxygeN/z3nim/edit/devel/src/z3nim.nim#L245" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <a id="declConst.t,int,typedesc"></a>
@@ -1738,9 +1756,9 @@ class="link-seesrc" target="_blank">Source</a>
 
 Declare a constant.
 &nbsp;&nbsp;<a
-href="https://github.com/Double-oxygeN/z3nim/tree/master/src/z3nim.nim#L239"
+href="https://github.com/Double-oxygeN/z3nim/tree/master/src/z3nim.nim#L250"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/Double-oxygeN/z3nim/edit/devel/src/z3nim.nim#L239" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/Double-oxygeN/z3nim/edit/devel/src/z3nim.nim#L250" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <a id="declBoolConst.t"></a>
@@ -1749,9 +1767,9 @@ class="link-seesrc" target="_blank">Source</a>
 
 Shorthand for <tt class="docutils literal"><span class="pre">declConst(id, BoolSort)</span></tt>.
 &nbsp;&nbsp;<a
-href="https://github.com/Double-oxygeN/z3nim/tree/master/src/z3nim.nim#L245"
+href="https://github.com/Double-oxygeN/z3nim/tree/master/src/z3nim.nim#L256"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/Double-oxygeN/z3nim/edit/devel/src/z3nim.nim#L245" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/Double-oxygeN/z3nim/edit/devel/src/z3nim.nim#L256" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <a id="declIntConst.t"></a>
@@ -1760,9 +1778,9 @@ class="link-seesrc" target="_blank">Source</a>
 
 Shorthand for <tt class="docutils literal"><span class="pre">declConst(id, IntSort)</span></tt>.
 &nbsp;&nbsp;<a
-href="https://github.com/Double-oxygeN/z3nim/tree/master/src/z3nim.nim#L249"
+href="https://github.com/Double-oxygeN/z3nim/tree/master/src/z3nim.nim#L260"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/Double-oxygeN/z3nim/edit/devel/src/z3nim.nim#L249" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/Double-oxygeN/z3nim/edit/devel/src/z3nim.nim#L260" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <a id="declRealConst.t"></a>
@@ -1771,9 +1789,9 @@ class="link-seesrc" target="_blank">Source</a>
 
 Shorthand for <tt class="docutils literal"><span class="pre">declConst(id, RealSort)</span></tt>.
 &nbsp;&nbsp;<a
-href="https://github.com/Double-oxygeN/z3nim/tree/master/src/z3nim.nim#L253"
+href="https://github.com/Double-oxygeN/z3nim/tree/master/src/z3nim.nim#L264"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/Double-oxygeN/z3nim/edit/devel/src/z3nim.nim#L253" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/Double-oxygeN/z3nim/edit/devel/src/z3nim.nim#L264" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <a id="declBitVecConst.t,,"></a>
@@ -1782,9 +1800,9 @@ class="link-seesrc" target="_blank">Source</a>
 
 Shorthand for <tt class="docutils literal"><span class="pre">declConst(id, BitVecSort[size])</span></tt>.
 &nbsp;&nbsp;<a
-href="https://github.com/Double-oxygeN/z3nim/tree/master/src/z3nim.nim#L257"
+href="https://github.com/Double-oxygeN/z3nim/tree/master/src/z3nim.nim#L268"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/Double-oxygeN/z3nim/edit/devel/src/z3nim.nim#L257" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/Double-oxygeN/z3nim/edit/devel/src/z3nim.nim#L268" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <a id="declFunc.t,string,Sorts[D],typedesc"></a>
@@ -1800,9 +1818,9 @@ Declare a function.
   <span class="Identifier">assert</span> <span class="Identifier">f</span><span class="Other">.</span><span class="Identifier">apply</span><span class="Other">(</span><span class="Identifier">params</span><span class="Other">(</span><span class="Identifier">x</span><span class="Other">,</span> <span class="Identifier">x</span><span class="Other">)</span><span class="Other">)</span> <span class="Operator">==</span> <span class="Identifier">x</span>
   <span class="Identifier">assert</span> <span class="Identifier">check</span><span class="Other">(</span><span class="Other">)</span> <span class="Operator">==</span> <span class="Identifier">sat</span></pre>
 &nbsp;&nbsp;<a
-href="https://github.com/Double-oxygeN/z3nim/tree/master/src/z3nim.nim#L278"
+href="https://github.com/Double-oxygeN/z3nim/tree/master/src/z3nim.nim#L289"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/Double-oxygeN/z3nim/edit/devel/src/z3nim.nim#L278" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/Double-oxygeN/z3nim/edit/devel/src/z3nim.nim#L289" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <a id="declFunc.t,int,Sorts[D],typedesc"></a>
@@ -1818,9 +1836,9 @@ Declare a function.
   <span class="Identifier">assert</span> <span class="Identifier">f</span><span class="Other">.</span><span class="Identifier">apply</span><span class="Other">(</span><span class="Identifier">params</span><span class="Other">(</span><span class="Identifier">x</span><span class="Other">,</span> <span class="Identifier">x</span><span class="Other">)</span><span class="Other">)</span> <span class="Operator">==</span> <span class="Identifier">x</span>
   <span class="Identifier">assert</span> <span class="Identifier">check</span><span class="Other">(</span><span class="Other">)</span> <span class="Operator">==</span> <span class="Identifier">sat</span></pre>
 &nbsp;&nbsp;<a
-href="https://github.com/Double-oxygeN/z3nim/tree/master/src/z3nim.nim#L292"
+href="https://github.com/Double-oxygeN/z3nim/tree/master/src/z3nim.nim#L303"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/Double-oxygeN/z3nim/edit/devel/src/z3nim.nim#L292" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/Double-oxygeN/z3nim/edit/devel/src/z3nim.nim#L303" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <a id="defRecursiveFunc.t,string,Asts[D],typedesc,untyped"></a>
@@ -1846,9 +1864,9 @@ class="link-seesrc" target="_blank">Source</a>
   <span class="Identifier">assert</span> <span class="Identifier">factorial</span><span class="Other">(</span><span class="Identifier">n</span><span class="Other">)</span> <span class="Operator">&lt;</span> <span class="DecNumber">10000</span>
   <span class="Identifier">assert</span> <span class="Identifier">check</span><span class="Other">(</span><span class="Other">)</span> <span class="Operator">==</span> <span class="Identifier">sat</span></pre>
 &nbsp;&nbsp;<a
-href="https://github.com/Double-oxygeN/z3nim/tree/master/src/z3nim.nim#L334"
+href="https://github.com/Double-oxygeN/z3nim/tree/master/src/z3nim.nim#L345"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/Double-oxygeN/z3nim/edit/devel/src/z3nim.nim#L334" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/Double-oxygeN/z3nim/edit/devel/src/z3nim.nim#L345" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <a id="toAst.t,Ast[S]"></a>
@@ -1857,9 +1875,9 @@ class="link-seesrc" target="_blank">Source</a>
 
 Convert to Z3 AST. This is an identity function.
 &nbsp;&nbsp;<a
-href="https://github.com/Double-oxygeN/z3nim/tree/master/src/z3nim.nim#L360"
+href="https://github.com/Double-oxygeN/z3nim/tree/master/src/z3nim.nim#L371"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/Double-oxygeN/z3nim/edit/devel/src/z3nim.nim#L360" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/Double-oxygeN/z3nim/edit/devel/src/z3nim.nim#L371" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <a id="toAst.t,bool"></a>
@@ -1868,9 +1886,9 @@ class="link-seesrc" target="_blank">Source</a>
 
 Convert from a boolean value to Z3 AST.
 &nbsp;&nbsp;<a
-href="https://github.com/Double-oxygeN/z3nim/tree/master/src/z3nim.nim#L365"
+href="https://github.com/Double-oxygeN/z3nim/tree/master/src/z3nim.nim#L376"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/Double-oxygeN/z3nim/edit/devel/src/z3nim.nim#L365" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/Double-oxygeN/z3nim/edit/devel/src/z3nim.nim#L376" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <a id="toAst.t,int"></a>
@@ -1879,9 +1897,9 @@ class="link-seesrc" target="_blank">Source</a>
 
 Convert from an integer value to Z3 AST.
 &nbsp;&nbsp;<a
-href="https://github.com/Double-oxygeN/z3nim/tree/master/src/z3nim.nim#L369"
+href="https://github.com/Double-oxygeN/z3nim/tree/master/src/z3nim.nim#L380"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/Double-oxygeN/z3nim/edit/devel/src/z3nim.nim#L369" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/Double-oxygeN/z3nim/edit/devel/src/z3nim.nim#L380" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <a id="toAst.t,float"></a>
@@ -1890,9 +1908,9 @@ class="link-seesrc" target="_blank">Source</a>
 
 Convert from a float value to Z3 AST.
 &nbsp;&nbsp;<a
-href="https://github.com/Double-oxygeN/z3nim/tree/master/src/z3nim.nim#L373"
+href="https://github.com/Double-oxygeN/z3nim/tree/master/src/z3nim.nim#L384"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/Double-oxygeN/z3nim/edit/devel/src/z3nim.nim#L373" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/Double-oxygeN/z3nim/edit/devel/src/z3nim.nim#L384" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <a id="toFloat32Ast.t,float32"></a>
@@ -1901,9 +1919,9 @@ class="link-seesrc" target="_blank">Source</a>
 
 Convert from a float value to Z3 AST with a 32-bit float sort.
 &nbsp;&nbsp;<a
-href="https://github.com/Double-oxygeN/z3nim/tree/master/src/z3nim.nim#L378"
+href="https://github.com/Double-oxygeN/z3nim/tree/master/src/z3nim.nim#L389"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/Double-oxygeN/z3nim/edit/devel/src/z3nim.nim#L378" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/Double-oxygeN/z3nim/edit/devel/src/z3nim.nim#L389" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <a id="toFloat64Ast.t,float64"></a>
@@ -1912,9 +1930,9 @@ class="link-seesrc" target="_blank">Source</a>
 
 Convert from a float value to Z3 AST with a 64-bit float sort.
 &nbsp;&nbsp;<a
-href="https://github.com/Double-oxygeN/z3nim/tree/master/src/z3nim.nim#L382"
+href="https://github.com/Double-oxygeN/z3nim/tree/master/src/z3nim.nim#L393"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/Double-oxygeN/z3nim/edit/devel/src/z3nim.nim#L382" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/Double-oxygeN/z3nim/edit/devel/src/z3nim.nim#L393" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <a id="not.t,Ast[BoolSort]"></a>
@@ -1923,9 +1941,9 @@ class="link-seesrc" target="_blank">Source</a>
 
 
 &nbsp;&nbsp;<a
-href="https://github.com/Double-oxygeN/z3nim/tree/master/src/z3nim.nim#L387"
+href="https://github.com/Double-oxygeN/z3nim/tree/master/src/z3nim.nim#L398"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/Double-oxygeN/z3nim/edit/devel/src/z3nim.nim#L387" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/Double-oxygeN/z3nim/edit/devel/src/z3nim.nim#L398" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <a id="boolAnd.t,varargs[Ast[BoolSort],toAst]"></a>
@@ -1934,9 +1952,9 @@ class="link-seesrc" target="_blank">Source</a>
 
 
 &nbsp;&nbsp;<a
-href="https://github.com/Double-oxygeN/z3nim/tree/master/src/z3nim.nim#L390"
+href="https://github.com/Double-oxygeN/z3nim/tree/master/src/z3nim.nim#L401"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/Double-oxygeN/z3nim/edit/devel/src/z3nim.nim#L390" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/Double-oxygeN/z3nim/edit/devel/src/z3nim.nim#L401" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <a id="and.t,Ast[BoolSort],Ast[BoolSort]"></a>
@@ -1945,9 +1963,9 @@ class="link-seesrc" target="_blank">Source</a>
 
 
 &nbsp;&nbsp;<a
-href="https://github.com/Double-oxygeN/z3nim/tree/master/src/z3nim.nim#L404"
+href="https://github.com/Double-oxygeN/z3nim/tree/master/src/z3nim.nim#L415"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/Double-oxygeN/z3nim/edit/devel/src/z3nim.nim#L404" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/Double-oxygeN/z3nim/edit/devel/src/z3nim.nim#L415" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <a id="and.t,Ast[BoolSort],bool"></a>
@@ -1956,9 +1974,9 @@ class="link-seesrc" target="_blank">Source</a>
 
 
 &nbsp;&nbsp;<a
-href="https://github.com/Double-oxygeN/z3nim/tree/master/src/z3nim.nim#L407"
+href="https://github.com/Double-oxygeN/z3nim/tree/master/src/z3nim.nim#L418"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/Double-oxygeN/z3nim/edit/devel/src/z3nim.nim#L407" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/Double-oxygeN/z3nim/edit/devel/src/z3nim.nim#L418" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <a id="and.t,bool,Ast[BoolSort]"></a>
@@ -1967,9 +1985,9 @@ class="link-seesrc" target="_blank">Source</a>
 
 
 &nbsp;&nbsp;<a
-href="https://github.com/Double-oxygeN/z3nim/tree/master/src/z3nim.nim#L410"
+href="https://github.com/Double-oxygeN/z3nim/tree/master/src/z3nim.nim#L421"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/Double-oxygeN/z3nim/edit/devel/src/z3nim.nim#L410" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/Double-oxygeN/z3nim/edit/devel/src/z3nim.nim#L421" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <a id="boolOr.t,varargs[Ast[BoolSort],toAst]"></a>
@@ -1978,9 +1996,9 @@ class="link-seesrc" target="_blank">Source</a>
 
 
 &nbsp;&nbsp;<a
-href="https://github.com/Double-oxygeN/z3nim/tree/master/src/z3nim.nim#L413"
+href="https://github.com/Double-oxygeN/z3nim/tree/master/src/z3nim.nim#L424"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/Double-oxygeN/z3nim/edit/devel/src/z3nim.nim#L413" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/Double-oxygeN/z3nim/edit/devel/src/z3nim.nim#L424" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <a id="or.t,Ast[BoolSort],Ast[BoolSort]"></a>
@@ -1989,9 +2007,9 @@ class="link-seesrc" target="_blank">Source</a>
 
 
 &nbsp;&nbsp;<a
-href="https://github.com/Double-oxygeN/z3nim/tree/master/src/z3nim.nim#L427"
+href="https://github.com/Double-oxygeN/z3nim/tree/master/src/z3nim.nim#L438"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/Double-oxygeN/z3nim/edit/devel/src/z3nim.nim#L427" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/Double-oxygeN/z3nim/edit/devel/src/z3nim.nim#L438" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <a id="or.t,Ast[BoolSort],bool"></a>
@@ -2000,57 +2018,13 @@ class="link-seesrc" target="_blank">Source</a>
 
 
 &nbsp;&nbsp;<a
-href="https://github.com/Double-oxygeN/z3nim/tree/master/src/z3nim.nim#L430"
+href="https://github.com/Double-oxygeN/z3nim/tree/master/src/z3nim.nim#L441"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/Double-oxygeN/z3nim/edit/devel/src/z3nim.nim#L430" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/Double-oxygeN/z3nim/edit/devel/src/z3nim.nim#L441" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <a id="or.t,bool,Ast[BoolSort]"></a>
 <dt><pre><span class="Keyword">template</span> <a href="#or.t%2Cbool%2CAst%5BBoolSort%5D"><span class="Identifier">`or`</span></a><span class="Other">(</span><span class="Identifier">arg1</span><span class="Other">:</span> <span class="Identifier">bool</span><span class="Other">;</span> <span class="Identifier">arg2</span><span class="Other">:</span> <a href="z3nim.html#Ast"><span class="Identifier">Ast</span></a><span class="Other">[</span><a href="z3nim.html#BoolSort"><span class="Identifier">BoolSort</span></a><span class="Other">]</span><span class="Other">)</span><span class="Other">:</span> <a href="z3nim.html#Ast"><span class="Identifier">Ast</span></a><span class="Other">[</span><a href="z3nim.html#BoolSort"><span class="Identifier">BoolSort</span></a><span class="Other">]</span></pre></dt>
-<dd>
-
-
-&nbsp;&nbsp;<a
-href="https://github.com/Double-oxygeN/z3nim/tree/master/src/z3nim.nim#L433"
-class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/Double-oxygeN/z3nim/edit/devel/src/z3nim.nim#L433" class="link-seesrc" target="_blank" >Edit</a>
-
-</dd>
-<a id="xor.t,Ast[BoolSort],Ast[BoolSort]"></a>
-<dt><pre><span class="Keyword">template</span> <a href="#xor.t%2CAst%5BBoolSort%5D%2CAst%5BBoolSort%5D"><span class="Identifier">`xor`</span></a><span class="Other">(</span><span class="Identifier">arg1</span><span class="Other">,</span> <span class="Identifier">arg2</span><span class="Other">:</span> <a href="z3nim.html#Ast"><span class="Identifier">Ast</span></a><span class="Other">[</span><a href="z3nim.html#BoolSort"><span class="Identifier">BoolSort</span></a><span class="Other">]</span><span class="Other">)</span><span class="Other">:</span> <a href="z3nim.html#Ast"><span class="Identifier">Ast</span></a><span class="Other">[</span><a href="z3nim.html#BoolSort"><span class="Identifier">BoolSort</span></a><span class="Other">]</span></pre></dt>
-<dd>
-
-
-&nbsp;&nbsp;<a
-href="https://github.com/Double-oxygeN/z3nim/tree/master/src/z3nim.nim#L436"
-class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/Double-oxygeN/z3nim/edit/devel/src/z3nim.nim#L436" class="link-seesrc" target="_blank" >Edit</a>
-
-</dd>
-<a id="xor.t,bool,Ast[BoolSort]"></a>
-<dt><pre><span class="Keyword">template</span> <a href="#xor.t%2Cbool%2CAst%5BBoolSort%5D"><span class="Identifier">`xor`</span></a><span class="Other">(</span><span class="Identifier">arg1</span><span class="Other">:</span> <span class="Identifier">bool</span><span class="Other">;</span> <span class="Identifier">arg2</span><span class="Other">:</span> <a href="z3nim.html#Ast"><span class="Identifier">Ast</span></a><span class="Other">[</span><a href="z3nim.html#BoolSort"><span class="Identifier">BoolSort</span></a><span class="Other">]</span><span class="Other">)</span><span class="Other">:</span> <a href="z3nim.html#Ast"><span class="Identifier">Ast</span></a><span class="Other">[</span><a href="z3nim.html#BoolSort"><span class="Identifier">BoolSort</span></a><span class="Other">]</span></pre></dt>
-<dd>
-
-
-&nbsp;&nbsp;<a
-href="https://github.com/Double-oxygeN/z3nim/tree/master/src/z3nim.nim#L439"
-class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/Double-oxygeN/z3nim/edit/devel/src/z3nim.nim#L439" class="link-seesrc" target="_blank" >Edit</a>
-
-</dd>
-<a id="xor.t,Ast[BoolSort],bool"></a>
-<dt><pre><span class="Keyword">template</span> <a href="#xor.t%2CAst%5BBoolSort%5D%2Cbool"><span class="Identifier">`xor`</span></a><span class="Other">(</span><span class="Identifier">arg1</span><span class="Other">:</span> <a href="z3nim.html#Ast"><span class="Identifier">Ast</span></a><span class="Other">[</span><a href="z3nim.html#BoolSort"><span class="Identifier">BoolSort</span></a><span class="Other">]</span><span class="Other">;</span> <span class="Identifier">arg2</span><span class="Other">:</span> <span class="Identifier">bool</span><span class="Other">)</span><span class="Other">:</span> <a href="z3nim.html#Ast"><span class="Identifier">Ast</span></a><span class="Other">[</span><a href="z3nim.html#BoolSort"><span class="Identifier">BoolSort</span></a><span class="Other">]</span></pre></dt>
-<dd>
-
-
-&nbsp;&nbsp;<a
-href="https://github.com/Double-oxygeN/z3nim/tree/master/src/z3nim.nim#L442"
-class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/Double-oxygeN/z3nim/edit/devel/src/z3nim.nim#L442" class="link-seesrc" target="_blank" >Edit</a>
-
-</dd>
-<a id="==.t,Ast[S: not FloatSort],Ast[S: not FloatSort]"></a>
-<dt><pre><span class="Keyword">template</span> <a href="#%3D%3D.t%2CAst%5BS%3A+not+FloatSort%5D%2CAst%5BS%3A+not+FloatSort%5D"><span class="Identifier">`==`</span></a><span class="Other">[</span><span class="Identifier">S</span><span class="Other">]</span><span class="Other">(</span><span class="Identifier">arg1</span><span class="Other">,</span> <span class="Identifier">arg2</span><span class="Other">:</span> <a href="z3nim.html#Ast"><span class="Identifier">Ast</span></a><span class="Other">[</span><span class="Identifier">S</span><span class="Other">]</span><span class="Other">)</span><span class="Other">:</span> <a href="z3nim.html#Ast"><span class="Identifier">Ast</span></a><span class="Other">[</span><a href="z3nim.html#BoolSort"><span class="Identifier">BoolSort</span></a><span class="Other">]</span></pre></dt>
 <dd>
 
 
@@ -2060,8 +2034,19 @@ class="link-seesrc" target="_blank">Source</a>
 <a href="https://github.com/Double-oxygeN/z3nim/edit/devel/src/z3nim.nim#L444" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<a id="==.t,bool,Ast[BoolSort]"></a>
-<dt><pre><span class="Keyword">template</span> <a href="#%3D%3D.t%2Cbool%2CAst%5BBoolSort%5D"><span class="Identifier">`==`</span></a><span class="Other">(</span><span class="Identifier">arg1</span><span class="Other">:</span> <span class="Identifier">bool</span><span class="Other">;</span> <span class="Identifier">arg2</span><span class="Other">:</span> <a href="z3nim.html#Ast"><span class="Identifier">Ast</span></a><span class="Other">[</span><a href="z3nim.html#BoolSort"><span class="Identifier">BoolSort</span></a><span class="Other">]</span><span class="Other">)</span><span class="Other">:</span> <a href="z3nim.html#Ast"><span class="Identifier">Ast</span></a><span class="Other">[</span><a href="z3nim.html#BoolSort"><span class="Identifier">BoolSort</span></a><span class="Other">]</span></pre></dt>
+<a id="xor.t,Ast[BoolSort],Ast[BoolSort]"></a>
+<dt><pre><span class="Keyword">template</span> <a href="#xor.t%2CAst%5BBoolSort%5D%2CAst%5BBoolSort%5D"><span class="Identifier">`xor`</span></a><span class="Other">(</span><span class="Identifier">arg1</span><span class="Other">,</span> <span class="Identifier">arg2</span><span class="Other">:</span> <a href="z3nim.html#Ast"><span class="Identifier">Ast</span></a><span class="Other">[</span><a href="z3nim.html#BoolSort"><span class="Identifier">BoolSort</span></a><span class="Other">]</span><span class="Other">)</span><span class="Other">:</span> <a href="z3nim.html#Ast"><span class="Identifier">Ast</span></a><span class="Other">[</span><a href="z3nim.html#BoolSort"><span class="Identifier">BoolSort</span></a><span class="Other">]</span></pre></dt>
+<dd>
+
+
+&nbsp;&nbsp;<a
+href="https://github.com/Double-oxygeN/z3nim/tree/master/src/z3nim.nim#L447"
+class="link-seesrc" target="_blank">Source</a>
+<a href="https://github.com/Double-oxygeN/z3nim/edit/devel/src/z3nim.nim#L447" class="link-seesrc" target="_blank" >Edit</a>
+
+</dd>
+<a id="xor.t,bool,Ast[BoolSort]"></a>
+<dt><pre><span class="Keyword">template</span> <a href="#xor.t%2Cbool%2CAst%5BBoolSort%5D"><span class="Identifier">`xor`</span></a><span class="Other">(</span><span class="Identifier">arg1</span><span class="Other">:</span> <span class="Identifier">bool</span><span class="Other">;</span> <span class="Identifier">arg2</span><span class="Other">:</span> <a href="z3nim.html#Ast"><span class="Identifier">Ast</span></a><span class="Other">[</span><a href="z3nim.html#BoolSort"><span class="Identifier">BoolSort</span></a><span class="Other">]</span><span class="Other">)</span><span class="Other">:</span> <a href="z3nim.html#Ast"><span class="Identifier">Ast</span></a><span class="Other">[</span><a href="z3nim.html#BoolSort"><span class="Identifier">BoolSort</span></a><span class="Other">]</span></pre></dt>
 <dd>
 
 
@@ -2071,8 +2056,8 @@ class="link-seesrc" target="_blank">Source</a>
 <a href="https://github.com/Double-oxygeN/z3nim/edit/devel/src/z3nim.nim#L450" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<a id="==.t,Ast[BoolSort],bool"></a>
-<dt><pre><span class="Keyword">template</span> <a href="#%3D%3D.t%2CAst%5BBoolSort%5D%2Cbool"><span class="Identifier">`==`</span></a><span class="Other">(</span><span class="Identifier">arg1</span><span class="Other">:</span> <a href="z3nim.html#Ast"><span class="Identifier">Ast</span></a><span class="Other">[</span><a href="z3nim.html#BoolSort"><span class="Identifier">BoolSort</span></a><span class="Other">]</span><span class="Other">;</span> <span class="Identifier">arg2</span><span class="Other">:</span> <span class="Identifier">bool</span><span class="Other">)</span><span class="Other">:</span> <a href="z3nim.html#Ast"><span class="Identifier">Ast</span></a><span class="Other">[</span><a href="z3nim.html#BoolSort"><span class="Identifier">BoolSort</span></a><span class="Other">]</span></pre></dt>
+<a id="xor.t,Ast[BoolSort],bool"></a>
+<dt><pre><span class="Keyword">template</span> <a href="#xor.t%2CAst%5BBoolSort%5D%2Cbool"><span class="Identifier">`xor`</span></a><span class="Other">(</span><span class="Identifier">arg1</span><span class="Other">:</span> <a href="z3nim.html#Ast"><span class="Identifier">Ast</span></a><span class="Other">[</span><a href="z3nim.html#BoolSort"><span class="Identifier">BoolSort</span></a><span class="Other">]</span><span class="Other">;</span> <span class="Identifier">arg2</span><span class="Other">:</span> <span class="Identifier">bool</span><span class="Other">)</span><span class="Other">:</span> <a href="z3nim.html#Ast"><span class="Identifier">Ast</span></a><span class="Other">[</span><a href="z3nim.html#BoolSort"><span class="Identifier">BoolSort</span></a><span class="Other">]</span></pre></dt>
 <dd>
 
 
@@ -2082,15 +2067,48 @@ class="link-seesrc" target="_blank">Source</a>
 <a href="https://github.com/Double-oxygeN/z3nim/edit/devel/src/z3nim.nim#L453" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
+<a id="==.t,Ast[S: not FloatSort],Ast[S: not FloatSort]"></a>
+<dt><pre><span class="Keyword">template</span> <a href="#%3D%3D.t%2CAst%5BS%3A+not+FloatSort%5D%2CAst%5BS%3A+not+FloatSort%5D"><span class="Identifier">`==`</span></a><span class="Other">[</span><span class="Identifier">S</span><span class="Other">]</span><span class="Other">(</span><span class="Identifier">arg1</span><span class="Other">,</span> <span class="Identifier">arg2</span><span class="Other">:</span> <a href="z3nim.html#Ast"><span class="Identifier">Ast</span></a><span class="Other">[</span><span class="Identifier">S</span><span class="Other">]</span><span class="Other">)</span><span class="Other">:</span> <a href="z3nim.html#Ast"><span class="Identifier">Ast</span></a><span class="Other">[</span><a href="z3nim.html#BoolSort"><span class="Identifier">BoolSort</span></a><span class="Other">]</span></pre></dt>
+<dd>
+
+
+&nbsp;&nbsp;<a
+href="https://github.com/Double-oxygeN/z3nim/tree/master/src/z3nim.nim#L455"
+class="link-seesrc" target="_blank">Source</a>
+<a href="https://github.com/Double-oxygeN/z3nim/edit/devel/src/z3nim.nim#L455" class="link-seesrc" target="_blank" >Edit</a>
+
+</dd>
+<a id="==.t,bool,Ast[BoolSort]"></a>
+<dt><pre><span class="Keyword">template</span> <a href="#%3D%3D.t%2Cbool%2CAst%5BBoolSort%5D"><span class="Identifier">`==`</span></a><span class="Other">(</span><span class="Identifier">arg1</span><span class="Other">:</span> <span class="Identifier">bool</span><span class="Other">;</span> <span class="Identifier">arg2</span><span class="Other">:</span> <a href="z3nim.html#Ast"><span class="Identifier">Ast</span></a><span class="Other">[</span><a href="z3nim.html#BoolSort"><span class="Identifier">BoolSort</span></a><span class="Other">]</span><span class="Other">)</span><span class="Other">:</span> <a href="z3nim.html#Ast"><span class="Identifier">Ast</span></a><span class="Other">[</span><a href="z3nim.html#BoolSort"><span class="Identifier">BoolSort</span></a><span class="Other">]</span></pre></dt>
+<dd>
+
+
+&nbsp;&nbsp;<a
+href="https://github.com/Double-oxygeN/z3nim/tree/master/src/z3nim.nim#L461"
+class="link-seesrc" target="_blank">Source</a>
+<a href="https://github.com/Double-oxygeN/z3nim/edit/devel/src/z3nim.nim#L461" class="link-seesrc" target="_blank" >Edit</a>
+
+</dd>
+<a id="==.t,Ast[BoolSort],bool"></a>
+<dt><pre><span class="Keyword">template</span> <a href="#%3D%3D.t%2CAst%5BBoolSort%5D%2Cbool"><span class="Identifier">`==`</span></a><span class="Other">(</span><span class="Identifier">arg1</span><span class="Other">:</span> <a href="z3nim.html#Ast"><span class="Identifier">Ast</span></a><span class="Other">[</span><a href="z3nim.html#BoolSort"><span class="Identifier">BoolSort</span></a><span class="Other">]</span><span class="Other">;</span> <span class="Identifier">arg2</span><span class="Other">:</span> <span class="Identifier">bool</span><span class="Other">)</span><span class="Other">:</span> <a href="z3nim.html#Ast"><span class="Identifier">Ast</span></a><span class="Other">[</span><a href="z3nim.html#BoolSort"><span class="Identifier">BoolSort</span></a><span class="Other">]</span></pre></dt>
+<dd>
+
+
+&nbsp;&nbsp;<a
+href="https://github.com/Double-oxygeN/z3nim/tree/master/src/z3nim.nim#L464"
+class="link-seesrc" target="_blank">Source</a>
+<a href="https://github.com/Double-oxygeN/z3nim/edit/devel/src/z3nim.nim#L464" class="link-seesrc" target="_blank" >Edit</a>
+
+</dd>
 <a id="==.t,int,Ast[IntSort]"></a>
 <dt><pre><span class="Keyword">template</span> <a href="#%3D%3D.t%2Cint%2CAst%5BIntSort%5D"><span class="Identifier">`==`</span></a><span class="Other">(</span><span class="Identifier">arg1</span><span class="Other">:</span> <span class="Identifier">int</span><span class="Other">;</span> <span class="Identifier">arg2</span><span class="Other">:</span> <a href="z3nim.html#Ast"><span class="Identifier">Ast</span></a><span class="Other">[</span><a href="z3nim.html#IntSort"><span class="Identifier">IntSort</span></a><span class="Other">]</span><span class="Other">)</span><span class="Other">:</span> <a href="z3nim.html#Ast"><span class="Identifier">Ast</span></a><span class="Other">[</span><a href="z3nim.html#BoolSort"><span class="Identifier">BoolSort</span></a><span class="Other">]</span></pre></dt>
 <dd>
 
 
 &nbsp;&nbsp;<a
-href="https://github.com/Double-oxygeN/z3nim/tree/master/src/z3nim.nim#L456"
+href="https://github.com/Double-oxygeN/z3nim/tree/master/src/z3nim.nim#L467"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/Double-oxygeN/z3nim/edit/devel/src/z3nim.nim#L456" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/Double-oxygeN/z3nim/edit/devel/src/z3nim.nim#L467" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <a id="==.t,Ast[IntSort],int"></a>
@@ -2099,9 +2117,9 @@ class="link-seesrc" target="_blank">Source</a>
 
 
 &nbsp;&nbsp;<a
-href="https://github.com/Double-oxygeN/z3nim/tree/master/src/z3nim.nim#L459"
+href="https://github.com/Double-oxygeN/z3nim/tree/master/src/z3nim.nim#L470"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/Double-oxygeN/z3nim/edit/devel/src/z3nim.nim#L459" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/Double-oxygeN/z3nim/edit/devel/src/z3nim.nim#L470" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <a id="==.t,float,Ast[RealSort]"></a>
@@ -2110,9 +2128,9 @@ class="link-seesrc" target="_blank">Source</a>
 
 
 &nbsp;&nbsp;<a
-href="https://github.com/Double-oxygeN/z3nim/tree/master/src/z3nim.nim#L462"
+href="https://github.com/Double-oxygeN/z3nim/tree/master/src/z3nim.nim#L473"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/Double-oxygeN/z3nim/edit/devel/src/z3nim.nim#L462" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/Double-oxygeN/z3nim/edit/devel/src/z3nim.nim#L473" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <a id="==.t,Ast[RealSort],float"></a>
@@ -2121,9 +2139,9 @@ class="link-seesrc" target="_blank">Source</a>
 
 
 &nbsp;&nbsp;<a
-href="https://github.com/Double-oxygeN/z3nim/tree/master/src/z3nim.nim#L465"
+href="https://github.com/Double-oxygeN/z3nim/tree/master/src/z3nim.nim#L476"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/Double-oxygeN/z3nim/edit/devel/src/z3nim.nim#L465" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/Double-oxygeN/z3nim/edit/devel/src/z3nim.nim#L476" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <a id="==.t,Ast[S: FloatSort],Ast[S: FloatSort]"></a>
@@ -2132,9 +2150,9 @@ class="link-seesrc" target="_blank">Source</a>
 
 
 &nbsp;&nbsp;<a
-href="https://github.com/Double-oxygeN/z3nim/tree/master/src/z3nim.nim#L468"
+href="https://github.com/Double-oxygeN/z3nim/tree/master/src/z3nim.nim#L479"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/Double-oxygeN/z3nim/edit/devel/src/z3nim.nim#L468" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/Double-oxygeN/z3nim/edit/devel/src/z3nim.nim#L479" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <a id="distinc.t,varargs[Ast[S],toAst]"></a>
@@ -2143,9 +2161,9 @@ class="link-seesrc" target="_blank">Source</a>
 
 
 &nbsp;&nbsp;<a
-href="https://github.com/Double-oxygeN/z3nim/tree/master/src/z3nim.nim#L471"
+href="https://github.com/Double-oxygeN/z3nim/tree/master/src/z3nim.nim#L482"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/Double-oxygeN/z3nim/edit/devel/src/z3nim.nim#L471" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/Double-oxygeN/z3nim/edit/devel/src/z3nim.nim#L482" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <a id="==>.t,Ast[BoolSort],Ast[BoolSort]"></a>
@@ -2154,9 +2172,9 @@ class="link-seesrc" target="_blank">Source</a>
 
 
 &nbsp;&nbsp;<a
-href="https://github.com/Double-oxygeN/z3nim/tree/master/src/z3nim.nim#L485"
+href="https://github.com/Double-oxygeN/z3nim/tree/master/src/z3nim.nim#L496"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/Double-oxygeN/z3nim/edit/devel/src/z3nim.nim#L485" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/Double-oxygeN/z3nim/edit/devel/src/z3nim.nim#L496" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <a id="==>.t,bool,Ast[BoolSort]"></a>
@@ -2165,9 +2183,9 @@ class="link-seesrc" target="_blank">Source</a>
 
 
 &nbsp;&nbsp;<a
-href="https://github.com/Double-oxygeN/z3nim/tree/master/src/z3nim.nim#L488"
+href="https://github.com/Double-oxygeN/z3nim/tree/master/src/z3nim.nim#L499"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/Double-oxygeN/z3nim/edit/devel/src/z3nim.nim#L488" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/Double-oxygeN/z3nim/edit/devel/src/z3nim.nim#L499" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <a id="==>.t,Ast[BoolSort],bool"></a>
@@ -2176,9 +2194,9 @@ class="link-seesrc" target="_blank">Source</a>
 
 
 &nbsp;&nbsp;<a
-href="https://github.com/Double-oxygeN/z3nim/tree/master/src/z3nim.nim#L491"
+href="https://github.com/Double-oxygeN/z3nim/tree/master/src/z3nim.nim#L502"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/Double-oxygeN/z3nim/edit/devel/src/z3nim.nim#L491" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/Double-oxygeN/z3nim/edit/devel/src/z3nim.nim#L502" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <a id="ite.t,Ast[BoolSort],Ast[S],Ast[S]"></a>
@@ -2187,9 +2205,9 @@ class="link-seesrc" target="_blank">Source</a>
 
 
 &nbsp;&nbsp;<a
-href="https://github.com/Double-oxygeN/z3nim/tree/master/src/z3nim.nim#L494"
+href="https://github.com/Double-oxygeN/z3nim/tree/master/src/z3nim.nim#L505"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/Double-oxygeN/z3nim/edit/devel/src/z3nim.nim#L494" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/Double-oxygeN/z3nim/edit/devel/src/z3nim.nim#L505" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <a id="ite.t,bool,Ast[S],Ast[S]"></a>
@@ -2198,9 +2216,9 @@ class="link-seesrc" target="_blank">Source</a>
 
 
 &nbsp;&nbsp;<a
-href="https://github.com/Double-oxygeN/z3nim/tree/master/src/z3nim.nim#L497"
+href="https://github.com/Double-oxygeN/z3nim/tree/master/src/z3nim.nim#L508"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/Double-oxygeN/z3nim/edit/devel/src/z3nim.nim#L497" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/Double-oxygeN/z3nim/edit/devel/src/z3nim.nim#L508" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <a id="numAdd.t,varargs[Ast[S: NumericSort],toAst]"></a>
@@ -2209,9 +2227,9 @@ class="link-seesrc" target="_blank">Source</a>
 
 
 &nbsp;&nbsp;<a
-href="https://github.com/Double-oxygeN/z3nim/tree/master/src/z3nim.nim#L500"
+href="https://github.com/Double-oxygeN/z3nim/tree/master/src/z3nim.nim#L511"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/Double-oxygeN/z3nim/edit/devel/src/z3nim.nim#L500" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/Double-oxygeN/z3nim/edit/devel/src/z3nim.nim#L511" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <a id="+.t,Ast[IntSort],Ast[IntSort]"></a>
@@ -2220,9 +2238,9 @@ class="link-seesrc" target="_blank">Source</a>
 
 
 &nbsp;&nbsp;<a
-href="https://github.com/Double-oxygeN/z3nim/tree/master/src/z3nim.nim#L514"
+href="https://github.com/Double-oxygeN/z3nim/tree/master/src/z3nim.nim#L525"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/Double-oxygeN/z3nim/edit/devel/src/z3nim.nim#L514" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/Double-oxygeN/z3nim/edit/devel/src/z3nim.nim#L525" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <a id="+.t,Ast[IntSort],int"></a>
@@ -2231,9 +2249,9 @@ class="link-seesrc" target="_blank">Source</a>
 
 
 &nbsp;&nbsp;<a
-href="https://github.com/Double-oxygeN/z3nim/tree/master/src/z3nim.nim#L517"
+href="https://github.com/Double-oxygeN/z3nim/tree/master/src/z3nim.nim#L528"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/Double-oxygeN/z3nim/edit/devel/src/z3nim.nim#L517" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/Double-oxygeN/z3nim/edit/devel/src/z3nim.nim#L528" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <a id="+.t,int,Ast[IntSort]"></a>
@@ -2242,9 +2260,9 @@ class="link-seesrc" target="_blank">Source</a>
 
 
 &nbsp;&nbsp;<a
-href="https://github.com/Double-oxygeN/z3nim/tree/master/src/z3nim.nim#L520"
+href="https://github.com/Double-oxygeN/z3nim/tree/master/src/z3nim.nim#L531"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/Double-oxygeN/z3nim/edit/devel/src/z3nim.nim#L520" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/Double-oxygeN/z3nim/edit/devel/src/z3nim.nim#L531" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <a id="+.t,Ast[RealSort],Ast[RealSort]"></a>
@@ -2253,9 +2271,9 @@ class="link-seesrc" target="_blank">Source</a>
 
 
 &nbsp;&nbsp;<a
-href="https://github.com/Double-oxygeN/z3nim/tree/master/src/z3nim.nim#L523"
+href="https://github.com/Double-oxygeN/z3nim/tree/master/src/z3nim.nim#L534"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/Double-oxygeN/z3nim/edit/devel/src/z3nim.nim#L523" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/Double-oxygeN/z3nim/edit/devel/src/z3nim.nim#L534" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <a id="+.t,Ast[RealSort],float"></a>
@@ -2264,9 +2282,9 @@ class="link-seesrc" target="_blank">Source</a>
 
 
 &nbsp;&nbsp;<a
-href="https://github.com/Double-oxygeN/z3nim/tree/master/src/z3nim.nim#L526"
+href="https://github.com/Double-oxygeN/z3nim/tree/master/src/z3nim.nim#L537"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/Double-oxygeN/z3nim/edit/devel/src/z3nim.nim#L526" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/Double-oxygeN/z3nim/edit/devel/src/z3nim.nim#L537" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <a id="+.t,float,Ast[RealSort]"></a>
@@ -2275,9 +2293,9 @@ class="link-seesrc" target="_blank">Source</a>
 
 
 &nbsp;&nbsp;<a
-href="https://github.com/Double-oxygeN/z3nim/tree/master/src/z3nim.nim#L529"
+href="https://github.com/Double-oxygeN/z3nim/tree/master/src/z3nim.nim#L540"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/Double-oxygeN/z3nim/edit/devel/src/z3nim.nim#L529" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/Double-oxygeN/z3nim/edit/devel/src/z3nim.nim#L540" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <a id="+.t,Ast[S: FloatSort],Ast[S: FloatSort]"></a>
@@ -2286,9 +2304,9 @@ class="link-seesrc" target="_blank">Source</a>
 
 
 &nbsp;&nbsp;<a
-href="https://github.com/Double-oxygeN/z3nim/tree/master/src/z3nim.nim#L532"
+href="https://github.com/Double-oxygeN/z3nim/tree/master/src/z3nim.nim#L543"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/Double-oxygeN/z3nim/edit/devel/src/z3nim.nim#L532" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/Double-oxygeN/z3nim/edit/devel/src/z3nim.nim#L543" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <a id="numMul.t,varargs[Ast[S: NumericSort],toAst]"></a>
@@ -2297,9 +2315,9 @@ class="link-seesrc" target="_blank">Source</a>
 
 
 &nbsp;&nbsp;<a
-href="https://github.com/Double-oxygeN/z3nim/tree/master/src/z3nim.nim#L535"
+href="https://github.com/Double-oxygeN/z3nim/tree/master/src/z3nim.nim#L546"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/Double-oxygeN/z3nim/edit/devel/src/z3nim.nim#L535" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/Double-oxygeN/z3nim/edit/devel/src/z3nim.nim#L546" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <a id="*.t,Ast[IntSort],Ast[IntSort]"></a>
@@ -2308,9 +2326,9 @@ class="link-seesrc" target="_blank">Source</a>
 
 
 &nbsp;&nbsp;<a
-href="https://github.com/Double-oxygeN/z3nim/tree/master/src/z3nim.nim#L549"
+href="https://github.com/Double-oxygeN/z3nim/tree/master/src/z3nim.nim#L560"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/Double-oxygeN/z3nim/edit/devel/src/z3nim.nim#L549" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/Double-oxygeN/z3nim/edit/devel/src/z3nim.nim#L560" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <a id="*.t,Ast[IntSort],int"></a>
@@ -2319,9 +2337,9 @@ class="link-seesrc" target="_blank">Source</a>
 
 
 &nbsp;&nbsp;<a
-href="https://github.com/Double-oxygeN/z3nim/tree/master/src/z3nim.nim#L552"
+href="https://github.com/Double-oxygeN/z3nim/tree/master/src/z3nim.nim#L563"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/Double-oxygeN/z3nim/edit/devel/src/z3nim.nim#L552" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/Double-oxygeN/z3nim/edit/devel/src/z3nim.nim#L563" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <a id="*.t,int,Ast[IntSort]"></a>
@@ -2330,9 +2348,9 @@ class="link-seesrc" target="_blank">Source</a>
 
 
 &nbsp;&nbsp;<a
-href="https://github.com/Double-oxygeN/z3nim/tree/master/src/z3nim.nim#L555"
+href="https://github.com/Double-oxygeN/z3nim/tree/master/src/z3nim.nim#L566"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/Double-oxygeN/z3nim/edit/devel/src/z3nim.nim#L555" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/Double-oxygeN/z3nim/edit/devel/src/z3nim.nim#L566" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <a id="*.t,Ast[RealSort],Ast[RealSort]"></a>
@@ -2341,9 +2359,9 @@ class="link-seesrc" target="_blank">Source</a>
 
 
 &nbsp;&nbsp;<a
-href="https://github.com/Double-oxygeN/z3nim/tree/master/src/z3nim.nim#L558"
+href="https://github.com/Double-oxygeN/z3nim/tree/master/src/z3nim.nim#L569"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/Double-oxygeN/z3nim/edit/devel/src/z3nim.nim#L558" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/Double-oxygeN/z3nim/edit/devel/src/z3nim.nim#L569" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <a id="*.t,Ast[RealSort],float"></a>
@@ -2352,9 +2370,9 @@ class="link-seesrc" target="_blank">Source</a>
 
 
 &nbsp;&nbsp;<a
-href="https://github.com/Double-oxygeN/z3nim/tree/master/src/z3nim.nim#L561"
+href="https://github.com/Double-oxygeN/z3nim/tree/master/src/z3nim.nim#L572"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/Double-oxygeN/z3nim/edit/devel/src/z3nim.nim#L561" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/Double-oxygeN/z3nim/edit/devel/src/z3nim.nim#L572" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <a id="*.t,float,Ast[RealSort]"></a>
@@ -2363,9 +2381,9 @@ class="link-seesrc" target="_blank">Source</a>
 
 
 &nbsp;&nbsp;<a
-href="https://github.com/Double-oxygeN/z3nim/tree/master/src/z3nim.nim#L564"
+href="https://github.com/Double-oxygeN/z3nim/tree/master/src/z3nim.nim#L575"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/Double-oxygeN/z3nim/edit/devel/src/z3nim.nim#L564" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/Double-oxygeN/z3nim/edit/devel/src/z3nim.nim#L575" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <a id="*.t,Ast[S: FloatSort],Ast[S: FloatSort]"></a>
@@ -2374,9 +2392,9 @@ class="link-seesrc" target="_blank">Source</a>
 
 
 &nbsp;&nbsp;<a
-href="https://github.com/Double-oxygeN/z3nim/tree/master/src/z3nim.nim#L567"
+href="https://github.com/Double-oxygeN/z3nim/tree/master/src/z3nim.nim#L578"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/Double-oxygeN/z3nim/edit/devel/src/z3nim.nim#L567" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/Double-oxygeN/z3nim/edit/devel/src/z3nim.nim#L578" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <a id="-.t,Ast[S: NumericSort]"></a>
@@ -2385,9 +2403,9 @@ class="link-seesrc" target="_blank">Source</a>
 
 
 &nbsp;&nbsp;<a
-href="https://github.com/Double-oxygeN/z3nim/tree/master/src/z3nim.nim#L570"
+href="https://github.com/Double-oxygeN/z3nim/tree/master/src/z3nim.nim#L581"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/Double-oxygeN/z3nim/edit/devel/src/z3nim.nim#L570" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/Double-oxygeN/z3nim/edit/devel/src/z3nim.nim#L581" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <a id="-.t,Ast[S: FloatSort]"></a>
@@ -2396,9 +2414,9 @@ class="link-seesrc" target="_blank">Source</a>
 
 
 &nbsp;&nbsp;<a
-href="https://github.com/Double-oxygeN/z3nim/tree/master/src/z3nim.nim#L573"
+href="https://github.com/Double-oxygeN/z3nim/tree/master/src/z3nim.nim#L584"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/Double-oxygeN/z3nim/edit/devel/src/z3nim.nim#L573" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/Double-oxygeN/z3nim/edit/devel/src/z3nim.nim#L584" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <a id="astSub.t,varargs[Ast[S: NumericSort],toAst]"></a>
@@ -2407,9 +2425,9 @@ class="link-seesrc" target="_blank">Source</a>
 
 
 &nbsp;&nbsp;<a
-href="https://github.com/Double-oxygeN/z3nim/tree/master/src/z3nim.nim#L576"
+href="https://github.com/Double-oxygeN/z3nim/tree/master/src/z3nim.nim#L587"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/Double-oxygeN/z3nim/edit/devel/src/z3nim.nim#L576" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/Double-oxygeN/z3nim/edit/devel/src/z3nim.nim#L587" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <a id="-.t,Ast[IntSort],Ast[IntSort]"></a>
@@ -2418,9 +2436,9 @@ class="link-seesrc" target="_blank">Source</a>
 
 
 &nbsp;&nbsp;<a
-href="https://github.com/Double-oxygeN/z3nim/tree/master/src/z3nim.nim#L590"
+href="https://github.com/Double-oxygeN/z3nim/tree/master/src/z3nim.nim#L601"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/Double-oxygeN/z3nim/edit/devel/src/z3nim.nim#L590" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/Double-oxygeN/z3nim/edit/devel/src/z3nim.nim#L601" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <a id="-.t,Ast[IntSort],int"></a>
@@ -2429,9 +2447,9 @@ class="link-seesrc" target="_blank">Source</a>
 
 
 &nbsp;&nbsp;<a
-href="https://github.com/Double-oxygeN/z3nim/tree/master/src/z3nim.nim#L593"
+href="https://github.com/Double-oxygeN/z3nim/tree/master/src/z3nim.nim#L604"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/Double-oxygeN/z3nim/edit/devel/src/z3nim.nim#L593" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/Double-oxygeN/z3nim/edit/devel/src/z3nim.nim#L604" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <a id="-.t,int,Ast[IntSort]"></a>
@@ -2440,9 +2458,9 @@ class="link-seesrc" target="_blank">Source</a>
 
 
 &nbsp;&nbsp;<a
-href="https://github.com/Double-oxygeN/z3nim/tree/master/src/z3nim.nim#L596"
+href="https://github.com/Double-oxygeN/z3nim/tree/master/src/z3nim.nim#L607"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/Double-oxygeN/z3nim/edit/devel/src/z3nim.nim#L596" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/Double-oxygeN/z3nim/edit/devel/src/z3nim.nim#L607" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <a id="-.t,Ast[RealSort],Ast[RealSort]"></a>
@@ -2451,9 +2469,9 @@ class="link-seesrc" target="_blank">Source</a>
 
 
 &nbsp;&nbsp;<a
-href="https://github.com/Double-oxygeN/z3nim/tree/master/src/z3nim.nim#L599"
+href="https://github.com/Double-oxygeN/z3nim/tree/master/src/z3nim.nim#L610"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/Double-oxygeN/z3nim/edit/devel/src/z3nim.nim#L599" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/Double-oxygeN/z3nim/edit/devel/src/z3nim.nim#L610" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <a id="-.t,Ast[RealSort],float"></a>
@@ -2462,9 +2480,9 @@ class="link-seesrc" target="_blank">Source</a>
 
 
 &nbsp;&nbsp;<a
-href="https://github.com/Double-oxygeN/z3nim/tree/master/src/z3nim.nim#L602"
+href="https://github.com/Double-oxygeN/z3nim/tree/master/src/z3nim.nim#L613"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/Double-oxygeN/z3nim/edit/devel/src/z3nim.nim#L602" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/Double-oxygeN/z3nim/edit/devel/src/z3nim.nim#L613" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <a id="-.t,float,Ast[RealSort]"></a>
@@ -2473,9 +2491,9 @@ class="link-seesrc" target="_blank">Source</a>
 
 
 &nbsp;&nbsp;<a
-href="https://github.com/Double-oxygeN/z3nim/tree/master/src/z3nim.nim#L605"
+href="https://github.com/Double-oxygeN/z3nim/tree/master/src/z3nim.nim#L616"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/Double-oxygeN/z3nim/edit/devel/src/z3nim.nim#L605" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/Double-oxygeN/z3nim/edit/devel/src/z3nim.nim#L616" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <a id="-.t,Ast[S: FloatSort],Ast[S: FloatSort]"></a>
@@ -2484,9 +2502,9 @@ class="link-seesrc" target="_blank">Source</a>
 
 
 &nbsp;&nbsp;<a
-href="https://github.com/Double-oxygeN/z3nim/tree/master/src/z3nim.nim#L608"
+href="https://github.com/Double-oxygeN/z3nim/tree/master/src/z3nim.nim#L619"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/Double-oxygeN/z3nim/edit/devel/src/z3nim.nim#L608" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/Double-oxygeN/z3nim/edit/devel/src/z3nim.nim#L619" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <a id="div.t,Ast[IntSort],Ast[IntSort]"></a>
@@ -2495,9 +2513,9 @@ class="link-seesrc" target="_blank">Source</a>
 
 
 &nbsp;&nbsp;<a
-href="https://github.com/Double-oxygeN/z3nim/tree/master/src/z3nim.nim#L611"
+href="https://github.com/Double-oxygeN/z3nim/tree/master/src/z3nim.nim#L622"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/Double-oxygeN/z3nim/edit/devel/src/z3nim.nim#L611" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/Double-oxygeN/z3nim/edit/devel/src/z3nim.nim#L622" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <a id="div.t,int,Ast[IntSort]"></a>
@@ -2506,9 +2524,9 @@ class="link-seesrc" target="_blank">Source</a>
 
 
 &nbsp;&nbsp;<a
-href="https://github.com/Double-oxygeN/z3nim/tree/master/src/z3nim.nim#L614"
+href="https://github.com/Double-oxygeN/z3nim/tree/master/src/z3nim.nim#L625"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/Double-oxygeN/z3nim/edit/devel/src/z3nim.nim#L614" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/Double-oxygeN/z3nim/edit/devel/src/z3nim.nim#L625" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <a id="div.t,Ast[IntSort],int"></a>
@@ -2517,9 +2535,9 @@ class="link-seesrc" target="_blank">Source</a>
 
 
 &nbsp;&nbsp;<a
-href="https://github.com/Double-oxygeN/z3nim/tree/master/src/z3nim.nim#L617"
+href="https://github.com/Double-oxygeN/z3nim/tree/master/src/z3nim.nim#L628"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/Double-oxygeN/z3nim/edit/devel/src/z3nim.nim#L617" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/Double-oxygeN/z3nim/edit/devel/src/z3nim.nim#L628" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <a id="/.t,Ast[RealSort],Ast[RealSort]"></a>
@@ -2528,9 +2546,9 @@ class="link-seesrc" target="_blank">Source</a>
 
 
 &nbsp;&nbsp;<a
-href="https://github.com/Double-oxygeN/z3nim/tree/master/src/z3nim.nim#L620"
+href="https://github.com/Double-oxygeN/z3nim/tree/master/src/z3nim.nim#L631"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/Double-oxygeN/z3nim/edit/devel/src/z3nim.nim#L620" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/Double-oxygeN/z3nim/edit/devel/src/z3nim.nim#L631" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <a id="/.t,float,Ast[RealSort]"></a>
@@ -2539,9 +2557,9 @@ class="link-seesrc" target="_blank">Source</a>
 
 
 &nbsp;&nbsp;<a
-href="https://github.com/Double-oxygeN/z3nim/tree/master/src/z3nim.nim#L623"
+href="https://github.com/Double-oxygeN/z3nim/tree/master/src/z3nim.nim#L634"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/Double-oxygeN/z3nim/edit/devel/src/z3nim.nim#L623" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/Double-oxygeN/z3nim/edit/devel/src/z3nim.nim#L634" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <a id="/.t,Ast[RealSort],float"></a>
@@ -2550,9 +2568,9 @@ class="link-seesrc" target="_blank">Source</a>
 
 
 &nbsp;&nbsp;<a
-href="https://github.com/Double-oxygeN/z3nim/tree/master/src/z3nim.nim#L626"
+href="https://github.com/Double-oxygeN/z3nim/tree/master/src/z3nim.nim#L637"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/Double-oxygeN/z3nim/edit/devel/src/z3nim.nim#L626" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/Double-oxygeN/z3nim/edit/devel/src/z3nim.nim#L637" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <a id="/.t,Ast[S: FloatSort],Ast[S: FloatSort]"></a>
@@ -2561,9 +2579,9 @@ class="link-seesrc" target="_blank">Source</a>
 
 
 &nbsp;&nbsp;<a
-href="https://github.com/Double-oxygeN/z3nim/tree/master/src/z3nim.nim#L629"
+href="https://github.com/Double-oxygeN/z3nim/tree/master/src/z3nim.nim#L640"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/Double-oxygeN/z3nim/edit/devel/src/z3nim.nim#L629" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/Double-oxygeN/z3nim/edit/devel/src/z3nim.nim#L640" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <a id="mod.t,Ast[IntSort],Ast[IntSort]"></a>
@@ -2572,9 +2590,9 @@ class="link-seesrc" target="_blank">Source</a>
 
 
 &nbsp;&nbsp;<a
-href="https://github.com/Double-oxygeN/z3nim/tree/master/src/z3nim.nim#L632"
+href="https://github.com/Double-oxygeN/z3nim/tree/master/src/z3nim.nim#L643"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/Double-oxygeN/z3nim/edit/devel/src/z3nim.nim#L632" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/Double-oxygeN/z3nim/edit/devel/src/z3nim.nim#L643" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <a id="mod.t,int,Ast[IntSort]"></a>
@@ -2583,9 +2601,9 @@ class="link-seesrc" target="_blank">Source</a>
 
 
 &nbsp;&nbsp;<a
-href="https://github.com/Double-oxygeN/z3nim/tree/master/src/z3nim.nim#L635"
+href="https://github.com/Double-oxygeN/z3nim/tree/master/src/z3nim.nim#L646"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/Double-oxygeN/z3nim/edit/devel/src/z3nim.nim#L635" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/Double-oxygeN/z3nim/edit/devel/src/z3nim.nim#L646" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <a id="mod.t,Ast[IntSort],int"></a>
@@ -2594,9 +2612,9 @@ class="link-seesrc" target="_blank">Source</a>
 
 
 &nbsp;&nbsp;<a
-href="https://github.com/Double-oxygeN/z3nim/tree/master/src/z3nim.nim#L638"
+href="https://github.com/Double-oxygeN/z3nim/tree/master/src/z3nim.nim#L649"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/Double-oxygeN/z3nim/edit/devel/src/z3nim.nim#L638" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/Double-oxygeN/z3nim/edit/devel/src/z3nim.nim#L649" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <a id="remainder.t,Ast[S: FloatSort],Ast[S: FloatSort]"></a>
@@ -2605,9 +2623,9 @@ class="link-seesrc" target="_blank">Source</a>
 
 
 &nbsp;&nbsp;<a
-href="https://github.com/Double-oxygeN/z3nim/tree/master/src/z3nim.nim#L641"
+href="https://github.com/Double-oxygeN/z3nim/tree/master/src/z3nim.nim#L652"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/Double-oxygeN/z3nim/edit/devel/src/z3nim.nim#L641" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/Double-oxygeN/z3nim/edit/devel/src/z3nim.nim#L652" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <a id="^.t,Ast[S: NumericSort],Ast[S: NumericSort]"></a>
@@ -2616,9 +2634,9 @@ class="link-seesrc" target="_blank">Source</a>
 
 
 &nbsp;&nbsp;<a
-href="https://github.com/Double-oxygeN/z3nim/tree/master/src/z3nim.nim#L644"
+href="https://github.com/Double-oxygeN/z3nim/tree/master/src/z3nim.nim#L655"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/Double-oxygeN/z3nim/edit/devel/src/z3nim.nim#L644" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/Double-oxygeN/z3nim/edit/devel/src/z3nim.nim#L655" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <a id="^.t,int,Ast[IntSort]"></a>
@@ -2627,9 +2645,9 @@ class="link-seesrc" target="_blank">Source</a>
 
 
 &nbsp;&nbsp;<a
-href="https://github.com/Double-oxygeN/z3nim/tree/master/src/z3nim.nim#L647"
+href="https://github.com/Double-oxygeN/z3nim/tree/master/src/z3nim.nim#L658"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/Double-oxygeN/z3nim/edit/devel/src/z3nim.nim#L647" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/Double-oxygeN/z3nim/edit/devel/src/z3nim.nim#L658" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <a id="^.t,Ast[IntSort],int"></a>
@@ -2638,9 +2656,9 @@ class="link-seesrc" target="_blank">Source</a>
 
 
 &nbsp;&nbsp;<a
-href="https://github.com/Double-oxygeN/z3nim/tree/master/src/z3nim.nim#L650"
+href="https://github.com/Double-oxygeN/z3nim/tree/master/src/z3nim.nim#L661"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/Double-oxygeN/z3nim/edit/devel/src/z3nim.nim#L650" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/Double-oxygeN/z3nim/edit/devel/src/z3nim.nim#L661" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <a id="^.t,float,Ast[RealSort]"></a>
@@ -2649,9 +2667,9 @@ class="link-seesrc" target="_blank">Source</a>
 
 
 &nbsp;&nbsp;<a
-href="https://github.com/Double-oxygeN/z3nim/tree/master/src/z3nim.nim#L657"
+href="https://github.com/Double-oxygeN/z3nim/tree/master/src/z3nim.nim#L668"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/Double-oxygeN/z3nim/edit/devel/src/z3nim.nim#L657" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/Double-oxygeN/z3nim/edit/devel/src/z3nim.nim#L668" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <a id="^.t,Ast[RealSort],float"></a>
@@ -2660,9 +2678,9 @@ class="link-seesrc" target="_blank">Source</a>
 
 
 &nbsp;&nbsp;<a
-href="https://github.com/Double-oxygeN/z3nim/tree/master/src/z3nim.nim#L660"
+href="https://github.com/Double-oxygeN/z3nim/tree/master/src/z3nim.nim#L671"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/Double-oxygeN/z3nim/edit/devel/src/z3nim.nim#L660" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/Double-oxygeN/z3nim/edit/devel/src/z3nim.nim#L671" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <a id="<.t,Ast[S: NumericSort],Ast[S: NumericSort]"></a>
@@ -2671,9 +2689,9 @@ class="link-seesrc" target="_blank">Source</a>
 
 
 &nbsp;&nbsp;<a
-href="https://github.com/Double-oxygeN/z3nim/tree/master/src/z3nim.nim#L663"
+href="https://github.com/Double-oxygeN/z3nim/tree/master/src/z3nim.nim#L674"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/Double-oxygeN/z3nim/edit/devel/src/z3nim.nim#L663" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/Double-oxygeN/z3nim/edit/devel/src/z3nim.nim#L674" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <a id="<.t,int,Ast[IntSort]"></a>
@@ -2682,9 +2700,9 @@ class="link-seesrc" target="_blank">Source</a>
 
 
 &nbsp;&nbsp;<a
-href="https://github.com/Double-oxygeN/z3nim/tree/master/src/z3nim.nim#L666"
+href="https://github.com/Double-oxygeN/z3nim/tree/master/src/z3nim.nim#L677"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/Double-oxygeN/z3nim/edit/devel/src/z3nim.nim#L666" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/Double-oxygeN/z3nim/edit/devel/src/z3nim.nim#L677" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <a id="<.t,Ast[IntSort],int"></a>
@@ -2693,9 +2711,9 @@ class="link-seesrc" target="_blank">Source</a>
 
 
 &nbsp;&nbsp;<a
-href="https://github.com/Double-oxygeN/z3nim/tree/master/src/z3nim.nim#L669"
+href="https://github.com/Double-oxygeN/z3nim/tree/master/src/z3nim.nim#L680"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/Double-oxygeN/z3nim/edit/devel/src/z3nim.nim#L669" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/Double-oxygeN/z3nim/edit/devel/src/z3nim.nim#L680" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <a id="<.t,float,Ast[RealSort]"></a>
@@ -2704,9 +2722,9 @@ class="link-seesrc" target="_blank">Source</a>
 
 
 &nbsp;&nbsp;<a
-href="https://github.com/Double-oxygeN/z3nim/tree/master/src/z3nim.nim#L672"
+href="https://github.com/Double-oxygeN/z3nim/tree/master/src/z3nim.nim#L683"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/Double-oxygeN/z3nim/edit/devel/src/z3nim.nim#L672" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/Double-oxygeN/z3nim/edit/devel/src/z3nim.nim#L683" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <a id="<.t,Ast[RealSort],float"></a>
@@ -2715,9 +2733,9 @@ class="link-seesrc" target="_blank">Source</a>
 
 
 &nbsp;&nbsp;<a
-href="https://github.com/Double-oxygeN/z3nim/tree/master/src/z3nim.nim#L675"
+href="https://github.com/Double-oxygeN/z3nim/tree/master/src/z3nim.nim#L686"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/Double-oxygeN/z3nim/edit/devel/src/z3nim.nim#L675" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/Double-oxygeN/z3nim/edit/devel/src/z3nim.nim#L686" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <a id="<.t,Ast[S: FloatSort],Ast[S: FloatSort]"></a>
@@ -2726,9 +2744,9 @@ class="link-seesrc" target="_blank">Source</a>
 
 
 &nbsp;&nbsp;<a
-href="https://github.com/Double-oxygeN/z3nim/tree/master/src/z3nim.nim#L678"
+href="https://github.com/Double-oxygeN/z3nim/tree/master/src/z3nim.nim#L689"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/Double-oxygeN/z3nim/edit/devel/src/z3nim.nim#L678" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/Double-oxygeN/z3nim/edit/devel/src/z3nim.nim#L689" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <a id="<=.t,Ast[S: NumericSort],Ast[S: NumericSort]"></a>
@@ -2737,9 +2755,9 @@ class="link-seesrc" target="_blank">Source</a>
 
 
 &nbsp;&nbsp;<a
-href="https://github.com/Double-oxygeN/z3nim/tree/master/src/z3nim.nim#L681"
+href="https://github.com/Double-oxygeN/z3nim/tree/master/src/z3nim.nim#L692"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/Double-oxygeN/z3nim/edit/devel/src/z3nim.nim#L681" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/Double-oxygeN/z3nim/edit/devel/src/z3nim.nim#L692" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <a id="<=.t,int,Ast[IntSort]"></a>
@@ -2748,9 +2766,9 @@ class="link-seesrc" target="_blank">Source</a>
 
 
 &nbsp;&nbsp;<a
-href="https://github.com/Double-oxygeN/z3nim/tree/master/src/z3nim.nim#L684"
+href="https://github.com/Double-oxygeN/z3nim/tree/master/src/z3nim.nim#L695"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/Double-oxygeN/z3nim/edit/devel/src/z3nim.nim#L684" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/Double-oxygeN/z3nim/edit/devel/src/z3nim.nim#L695" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <a id="<=.t,Ast[IntSort],int"></a>
@@ -2759,9 +2777,9 @@ class="link-seesrc" target="_blank">Source</a>
 
 
 &nbsp;&nbsp;<a
-href="https://github.com/Double-oxygeN/z3nim/tree/master/src/z3nim.nim#L687"
+href="https://github.com/Double-oxygeN/z3nim/tree/master/src/z3nim.nim#L698"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/Double-oxygeN/z3nim/edit/devel/src/z3nim.nim#L687" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/Double-oxygeN/z3nim/edit/devel/src/z3nim.nim#L698" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <a id="<=.t,float,Ast[RealSort]"></a>
@@ -2770,9 +2788,9 @@ class="link-seesrc" target="_blank">Source</a>
 
 
 &nbsp;&nbsp;<a
-href="https://github.com/Double-oxygeN/z3nim/tree/master/src/z3nim.nim#L690"
+href="https://github.com/Double-oxygeN/z3nim/tree/master/src/z3nim.nim#L701"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/Double-oxygeN/z3nim/edit/devel/src/z3nim.nim#L690" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/Double-oxygeN/z3nim/edit/devel/src/z3nim.nim#L701" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <a id="<=.t,Ast[RealSort],float"></a>
@@ -2781,9 +2799,9 @@ class="link-seesrc" target="_blank">Source</a>
 
 
 &nbsp;&nbsp;<a
-href="https://github.com/Double-oxygeN/z3nim/tree/master/src/z3nim.nim#L693"
+href="https://github.com/Double-oxygeN/z3nim/tree/master/src/z3nim.nim#L704"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/Double-oxygeN/z3nim/edit/devel/src/z3nim.nim#L693" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/Double-oxygeN/z3nim/edit/devel/src/z3nim.nim#L704" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <a id="<=.t,Ast[S: FloatSort],Ast[S: FloatSort]"></a>
@@ -2792,9 +2810,9 @@ class="link-seesrc" target="_blank">Source</a>
 
 
 &nbsp;&nbsp;<a
-href="https://github.com/Double-oxygeN/z3nim/tree/master/src/z3nim.nim#L696"
+href="https://github.com/Double-oxygeN/z3nim/tree/master/src/z3nim.nim#L707"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/Double-oxygeN/z3nim/edit/devel/src/z3nim.nim#L696" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/Double-oxygeN/z3nim/edit/devel/src/z3nim.nim#L707" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <a id=">.t,Ast[S: NumericSort],Ast[S: NumericSort]"></a>
@@ -2803,9 +2821,9 @@ class="link-seesrc" target="_blank">Source</a>
 
 
 &nbsp;&nbsp;<a
-href="https://github.com/Double-oxygeN/z3nim/tree/master/src/z3nim.nim#L699"
+href="https://github.com/Double-oxygeN/z3nim/tree/master/src/z3nim.nim#L710"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/Double-oxygeN/z3nim/edit/devel/src/z3nim.nim#L699" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/Double-oxygeN/z3nim/edit/devel/src/z3nim.nim#L710" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <a id=">.t,int,Ast[IntSort]"></a>
@@ -2814,9 +2832,9 @@ class="link-seesrc" target="_blank">Source</a>
 
 
 &nbsp;&nbsp;<a
-href="https://github.com/Double-oxygeN/z3nim/tree/master/src/z3nim.nim#L702"
+href="https://github.com/Double-oxygeN/z3nim/tree/master/src/z3nim.nim#L713"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/Double-oxygeN/z3nim/edit/devel/src/z3nim.nim#L702" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/Double-oxygeN/z3nim/edit/devel/src/z3nim.nim#L713" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <a id=">.t,Ast[IntSort],int"></a>
@@ -2825,9 +2843,9 @@ class="link-seesrc" target="_blank">Source</a>
 
 
 &nbsp;&nbsp;<a
-href="https://github.com/Double-oxygeN/z3nim/tree/master/src/z3nim.nim#L705"
+href="https://github.com/Double-oxygeN/z3nim/tree/master/src/z3nim.nim#L716"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/Double-oxygeN/z3nim/edit/devel/src/z3nim.nim#L705" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/Double-oxygeN/z3nim/edit/devel/src/z3nim.nim#L716" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <a id=">.t,float,Ast[RealSort]"></a>
@@ -2836,9 +2854,9 @@ class="link-seesrc" target="_blank">Source</a>
 
 
 &nbsp;&nbsp;<a
-href="https://github.com/Double-oxygeN/z3nim/tree/master/src/z3nim.nim#L708"
+href="https://github.com/Double-oxygeN/z3nim/tree/master/src/z3nim.nim#L719"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/Double-oxygeN/z3nim/edit/devel/src/z3nim.nim#L708" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/Double-oxygeN/z3nim/edit/devel/src/z3nim.nim#L719" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <a id=">.t,Ast[RealSort],float"></a>
@@ -2847,9 +2865,9 @@ class="link-seesrc" target="_blank">Source</a>
 
 
 &nbsp;&nbsp;<a
-href="https://github.com/Double-oxygeN/z3nim/tree/master/src/z3nim.nim#L711"
+href="https://github.com/Double-oxygeN/z3nim/tree/master/src/z3nim.nim#L722"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/Double-oxygeN/z3nim/edit/devel/src/z3nim.nim#L711" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/Double-oxygeN/z3nim/edit/devel/src/z3nim.nim#L722" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <a id=">.t,Ast[S: FloatSort],Ast[S: FloatSort]"></a>
@@ -2858,9 +2876,9 @@ class="link-seesrc" target="_blank">Source</a>
 
 
 &nbsp;&nbsp;<a
-href="https://github.com/Double-oxygeN/z3nim/tree/master/src/z3nim.nim#L714"
+href="https://github.com/Double-oxygeN/z3nim/tree/master/src/z3nim.nim#L725"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/Double-oxygeN/z3nim/edit/devel/src/z3nim.nim#L714" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/Double-oxygeN/z3nim/edit/devel/src/z3nim.nim#L725" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <a id=">=.t,Ast[S: NumericSort],Ast[S: NumericSort]"></a>
@@ -2869,9 +2887,9 @@ class="link-seesrc" target="_blank">Source</a>
 
 
 &nbsp;&nbsp;<a
-href="https://github.com/Double-oxygeN/z3nim/tree/master/src/z3nim.nim#L717"
+href="https://github.com/Double-oxygeN/z3nim/tree/master/src/z3nim.nim#L728"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/Double-oxygeN/z3nim/edit/devel/src/z3nim.nim#L717" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/Double-oxygeN/z3nim/edit/devel/src/z3nim.nim#L728" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <a id=">=.t,int,Ast[IntSort]"></a>
@@ -2880,9 +2898,9 @@ class="link-seesrc" target="_blank">Source</a>
 
 
 &nbsp;&nbsp;<a
-href="https://github.com/Double-oxygeN/z3nim/tree/master/src/z3nim.nim#L720"
+href="https://github.com/Double-oxygeN/z3nim/tree/master/src/z3nim.nim#L731"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/Double-oxygeN/z3nim/edit/devel/src/z3nim.nim#L720" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/Double-oxygeN/z3nim/edit/devel/src/z3nim.nim#L731" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <a id=">=.t,Ast[IntSort],int"></a>
@@ -2891,9 +2909,9 @@ class="link-seesrc" target="_blank">Source</a>
 
 
 &nbsp;&nbsp;<a
-href="https://github.com/Double-oxygeN/z3nim/tree/master/src/z3nim.nim#L723"
+href="https://github.com/Double-oxygeN/z3nim/tree/master/src/z3nim.nim#L734"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/Double-oxygeN/z3nim/edit/devel/src/z3nim.nim#L723" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/Double-oxygeN/z3nim/edit/devel/src/z3nim.nim#L734" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <a id=">=.t,float,Ast[RealSort]"></a>
@@ -2902,9 +2920,9 @@ class="link-seesrc" target="_blank">Source</a>
 
 
 &nbsp;&nbsp;<a
-href="https://github.com/Double-oxygeN/z3nim/tree/master/src/z3nim.nim#L726"
+href="https://github.com/Double-oxygeN/z3nim/tree/master/src/z3nim.nim#L737"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/Double-oxygeN/z3nim/edit/devel/src/z3nim.nim#L726" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/Double-oxygeN/z3nim/edit/devel/src/z3nim.nim#L737" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <a id=">=.t,Ast[RealSort],float"></a>
@@ -2913,9 +2931,9 @@ class="link-seesrc" target="_blank">Source</a>
 
 
 &nbsp;&nbsp;<a
-href="https://github.com/Double-oxygeN/z3nim/tree/master/src/z3nim.nim#L729"
+href="https://github.com/Double-oxygeN/z3nim/tree/master/src/z3nim.nim#L740"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/Double-oxygeN/z3nim/edit/devel/src/z3nim.nim#L729" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/Double-oxygeN/z3nim/edit/devel/src/z3nim.nim#L740" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <a id=">=.t,Ast[S: FloatSort],Ast[S: FloatSort]"></a>
@@ -2924,9 +2942,9 @@ class="link-seesrc" target="_blank">Source</a>
 
 
 &nbsp;&nbsp;<a
-href="https://github.com/Double-oxygeN/z3nim/tree/master/src/z3nim.nim#L732"
+href="https://github.com/Double-oxygeN/z3nim/tree/master/src/z3nim.nim#L743"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/Double-oxygeN/z3nim/edit/devel/src/z3nim.nim#L732" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/Double-oxygeN/z3nim/edit/devel/src/z3nim.nim#L743" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <a id="int2real.t,Ast[IntSort]"></a>
@@ -2935,9 +2953,9 @@ class="link-seesrc" target="_blank">Source</a>
 
 
 &nbsp;&nbsp;<a
-href="https://github.com/Double-oxygeN/z3nim/tree/master/src/z3nim.nim#L735"
+href="https://github.com/Double-oxygeN/z3nim/tree/master/src/z3nim.nim#L746"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/Double-oxygeN/z3nim/edit/devel/src/z3nim.nim#L735" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/Double-oxygeN/z3nim/edit/devel/src/z3nim.nim#L746" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <a id="real2int.t,Ast[RealSort]"></a>
@@ -2946,9 +2964,9 @@ class="link-seesrc" target="_blank">Source</a>
 
 
 &nbsp;&nbsp;<a
-href="https://github.com/Double-oxygeN/z3nim/tree/master/src/z3nim.nim#L738"
+href="https://github.com/Double-oxygeN/z3nim/tree/master/src/z3nim.nim#L749"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/Double-oxygeN/z3nim/edit/devel/src/z3nim.nim#L738" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/Double-oxygeN/z3nim/edit/devel/src/z3nim.nim#L749" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <a id="isInt.t,Ast[RealSort]"></a>
@@ -2957,9 +2975,9 @@ class="link-seesrc" target="_blank">Source</a>
 
 
 &nbsp;&nbsp;<a
-href="https://github.com/Double-oxygeN/z3nim/tree/master/src/z3nim.nim#L741"
+href="https://github.com/Double-oxygeN/z3nim/tree/master/src/z3nim.nim#L752"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/Double-oxygeN/z3nim/edit/devel/src/z3nim.nim#L741" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/Double-oxygeN/z3nim/edit/devel/src/z3nim.nim#L752" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <a id="abs.t,Ast[IntSort]"></a>
@@ -2968,9 +2986,9 @@ class="link-seesrc" target="_blank">Source</a>
 
 
 &nbsp;&nbsp;<a
-href="https://github.com/Double-oxygeN/z3nim/tree/master/src/z3nim.nim#L744"
+href="https://github.com/Double-oxygeN/z3nim/tree/master/src/z3nim.nim#L755"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/Double-oxygeN/z3nim/edit/devel/src/z3nim.nim#L744" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/Double-oxygeN/z3nim/edit/devel/src/z3nim.nim#L755" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <a id="abs.t,Ast[RealSort]"></a>
@@ -2979,9 +2997,9 @@ class="link-seesrc" target="_blank">Source</a>
 
 
 &nbsp;&nbsp;<a
-href="https://github.com/Double-oxygeN/z3nim/tree/master/src/z3nim.nim#L747"
+href="https://github.com/Double-oxygeN/z3nim/tree/master/src/z3nim.nim#L758"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/Double-oxygeN/z3nim/edit/devel/src/z3nim.nim#L747" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/Double-oxygeN/z3nim/edit/devel/src/z3nim.nim#L758" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <a id="abs.t,Ast[S: FloatSort]"></a>
@@ -2990,9 +3008,9 @@ class="link-seesrc" target="_blank">Source</a>
 
 
 &nbsp;&nbsp;<a
-href="https://github.com/Double-oxygeN/z3nim/tree/master/src/z3nim.nim#L750"
+href="https://github.com/Double-oxygeN/z3nim/tree/master/src/z3nim.nim#L761"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/Double-oxygeN/z3nim/edit/devel/src/z3nim.nim#L750" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/Double-oxygeN/z3nim/edit/devel/src/z3nim.nim#L761" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <a id="sqrt.t,Ast[S: FloatSort]"></a>
@@ -3001,9 +3019,9 @@ class="link-seesrc" target="_blank">Source</a>
 
 
 &nbsp;&nbsp;<a
-href="https://github.com/Double-oxygeN/z3nim/tree/master/src/z3nim.nim#L753"
+href="https://github.com/Double-oxygeN/z3nim/tree/master/src/z3nim.nim#L764"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/Double-oxygeN/z3nim/edit/devel/src/z3nim.nim#L753" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/Double-oxygeN/z3nim/edit/devel/src/z3nim.nim#L764" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <a id="round.t,Ast[S: FloatSort]"></a>
@@ -3012,9 +3030,9 @@ class="link-seesrc" target="_blank">Source</a>
 
 
 &nbsp;&nbsp;<a
-href="https://github.com/Double-oxygeN/z3nim/tree/master/src/z3nim.nim#L756"
+href="https://github.com/Double-oxygeN/z3nim/tree/master/src/z3nim.nim#L767"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/Double-oxygeN/z3nim/edit/devel/src/z3nim.nim#L756" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/Double-oxygeN/z3nim/edit/devel/src/z3nim.nim#L767" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <a id="floor.t,Ast[S: FloatSort]"></a>
@@ -3023,9 +3041,9 @@ class="link-seesrc" target="_blank">Source</a>
 
 
 &nbsp;&nbsp;<a
-href="https://github.com/Double-oxygeN/z3nim/tree/master/src/z3nim.nim#L759"
+href="https://github.com/Double-oxygeN/z3nim/tree/master/src/z3nim.nim#L770"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/Double-oxygeN/z3nim/edit/devel/src/z3nim.nim#L759" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/Double-oxygeN/z3nim/edit/devel/src/z3nim.nim#L770" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <a id="ceil.t,Ast[S: FloatSort]"></a>
@@ -3034,9 +3052,9 @@ class="link-seesrc" target="_blank">Source</a>
 
 
 &nbsp;&nbsp;<a
-href="https://github.com/Double-oxygeN/z3nim/tree/master/src/z3nim.nim#L762"
+href="https://github.com/Double-oxygeN/z3nim/tree/master/src/z3nim.nim#L773"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/Double-oxygeN/z3nim/edit/devel/src/z3nim.nim#L762" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/Double-oxygeN/z3nim/edit/devel/src/z3nim.nim#L773" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <a id="min.t,Ast[S: FloatSort],Ast[S: FloatSort]"></a>
@@ -3045,9 +3063,9 @@ class="link-seesrc" target="_blank">Source</a>
 
 
 &nbsp;&nbsp;<a
-href="https://github.com/Double-oxygeN/z3nim/tree/master/src/z3nim.nim#L765"
+href="https://github.com/Double-oxygeN/z3nim/tree/master/src/z3nim.nim#L776"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/Double-oxygeN/z3nim/edit/devel/src/z3nim.nim#L765" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/Double-oxygeN/z3nim/edit/devel/src/z3nim.nim#L776" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <a id="max.t,Ast[S: FloatSort],Ast[S: FloatSort]"></a>
@@ -3056,9 +3074,9 @@ class="link-seesrc" target="_blank">Source</a>
 
 
 &nbsp;&nbsp;<a
-href="https://github.com/Double-oxygeN/z3nim/tree/master/src/z3nim.nim#L768"
+href="https://github.com/Double-oxygeN/z3nim/tree/master/src/z3nim.nim#L779"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/Double-oxygeN/z3nim/edit/devel/src/z3nim.nim#L768" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/Double-oxygeN/z3nim/edit/devel/src/z3nim.nim#L779" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <a id="isNormal.t,Ast[S: FloatSort]"></a>
@@ -3067,9 +3085,9 @@ class="link-seesrc" target="_blank">Source</a>
 
 
 &nbsp;&nbsp;<a
-href="https://github.com/Double-oxygeN/z3nim/tree/master/src/z3nim.nim#L771"
+href="https://github.com/Double-oxygeN/z3nim/tree/master/src/z3nim.nim#L782"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/Double-oxygeN/z3nim/edit/devel/src/z3nim.nim#L771" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/Double-oxygeN/z3nim/edit/devel/src/z3nim.nim#L782" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <a id="isSubNormal.t,Ast[S: FloatSort]"></a>
@@ -3078,9 +3096,9 @@ class="link-seesrc" target="_blank">Source</a>
 
 
 &nbsp;&nbsp;<a
-href="https://github.com/Double-oxygeN/z3nim/tree/master/src/z3nim.nim#L774"
+href="https://github.com/Double-oxygeN/z3nim/tree/master/src/z3nim.nim#L785"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/Double-oxygeN/z3nim/edit/devel/src/z3nim.nim#L774" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/Double-oxygeN/z3nim/edit/devel/src/z3nim.nim#L785" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <a id="isZero.t,Ast[S: FloatSort]"></a>
@@ -3089,9 +3107,9 @@ class="link-seesrc" target="_blank">Source</a>
 
 
 &nbsp;&nbsp;<a
-href="https://github.com/Double-oxygeN/z3nim/tree/master/src/z3nim.nim#L777"
+href="https://github.com/Double-oxygeN/z3nim/tree/master/src/z3nim.nim#L788"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/Double-oxygeN/z3nim/edit/devel/src/z3nim.nim#L777" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/Double-oxygeN/z3nim/edit/devel/src/z3nim.nim#L788" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <a id="isInfinite.t,Ast[S: FloatSort]"></a>
@@ -3100,9 +3118,9 @@ class="link-seesrc" target="_blank">Source</a>
 
 
 &nbsp;&nbsp;<a
-href="https://github.com/Double-oxygeN/z3nim/tree/master/src/z3nim.nim#L780"
+href="https://github.com/Double-oxygeN/z3nim/tree/master/src/z3nim.nim#L791"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/Double-oxygeN/z3nim/edit/devel/src/z3nim.nim#L780" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/Double-oxygeN/z3nim/edit/devel/src/z3nim.nim#L791" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <a id="isNaN.t,Ast[S: FloatSort]"></a>
@@ -3111,9 +3129,9 @@ class="link-seesrc" target="_blank">Source</a>
 
 
 &nbsp;&nbsp;<a
-href="https://github.com/Double-oxygeN/z3nim/tree/master/src/z3nim.nim#L783"
+href="https://github.com/Double-oxygeN/z3nim/tree/master/src/z3nim.nim#L794"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/Double-oxygeN/z3nim/edit/devel/src/z3nim.nim#L783" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/Double-oxygeN/z3nim/edit/devel/src/z3nim.nim#L794" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <a id="isNegative.t,Ast[S: FloatSort]"></a>
@@ -3122,9 +3140,9 @@ class="link-seesrc" target="_blank">Source</a>
 
 
 &nbsp;&nbsp;<a
-href="https://github.com/Double-oxygeN/z3nim/tree/master/src/z3nim.nim#L786"
+href="https://github.com/Double-oxygeN/z3nim/tree/master/src/z3nim.nim#L797"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/Double-oxygeN/z3nim/edit/devel/src/z3nim.nim#L786" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/Double-oxygeN/z3nim/edit/devel/src/z3nim.nim#L797" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <a id="isPositive.t,Ast[S: FloatSort]"></a>
@@ -3133,9 +3151,9 @@ class="link-seesrc" target="_blank">Source</a>
 
 
 &nbsp;&nbsp;<a
-href="https://github.com/Double-oxygeN/z3nim/tree/master/src/z3nim.nim#L789"
+href="https://github.com/Double-oxygeN/z3nim/tree/master/src/z3nim.nim#L800"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/Double-oxygeN/z3nim/edit/devel/src/z3nim.nim#L789" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/Double-oxygeN/z3nim/edit/devel/src/z3nim.nim#L800" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <a id="toReal.t,Ast[S: FloatSort]"></a>
@@ -3144,9 +3162,53 @@ class="link-seesrc" target="_blank">Source</a>
 
 
 &nbsp;&nbsp;<a
-href="https://github.com/Double-oxygeN/z3nim/tree/master/src/z3nim.nim#L792"
+href="https://github.com/Double-oxygeN/z3nim/tree/master/src/z3nim.nim#L803"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/Double-oxygeN/z3nim/edit/devel/src/z3nim.nim#L792" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/Double-oxygeN/z3nim/edit/devel/src/z3nim.nim#L803" class="link-seesrc" target="_blank" >Edit</a>
+
+</dd>
+<a id="[].t,Ast[ArraySort[D,R]],Ast[D]"></a>
+<dt><pre><span class="Keyword">template</span> <a href="#%5B%5D.t%2CAst%5BArraySort%5BD%2CR%5D%5D%2CAst%5BD%5D"><span class="Identifier">`[]`</span></a><span class="Other">[</span><span class="Identifier">D</span><span class="Other">;</span> <span class="Identifier">R</span><span class="Other">]</span><span class="Other">(</span><span class="Identifier">arg</span><span class="Other">:</span> <a href="z3nim.html#Ast"><span class="Identifier">Ast</span></a><span class="Other">[</span><a href="z3nim.html#ArraySort"><span class="Identifier">ArraySort</span></a><span class="Other">[</span><span class="Identifier">D</span><span class="Other">,</span> <span class="Identifier">R</span><span class="Other">]</span><span class="Other">]</span><span class="Other">;</span> <span class="Identifier">idx</span><span class="Other">:</span> <a href="z3nim.html#Ast"><span class="Identifier">Ast</span></a><span class="Other">[</span><span class="Identifier">D</span><span class="Other">]</span><span class="Other">)</span><span class="Other">:</span> <a href="z3nim.html#Ast"><span class="Identifier">Ast</span></a><span class="Other">[</span><span class="Identifier">R</span><span class="Other">]</span></pre></dt>
+<dd>
+
+
+&nbsp;&nbsp;<a
+href="https://github.com/Double-oxygeN/z3nim/tree/master/src/z3nim.nim#L806"
+class="link-seesrc" target="_blank">Source</a>
+<a href="https://github.com/Double-oxygeN/z3nim/edit/devel/src/z3nim.nim#L806" class="link-seesrc" target="_blank" >Edit</a>
+
+</dd>
+<a id="[].t,Ast[ArraySort[IntSort,R]],int"></a>
+<dt><pre><span class="Keyword">template</span> <a href="#%5B%5D.t%2CAst%5BArraySort%5BIntSort%2CR%5D%5D%2Cint"><span class="Identifier">`[]`</span></a><span class="Other">[</span><span class="Identifier">R</span><span class="Other">]</span><span class="Other">(</span><span class="Identifier">arg</span><span class="Other">:</span> <a href="z3nim.html#Ast"><span class="Identifier">Ast</span></a><span class="Other">[</span><a href="z3nim.html#ArraySort"><span class="Identifier">ArraySort</span></a><span class="Other">[</span><a href="z3nim.html#IntSort"><span class="Identifier">IntSort</span></a><span class="Other">,</span> <span class="Identifier">R</span><span class="Other">]</span><span class="Other">]</span><span class="Other">;</span> <span class="Identifier">idx</span><span class="Other">:</span> <span class="Identifier">int</span><span class="Other">)</span><span class="Other">:</span> <a href="z3nim.html#Ast"><span class="Identifier">Ast</span></a><span class="Other">[</span><span class="Identifier">R</span><span class="Other">]</span></pre></dt>
+<dd>
+
+
+&nbsp;&nbsp;<a
+href="https://github.com/Double-oxygeN/z3nim/tree/master/src/z3nim.nim#L809"
+class="link-seesrc" target="_blank">Source</a>
+<a href="https://github.com/Double-oxygeN/z3nim/edit/devel/src/z3nim.nim#L809" class="link-seesrc" target="_blank" >Edit</a>
+
+</dd>
+<a id="[]=.t,Ast[ArraySort[D,R]],Ast[D],Ast[R]"></a>
+<dt><pre><span class="Keyword">template</span> <a href="#%5B%5D%3D.t%2CAst%5BArraySort%5BD%2CR%5D%5D%2CAst%5BD%5D%2CAst%5BR%5D"><span class="Identifier">`[]=`</span></a><span class="Other">[</span><span class="Identifier">D</span><span class="Other">;</span> <span class="Identifier">R</span><span class="Other">]</span><span class="Other">(</span><span class="Identifier">arg</span><span class="Other">:</span> <span class="Keyword">var</span> <a href="z3nim.html#Ast"><span class="Identifier">Ast</span></a><span class="Other">[</span><a href="z3nim.html#ArraySort"><span class="Identifier">ArraySort</span></a><span class="Other">[</span><span class="Identifier">D</span><span class="Other">,</span> <span class="Identifier">R</span><span class="Other">]</span><span class="Other">]</span><span class="Other">;</span> <span class="Identifier">idx</span><span class="Other">:</span> <a href="z3nim.html#Ast"><span class="Identifier">Ast</span></a><span class="Other">[</span><span class="Identifier">D</span><span class="Other">]</span><span class="Other">;</span> <span class="Identifier">val</span><span class="Other">:</span> <a href="z3nim.html#Ast"><span class="Identifier">Ast</span></a><span class="Other">[</span><span class="Identifier">R</span><span class="Other">]</span><span class="Other">)</span></pre></dt>
+<dd>
+
+
+&nbsp;&nbsp;<a
+href="https://github.com/Double-oxygeN/z3nim/tree/master/src/z3nim.nim#L812"
+class="link-seesrc" target="_blank">Source</a>
+<a href="https://github.com/Double-oxygeN/z3nim/edit/devel/src/z3nim.nim#L812" class="link-seesrc" target="_blank" >Edit</a>
+
+</dd>
+<a id="[]=.t,Ast[ArraySort[IntSort,R]],int,Ast[R]"></a>
+<dt><pre><span class="Keyword">template</span> <a href="#%5B%5D%3D.t%2CAst%5BArraySort%5BIntSort%2CR%5D%5D%2Cint%2CAst%5BR%5D"><span class="Identifier">`[]=`</span></a><span class="Other">[</span><span class="Identifier">R</span><span class="Other">]</span><span class="Other">(</span><span class="Identifier">arg</span><span class="Other">:</span> <span class="Keyword">var</span> <a href="z3nim.html#Ast"><span class="Identifier">Ast</span></a><span class="Other">[</span><a href="z3nim.html#ArraySort"><span class="Identifier">ArraySort</span></a><span class="Other">[</span><a href="z3nim.html#IntSort"><span class="Identifier">IntSort</span></a><span class="Other">,</span> <span class="Identifier">R</span><span class="Other">]</span><span class="Other">]</span><span class="Other">;</span> <span class="Identifier">idx</span><span class="Other">:</span> <span class="Identifier">int</span><span class="Other">;</span> <span class="Identifier">val</span><span class="Other">:</span> <a href="z3nim.html#Ast"><span class="Identifier">Ast</span></a><span class="Other">[</span><span class="Identifier">R</span><span class="Other">]</span><span class="Other">)</span></pre></dt>
+<dd>
+
+
+&nbsp;&nbsp;<a
+href="https://github.com/Double-oxygeN/z3nim/tree/master/src/z3nim.nim#L815"
+class="link-seesrc" target="_blank">Source</a>
+<a href="https://github.com/Double-oxygeN/z3nim/edit/devel/src/z3nim.nim#L815" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <a id="apply.t,FuncDecl[D,R],Asts[D]"></a>
@@ -3155,9 +3217,9 @@ class="link-seesrc" target="_blank">Source</a>
 
 
 &nbsp;&nbsp;<a
-href="https://github.com/Double-oxygeN/z3nim/tree/master/src/z3nim.nim#L795"
+href="https://github.com/Double-oxygeN/z3nim/tree/master/src/z3nim.nim#L818"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/Double-oxygeN/z3nim/edit/devel/src/z3nim.nim#L795" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/Double-oxygeN/z3nim/edit/devel/src/z3nim.nim#L818" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <a id="forall.t,Asts[V],Ast[S]"></a>
@@ -3166,9 +3228,9 @@ class="link-seesrc" target="_blank">Source</a>
 
 
 &nbsp;&nbsp;<a
-href="https://github.com/Double-oxygeN/z3nim/tree/master/src/z3nim.nim#L826"
+href="https://github.com/Double-oxygeN/z3nim/tree/master/src/z3nim.nim#L849"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/Double-oxygeN/z3nim/edit/devel/src/z3nim.nim#L826" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/Double-oxygeN/z3nim/edit/devel/src/z3nim.nim#L849" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <a id="exists.t,Asts[V],Ast[S]"></a>
@@ -3177,9 +3239,9 @@ class="link-seesrc" target="_blank">Source</a>
 
 
 &nbsp;&nbsp;<a
-href="https://github.com/Double-oxygeN/z3nim/tree/master/src/z3nim.nim#L829"
+href="https://github.com/Double-oxygeN/z3nim/tree/master/src/z3nim.nim#L852"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/Double-oxygeN/z3nim/edit/devel/src/z3nim.nim#L829" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/Double-oxygeN/z3nim/edit/devel/src/z3nim.nim#L852" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <a id="assert.t,Ast[BoolSort]"></a>
@@ -3188,9 +3250,42 @@ class="link-seesrc" target="_blank">Source</a>
 
 Add an assertion.
 &nbsp;&nbsp;<a
-href="https://github.com/Double-oxygeN/z3nim/tree/master/src/z3nim.nim#L832"
+href="https://github.com/Double-oxygeN/z3nim/tree/master/src/z3nim.nim#L855"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/Double-oxygeN/z3nim/edit/devel/src/z3nim.nim#L832" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/Double-oxygeN/z3nim/edit/devel/src/z3nim.nim#L855" class="link-seesrc" target="_blank" >Edit</a>
+
+</dd>
+<a id="assertOpt.t,Ast[BoolSort]"></a>
+<dt><pre><span class="Keyword">template</span> <a href="#assertOpt.t%2CAst%5BBoolSort%5D"><span class="Identifier">assertOpt</span></a><span class="Other">(</span><span class="Identifier">t</span><span class="Other">:</span> <a href="z3nim.html#Ast"><span class="Identifier">Ast</span></a><span class="Other">[</span><a href="z3nim.html#BoolSort"><span class="Identifier">BoolSort</span></a><span class="Other">]</span><span class="Other">)</span></pre></dt>
+<dd>
+
+Add an assertion for the optimizer.
+&nbsp;&nbsp;<a
+href="https://github.com/Double-oxygeN/z3nim/tree/master/src/z3nim.nim#L859"
+class="link-seesrc" target="_blank">Source</a>
+<a href="https://github.com/Double-oxygeN/z3nim/edit/devel/src/z3nim.nim#L859" class="link-seesrc" target="_blank" >Edit</a>
+
+</dd>
+<a id="minimize.t,Ast[NumericSort]"></a>
+<dt><pre><span class="Keyword">template</span> <a href="#minimize.t%2CAst%5BNumericSort%5D"><span class="Identifier">minimize</span></a><span class="Other">(</span><span class="Identifier">t</span><span class="Other">:</span> <a href="z3nim.html#Ast"><span class="Identifier">Ast</span></a><span class="Other">[</span><a href="z3nim.html#NumericSort"><span class="Identifier">NumericSort</span></a><span class="Other">]</span><span class="Other">)</span></pre></dt>
+<dd>
+
+Tell the optimizer to minimize the value.
+&nbsp;&nbsp;<a
+href="https://github.com/Double-oxygeN/z3nim/tree/master/src/z3nim.nim#L863"
+class="link-seesrc" target="_blank">Source</a>
+<a href="https://github.com/Double-oxygeN/z3nim/edit/devel/src/z3nim.nim#L863" class="link-seesrc" target="_blank" >Edit</a>
+
+</dd>
+<a id="maximize.t,Ast[NumericSort]"></a>
+<dt><pre><span class="Keyword">template</span> <a href="#maximize.t%2CAst%5BNumericSort%5D"><span class="Identifier">maximize</span></a><span class="Other">(</span><span class="Identifier">t</span><span class="Other">:</span> <a href="z3nim.html#Ast"><span class="Identifier">Ast</span></a><span class="Other">[</span><a href="z3nim.html#NumericSort"><span class="Identifier">NumericSort</span></a><span class="Other">]</span><span class="Other">)</span></pre></dt>
+<dd>
+
+Tell the optimizer to maximize the value.
+&nbsp;&nbsp;<a
+href="https://github.com/Double-oxygeN/z3nim/tree/master/src/z3nim.nim#L867"
+class="link-seesrc" target="_blank">Source</a>
+<a href="https://github.com/Double-oxygeN/z3nim/edit/devel/src/z3nim.nim#L867" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <a id="check.t"></a>
@@ -3199,9 +3294,20 @@ class="link-seesrc" target="_blank">Source</a>
 
 Check if all assertions satisfy or not.
 &nbsp;&nbsp;<a
-href="https://github.com/Double-oxygeN/z3nim/tree/master/src/z3nim.nim#L836"
+href="https://github.com/Double-oxygeN/z3nim/tree/master/src/z3nim.nim#L871"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/Double-oxygeN/z3nim/edit/devel/src/z3nim.nim#L836" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/Double-oxygeN/z3nim/edit/devel/src/z3nim.nim#L871" class="link-seesrc" target="_blank" >Edit</a>
+
+</dd>
+<a id="checkOpt.t"></a>
+<dt><pre><span class="Keyword">template</span> <a href="#checkOpt.t"><span class="Identifier">checkOpt</span></a><span class="Other">(</span><span class="Other">)</span><span class="Other">:</span> <a href="z3nim.html#CheckResult"><span class="Identifier">CheckResult</span></a></pre></dt>
+<dd>
+
+Check if all assertions satisfy and if optimization succeed.
+&nbsp;&nbsp;<a
+href="https://github.com/Double-oxygeN/z3nim/tree/master/src/z3nim.nim#L876"
+class="link-seesrc" target="_blank">Source</a>
+<a href="https://github.com/Double-oxygeN/z3nim/edit/devel/src/z3nim.nim#L876" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <a id="getModel.t"></a>
@@ -3210,9 +3316,20 @@ class="link-seesrc" target="_blank">Source</a>
 
 Get model. Do not call this procedure before calling <tt class="docutils literal"><span class="pre">check</span></tt>.
 &nbsp;&nbsp;<a
-href="https://github.com/Double-oxygeN/z3nim/tree/master/src/z3nim.nim#L841"
+href="https://github.com/Double-oxygeN/z3nim/tree/master/src/z3nim.nim#L881"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/Double-oxygeN/z3nim/edit/devel/src/z3nim.nim#L841" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/Double-oxygeN/z3nim/edit/devel/src/z3nim.nim#L881" class="link-seesrc" target="_blank" >Edit</a>
+
+</dd>
+<a id="getModelOpt.t"></a>
+<dt><pre><span class="Keyword">template</span> <a href="#getModelOpt.t"><span class="Identifier">getModelOpt</span></a><span class="Other">(</span><span class="Other">)</span><span class="Other">:</span> <a href="z3nim.html#Model"><span class="Identifier">Model</span></a></pre></dt>
+<dd>
+
+Get model of the optimizer. Do not call this procedure before calling <tt class="docutils literal"><span class="pre">checkOpt</span></tt>.
+&nbsp;&nbsp;<a
+href="https://github.com/Double-oxygeN/z3nim/tree/master/src/z3nim.nim#L886"
+class="link-seesrc" target="_blank">Source</a>
+<a href="https://github.com/Double-oxygeN/z3nim/edit/devel/src/z3nim.nim#L886" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <a id="getAssertions.t"></a>
@@ -3221,9 +3338,9 @@ class="link-seesrc" target="_blank">Source</a>
 
 Get assertions.
 &nbsp;&nbsp;<a
-href="https://github.com/Double-oxygeN/z3nim/tree/master/src/z3nim.nim#L846"
+href="https://github.com/Double-oxygeN/z3nim/tree/master/src/z3nim.nim#L891"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/Double-oxygeN/z3nim/edit/devel/src/z3nim.nim#L846" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/Double-oxygeN/z3nim/edit/devel/src/z3nim.nim#L891" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <a id="getProof.t"></a>
@@ -3232,9 +3349,9 @@ class="link-seesrc" target="_blank">Source</a>
 
 Get proof for unsat. Do not call this procedure before calling <tt class="docutils literal"><span class="pre">check</span></tt>.
 &nbsp;&nbsp;<a
-href="https://github.com/Double-oxygeN/z3nim/tree/master/src/z3nim.nim#L850"
+href="https://github.com/Double-oxygeN/z3nim/tree/master/src/z3nim.nim#L895"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/Double-oxygeN/z3nim/edit/devel/src/z3nim.nim#L850" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/Double-oxygeN/z3nim/edit/devel/src/z3nim.nim#L895" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <a id="getReason.t"></a>
@@ -3243,9 +3360,9 @@ class="link-seesrc" target="_blank">Source</a>
 
 Get reason for <tt class="docutils literal"><span class="pre">undefined</span></tt>. Do not call this procedure before calling <tt class="docutils literal"><span class="pre">check</span></tt>.
 &nbsp;&nbsp;<a
-href="https://github.com/Double-oxygeN/z3nim/tree/master/src/z3nim.nim#L855"
+href="https://github.com/Double-oxygeN/z3nim/tree/master/src/z3nim.nim#L900"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/Double-oxygeN/z3nim/edit/devel/src/z3nim.nim#L855" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/Double-oxygeN/z3nim/edit/devel/src/z3nim.nim#L900" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <a id="eval.t,Model,Ast[S]"></a>
@@ -3262,9 +3379,9 @@ Evaluate AST under the model.
   <span class="Keyword">let</span> <span class="Identifier">model</span> <span class="Other">=</span> <span class="Identifier">getModel</span><span class="Other">(</span><span class="Other">)</span>
   <span class="Identifier">assert</span> <span class="Identifier">model</span><span class="Other">.</span><span class="Identifier">eval</span><span class="Other">(</span><span class="Identifier">x</span> <span class="Keyword">mod</span> <span class="DecNumber">33</span><span class="Other">)</span><span class="Other">.</span><span class="Identifier">toInt</span><span class="Other">(</span><span class="Other">)</span> <span class="Operator">==</span> <span class="DecNumber">19</span></pre>
 &nbsp;&nbsp;<a
-href="https://github.com/Double-oxygeN/z3nim/tree/master/src/z3nim.nim#L860"
+href="https://github.com/Double-oxygeN/z3nim/tree/master/src/z3nim.nim#L905"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/Double-oxygeN/z3nim/edit/devel/src/z3nim.nim#L860" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/Double-oxygeN/z3nim/edit/devel/src/z3nim.nim#L905" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <a id="toInt.t,Ast[IntSort]"></a>
@@ -3273,9 +3390,9 @@ class="link-seesrc" target="_blank">Source</a>
 
 Convert AST to an integer value.
 &nbsp;&nbsp;<a
-href="https://github.com/Double-oxygeN/z3nim/tree/master/src/z3nim.nim#L881"
+href="https://github.com/Double-oxygeN/z3nim/tree/master/src/z3nim.nim#L926"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/Double-oxygeN/z3nim/edit/devel/src/z3nim.nim#L881" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/Double-oxygeN/z3nim/edit/devel/src/z3nim.nim#L926" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <a id="toInt64.t,Ast[IntSort]"></a>
@@ -3284,9 +3401,9 @@ class="link-seesrc" target="_blank">Source</a>
 
 Convert AST to a 64-bit integer value.
 &nbsp;&nbsp;<a
-href="https://github.com/Double-oxygeN/z3nim/tree/master/src/z3nim.nim#L892"
+href="https://github.com/Double-oxygeN/z3nim/tree/master/src/z3nim.nim#L937"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/Double-oxygeN/z3nim/edit/devel/src/z3nim.nim#L892" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/Double-oxygeN/z3nim/edit/devel/src/z3nim.nim#L937" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <a id="toUint.t,Ast[IntSort]"></a>
@@ -3295,9 +3412,9 @@ class="link-seesrc" target="_blank">Source</a>
 
 Convert AST to an unsigned integer value.
 &nbsp;&nbsp;<a
-href="https://github.com/Double-oxygeN/z3nim/tree/master/src/z3nim.nim#L903"
+href="https://github.com/Double-oxygeN/z3nim/tree/master/src/z3nim.nim#L948"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/Double-oxygeN/z3nim/edit/devel/src/z3nim.nim#L903" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/Double-oxygeN/z3nim/edit/devel/src/z3nim.nim#L948" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <a id="toUint64.t,Ast[IntSort]"></a>
@@ -3306,9 +3423,9 @@ class="link-seesrc" target="_blank">Source</a>
 
 Convert AST to a 64-bit unsigned integer value.
 &nbsp;&nbsp;<a
-href="https://github.com/Double-oxygeN/z3nim/tree/master/src/z3nim.nim#L914"
+href="https://github.com/Double-oxygeN/z3nim/tree/master/src/z3nim.nim#L959"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/Double-oxygeN/z3nim/edit/devel/src/z3nim.nim#L914" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/Double-oxygeN/z3nim/edit/devel/src/z3nim.nim#L959" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <a id="toFloat.t,Ast[RealSort]"></a>
@@ -3317,9 +3434,9 @@ class="link-seesrc" target="_blank">Source</a>
 
 Convert AST to a floating-point value.
 &nbsp;&nbsp;<a
-href="https://github.com/Double-oxygeN/z3nim/tree/master/src/z3nim.nim#L925"
+href="https://github.com/Double-oxygeN/z3nim/tree/master/src/z3nim.nim#L970"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/Double-oxygeN/z3nim/edit/devel/src/z3nim.nim#L925" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/Double-oxygeN/z3nim/edit/devel/src/z3nim.nim#L970" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <a id="$.t,Sort[S]"></a>
@@ -3328,9 +3445,9 @@ class="link-seesrc" target="_blank">Source</a>
 
 
 &nbsp;&nbsp;<a
-href="https://github.com/Double-oxygeN/z3nim/tree/master/src/z3nim.nim#L932"
+href="https://github.com/Double-oxygeN/z3nim/tree/master/src/z3nim.nim#L977"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/Double-oxygeN/z3nim/edit/devel/src/z3nim.nim#L932" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/Double-oxygeN/z3nim/edit/devel/src/z3nim.nim#L977" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <a id="$.t,Sorts[S]"></a>
@@ -3339,9 +3456,9 @@ class="link-seesrc" target="_blank">Source</a>
 
 
 &nbsp;&nbsp;<a
-href="https://github.com/Double-oxygeN/z3nim/tree/master/src/z3nim.nim#L935"
+href="https://github.com/Double-oxygeN/z3nim/tree/master/src/z3nim.nim#L980"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/Double-oxygeN/z3nim/edit/devel/src/z3nim.nim#L935" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/Double-oxygeN/z3nim/edit/devel/src/z3nim.nim#L980" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <a id="$.t,Ast[S]"></a>
@@ -3350,9 +3467,9 @@ class="link-seesrc" target="_blank">Source</a>
 
 
 &nbsp;&nbsp;<a
-href="https://github.com/Double-oxygeN/z3nim/tree/master/src/z3nim.nim#L949"
+href="https://github.com/Double-oxygeN/z3nim/tree/master/src/z3nim.nim#L994"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/Double-oxygeN/z3nim/edit/devel/src/z3nim.nim#L949" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/Double-oxygeN/z3nim/edit/devel/src/z3nim.nim#L994" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <a id="$.t,Asts[S]"></a>
@@ -3361,9 +3478,9 @@ class="link-seesrc" target="_blank">Source</a>
 
 
 &nbsp;&nbsp;<a
-href="https://github.com/Double-oxygeN/z3nim/tree/master/src/z3nim.nim#L952"
+href="https://github.com/Double-oxygeN/z3nim/tree/master/src/z3nim.nim#L997"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/Double-oxygeN/z3nim/edit/devel/src/z3nim.nim#L952" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/Double-oxygeN/z3nim/edit/devel/src/z3nim.nim#L997" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <a id="$.t,Model"></a>
@@ -3372,9 +3489,9 @@ class="link-seesrc" target="_blank">Source</a>
 
 
 &nbsp;&nbsp;<a
-href="https://github.com/Double-oxygeN/z3nim/tree/master/src/z3nim.nim#L966"
+href="https://github.com/Double-oxygeN/z3nim/tree/master/src/z3nim.nim#L1011"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/Double-oxygeN/z3nim/edit/devel/src/z3nim.nim#L966" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/Double-oxygeN/z3nim/edit/devel/src/z3nim.nim#L1011" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <a id="$.t,FuncDecl[D,R]"></a>
@@ -3383,9 +3500,9 @@ class="link-seesrc" target="_blank">Source</a>
 
 
 &nbsp;&nbsp;<a
-href="https://github.com/Double-oxygeN/z3nim/tree/master/src/z3nim.nim#L969"
+href="https://github.com/Double-oxygeN/z3nim/tree/master/src/z3nim.nim#L1014"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/Double-oxygeN/z3nim/edit/devel/src/z3nim.nim#L969" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/Double-oxygeN/z3nim/edit/devel/src/z3nim.nim#L1014" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <a id="$.t,AstVector"></a>
@@ -3394,9 +3511,9 @@ class="link-seesrc" target="_blank">Source</a>
 
 
 &nbsp;&nbsp;<a
-href="https://github.com/Double-oxygeN/z3nim/tree/master/src/z3nim.nim#L972"
+href="https://github.com/Double-oxygeN/z3nim/tree/master/src/z3nim.nim#L1017"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/Double-oxygeN/z3nim/edit/devel/src/z3nim.nim#L972" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/Double-oxygeN/z3nim/edit/devel/src/z3nim.nim#L1017" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <a id="len.t,AstVector"></a>
@@ -3405,9 +3522,9 @@ class="link-seesrc" target="_blank">Source</a>
 
 
 &nbsp;&nbsp;<a
-href="https://github.com/Double-oxygeN/z3nim/tree/master/src/z3nim.nim#L975"
+href="https://github.com/Double-oxygeN/z3nim/tree/master/src/z3nim.nim#L1020"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/Double-oxygeN/z3nim/edit/devel/src/z3nim.nim#L975" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/Double-oxygeN/z3nim/edit/devel/src/z3nim.nim#L1020" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <a id="===.t,Ast[S],Ast[S]"></a>
@@ -3416,9 +3533,9 @@ class="link-seesrc" target="_blank">Source</a>
 
 
 &nbsp;&nbsp;<a
-href="https://github.com/Double-oxygeN/z3nim/tree/master/src/z3nim.nim#L978"
+href="https://github.com/Double-oxygeN/z3nim/tree/master/src/z3nim.nim#L1023"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/Double-oxygeN/z3nim/edit/devel/src/z3nim.nim#L978" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/Double-oxygeN/z3nim/edit/devel/src/z3nim.nim#L1023" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <a id="==.t,Sort[S],Sort[S]"></a>
@@ -3427,9 +3544,9 @@ class="link-seesrc" target="_blank">Source</a>
 
 
 &nbsp;&nbsp;<a
-href="https://github.com/Double-oxygeN/z3nim/tree/master/src/z3nim.nim#L981"
+href="https://github.com/Double-oxygeN/z3nim/tree/master/src/z3nim.nim#L1026"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/Double-oxygeN/z3nim/edit/devel/src/z3nim.nim#L981" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/Double-oxygeN/z3nim/edit/devel/src/z3nim.nim#L1026" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <a id="==.t,FuncDecl[D,R],FuncDecl[D,R]"></a>
@@ -3438,9 +3555,9 @@ class="link-seesrc" target="_blank">Source</a>
 
 
 &nbsp;&nbsp;<a
-href="https://github.com/Double-oxygeN/z3nim/tree/master/src/z3nim.nim#L984"
+href="https://github.com/Double-oxygeN/z3nim/tree/master/src/z3nim.nim#L1029"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/Double-oxygeN/z3nim/edit/devel/src/z3nim.nim#L984" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/Double-oxygeN/z3nim/edit/devel/src/z3nim.nim#L1029" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <a id="hash.t,Ast[S]"></a>
@@ -3449,9 +3566,9 @@ class="link-seesrc" target="_blank">Source</a>
 
 
 &nbsp;&nbsp;<a
-href="https://github.com/Double-oxygeN/z3nim/tree/master/src/z3nim.nim#L987"
+href="https://github.com/Double-oxygeN/z3nim/tree/master/src/z3nim.nim#L1032"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/Double-oxygeN/z3nim/edit/devel/src/z3nim.nim#L987" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/Double-oxygeN/z3nim/edit/devel/src/z3nim.nim#L1032" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 
@@ -3464,7 +3581,7 @@ class="link-seesrc" target="_blank">Source</a>
       <div class="twelve-columns footer">
         <span class="nim-sprite"></span>
         <br/>
-        <small>Made with Nim. Generated: 2019-09-02 08:33:43 UTC</small>
+        <small>Made with Nim. Generated: 2019-10-05 10:52:08 UTC</small>
       </div>
     </div>
   </div>
