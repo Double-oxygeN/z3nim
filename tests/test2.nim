@@ -197,7 +197,7 @@ suite "Library":
       check check() == sat
 
       let model = getModel()
-      
+
       check model.eval(arr2[not b1]).toFloat() == -model.eval(r1).toFloat()
 
   test "optimize":
@@ -208,9 +208,12 @@ suite "Library":
 
       assertOpt x < 2
       assertOpt (y - x) < 1
-      maximize x + y
+      let oi0 = maximize x + y
 
       check checkOpt == sat
 
       let model = getModelOpt()
       check model.eval(x + y).toInt() == 2
+
+      echo getUpper(oi0)
+      echo getLower(oi0)

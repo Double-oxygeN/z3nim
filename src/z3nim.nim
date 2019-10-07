@@ -56,6 +56,8 @@ type
 
   AstVector* = distinct Z3AstVector
 
+  OptimizeIndex* = distinct cuint
+
   Z3Exception* = object of Exception
 
 
@@ -153,6 +155,7 @@ template z3block*(body: untyped): untyped =
 template setTimeout*(ms: uint) =
   let sym = Z3MkStringSymbol(ctx, "timeout")
   Z3ParamsSetUint(ctx, solverParams, sym, cuint(ms))
+  Z3ParamsSetUint(ctx, optimizeParams, sym, cuint(ms))
 
 template setParallelThreads*(count: uint) =
   let sym = Z3MkStringSymbol(ctx, "threads")
@@ -860,13 +863,13 @@ template assertOpt*(t: Ast[BoolSort]) =
   ## Add an assertion for the optimizer.
   Z3OptimizeAssert(ctx, optimize, Z3Ast(t))
 
-template minimize*(t: Ast[NumericSort]) =
+template minimize*(t: Ast[NumericSort]): OptimizeIndex =
   ## Tell the optimizer to minimize the value.
-  discard Z3OptimizeMinimize(ctx, optimize, Z3Ast(t))
+  OptimizeIndex(Z3OptimizeMinimize(ctx, optimize, Z3Ast(t)))
 
-template maximize*(t: Ast[NumericSort]) =
+template maximize*(t: Ast[NumericSort]): OptimizeIndex =
   ## Tell the optimizer to maximize the value.
-  discard Z3OptimizeMaximize(ctx, optimize, Z3Ast(t))
+  OptimizeIndex(Z3OptimizeMaximize(ctx, optimize, Z3Ast(t)))
 
 template check*: CheckResult =
   ## Check if all assertions satisfy or not.
@@ -892,6 +895,10 @@ template getAssertions*: AstVector =
   ## Get assertions.
   AstVector(Z3SolverGetAssertions(ctx, solver))
 
+template getAssertionsOpt*: AstVector =
+  ## Get assertions of the optimizer.
+  AstVector(Z3OptimizeGetAssertions(ctx, optimize))
+
 template getProof*: Ast[UnknownSort] =
   ## Get proof for unsat.
   ## Do not call this procedure before calling ``check``.
@@ -901,6 +908,18 @@ template getReason*: string =
   ## Get reason for ``undefined``.
   ## Do not call this procedure before calling ``check``.
   $Z3SolverGetReasonUnknown(ctx, solver)
+
+template getReasonOpt*: string =
+  $Z3OptimizeGetReasonUnknown(ctx, optimize)
+
+template getObjectives*: AstVector =
+  AstVector(Z3OptimizeGetObjectives(ctx, optimize))
+
+template getLower*(idx: OptimizeIndex): AstVector =
+  AstVector(Z3OptimizeGetLowerAsVector(ctx, optimize, cuint(idx)))
+
+template getUpper*(idx: OptimizeIndex): AstVector =
+  AstVector(Z3OptimizeGetUpperAsVector(ctx, optimize, cuint(idx)))
 
 template eval*[S](model: Model; ast: Ast[S]): Ast[S] =
   ## Evaluate AST under the model.
